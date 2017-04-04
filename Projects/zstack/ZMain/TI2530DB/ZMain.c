@@ -71,7 +71,7 @@
 
 extern void uartInit(void);
 extern void uartSend(char);
-extern void magneticSwitchInit(void);
+//extern void magneticSwitchInit(void);
 
 
 static void zmain_ext_addr( void );
@@ -99,10 +99,7 @@ int main( void )
   HAL_BOARD_INIT();
     
   //uartInit();
-  
-  
-  magneticSwitchInit();
-  
+
   HalAdcInit();
   
     

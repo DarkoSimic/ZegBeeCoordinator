@@ -214,6 +214,8 @@ void HalLcd_HW_Write(uint8 data);
 void HalLcd_HW_SetContrast(uint8 value);
 void HalLcd_HW_WriteChar(uint8 line, uint8 col, char text);
 void HalLcd_HW_WriteLine(uint8 line, const char *pText);
+
+uint8 uartGet(void);
 #endif //LCD
 
 /**************************************************************************************************
@@ -233,6 +235,15 @@ void HalLcdInit(void)
 #endif
 }
 
+uint8 uartGet()
+{
+    uint8 data;
+    
+    data = U0DBUF;
+    
+    return data;
+    
+}
 /*************************************************************************************************
  *                    LCD EMULATION FUNCTIONS
  *
@@ -676,6 +687,19 @@ void HalLcd_HW_Write(uint8 data)
 */
 }
 
+
+void HalLcdRead ( uint8 *buff, uint8 len)
+{
+  
+ 
+  for(int i=0; i< len; i++)                             //*buff != NULL)
+  {
+    *buff = uartGet();                
+    buff++;
+    i++;
+  }
+  
+}
 /**************************************************************************************************
  * @fn          HalLcd_HW_SetContrast
  *

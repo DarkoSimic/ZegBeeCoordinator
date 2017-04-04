@@ -99,6 +99,9 @@ extern void HalLcdInit(void);
  */
 extern void HalLcdWriteString ( char *str, uint8 option);
 
+extern void HalLcdRead ( uint8 *buff, uint8 len);
+
+
 /*
  * Write a value to the LCD
  */
