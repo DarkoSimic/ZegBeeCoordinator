@@ -109,6 +109,21 @@
 #define OPENED 0
 // magnetic switch macros end
    
+
+#define HAL_UART_ISR 1
+
+#define HAL_UART_MSECS_TO_TICKS    33
+
+#if !defined HAL_UART_ISR_IDLE
+#define HAL_UART_ISR_IDLE         (6 * HAL_UART_MSECS_TO_TICKS)
+#endif
+
+#if !defined HAL_UART_ISR_RX_MAX
+#define HAL_UART_ISR_RX_MAX        128
+#endif
+#if !defined HAL_UART_ISR_TX_MAX
+#define HAL_UART_ISR_TX_MAX        HAL_UART_ISR_RX_MAX
+#endif
    
 /*********************************************************************
  * CONSTANTS
@@ -130,6 +145,8 @@ uint8 keyPressSW4 = 1;
 
 uint8 dataBuffer[10];
    
+uint8 *buff;
+
 int counter = 0;
 
 
@@ -139,6 +156,10 @@ uint16 SAddr[MAX_NUMBER_OF_ENDDEVICES] = {0,0};
 uint8 index = 0;
 
 uint8 brojac = 0;
+
+uint8 txBuff = 97;
+uint8 rxBuff[HAL_UART_ISR_RX_MAX];
+halUARTCfg_t uartConfig;
 
 
 // This list should be filled with Application specific Cluster IDs.
@@ -176,7 +197,7 @@ endPointDesc_t GenericApp_epDesc;
 
   extern void uartInit(void);
   extern void uartSend(char);
-
+ // void LazoInit(void);
 
 /*********************************************************************
  * LOCAL VARIABLES
@@ -234,7 +255,57 @@ static void GenericApp_ProcessRtosMessage( void );
  *                    used to send messages and set timers.
  *
  * @return  none
- */
+ *//*
+void LazoInit()
+{
+	  uint16 count;
+   
+  // Podesavanje da P0.1 ima GPIO funkciju  
+  P0SEL &= 0xFD;
+        
+  // Podesavanje P0.1 izlazni 
+  P0DIR |= 0x02;
+  
+  // Podesavanje da svi pinovi porta P0 imaju pulldown konfiguraciju
+  P2INP = 0x20;
+  
+  // led for indication
+  //LED = 0;
+  
+  // config struct
+  
+	
+  // initialize structure for uart config
+  uartConfig.configured = TRUE;
+  uartConfig.baudRate = HAL_UART_BR_9600;
+  uartConfig.flowControl = FALSE;
+  
+  uartConfig.idleTimeout = HAL_UART_ISR_IDLE;
+  uartConfig.intEnable = TRUE;
+  uartConfig.callBackFunc = NULL;
+	
+  //config tx options
+  uartConfig.tx.maxBufSize = HAL_UART_ISR_TX_MAX;
+  uartConfig.tx.pBuffer = &txBuff;
+  
+  //config rx options
+  uartConfig.rx.maxBufSize = HAL_UART_ISR_RX_MAX;
+  uartConfig.rx.pBuffer = rxBuff;
+  //uartConfig.rx.Tail = 0;
+  //uartConfig.rx.Head = 0;
+  // enable global interrupt
+	EA = 1;
+  
+  // provjeriti je li UART "definisan"
+  
+  HalUARTInit();
+  uartInit();
+  
+  
+  
+  //HalUARTOpen(HAL_UART_PORT_0, &uartConfig);
+}
+*/
 void GenericApp_Init( uint8 task_id )
 {
   GenericApp_TaskID = task_id;
@@ -321,6 +392,7 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
 
     uint8 flag = 0;
     uint8 i;
+
 
   // Data Confirmation message fields
   byte sentEP;
@@ -465,9 +537,48 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
     }
     else
     {
+      //uint8 l=0;
+      //for(int i=0; i< len; i++)                             //*buff != NULL)
+       //HalUARTOpen(HAL_UART_PORT_0, &uartConfig);
+     //HalUARTRead(HAL_UART_PORT_0, buff, 2);
+     //if(HalUARTRead(HAL_UART_PORT_0, buff, 2))
+      /*while(buff[l]!='\0')
+      {
+        //buff[i] = U0DBUF;   
+        buff[l] = uartGet();
+        //*buff = uartGet(); 
+        //buff++;
+        l++;
+      }*/
+      //if(l==0)
+      //HalLcdRead(buff, 1);
+      //buff++;
+      
+       
+      
+      HalLcdRead(buff, 1);
+      //HalLcdWriteString("Sinisa",0); 
+      //if(buff[0]='\0')
+    /*  for(i = 0;i <3;i++)
+          {
+            uartSend(*(buff + i));
+          }
+      
+          HalLcdWriteString("",0);
+          HalLcdWriteString("--------------------------------",0);
+        */
+     if((char)*buff!='\0')
+     {
+       GenericApp_SendTheMessage();
+       //HalLcdWriteString("Sile before send",0);
+     }
+    
+
+     
+     
      
     // Send "the" message
-    GenericApp_SendTheMessage();
+     //GenericApp_SendTheMessage();                                              //////////////////////////////////////////////////////////////////////////////////////////////////
      
      //Setup to send message again
      osal_start_timerEx( GenericApp_TaskID,
@@ -672,7 +783,7 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
   {
     case GENERICAPP_CLUSTERID:
       rxMsgCount += 1;  // Count this message
-     // HalLedSet ( HAL_LED_4, HAL_LED_MODE_BLINK );  // Blink an LED
+      HalLedSet ( HAL_LED_4, HAL_LED_MODE_BLINK );  // Blink an LED
 
       HalLcdWriteString("--------------------------------",0);
       HalLcdWriteString("Received data:",0);
@@ -684,6 +795,10 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       
       HalLcdWriteString("",0);
       HalLcdWriteString("--------------------------------",0);
+      
+     
+      
+
 
       break;
       
@@ -703,6 +818,7 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
  * @brief   Send "the" message.
  *
  * @param   none
+
  *
  * @return  none
  */
@@ -710,23 +826,76 @@ static void GenericApp_SendTheMessage( void )
 {
 
   uint8 i;
+  char num = '0';
 
   char theMessageData[MAX_NUMBER_OF_ENDDEVICES][25] = {"You are EndDevice1111","You are EndDevice2222"};
-
+  //char *msg1;
+  //char *msg2;
+  /*char *msg[MAX_NUMBER_OF_ENDDEVICES];
+  HalLcdRead(msg[0],2);
+  HalLcdRead(msg[1],2);
+  */
+  //HalLcdWriteString("Sile in send",0);
+  char theMessage[MAX_NUMBER_OF_ENDDEVICES][25] = {"0000", "FFFF"};
+  if('1' == (char)*buff)
+  {
+    theMessage[0][0] = (char)buff[0];
+    theMessage[0][1] = (char)buff[1];
+    theMessage[0][2] = '\0';
+    theMessage[1][0] = '0';
+    theMessage[1][1] = '0';
+    theMessage[1][2] = '\0';
+   // HalLcdWriteString("Buff 1",0);
+  }
+  else
+  {
+    theMessage[1][0] = (char)buff[0];
+    theMessage[1][1] = (char)buff[1];
+    //theMessage[1][0] = (char)*buff;
+    //theMessage[1][1] = (char)*(buff+1);
+    theMessage[1][2] = '\0';
+    theMessage[0][0] = '0';
+    theMessage[0][1] = '0';
+    theMessage[0][2] = '\0';
+    //HalLcdWriteString("Buff 2",0);
+  }
+  
   for(i = 0; i<brojac; i++)
   {
     
+   /*  HalLcdWriteString("Ulazak u petlju",0);
+     num+=i;
+     uartSend(num);
+     HalLcdWriteString("",0);
+     */
     if(GenericApp_DstAddress[i].addr.shortAddr != 0 )
+                         
     {
       if ( AF_DataRequest( &GenericApp_DstAddress[i], &GenericApp_epDesc,
                          GENERICAPP_CLUSTERID,
-                         (byte)osal_strlen( theMessageData[i] ) + 1,
-                         (byte *)&theMessageData[i],
+                         //(byte)osal_strlen( theMessageData[i] ) + 1,
+                         //(byte *)&theMessageData[i],
+                         (byte)osal_strlen( theMessage[i] ) + 1,
+                         (byte *)&theMessage[i],
+                         //(byte *)theMessageData[i],
+                         //(byte)osal_strlen(msg[i]) + 1,
+                         //(byte *)msg[i],
                          &GenericApp_TransID,
                          AF_DISCV_ROUTE, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
       {
       // Successfully requested to be sent.
         HalLcdWriteString("Podatak je poslan.",0);
+        /*HalLcdWriteString("###############################",0);
+     
+      
+          for(i = 0;i <3;i++)
+          {
+            uartSend(*(buff + i));
+          }
+      
+          HalLcdWriteString("",0);
+          HalLcdWriteString("--------------------------------",0);
+        */
       }
       else
       {
@@ -736,6 +905,8 @@ static void GenericApp_SendTheMessage( void )
     
     }
   }
+
+  buff[0] = '\0';
   
 }
 
