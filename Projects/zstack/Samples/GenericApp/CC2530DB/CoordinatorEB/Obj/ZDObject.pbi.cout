@@ -1,48 +1,48 @@
-"C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\stack\zdo\ZDObject.c"
+"C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\stack\zdo\ZDObject.c"
 -std=c99
 -ferror-limit=100
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\8051\inc
 -I
@@ -50,47 +50,47 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\8051\lib\dlib
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\8051\inc\clib
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\CC2530DB
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\Samples\GenericApp\Source
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\Source
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Projects\zstack\ZMain\TI2530DB
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\ZMain\TI2530DB
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\hal\include
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\include
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\hal\target\CC2530EB
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\mac\include
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\mac\include
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\mac\high_level
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\mac\high_level
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\mac\low_level\srf04
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\mac\low_level\srf04
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\mac\low_level\srf04\single_chip
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\mac\low_level\srf04\single_chip
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\mt
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\mt
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\osal\include
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\osal\include
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\services\saddr
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\services\saddr
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\services\sdata
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\services\sdata
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\stack\af
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\stack\af
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\stack\nwk
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\stack\nwk
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\stack\sapi
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\stack\sapi
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\stack\sec
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\stack\sec
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\stack\sys
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\stack\sys
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\stack\zdo
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\stack\zdo
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\zmac
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\zmac
 -I
-C:\Users\bsavanovic\Desktop\New folder (3)\Z-Stack Mesh 1.0.0\Components\zmac\f8w
+C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\zmac\f8w
 -DZTOOL_P1=1
 -DMT_TASK=1
 -DMT_SYS_FUNC=1

@@ -782,31 +782,113 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
   switch ( pkt->clusterId )
   {
     case GENERICAPP_CLUSTERID:
+      
+      {
       rxMsgCount += 1;  // Count this message
       HalLedSet ( HAL_LED_4, HAL_LED_MODE_BLINK );  // Blink an LED
 
       HalLcdWriteString("--------------------------------",0);
       HalLcdWriteString("Received data:",0);
-      
-      for(i = 0;i < pkt->cmd.DataLength;i++)
+/*      
+      for(i=0;i<pkt->cmd.DataLength;i++)
       {
         uartSend(*(pkt->cmd.Data + i));
+        
       }
+*/     
+      switch(*(pkt->cmd.Data))
+      {
+        
+        case ('T'):
+        {
+              HalLcdWriteString("Temperatura: ",0);
+              for(i=1;i<pkt->cmd.DataLength;i++)
+              {
+                uartSend(*(pkt->cmd.Data + i));
+              }
+          
+              break;
+        }
+      
+      
+       case ('P'):
+       {
+            
+         HalLcdWriteString("Pritisak: ",0);
+            for(i=1;i<pkt->cmd.DataLength;i++)
+            {
+              uartSend(*(pkt->cmd.Data + i));
+            } 
+         
+             break;
+        }
+          
+       case ('H'):
+        {
+         HalLcdWriteString("Vlaznost",0);
+         for(i=1;i<pkt->cmd.DataLength;i++)
+            {
+            uartSend(*(pkt->cmd.Data + i));
+            }
+         break;
+         }
+        
+      case ('M'):
+        {
+        if(*(pkt->cmd.Data+1)=='1')
+           HalLcdWriteString("Pokret je detektovan",0);
+           
+         else
+           HalLcdWriteString(" GreskaM!!! ",0);
+        break;
+        }
+
+        case ('D'):
+          {
+           if(*(pkt->cmd.Data+1)=='1')
+              HalLcdWriteString("Vrata su otvorena",0);
+           
+            else if(*(pkt->cmd.Data+1)=='0')
+               HalLcdWriteString("Vrata su zatvorena",0);
+        
+         else
+           HalLcdWriteString(" GreskaD!!! ",0);
+         break;
+          }
+      
+          case ('O'):
+          {
+          if(*(pkt->cmd.Data+1)=='1')
+           HalLcdWriteString("Mrak",0);
+           
+          else if(*(pkt->cmd.Data+1)=='2')
+           HalLcdWriteString("Slabo osvijetljeno",0);
+        
+          else if(*(pkt->cmd.Data+1)=='3')
+           HalLcdWriteString("Osvijetljeno",0);
+        
+          else if(*(pkt->cmd.Data+1)=='4')
+           HalLcdWriteString("Jako osvijetljeno",0);
+        
+          else
+            HalLcdWriteString(" GreskaO!!! ",0);
+          break;
+          }
+      } //second switch end
       
       HalLcdWriteString("",0);
       HalLcdWriteString("--------------------------------",0);
       
      
-      
-
-
-      break;
+      }
+      break; //break first switch
       
   default:
+    
     HalLcdWriteString("Podatak nije primljen.",0);
         
     break;
-      
+
   }
 
 
