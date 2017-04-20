@@ -804,9 +804,15 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
               HalLcdWriteString("Temperatura: ",0);
               for(i=1;i<pkt->cmd.DataLength;i++)
               {
-                uartSend(*(pkt->cmd.Data + i));
+                if(3 == i)
+                {
+                  uartSend('.');
+                }
+                
+                  uartSend(*(pkt->cmd.Data + i));
               }
-          
+              
+              HalLcdWriteString(" *C",0);
               break;
         }
       
@@ -819,7 +825,7 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
             {
               uartSend(*(pkt->cmd.Data + i));
             } 
-         
+           HalLcdWriteString(" mbar",0);
              break;
         }
           
@@ -830,6 +836,7 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
             {
             uartSend(*(pkt->cmd.Data + i));
             }
+           HalLcdWriteString(" %",0);
          break;
          }
         
