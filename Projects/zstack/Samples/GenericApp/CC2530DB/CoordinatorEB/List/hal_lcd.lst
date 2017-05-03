@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V9.30.3.3983 for 8051                13/Apr/2017  10:19:11
+# IAR C/C++ Compiler V9.30.3.3983 for 8051                03/May/2017  09:23:46
 # Copyright 2004-2016 IAR Systems AB.
 # Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 #
@@ -12,14 +12,15 @@
 #    Dptr setup         =  1,16
 #                          
 #    Source file        =  
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c
+#        C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c
 #    Command line       =  
-#        -f
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg
+#        -f "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg"
 #        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRUE
 #        -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8 -DMAC_CFG_RX_MAX=5
-#        -DZDO_COORDINATOR -DRTR_NWK) -f
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+#        -DZDO_COORDINATOR -DRTR_NWK) -f "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg"
 #        (-DZIGBEEPRO -DSECURE=1 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
 #        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0x0422
 #        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
@@ -34,69 +35,73 @@
 #        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
 #        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
 #        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)
-#        -DREJOIN_POLL_RATE=440
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c
-#        -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D
-#        LCD_SUPPORTED=DEBUG -lC
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List
-#        -lA
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List
-#        --diag_suppress Pe001,Pa010 -o
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj
+#        -DREJOIN_POLL_RATE=440 "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c" -D
+#        ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D
+#        LCD_SUPPORTED=DEBUG -lC "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List"
+#        -lA "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List"
+#        --diag_suppress Pe001,Pa010 -o "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj"
 #        -e --no_code_motion --debug --core=plain --dptr=16,1
 #        --data_model=large --code_model=banked
 #        --calling_convention=xdata_reentrant --place_constants=data_rom
-#        --nr_virtual_regs 16 -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\
-#        -I
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+#        --nr_virtual_regs 16 -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\dll\"
 #        -Ohz --require_prototypes
 #    List file          =  
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List\hal_lcd.lst
+#        C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List\hal_lcd.lst
 #    Object file        =  
-#        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj\hal_lcd.r51
+#        C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj\hal_lcd.r51
 #
 ###############################################################################
 
-C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c
+C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c
       1          /**************************************************************************************************
       2            Filename:       hal_lcd.c
       3            Revised:        $Date: 2012-09-30 16:36:36 -0700 (Sun, 30 Sep 2012) $
@@ -333,12 +338,7 @@ C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\
     199           *                                       LOCAL VARIABLES
     200           **************************************************************************************************/
     201          
-
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
-    202          static uint8 *Lcd_Line1;
-   \                     Lcd_Line1:
-   \   000000                DS 2
-   \   000002                REQUIRE __INIT_XDATA_Z
+    202          //static uint8 *Lcd_Line1;
     203          
     204          /**************************************************************************************************
     205           *                                       FUNCTIONS - API
@@ -378,18 +378,13 @@ C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\
    \   000004                ; Setup parameters for call to function HalLcd_HW_Init
    \   000004   12....       LCALL   `??HalLcd_HW_Init::?relay`; Banked call to: HalLcd_HW_Init
     232          #if (HAL_LCD == TRUE)
-    233            Lcd_Line1 = NULL;
-   \   000007   90....       MOV     DPTR,#Lcd_Line1
-   \   00000A   E4           CLR     A
-   \   00000B   F0           MOVX    @DPTR,A
-   \   00000C   A3           INC     DPTR
-   \   00000D   F0           MOVX    @DPTR,A
+    233            //Lcd_Line1 = NULL;
     234           
     235          #endif
     236          }
-   \   00000E   D083         POP     DPH
-   \   000010   D082         POP     DPL
-   \   000012   02....       LJMP    ?BRET
+   \   000007   D083         POP     DPH
+   \   000009   D082         POP     DPL
+   \   00000B   02....       LJMP    ?BRET
     237          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
@@ -453,11 +448,11 @@ C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\
    \   000008   FF           MOV     R7,A
     277          #if (HAL_LCD == TRUE)
     278          
-    279            uint8 strLen = 0;
+    279           /* uint8 strLen = 0;
     280            uint8 totalLen = 0;
     281            uint8 *buf;
     282            uint8 tmpLen;
-    283          
+    283          */
     284          #endif 
     285            
     286            uint8 i = 0;
@@ -499,41 +494,31 @@ C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\
     302          
     303            strLen = (uint8)osal_strlen( (char*)str );
     304          
-    305            /* Check boundries 
-                   ^
-Warning[Pe009]: nested comment is not allowed
+    305            *//* Check boundries 
     306            if ( strLen > HAL_LCD_MAX_CHARS )
     307              strLen = HAL_LCD_MAX_CHARS;
     308          
     309            if ( option == HAL_LCD_LINE_1 )
     310            {
-    311              /* Line 1 gets saved for later 
-                     ^
-Warning[Pe009]: nested comment is not allowed
+    311              *//* Line 1 gets saved for later 
     312              osal_memcpy( Lcd_Line1, str, strLen );
     313              Lcd_Line1[strLen] = '\0';
     314            }
     315            else
     316            {
-    317              /* Line 2 triggers action 
-                     ^
-Warning[Pe009]: nested comment is not allowed
+    317              *//* Line 2 triggers action 
     318              tmpLen = (uint8)osal_strlen( (char*)Lcd_Line1 );
     319              totalLen =  tmpLen + 1 + strLen + 1;
     320              buf = osal_mem_alloc( totalLen );
     321              if ( buf != NULL )
     322              {
-    323                /* Concatenate strings 
-                       ^
-Warning[Pe009]: nested comment is not allowed
+    323                *//* Concatenate strings 
     324                osal_memcpy( buf, Lcd_Line1, tmpLen );
     325                buf[tmpLen++] = ' ';
     326                osal_memcpy( &buf[tmpLen], str, strLen );
     327                buf[tmpLen+strLen] = '\0';
     328          
-    329                /* Send it out 
-                       ^
-Warning[Pe009]: nested comment is not allowed
+    329                *//* Send it out 
     330          #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
     331          
     332          #if defined(SERIAL_DEBUG_SUPPORTED)
@@ -542,36 +527,12 @@ Warning[Pe009]: nested comment is not allowed
     335          
     336          #endif //ZTOOL_P1
     337          
-    338                /* Free mem 
-                       ^
-Warning[Pe009]: nested comment is not allowed
+    338               */ /* Free mem 
     339                osal_mem_free( buf );
     340              }
     341            }
     342          
-    343            /* Display the string 
-                   ^
-Warning[Pe009]: nested comment is not allowed
-
-    uint8 strLen = 0;
-          ^
-"C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c",279  Warning[Pe177]: 
-          variable "strLen" was declared but never referenced
-
-    uint8 totalLen = 0;
-          ^
-"C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c",280  Warning[Pe177]: 
-          variable "totalLen" was declared but never referenced
-
-    uint8 *buf;
-           ^
-"C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c",281  Warning[Pe177]: 
-          variable "buf" was declared but never referenced
-
-    uint8 tmpLen;
-          ^
-"C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c",282  Warning[Pe177]: 
-          variable "tmpLen" was declared but never referenced
+    343            *//* Display the string 
     344            HalLcd_HW_WriteLine (option, str);
     345          
     346          #endif //HAL_LCD
@@ -1173,157 +1134,123 @@ Warning[Pe009]: nested comment is not allowed
     537           *
     538           * @return  None
     539           **************************************************************************************************/
-    540          static void halLcd_ConfigIO(void)
-    541          {
-    542            /* GPIO configuration */
-    543            HAL_CONFIG_IO_OUTPUT(HAL_LCD_MODE_PORT,  HAL_LCD_MODE_PIN,  1);
-                   ^
-Warning[Pe1665]: concatenation with "=" in macro "HAL_CONFIG_IO_OUTPUT_PREP"
-          does not create a valid token
-    544            HAL_CONFIG_IO_OUTPUT(HAL_LCD_RESET_PORT, HAL_LCD_RESET_PIN, 1);
-                   ^
-Warning[Pe1665]: concatenation with "=" in macro "HAL_CONFIG_IO_OUTPUT_PREP"
-          does not create a valid token
-    545            HAL_CONFIG_IO_OUTPUT(HAL_LCD_CS_PORT,    HAL_LCD_CS_PIN,    1);
-                   ^
-Warning[Pe1665]: concatenation with "=" in macro "HAL_CONFIG_IO_OUTPUT_PREP"
-          does not create a valid token
-    546          }
-    547          
-    548          /**************************************************************************************************
-    549           * @fn      halLcd_ConfigSPI
-    550           *
-    551           * @brief   Configure SPI lines needed for talking to LCD.
-    552           *
-    553           * @param   None
-    554           *
-    555           * @return  None
-    556           **************************************************************************************************/
-    557          static void halLcd_ConfigSPI(void)
-    558          {
-    559            /* UART/SPI Peripheral configuration */
-    560          
-    561             uint8 baud_exponent;
-    562             uint8 baud_mantissa;
-    563          
-    564            /* Set SPI on UART 1 alternative 2 */
-    565            PERCFG |= 0x02;
-    566          
-    567            /* Configure clk, master out and master in lines */
-    568            HAL_CONFIG_IO_PERIPHERAL(HAL_LCD_CLK_PORT,  HAL_LCD_CLK_PIN);
-    569            HAL_CONFIG_IO_PERIPHERAL(HAL_LCD_MOSI_PORT, HAL_LCD_MOSI_PIN);
-    570            HAL_CONFIG_IO_PERIPHERAL(HAL_LCD_MISO_PORT, HAL_LCD_MISO_PIN);
-    571          
-    572          
-    573            /* Set SPI speed to 1 MHz (the values assume system clk of 32MHz)
-    574             * Confirm on board that this results in 1MHz spi clk.
-    575             */
-    576            baud_exponent = 15;
-    577            baud_mantissa =  0;
-    578          
-    579            /* Configure SPI */
-    580            U1UCR  = 0x80;      /* Flush and goto IDLE state. 8-N-1. */
-    581            U1CSR  = 0x00;      /* SPI mode, master. */
-    582            U1GCR  = HAL_SPI_TRANSFER_MSB_FIRST | HAL_SPI_CLOCK_PHA_0 | HAL_SPI_CLOCK_POL_LO | baud_exponent;
-    583            U1BAUD = baud_mantissa;
-    584          }
-    585          
-    586          /**************************************************************************************************
-    587           * @fn      HalLcd_HW_Init
-    588           *
-    589           * @brief   Initilize HW LCD Driver.
+    540          /*
+    541          static void halLcd_ConfigIO(void)
+    542          {
+    543            // GPIO configuration 
+    544            HAL_CONFIG_IO_OUTPUT(HAL_LCD_MODE_PORT,  HAL_LCD_MODE_PIN,  1);
+    545            HAL_CONFIG_IO_OUTPUT(HAL_LCD_RESET_PORT, HAL_LCD_RESET_PIN, 1);
+    546            HAL_CONFIG_IO_OUTPUT(HAL_LCD_CS_PORT,    HAL_LCD_CS_PIN,    1);
+    547          }
+    548          */
+    549          /**************************************************************************************************
+    550           * @fn      halLcd_ConfigSPI
+    551           *
+    552           * @brief   Configure SPI lines needed for talking to LCD.
+    553           *
+    554           * @param   None
+    555           *
+    556           * @return  None
+    557           **************************************************************************************************/
+    558          /*
+    559          static void halLcd_ConfigSPI(void)
+    560          {
+    561             //UART/SPI Peripheral configuration 
+    562          
+    563             uint8 baud_exponent;
+    564             uint8 baud_mantissa;
+    565          
+    566            // Set SPI on UART 1 alternative 2 
+    567            PERCFG |= 0x02;
+    568          
+    569            // Configure clk, master out and master in lines 
+    570            HAL_CONFIG_IO_PERIPHERAL(HAL_LCD_CLK_PORT,  HAL_LCD_CLK_PIN);
+    571            HAL_CONFIG_IO_PERIPHERAL(HAL_LCD_MOSI_PORT, HAL_LCD_MOSI_PIN);
+    572            HAL_CONFIG_IO_PERIPHERAL(HAL_LCD_MISO_PORT, HAL_LCD_MISO_PIN);
+    573          
+    574          
+    575            // Set SPI speed to 1 MHz (the values assume system clk of 32MHz)
+    576             // Confirm on board that this results in 1MHz spi clk.
+    577             
+    578            baud_exponent = 15;
+    579            baud_mantissa =  0;
+    580          
+    581            //Configure SPI 
+    582            U1UCR  = 0x80;      // Flush and goto IDLE state. 8-N-1. 
+    583            U1CSR  = 0x00;      // SPI mode, master. 
+    584            U1GCR  = HAL_SPI_TRANSFER_MSB_FIRST | HAL_SPI_CLOCK_PHA_0 | HAL_SPI_CLOCK_POL_LO | baud_exponent;
+    585            U1BAUD = baud_mantissa;
+    586          }
+    587          */
+    588          /**************************************************************************************************
+    589           * @fn      HalLcd_HW_Init
     590           *
-    591           * @param   None
+    591           * @brief   Initilize HW LCD Driver.
     592           *
-    593           * @return  None
-    594           **************************************************************************************************/
+    593           * @param   None
+    594           *
+    595           * @return  None
+    596           **************************************************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    595          void HalLcd_HW_Init(void)
+    597          void HalLcd_HW_Init(void)
    \                     HalLcd_HW_Init:
-    596          {
+    598          {
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
-    597            
-    598            CLKCONCMD =0x00;                                                            //Podesavanje clocka na 32MHz
+    599            
+    600            CLKCONCMD =0x00;                                                            //Podesavanje clocka na 32MHz
    \   000000   75C600       MOV     0xc6,#0x0
-    599              
-    600            
-    601              PERCFG = 0x00;                                                              //Podesavanje primarnih funkcija modula 
+    601              
+    602            
+    603              PERCFG = 0x00;                                                              //Podesavanje primarnih funkcija modula 
    \   000003   75F100       MOV     0xf1,#0x0
-    602              P0SEL = 0x0C;                                                               //Podesavanje osnovne ili periferne funkcije odredjenog pina(0-osnovna ; 1-periferna)
+    604              P0SEL = 0x0C;                                                               //Podesavanje osnovne ili periferne funkcije odredjenog pina(0-osnovna ; 1-periferna)
    \   000006   75F30C       MOV     0xf3,#0xc
-    603              
-    604            
-    605              U0CSR = 0xC0;                                                               //Prvi bit 1 je UART mode
+    605              
+    606            
+    607              U0CSR = 0xC0;                                                               //Prvi bit 1 je UART mode
    \   000009   7586C0       MOV     0x86,#-0x40
-    606              U0GCR = 0x08;                                                               //Poslednjih 5 bita odredjuje baud rate exponent vrijednost
+    608              U0GCR = 0x08;                                                               //Poslednjih 5 bita odredjuje baud rate exponent vrijednost
    \   00000C   75C508       MOV     0xc5,#0x8
-    607           
-    608              
-    609              U0BAUD = 0x3A;                                                              //Postavja baud rate na 9600
-   \   00000F   75C23A       MOV     0xc2,#0x3a
+    609           
     610              
-    611            
-    612            
-    613            /* Initialize LCD IO lines 
-    614            halLcd_ConfigIO();
-    615          
-    616            /* Initialize SPI 
-                   ^
-Warning[Pe009]: nested comment is not allowed
-    617            halLcd_ConfigSPI();
-    618          
-    619            /* Perform reset 
-                   ^
-Warning[Pe009]: nested comment is not allowed
-    620            LCD_ACTIVATE_RESET();
-    621            HalLcd_HW_WaitUs(15000); // 15 ms
-    622            LCD_RELEASE_RESET();
-    623            HalLcd_HW_WaitUs(15); // 15 us
-    624          
-    625            /* Perform the initialization sequence 
-                   ^
-Warning[Pe009]: nested comment is not allowed
-    626            FUNCTION_SET(CGRAM | COM_FORWARD | THREE_LINE);
-    627          
-    628            /* Set contrast 
-                   ^
-Warning[Pe009]: nested comment is not allowed
-    629            HalLcd_HW_SetContrast(15);
-    630          
-    631            /* Set power 
-                   ^
-Warning[Pe009]: nested comment is not allowed
-    632            SET_POWER_SAVE_MODE(OSC_OFF | POWER_SAVE_ON);
-    633            SET_POWER_CTRL(VOLTAGE_DIVIDER_ON | CONVERTER_AND_REG_ON);
-    634            SET_BIAS_CTRL(BIAS_1_5);
-    635            HalLcd_HW_WaitUs(21000);// 21 ms
-    636          
-    637            /* Clear the display 
-                   ^
-Warning[Pe009]: nested comment is not allowed
-
-  static uint8 *Lcd_Line1;
-                ^
-"C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c",202  Warning[Pe550]: 
-          variable "Lcd_Line1" was set but never used
-
-  static void halLcd_ConfigIO(void)
-              ^
-"C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c",540  Warning[Pe177]: 
-          function "halLcd_ConfigIO" was declared but never referenced
-
-  static void halLcd_ConfigSPI(void)
-              ^
-"C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\target\CC2530EB\hal_lcd.c",557  Warning[Pe177]: 
-          function "halLcd_ConfigSPI" was declared but never referenced
-    638            HalLcd_HW_Clear();
-    639            HalLcd_HW_ClearAllSpecChars();
-    640            SET_DISPLAY_CTRL(DISPLAY_CTRL_ON | DISPLAY_CTRL_BLINK_OFF | DISPLAY_CTRL_CURSOR_OFF);
-    641          */
-    642          
-    643          }
+    611              U0BAUD = 0x3A;                                                              //Postavja baud rate na 9600
+   \   00000F   75C23A       MOV     0xc2,#0x3a
+    612              
+    613            
+    614            
+    615            /* Initialize LCD IO lines 
+    616            halLcd_ConfigIO();
+    617          
+    618            *//* Initialize SPI 
+    619            halLcd_ConfigSPI();
+    620          
+    621            *//* Perform reset 
+    622            LCD_ACTIVATE_RESET();
+    623            HalLcd_HW_WaitUs(15000); // 15 ms
+    624            LCD_RELEASE_RESET();
+    625            HalLcd_HW_WaitUs(15); // 15 us
+    626          
+    627            *//* Perform the initialization sequence 
+    628            FUNCTION_SET(CGRAM | COM_FORWARD | THREE_LINE);
+    629          
+    630            *//* Set contrast 
+    631            HalLcd_HW_SetContrast(15);
+    632          
+    633            *//* Set power 
+    634            SET_POWER_SAVE_MODE(OSC_OFF | POWER_SAVE_ON);
+    635            SET_POWER_CTRL(VOLTAGE_DIVIDER_ON | CONVERTER_AND_REG_ON);
+    636            SET_BIAS_CTRL(BIAS_1_5);
+    637            HalLcd_HW_WaitUs(21000);// 21 ms
+    638          
+    639           */ /* Clear the display 
+    640            HalLcd_HW_Clear();
+    641            HalLcd_HW_ClearAllSpecChars();
+    642            SET_DISPLAY_CTRL(DISPLAY_CTRL_ON | DISPLAY_CTRL_BLINK_OFF | DISPLAY_CTRL_CURSOR_OFF);
+    643          */
+    644          
+    645          }
    \   000012   02....       LJMP    ?BRET
    \   000015                REQUIRE CLKCONCMD
    \   000015                REQUIRE PERCFG
@@ -1331,100 +1258,100 @@ Warning[Pe009]: nested comment is not allowed
    \   000015                REQUIRE U0CSR
    \   000015                REQUIRE U0GCR
    \   000015                REQUIRE U0BAUD
-    644          
-    645          /**************************************************************************************************
-    646           * @fn      HalLcd_HW_Control
-    647           *
-    648           * @brief   Write 1 command to the LCD
+    646          
+    647          /**************************************************************************************************
+    648           * @fn      HalLcd_HW_Control
     649           *
-    650           * @param   uint8 cmd - command to be written to the LCD
+    650           * @brief   Write 1 command to the LCD
     651           *
-    652           * @return  None
-    653           **************************************************************************************************/
+    652           * @param   uint8 cmd - command to be written to the LCD
+    653           *
+    654           * @return  None
+    655           **************************************************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    654          void HalLcd_HW_Control(uint8 cmd)
+    656          void HalLcd_HW_Control(uint8 cmd)
    \                     HalLcd_HW_Control:
-    655          {/*
+    657          {/*
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
-    656            LCD_SPI_BEGIN();
-    657            LCD_DO_CONTROL();
-    658            LCD_SPI_TX(cmd);
-    659            LCD_SPI_WAIT_RXRDY();
-    660            LCD_SPI_END();
-    661          */
-    662          }
+    658            LCD_SPI_BEGIN();
+    659            LCD_DO_CONTROL();
+    660            LCD_SPI_TX(cmd);
+    661            LCD_SPI_WAIT_RXRDY();
+    662            LCD_SPI_END();
+    663          */
+    664          }
    \   000000   02....       LJMP    ?BRET
-    663          
-    664          /**************************************************************************************************
-    665           * @fn      HalLcd_HW_Write
-    666           *
-    667           * @brief   Write 1 byte to the LCD
+    665          
+    666          /**************************************************************************************************
+    667           * @fn      HalLcd_HW_Write
     668           *
-    669           * @param   uint8 data - data to be written to the LCD
+    669           * @brief   Write 1 byte to the LCD
     670           *
-    671           * @return  None
-    672           **************************************************************************************************/
+    671           * @param   uint8 data - data to be written to the LCD
+    672           *
+    673           * @return  None
+    674           **************************************************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    673          void HalLcd_HW_Write(uint8 data)
+    675          void HalLcd_HW_Write(uint8 data)
    \                     HalLcd_HW_Write:
-    674          {
+    676          {
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
-    675            U0DBUF = data;
+    677            U0DBUF = data;
    \   000000   89C1         MOV     0xc1,R1
-    676              
-    677              while((U0CSR & 0x01) == 0x01)
+    678              
+    679              while((U0CSR & 0x01) == 0x01)
    \                     ??HalLcd_HW_Write_0:
    \   000002   E586         MOV     A,0x86
    \   000004   A2E0         MOV     C,0xE0 /* A   */.0
    \   000006   40FA         JC      ??HalLcd_HW_Write_0
-    678              {
-    679              }
-    680            
-    681            /*
-    682            LCD_SPI_BEGIN();
-    683            LCD_DO_WRITE();
-    684            LCD_SPI_TX(data);
-    685            LCD_SPI_WAIT_RXRDY();
-    686            LCD_SPI_END();
-    687          */
-    688          }
+    680              {
+    681              }
+    682            
+    683            /*
+    684            LCD_SPI_BEGIN();
+    685            LCD_DO_WRITE();
+    686            LCD_SPI_TX(data);
+    687            LCD_SPI_WAIT_RXRDY();
+    688            LCD_SPI_END();
+    689          */
+    690          }
    \   000008   02....       LJMP    ?BRET
    \   00000B                REQUIRE U0DBUF
    \   00000B                REQUIRE U0CSR
-    689          
-    690          
+    691          
+    692          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    691          void HalLcdRead ( uint8 *buff, uint8 len)
+    693          void HalLcdRead ( uint8 *buff, uint8 len)
    \                     HalLcdRead:
-    692          {
+    694          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-    693            
-    694           
-    695            for(int i=0; i< len; i++)                             //*buff != NULL)
+    695            
+    696           
+    697            for(int i=0; i< len; i++)                             //*buff != NULL)
    \   000005   7E00         MOV     R6,#0x0
    \   000007   7F00         MOV     R7,#0x0
    \   000009   8013         SJMP    ??HalLcdRead_0
-    696            {
-    697              *buff = uartGet();                
+    698            {
+    699              *buff = uartGet();                
    \                     ??HalLcdRead_1:
    \   00000B   E5C1         MOV     A,0xc1
    \   00000D   8A82         MOV     DPL,R2
    \   00000F   8B83         MOV     DPH,R3
    \   000011   F0           MOVX    @DPTR,A
-    698              buff++;
+    700              buff++;
    \   000012   A3           INC     DPTR
    \   000013   AA82         MOV     R2,DPL
    \   000015   AB83         MOV     R3,DPH
-    699              i++;
-    700            }
+    701              i++;
+    702            }
    \   000017   EE           MOV     A,R6
    \   000018   2402         ADD     A,#0x2
    \   00001A   FE           MOV     R6,A
@@ -1443,155 +1370,155 @@ Warning[Pe009]: nested comment is not allowed
    \   000028   65D0         XRL     A,PSW
    \   00002A   33           RLC     A
    \   00002B   40DE         JC      ??HalLcdRead_1
-    701            
-    702          }
+    703            
+    704          }
    \   00002D   02....       LJMP    ??Subroutine6_0 & 0xFFFF
    \   000030                REQUIRE U0DBUF
-    703          /**************************************************************************************************
-    704           * @fn          HalLcd_HW_SetContrast
-    705           *
-    706           * @brief       Set display contrast
+    705          /**************************************************************************************************
+    706           * @fn          HalLcd_HW_SetContrast
     707           *
-    708           * @param       uint8 value - contrast value
+    708           * @brief       Set display contrast
     709           *
-    710           * @return      none
-    711           **************************************************************************************************/
+    710           * @param       uint8 value - contrast value
+    711           *
+    712           * @return      none
+    713           **************************************************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    712          void HalLcd_HW_SetContrast(uint8 value)
+    714          void HalLcd_HW_SetContrast(uint8 value)
    \                     HalLcd_HW_SetContrast:
-    713          {
+    715          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-    714            SET_ICONRAM_ADDR(CONTRAST_CTRL_REGISTER);
-    715            HalLcd_HW_Write(value);
+    716            SET_ICONRAM_ADDR(CONTRAST_CTRL_REGISTER);
+    717            HalLcd_HW_Write(value);
    \   000005                ; Setup parameters for call to function HalLcd_HW_Write
    \   000005   02....       LJMP    ?Subroutine0 & 0xFFFF
-    716          }
-    717          
-    718          /**************************************************************************************************
-    719           * @fn      HalLcd_HW_Clear
-    720           *
-    721           * @brief   Clear the HW LCD
+    718          }
+    719          
+    720          /**************************************************************************************************
+    721           * @fn      HalLcd_HW_Clear
     722           *
-    723           * @param   None
+    723           * @brief   Clear the HW LCD
     724           *
-    725           * @return  None
-    726           **************************************************************************************************/
+    725           * @param   None
+    726           *
+    727           * @return  None
+    728           **************************************************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    727          void HalLcd_HW_Clear(void)
+    729          void HalLcd_HW_Clear(void)
    \                     HalLcd_HW_Clear:
-    728          {
+    730          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-    729            uint8 n;
-    730          
-    731            SET_DDRAM_ADDR(0x00);
-    732            for (n = 0; n < (LCD_MAX_LINE_COUNT * HAL_LCD_MAX_CHARS); n++)
+    731            uint8 n;
+    732          
+    733            SET_DDRAM_ADDR(0x00);
+    734            for (n = 0; n < (LCD_MAX_LINE_COUNT * HAL_LCD_MAX_CHARS); n++)
    \   000005   7E30         MOV     R6,#0x30
-    733            {
-    734              HalLcd_HW_Write(' ');
+    735            {
+    736              HalLcd_HW_Write(' ');
    \                     ??HalLcd_HW_Clear_0:
    \   000007                ; Setup parameters for call to function HalLcd_HW_Write
    \   000007   7920         MOV     R1,#0x20
    \   000009   12....       LCALL   `??HalLcd_HW_Write::?relay`; Banked call to: HalLcd_HW_Write
-    735            }
+    737            }
    \   00000C   DEF9         DJNZ    R6,??HalLcd_HW_Clear_0
-    736          }
+    738          }
    \   00000E   02....       LJMP    ??Subroutine6_0 & 0xFFFF
-    737          
-    738          /**************************************************************************************************
-    739           * @fn      HalLcd_HW_ClearAllSpecChars
-    740           *
-    741           * @brief   Clear all special chars
+    739          
+    740          /**************************************************************************************************
+    741           * @fn      HalLcd_HW_ClearAllSpecChars
     742           *
-    743           * @param   None
+    743           * @brief   Clear all special chars
     744           *
-    745           * @return  None
-    746           **************************************************************************************************/
+    745           * @param   None
+    746           *
+    747           * @return  None
+    748           **************************************************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    747          void HalLcd_HW_ClearAllSpecChars(void)
+    749          void HalLcd_HW_ClearAllSpecChars(void)
    \                     HalLcd_HW_ClearAllSpecChars:
-    748          {
+    750          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-    749            uint8 n = 0;
-    750          
-    751            SET_GCRAM_CHAR(0);
-    752            for (n = 0; n < (8 * 8); n++)
+    751            uint8 n = 0;
+    752          
+    753            SET_GCRAM_CHAR(0);
+    754            for (n = 0; n < (8 * 8); n++)
    \   000005   7E40         MOV     R6,#0x40
-    753            {
-    754              HalLcd_HW_Write(0x00);
+    755            {
+    756              HalLcd_HW_Write(0x00);
    \                     ??HalLcd_HW_ClearAllSpecChars_0:
    \   000007                ; Setup parameters for call to function HalLcd_HW_Write
    \   000007   7900         MOV     R1,#0x0
    \   000009   12....       LCALL   `??HalLcd_HW_Write::?relay`; Banked call to: HalLcd_HW_Write
-    755            }
+    757            }
    \   00000C   DEF9         DJNZ    R6,??HalLcd_HW_ClearAllSpecChars_0
-    756          }
+    758          }
    \   00000E   02....       LJMP    ??Subroutine6_0 & 0xFFFF
-    757          
-    758          /**************************************************************************************************
-    759           * @fn      HalLcd_HW_WriteChar
-    760           *
-    761           * @brief   Write one char to the display
+    759          
+    760          /**************************************************************************************************
+    761           * @fn      HalLcd_HW_WriteChar
     762           *
-    763           * @param   uint8 line - line number that the char will be displayed
-    764           *          uint8 col - colum where the char will be displayed
-    765           *
-    766           * @return  None
-    767           **************************************************************************************************/
+    763           * @brief   Write one char to the display
+    764           *
+    765           * @param   uint8 line - line number that the char will be displayed
+    766           *          uint8 col - colum where the char will be displayed
+    767           *
+    768           * @return  None
+    769           **************************************************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    768          void HalLcd_HW_WriteChar(uint8 line, uint8 col, char text)
+    770          void HalLcd_HW_WriteChar(uint8 line, uint8 col, char text)
    \                     HalLcd_HW_WriteChar:
-    769          {
+    771          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
    \   000005   EB           MOV     A,R3
-    770            HalLcd_HW_Write(text);
+    772            HalLcd_HW_Write(text);
    \   000006                ; Setup parameters for call to function HalLcd_HW_Write
    \   000006   F9           MOV     R1,A
    \   000007   02....       LJMP    ?Subroutine0 & 0xFFFF
-    771            
-    772            /*
-    773            if (col < HAL_LCD_MAX_CHARS)
-    774            {
-    775              SET_DDRAM_ADDR((line - 1) * HAL_LCD_MAX_CHARS + col);
-    776              HalLcd_HW_Write(text);
-    777            }
-    778            else
-    779            {
-    780              return;
-    781            }
-    782            */
-    783          }
-    784          
-    785          /**************************************************************************************************
-    786           * @fn          halLcdWriteLine
-    787           *
-    788           * @brief       Write one line on display
+    773            
+    774            /*
+    775            if (col < HAL_LCD_MAX_CHARS)
+    776            {
+    777              SET_DDRAM_ADDR((line - 1) * HAL_LCD_MAX_CHARS + col);
+    778              HalLcd_HW_Write(text);
+    779            }
+    780            else
+    781            {
+    782              return;
+    783            }
+    784            */
+    785          }
+    786          
+    787          /**************************************************************************************************
+    788           * @fn          halLcdWriteLine
     789           *
-    790           * @param       uint8 line - display line
-    791           *              char *pText - text buffer to write
-    792           *
-    793           * @return      none
-    794           **************************************************************************************************/
+    790           * @brief       Write one line on display
+    791           *
+    792           * @param       uint8 line - display line
+    793           *              char *pText - text buffer to write
+    794           *
+    795           * @return      none
+    796           **************************************************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    795          void HalLcd_HW_WriteLine(uint8 line, const char *pText)
+    797          void HalLcd_HW_WriteLine(uint8 line, const char *pText)
    \                     HalLcd_HW_WriteLine:
-    796          {
+    798          {
    \   000000                REQUIRE ?V0
    \   000000                REQUIRE ?V1
    \   000000   74F6         MOV     A,#-0xa
@@ -1602,19 +1529,19 @@ Warning[Pe009]: nested comment is not allowed
    \   000006   FE           MOV     R6,A
    \   000007   EB           MOV     A,R3
    \   000008   FF           MOV     R7,A
-    797            uint8 count;
-    798            uint8 totalLength = (uint8)osal_strlen( (char *)pText );
+    799            uint8 count;
+    800            uint8 totalLength = (uint8)osal_strlen( (char *)pText );
    \   000009                ; Setup parameters for call to function osal_strlen
    \   000009   12....       LCALL   `??osal_strlen::?relay`; Banked call to: osal_strlen
    \   00000C   EA           MOV     A,R2
    \   00000D   F5..         MOV     ?V1,A
-    799          
-    800            /* Write the content first */
-    801            for (count=0; count<totalLength; count++)
+    801          
+    802            /* Write the content first */
+    803            for (count=0; count<totalLength; count++)
    \   00000F   75..00       MOV     ?V0,#0x0
    \   000012   8014         SJMP    ??HalLcd_HW_WriteLine_0
-    802            {
-    803              HalLcd_HW_WriteChar(line, count, (*(pText++)));
+    804            {
+    805              HalLcd_HW_WriteChar(line, count, (*(pText++)));
    \                     ??HalLcd_HW_WriteLine_1:
    \   000014                ; Setup parameters for call to function HalLcd_HW_Write
    \   000014   8E82         MOV     DPL,R6
@@ -1627,96 +1554,96 @@ Warning[Pe009]: nested comment is not allowed
    \   000021   A3           INC     DPTR
    \   000022   AE82         MOV     R6,DPL
    \   000024   AF83         MOV     R7,DPH
-    804            }
+    806            }
    \   000026   05..         INC     ?V0
    \                     ??HalLcd_HW_WriteLine_0:
    \   000028   E5..         MOV     A,?V0
    \   00002A   C3           CLR     C
    \   00002B   95..         SUBB    A,?V1
    \   00002D   40E5         JC      ??HalLcd_HW_WriteLine_1
-    805          
-    806            /* Write blank spaces to rest of the line */
-    807            for(count=totalLength; count<HAL_LCD_MAX_CHARS;count++)
+    807          
+    808            /* Write blank spaces to rest of the line */
+    809            for(count=totalLength; count<HAL_LCD_MAX_CHARS;count++)
    \   00002F   85....       MOV     ?V0,?V1
    \   000032   8007         SJMP    ??HalLcd_HW_WriteLine_2
-    808            {
-    809              HalLcd_HW_WriteChar(line, count, ' ');
+    810            {
+    811              HalLcd_HW_WriteChar(line, count, ' ');
    \                     ??HalLcd_HW_WriteLine_3:
    \   000034                ; Setup parameters for call to function HalLcd_HW_Write
    \   000034   7920         MOV     R1,#0x20
    \   000036   12....       LCALL   `??HalLcd_HW_Write::?relay`; Banked call to: HalLcd_HW_Write
-    810            }
+    812            }
    \   000039   05..         INC     ?V0
    \                     ??HalLcd_HW_WriteLine_2:
    \   00003B   E5..         MOV     A,?V0
    \   00003D   C3           CLR     C
    \   00003E   9410         SUBB    A,#0x10
    \   000040   40F2         JC      ??HalLcd_HW_WriteLine_3
-    811          }
+    813          }
    \   000042   7F02         MOV     R7,#0x2
    \   000044   02....       LJMP    ?BANKED_LEAVE_XDATA
-    812          
-    813          /**************************************************************************************************
-    814           * @fn      HalLcd_HW_WaitUs
-    815           *
-    816           * @brief   wait for x us. @ 32MHz MCU clock it takes 32 "nop"s for 1 us delay.
+    814          
+    815          /**************************************************************************************************
+    816           * @fn      HalLcd_HW_WaitUs
     817           *
-    818           * @param   x us. range[0-65536]
+    818           * @brief   wait for x us. @ 32MHz MCU clock it takes 32 "nop"s for 1 us delay.
     819           *
-    820           * @return  None
-    821           **************************************************************************************************/
+    820           * @param   x us. range[0-65536]
+    821           *
+    822           * @return  None
+    823           **************************************************************************************************/
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    822          void HalLcd_HW_WaitUs(uint16 microSecs)
+    824          void HalLcd_HW_WaitUs(uint16 microSecs)
    \                     HalLcd_HW_WaitUs:
-    823          {
+    825          {
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
    \   000000   8020         SJMP    ??HalLcd_HW_WaitUs_0
-    824            while(microSecs--)
-    825            {
-    826              /* 32 NOPs == 1 usecs */
-    827              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    826            while(microSecs--)
+    827            {
+    828              /* 32 NOPs == 1 usecs */
+    829              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
    \                     ??HalLcd_HW_WaitUs_1:
    \   000002   00           nop
    \   000003   00           nop
    \   000004   00           nop
    \   000005   00           nop
    \   000006   00           nop
-    828              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    830              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
    \   000007   00           nop
    \   000008   00           nop
    \   000009   00           nop
    \   00000A   00           nop
    \   00000B   00           nop
-    829              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    831              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
    \   00000C   00           nop
    \   00000D   00           nop
    \   00000E   00           nop
    \   00000F   00           nop
    \   000010   00           nop
-    830              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    832              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
    \   000011   00           nop
    \   000012   00           nop
    \   000013   00           nop
    \   000014   00           nop
    \   000015   00           nop
-    831              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    833              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
    \   000016   00           nop
    \   000017   00           nop
    \   000018   00           nop
    \   000019   00           nop
    \   00001A   00           nop
-    832              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
+    834              asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
    \   00001B   00           nop
    \   00001C   00           nop
    \   00001D   00           nop
    \   00001E   00           nop
    \   00001F   00           nop
-    833              asm("nop"); asm("nop");
+    835              asm("nop"); asm("nop");
    \   000020   00           nop
    \   000021   00           nop
-    834            }
+    836            }
    \                     ??HalLcd_HW_WaitUs_0:
    \   000022   EA           MOV     A,R2
    \   000023   F8           MOV     R0,A
@@ -1731,7 +1658,7 @@ Warning[Pe009]: nested comment is not allowed
    \   00002E   E8           MOV     A,R0
    \   00002F   49           ORL     A,R1
    \   000030   70D0         JNZ     ??HalLcd_HW_WaitUs_1
-    835          }
+    837          }
    \   000032   02....       LJMP    ?BRET
 
    \                                 In  segment BANK_RELAYS, align 1
@@ -1830,14 +1757,14 @@ Warning[Pe009]: nested comment is not allowed
    \            20202020
    \            2020205D
    \            202000  
-    836          #endif
-    837          
-    838          
-    839          /**************************************************************************************************
-    840          **************************************************************************************************/
-    841          
-    842          
+    838          #endif
+    839          
+    840          
+    841          /**************************************************************************************************
+    842          **************************************************************************************************/
     843          
+    844          
+    845          
 
    Maximum stack usage in bytes:
 
@@ -1900,7 +1827,7 @@ Warning[Pe009]: nested comment is not allowed
        1  CLKCONCMD
      166  HalLcdDisplayPercentBar
        6  HalLcdDisplayPercentBar::?relay
-      21  HalLcdInit
+      14  HalLcdInit
        6  HalLcdInit::?relay
       48  HalLcdRead
        6  HalLcdRead::?relay
@@ -1932,7 +1859,6 @@ Warning[Pe009]: nested comment is not allowed
        6  HalLcd_HW_WriteChar::?relay
       71  HalLcd_HW_WriteLine
        6  HalLcd_HW_WriteLine::?relay
-       2  Lcd_Line1
        1  P0SEL
        1  PERCFG
        1  U0BAUD
@@ -1943,17 +1869,15 @@ Warning[Pe009]: nested comment is not allowed
        6  uartGet::?relay
 
  
- 920 bytes in segment BANKED_CODE
+ 913 bytes in segment BANKED_CODE
  108 bytes in segment BANK_RELAYS
    7 bytes in segment SFR_AN
   15 bytes in segment XDATA_ROM_C
-   2 bytes in segment XDATA_Z
  
  108 bytes of CODE     memory
   15 bytes of CONST    memory
    0 bytes of DATA     memory (+ 7 bytes shared)
- 920 bytes of HUGECODE memory
-   2 bytes of XDATA    memory
+ 913 bytes of HUGECODE memory
 
 Errors: none
-Warnings: 23
+Warnings: none

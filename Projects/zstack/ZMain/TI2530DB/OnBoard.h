@@ -213,7 +213,7 @@ extern uint8 aExtendedAddress[8];
  */
 #if !defined INT_HEAP_LEN
 #if defined RTR_NWK
-  #define INT_HEAP_LEN  3072
+  #define INT_HEAP_LEN  2048
 #else
   #define INT_HEAP_LEN  2048
 #endif

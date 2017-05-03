@@ -493,6 +493,7 @@
           <state>$PROJ_DIR$\..\..\..\..\..\Components\stack\zdo</state>
           <state>$PROJ_DIR$\..\..\..\..\..\Components\zmac</state>
           <state>$PROJ_DIR$\..\..\..\..\..\Components\zmac\f8w</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\Components\dll</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -6818,6 +6819,45 @@
     <file>
       <name>$PROJ_DIR$\..\Source\OSAL_GenericApp.c</name>
     </file>
+  </group>
+  <group>
+    <name>DLL</name>
+    <group>
+      <name>includes</name>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\includes\circular_buffer.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\includes\defines.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\includes\dll.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\includes\includes.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\includes\look_up_table.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\includes\status.h</name>
+      </file>
+    </group>
+    <group>
+      <name>src</name>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\src\circular_buffer.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\src\dll.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\src\look_up_table.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\Components\dll\src\status.c</name>
+      </file>
+    </group>
   </group>
   <group>
     <name>HAL</name>

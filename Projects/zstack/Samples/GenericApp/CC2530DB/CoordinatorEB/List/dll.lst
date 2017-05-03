@@ -1,0 +1,1671 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V9.30.3.3983 for 8051                03/May/2017  09:23:45
+# Copyright 2004-2016 IAR Systems AB.
+# Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
+#
+#    Core               =  plain
+#    Code model         =  banked
+#    Data model         =  large
+#    Calling convention =  xdata reentrant
+#    Constant location  =  data_rom
+#    Dptr setup         =  1,16
+#                          
+#    Source file        =  
+#        C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Components\dll\src\dll.c
+#    Command line       =  
+#        -f "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg"
+#        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRUE
+#        -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8 -DMAC_CFG_RX_MAX=5
+#        -DZDO_COORDINATOR -DRTR_NWK) -f "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg"
+#        (-DZIGBEEPRO -DSECURE=1 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+#        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0x0422
+#        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+#        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+#        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+#        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+#        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+#        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+#        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+#        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+#        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+#        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+#        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+#        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)
+#        -DREJOIN_POLL_RATE=440 "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Components\dll\src\dll.c" -D ZTOOL_P1 -D
+#        MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC
+#        "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List"
+#        -lA "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List"
+#        --diag_suppress Pe001,Pa010 -o "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj"
+#        -e --no_code_motion --debug --core=plain --dptr=16,1
+#        --data_model=large --code_model=banked
+#        --calling_convention=xdata_reentrant --place_constants=data_rom
+#        --nr_virtual_regs 16 -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\dll\"
+#        -Ohz --require_prototypes
+#    List file          =  
+#        C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List\dll.lst
+#    Object file        =  
+#        C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj\dll.r51
+#
+###############################################################################
+
+C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\dll.c
+      1          #include "includes/dll.h"
+      2          //#include "hal/includes/hal_gpio.h"
+      3          #include "includes/defines.h"
+      4          #include "hal_uart.h"
+      5          #include "includes/circular_buffer.h"
+      6          
+      7          #include "hal_lcd.h"
+      8          #include "OnBoard.h"
+      9          //#include <stdlib.h>
+     10          //#include "stdlib.h"
+     11          //#include "cmsis_os.h"
+     12          
+     13          #include <stdio.h>
+     14          //#include <stdint.h>
+     15          //#include <stdlib.h>
+     16          #include "hal_types.h"
+     17          //*****************************************************************************
+     18          //
+     19          // A mapping of devices IDs to signal_id number.
+     20          //
+     21          //*****************************************************************************
+
+   \                                 In  segment XDATA_ROM_C, align 1
+     22          static const uint16 signalID[] = {
+   \                     signalID:
+   \   000000   5432         DW 12884
+   \   000002   1211         DW 4370
+   \   000004   5032         DW 12880
+   \   000006   1411         DW 4372
+   \   000008   4832         DW 12872
+   \   00000A   1611         DW 4374
+   \   00000C   1711         DW 4375
+   \   00000E   1811         DW 4376
+   \   000010   1911         DW 4377
+     23                                            TEMP_SENSOR_INSIDE,
+     24                                            TEMP_SENSOR_OUTSIDE,
+     25                                            PRESSURE_SENSOR_INSIDE,
+     26                                            PRESSURE_SENSOR_OUTSIDE,
+     27                                            HUMIDITY_SENSOR_INSIDE,
+     28                                            HUMIDITY_SENSOR_OUTSIDE,
+     29                                            DOOR,
+     30                                            WINDOW,
+     31                                            MOTION_SENSOR
+     32                                            };
+     33          
+     34          
+     35          
+     36          
+     37          //*****************************************************************************
+     38          //
+     39          // Internal/local functions
+     40          // \just defining functionality/
+     41          //
+     42          //*****************************************************************************
+     43          static uint8 getSignalID(const uint16 devicesAddress);
+     44          static uint8 checksum(DLLPacket_t *frame);
+     45          
+     46          //static uint8 processFrameRx(uint8 *frame, uint8 len, uint16 Address);
+     47          //static uint8 devAddressSupport(uint16 devAddress);
+     48          
+     49          
+     50          //static uint8 halUARTWrite(CircularBuffer_t *txBuffer, uint8 len);
+     51          static void packFrameToStell(uint8 *buff, DLLPacket_t emPacket);
+     52          //*****************************************************************************
+     53          //
+     54          // CMSIS-RTOS tread definition and tread  function declaration
+     55          //
+     56          //*****************************************************************************
+     57          /*
+     58          void communicationThread(void const *arg);
+     59          osThreadId tID_PC_Communication;
+     60          osThreadId tID_CC2530_Communication;
+     61          */
+     62          
+     63          //*****************************************************************************
+     64          //
+     65          // Extern variables
+     66          //
+     67          // treba promijeniti naziv ova dva bafera u circularBuffer.h
+     68          //
+     69          //*****************************************************************************
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     70          CircularBuffer_t rxBufferPC;
+   \                     rxBufferPC:
+   \   000000                DS 260
+   \   000104                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     71          CircularBuffer_t rxBufferCC2530;
+   \                     rxBufferCC2530:
+   \   000000                DS 260
+   \   000104                REQUIRE __INIT_XDATA_Z
+     72          
+     73          //*****************************************************************************
+     74          //
+     75          // Local variables
+     76          //
+     77          //*****************************************************************************
+     78          //DLLState_t statePC;
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     79          DLLState_t stateCC2530;
+   \                     stateCC2530:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     80          //uint8 emFlagPC;
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     81          uint8 emFlagCC2530;
+   \                     emFlagCC2530:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     82          
+     83          //char uiTxBufferPC[MAX_BUFFER_LENGHT];
+     84          //uint8 uiRxBufferPC[MAX_BUFFER_LENGHT];
+     85          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     86          char uiTxBufferCC2530[MAX_BUFFER_LENGHT];
+   \                     uiTxBufferCC2530:
+   \   000000                DS 256
+   \   000100                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     87          uint8 uiRxBufferCC2530[MAX_BUFFER_LENGHT];
+   \                     uiRxBufferCC2530:
+   \   000000                DS 256
+   \   000100                REQUIRE __INIT_XDATA_Z
+     88          
+     89          //uint8 rxBufferPCIndex;
+     90          //uint8 txBufferPCIndex;
+     91          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     92          uint8 rxBufferCC2530Index;
+   \                     rxBufferCC2530Index:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     93          uint8 txBufferCC2530Index;
+   \                     txBufferCC2530Index:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     94          
+     95          //uint8 tmpPC;
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     96          uint8 tmpCC2530;
+   \                     tmpCC2530:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     97          
+     98          //CircularBuffer_t cTxBufferPC;
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     99          CircularBuffer_t cTxBufferCC2530;
+   \                     cTxBufferCC2530:
+   \   000000                DS 260
+   \   000104                REQUIRE __INIT_XDATA_Z
+    100          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    101          DLLPacket_t recPack;
+   \                     recPack:
+   \   000000                DS 9
+   \   000009                REQUIRE __INIT_XDATA_Z
+    102          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    103          static CallBack_t callBack;
+   \                     callBack:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+    104          
+    105          //*****************************************************************************
+    106          //
+    107          // Function definition
+    108          //
+    109          //*****************************************************************************
+    110          
+    111          //*****************************************************************************
+    112          //
+    113          //! Data link layer initialization function
+    114          //!
+    115          //! This function initializes states and indexes,
+    116          //! configures communication ports, one of \b PC or \b CC2530 and their
+    117          //! baudrates, one of \b BAUDRATE_PC \b BAUDRATE_CC2530. Creates two threads
+    118          //! for communication wia UART interface.
+    119          //!
+    120          //! \return None.
+    121          //
+    122          //*****************************************************************************
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    123          void dllInit(void)
+   \                     dllInit:
+    124          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    125          	//osThreadDef(communicationThread, osPriorityHigh, 2, 0);
+    126          
+    127          	//uint8 portPC = PC;
+    128          	//uint8 portCC2530 = CC2530;
+    129          
+    130          	//statePC = IDLE;
+    131          	stateCC2530 = IDLE;
+   \   000004   90....       MOV     DPTR,#stateCC2530
+   \   000007   E4           CLR     A
+   \   000008   F0           MOVX    @DPTR,A
+    132          	//rxBufferPCIndex = 0;
+    133          	//txBufferPCIndex = 0;
+    134          	rxBufferCC2530Index = 0;
+   \   000009   90....       MOV     DPTR,#rxBufferCC2530Index
+   \   00000C   F0           MOVX    @DPTR,A
+    135          	txBufferCC2530Index = 0;
+   \   00000D   90....       MOV     DPTR,#txBufferCC2530Index
+   \   000010   F0           MOVX    @DPTR,A
+    136          
+    137          	//circularInit(&cTxBufferPC);
+    138          	circularInit(&cTxBufferCC2530);
+   \   000011                ; Setup parameters for call to function circularInit
+   \   000011   7A..         MOV     R2,#cTxBufferCC2530 & 0xff
+   \   000013   7B..         MOV     R3,#(cTxBufferCC2530 >> 8) & 0xff
+   \   000015   12....       LCALL   `??circularInit::?relay`; Banked call to: circularInit
+    139                  /*CircularBuffer_t *cRxBuffer;
+    140          	CircularBuffer_t *cTxBuffer;
+    141                  cRxBuffer = &rxBufferCC2530;
+    142                  cTxBuffer = &cTxBufferCC2530;
+    143                  */
+    144               /*   
+    145                  
+    146                  uint8 port  = *(uint8 *)(arg);
+    147          	uint8 *tmp;
+    148          	uint8 *rxBuffer;
+    149                  uint8 *txBuffer;
+    150          	uint8 *txIndex;
+    151          	uint8 *rxIndex;
+    152          	uint8 *emFlag;
+    153          	DLLState_t *state;
+    154          	CircularBuffer_t *cRxBuffer;
+    155          	CircularBuffer_t *cTxBuffer;
+    156                  
+    157                  tmp = &tmpCC2530;
+    158                  state = &stateCC2530;
+    159                  txBuffer = (uint8 *)uiTxBufferCC2530;
+    160                  rxBuffer = uiRxBufferCC2530;
+    161                  txIndex = &txBufferCC2530Index;
+    162                  rxIndex = &rxBufferCC2530Index;
+    163                  emFlag = &emFlagCC2530;
+    164                  cRxBuffer = &rxBufferCC2530;
+    165                  cTxBuffer = &cTxBufferCC2530;
+    166          */
+    167          	//halUARTOpenPort(PC, BAUDRATE_PC , 1, 0);
+    168          	//halUARTOpenPort(CC2530, BAUDRATE_CC2530, 1, 0);
+    169                  
+    170                  
+    171                  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    172                  // Ovdje treba initUart
+    173                  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    174          
+    175          	//tID_PC_Communication = osThreadCreate( osThread(communicationThread), (void *)(&portPC));
+    176          	//tID_CC2530_Communication = osThreadCreate( osThread(communicationThread), (void *)(&portCC2530));
+    177          }
+   \   000018                REQUIRE ?Subroutine0
+   \   000018                ; // Fall through to label ?Subroutine0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   D083         POP     DPH
+   \   000002   D082         POP     DPL
+   \   000004   02....       LJMP    ?BRET
+    178          
+    179          //*****************************************************************************
+    180          //
+    181          //! Register callback function.
+    182          //!
+    183          //! \param cb is pointer on the function.
+    184          //!
+    185          //! \return None.
+    186          //
+    187          //*****************************************************************************
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    188          void CallBackRegister(CallBack_t cb)
+   \                     CallBackRegister:
+    189          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    190          	callBack = cb;
+   \   000004   90....       MOV     DPTR,#callBack
+   \   000007   EA           MOV     A,R2
+   \   000008   F0           MOVX    @DPTR,A
+   \   000009   A3           INC     DPTR
+   \   00000A   EB           MOV     A,R3
+   \   00000B   F0           MOVX    @DPTR,A
+    191          }
+   \   00000C   80..         SJMP    ?Subroutine0
+    192          
+    193          //*****************************************************************************
+    194          //
+    195          //! Function handles comminucation. Handles RX or TX on active ports.
+    196          //!
+    197          //! \param arg is pointer on port.
+    198          //!
+    199          //! This function sends data from app layer forward and delivers data to app
+    200          //! layer.
+    201          //!
+    202          //! \return None.
+    203          //
+    204          //*****************************************************************************
+    205          /*
+    206          void communicationThread(void const *arg)
+    207          {
+    208          	uint8 port  = *(uint8 *)(arg);
+    209          	uint8 *tmp;
+    210          	uint8 *rxBuffer;
+    211                  uint8 *txBuffer;
+    212          	uint8 *txIndex;
+    213          	uint8 *rxIndex;
+    214          	uint8 *emFlag;
+    215          	DLLState_t *state;
+    216          	CircularBuffer_t *cRxBuffer;
+    217          	CircularBuffer_t *cTxBuffer;
+    218          
+    219          	if (PC == port)
+    220          	{
+    221          		tmp = &tmpPC;
+    222          		state = &statePC;
+    223          		txBuffer = (uint8 *)uiTxBufferPC;
+    224          		rxBuffer = uiRxBufferPC;
+    225          		txIndex = &txBufferPCIndex;
+    226          		rxIndex = &rxBufferPCIndex;
+    227          		emFlag = &emFlagPC;
+    228          		cRxBuffer = &rxBufferPC;
+    229          		cTxBuffer = &cTxBufferPC;
+    230          	}
+    231          	else if (CC2530 == port)
+    232          	{
+    233            	tmp = &tmpCC2530;
+    234          		state = &stateCC2530;
+    235          		txBuffer = (uint8 *)uiTxBufferCC2530;
+    236          		rxBuffer = uiRxBufferCC2530;
+    237          		txIndex = &txBufferCC2530Index;
+    238          		rxIndex = &rxBufferCC2530Index;
+    239          		emFlag = &emFlagCC2530;
+    240          		cRxBuffer = &rxBufferCC2530;
+    241          		cTxBuffer = &cTxBufferCC2530;
+    242          	}
+    243          
+    244          	while (1)
+    245          	{
+    246          		osDelay(10);
+    247          		switch ((*state))
+    248          		{
+    249          			case IDLE:
+    250          				if (circularGet(cRxBuffer, tmp))	//zastita!!!
+    251          				{
+    252          					if (START_DELIMITER == (*tmp))
+    253          					{
+    254          						*rxIndex = 0;
+    255          						*state = RECEPTION;
+    256          					}
+    257          					else
+    258          					{
+    259          						*state = IDLE;
+    260          
+    261          					}
+    262          				}
+    263          				else if (EMISSION_START == (*emFlag))
+    264          				{
+    265          					*state = EMISSION;
+    266          				}
+    267          
+    268          				else
+    269          				{
+    270          					*state = IDLE;
+    271          
+    272          				}
+    273          				break;
+    274          			case RECEPTION:
+    275          				do
+    276          				{
+    277          					if (circularGet(cRxBuffer, tmp)) // zastita!!!
+    278          					{
+    279          						if (START_DELIMITER == (*tmp))
+    280          						{
+    281          							*rxIndex = 0;
+    282          						}
+    283          						else
+    284          						{
+    285          							rxBuffer[(*rxIndex)++] = *tmp;
+    286          						}
+    287          					}
+    288          				} while(STOP_DELIMITER != *tmp);
+    289          				*state = IDLE;				//
+    290          				processFrameRx(rxBuffer, *rxIndex, port);
+    291          			break;
+    292          			case EMISSION:
+    293          				array2circular(cTxBuffer, txBuffer, *txIndex);
+    294          				halUARTWrite(port, cTxBuffer, 0);
+    295          				*txIndex = 0;
+    296          				*state = IDLE;
+    297          			break;
+    298          			default:
+    299          				// error state!!!
+    300          			break;
+    301          		}
+    302          	}
+    303          }
+    304          */
+    305          //*****************************************************************************
+    306          //
+    307          //! Get the signal ID.
+    308          //!
+    309          //! \param deviceAddress is device address.
+    310          //!
+    311          //! For given a device address, this function returns the corresponding
+    312          //! signal ID.
+    313          //!
+    314          //! \return Returns signal ID, or -1 if \e deviceAddress is not supported.
+    315          //
+    316          //*****************************************************************************
+    317          static uint8 getSignalID(const uint16 deviceAddress)
+    318          {
+    319          	uint8 i;
+    320                  //uint8 j;
+    321                  char *id;
+    322                  //char idde;
+    323                  uint16 idde;
+    324                  
+    325          	uint8 retVal = 255;
+    326          	for (i = 0; i < sizeof(signalID); i+=2)
+    327          	{
+    328                      
+    329          		if (deviceAddress == signalID[i])
+    330          		{
+    331          			retVal = i;
+    332                                  
+    333                                  
+    334          		}
+    335                          //idde = deviceAddress;//i + 0x30;//signalID[i];
+    336                          idde = signalID[i];//i + 0x30;//signalID[i];
+    337                          id = (char*)&idde;
+    338                          //id[0] = idde;
+    339                         // id[1] = '\0';
+    340                          id[2] = '\0';
+    341                          //HalLcdWriteString("-----------------------------SignalID----------------------",0);
+    342                         // HalLcdWriteString(id,0);
+    343                          /*for(j=0;j<3;j++)
+    344                          {
+    345                            uartSend(*(id + j));
+    346                            
+    347                          }*/
+    348                          //HalLcdWriteString("-----------------------------SignalID----------------------",0);
+    349                          idde = deviceAddress;//i + 0x30;
+    350                          //signalID[i];id = (char*)&idde;
+    351                          //HalLcdWriteString("-----------------------------deviceAddress----------------------",0);
+    352                          //HalLcdWriteString(id,0);
+    353                          /*for(j=0;j<3;j++)
+    354                          {
+    355                            uartSend(*(id + j));
+    356                            
+    357                          }*/
+    358                          //HalLcdWriteString("-----------------------------deviceAddress----------------------",0);
+    359          	}
+    360          	return retVal;
+    361          }
+    362          
+    363          //*****************************************************************************
+    364          //
+    365          //! Process received data.
+    366          //!
+    367          //! \param frame is pointer on the received frame.
+    368          //! \param len is lenght of received frame.
+    369          //! \param port is number of port.
+    370          //!
+    371          //! Function process received frame, converts, checks checksum and validation
+    372          //! of signal ID (supported devices)
+    373          //!
+    374          //! \return Returns signal ID, or -1 if \e deviceAddress is not supported.
+    375          //
+    376          //*****************************************************************************
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    377          uint16 processFrameRx(uint8 *frame)
+   \                     processFrameRx:
+    378          {
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 10
+   \   000005   74F6         MOV     A,#-0xa
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+    379          	Data_t *cbData;
+    380          	int iSignalID;
+    381          	int iData;
+    382          	int iPackNum;
+    383          	int iTimeStamp;
+    384          	int iCheckSum;
+    385          	sscanf((char *)frame, 
+    386                         "%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d",
+    387                                 &iSignalID,
+    388                                 &iPackNum,
+    389                                 &iData,
+    390                                 &iTimeStamp,
+    391                                 &iCheckSum
+    392                                 );
+   \   00000A                ; Setup parameters for call to function sscanf
+   \   00000A   A8..         MOV     R0,?XSP + 0
+   \   00000C   A9..         MOV     R1,?XSP + 1
+   \   00000E   88..         MOV     ?V0,R0
+   \   000010   89..         MOV     ?V1,R1
+   \   000012   78..         MOV     R0,#?V0
+   \   000014   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000017   7404         MOV     A,#0x4
+   \   000019   12....       LCALL   ?XSTACK_DISP100_8
+   \   00001C   88..         MOV     ?V0,R0
+   \   00001E   89..         MOV     ?V1,R1
+   \   000020   78..         MOV     R0,#?V0
+   \   000022   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000025   740A         MOV     A,#0xa
+   \   000027   12....       LCALL   ?XSTACK_DISP100_8
+   \   00002A   88..         MOV     ?V0,R0
+   \   00002C   89..         MOV     ?V1,R1
+   \   00002E   78..         MOV     R0,#?V0
+   \   000030   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000033   740A         MOV     A,#0xa
+   \   000035   12....       LCALL   ?XSTACK_DISP100_8
+   \   000038   88..         MOV     ?V0,R0
+   \   00003A   89..         MOV     ?V1,R1
+   \   00003C   78..         MOV     R0,#?V0
+   \   00003E   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000041   7410         MOV     A,#0x10
+   \   000043   12....       LCALL   ?XSTACK_DISP100_8
+   \   000046   88..         MOV     ?V0,R0
+   \   000048   89..         MOV     ?V1,R1
+   \   00004A   78..         MOV     R0,#?V0
+   \   00004C   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00004F   7C..         MOV     R4,#`?<Constant "%*[^0123456789]%d%*[^...">` & 0xff
+   \   000051   7D..         MOV     R5,#(`?<Constant "%*[^0123456789]%d%*[^...">` >> 8) & 0xff
+   \   000053   12....       LCALL   `??sscanf::?relay`   ; Banked call to: sscanf
+   \   000056   740A         MOV     A,#0xa
+   \   000058   12....       LCALL   ?DEALLOC_XSTACK8
+    393          	recPack.appData.devID = signalID[iSignalID];
+   \   00005B   7408         MOV     A,#0x8
+   \   00005D   12....       LCALL   ?XSTACK_DISP0_8
+   \   000060   E0           MOVX    A,@DPTR
+   \   000061   F8           MOV     R0,A
+   \   000062   A3           INC     DPTR
+   \   000063   E0           MOVX    A,@DPTR
+   \   000064   F9           MOV     R1,A
+   \   000065   E8           MOV     A,R0
+   \   000066   28           ADD     A,R0
+   \   000067   F8           MOV     R0,A
+   \   000068   E9           MOV     A,R1
+   \   000069   33           RLC     A
+   \   00006A   F9           MOV     R1,A
+   \   00006B   74..         MOV     A,#signalID & 0xff
+   \   00006D   28           ADD     A,R0
+   \   00006E   F582         MOV     DPL,A
+   \   000070   74..         MOV     A,#(signalID >> 8) & 0xff
+   \   000072   39           ADDC    A,R1
+   \   000073   F583         MOV     DPH,A
+   \   000075   E0           MOVX    A,@DPTR
+   \   000076   F8           MOV     R0,A
+   \   000077   A3           INC     DPTR
+   \   000078   E0           MOVX    A,@DPTR
+   \   000079   F9           MOV     R1,A
+   \   00007A   90....       MOV     DPTR,#recPack
+   \   00007D   E8           MOV     A,R0
+   \   00007E   F0           MOVX    @DPTR,A
+   \   00007F   A3           INC     DPTR
+   \   000080   E9           MOV     A,R1
+   \   000081   F0           MOVX    @DPTR,A
+    394          	recPack.appData.packNum = (uint32)iPackNum & 0xff;
+   \   000082   7404         MOV     A,#0x4
+   \   000084   12....       LCALL   ?XSTACK_DISP0_8
+   \   000087   E0           MOVX    A,@DPTR
+   \   000088   90....       MOV     DPTR,#recPack + 2
+   \   00008B   F0           MOVX    @DPTR,A
+    395          	recPack.appData.data = (uint32)iData & 0xffffffff;
+   \   00008C   7406         MOV     A,#0x6
+   \   00008E   12....       LCALL   ?XSTACK_DISP0_8
+   \   000091   E0           MOVX    A,@DPTR
+   \   000092   FC           MOV     R4,A
+   \   000093   A3           INC     DPTR
+   \   000094   E0           MOVX    A,@DPTR
+   \   000095   FD           MOV     R5,A
+   \   000096   33           RLC     A
+   \   000097   95E0         SUBB    A,0xE0 /* A   */
+   \   000099   FE           MOV     R6,A
+   \   00009A   90....       MOV     DPTR,#recPack + 3
+   \   00009D   EC           MOV     A,R4
+   \   00009E   F0           MOVX    @DPTR,A
+   \   00009F   A3           INC     DPTR
+   \   0000A0   ED           MOV     A,R5
+   \   0000A1   F0           MOVX    @DPTR,A
+   \   0000A2   A3           INC     DPTR
+   \   0000A3   EE           MOV     A,R6
+   \   0000A4   F0           MOVX    @DPTR,A
+   \   0000A5   A3           INC     DPTR
+   \   0000A6   F0           MOVX    @DPTR,A
+    396          	recPack.timeStamp = (uint32)iTimeStamp & 0xff;
+   \   0000A7   7402         MOV     A,#0x2
+   \   0000A9   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000AC   E0           MOVX    A,@DPTR
+   \   0000AD   90....       MOV     DPTR,#recPack + 7
+   \   0000B0   F0           MOVX    @DPTR,A
+    397          	recPack.checkSum = (uint32)iCheckSum & 0xff;
+   \   0000B1   85..82       MOV     DPL,?XSP + 0
+   \   0000B4   85..83       MOV     DPH,?XSP + 1
+   \   0000B7   E0           MOVX    A,@DPTR
+   \   0000B8   90....       MOV     DPTR,#recPack + 8
+   \   0000BB   F0           MOVX    @DPTR,A
+    398          
+    399          	cbData = (struct sData *)(&recPack);
+    400          
+    401          
+    402          //if (checksum(recPack) == recPack->checkSum)
+    403          //{
+    404          //	if (devAddressSupport(recPack->appData.devID))
+    405          //	{
+    406          			callBack(cbData);
+   \   0000BC                ; Setup parameters for indirect call
+   \   0000BC   7A..         MOV     R2,#recPack & 0xff
+   \   0000BE   7B..         MOV     R3,#(recPack >> 8) & 0xff
+   \   0000C0   90....       MOV     DPTR,#callBack
+   \   0000C3   E0           MOVX    A,@DPTR
+   \   0000C4   F8           MOV     R0,A
+   \   0000C5   A3           INC     DPTR
+   \   0000C6   E0           MOVX    A,@DPTR
+   \   0000C7   F583         MOV     DPH,A
+   \   0000C9   8882         MOV     DPL,R0
+   \   0000CB   12....       LCALL   ?CALL_IND
+    407          
+    408          //	}
+    409          		//return 1;
+    410                          return recPack.appData.devID;
+   \   0000CE   90....       MOV     DPTR,#recPack
+   \   0000D1   E0           MOVX    A,@DPTR
+   \   0000D2   FA           MOV     R2,A
+   \   0000D3   A3           INC     DPTR
+   \   0000D4   E0           MOVX    A,@DPTR
+   \   0000D5   FB           MOV     R3,A
+   \   0000D6   740A         MOV     A,#0xa
+   \   0000D8                REQUIRE ?Subroutine1
+   \   0000D8                ; // Fall through to label ?Subroutine1
+    411          //}
+    412          //else
+    413          //{
+    414          //	error_checkSum();
+    415          //	recPack = NULL;
+    416          //	return 0;
+    417          //}
+    418          
+    419          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine1:
+   \   000000   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000003   7F02         MOV     R7,#0x2
+   \   000005   02....       LJMP    ?BANKED_LEAVE_XDATA
+    420          
+    421          
+    422          //*****************************************************************************
+    423          //
+    424          //! Calculating checksum.
+    425          //!
+    426          //! \param frame is pointer on frame on which one is needed to calculated.
+    427          //!
+    428          //! Function caluculates checksum executing XOR operation on evert member of
+    429          //! \b frame.
+    430          //!
+    431          //! \return Returns result of sumary operation.
+    432          //
+    433          //*****************************************************************************
+    434          static uint8 checksum(DLLPacket_t *frame)
+    435          {
+    436          	uint8 sum  = 0x00;
+    437          	uint8 *ptr = (uint8 *)(frame);
+    438          	uint8 *end = &frame->checkSum;
+    439          	while(ptr != end)
+    440          	{
+    441          		sum ^= *ptr;
+    442          		ptr++;
+    443          	}
+    444          
+    445          	return sum;
+    446          
+    447          }
+    448          
+    449          //*****************************************************************************
+    450          //
+    451          //! Checks a devices address.
+    452          //!
+    453          //! \param devAddress is device address.
+    454          //!
+    455          //! This function determines if a device address is supported.
+    456          //!
+    457          //! \return Returns \b true if address is supported, or \b false otherwise.
+    458          //
+    459          //*****************************************************************************
+    460          /*
+    461          static uint8 devAddressSupport(uint16 devAddress)
+    462          {
+    463          	return( (devAddress == TEMP_SENSOR_INSIDE) ||
+    464          					(devAddress == TEMP_SENSOR_OUTSIDE) ||
+    465          					(devAddress == PRESSURE_SENSOR_INSIDE) ||
+    466           					(devAddress == PRESSURE_SENSOR_OUTSIDE) ||
+    467          					(devAddress == HUMIDITY_SENSOR_INSIDE) ||
+    468          					(devAddress == HUMIDITY_SENSOR_OUTSIDE) ||
+    469          					(devAddress == DOOR) ||
+    470          					(devAddress == WINDOW) ||
+    471          					(devAddress == MOTION_SENSOR)
+    472          					);
+    473          }
+    474          */
+    475          //*****************************************************************************
+    476          //
+    477          //! Function that handles data services.
+    478          //!
+    479          //! \param aData is pointer on data structure.
+    480          //! \param port indicates port number.
+    481          //!
+    482          //! This function prepare data to be ready to send and sets state flag to
+    483          //! signals the thread to perform an action.
+    484          //!
+    485          //! \return None.
+    486          //
+    487          //*****************************************************************************
+    488          /*
+    489          static uint8 halUARTWrite(CircularBuffer_t *txBuffer, uint8 len)
+    490          {
+    491          	uint8 cnt = 0;
+    492          	uint8 i;
+    493          	uint8 data;
+    494          
+    495          	if (0 == len)
+    496          	{
+    497          		while(!circularIsEmpty(txBuffer))
+    498          		{
+    499          			circularGet(txBuffer, &data);
+    500                                  uartSend(data);
+    501          			cnt++;
+    502          
+    503          		}// end while
+    504          	}// end if
+    505          
+    506          	else if (len < circularSize(txBuffer))
+    507          	{
+    508          		for (i = 0; i < len; i++)
+    509          		{
+    510          			circularGet(txBuffer, &data);
+    511          			uartSend(data);
+    512          		}// end for
+    513          		cnt = i;
+    514          
+    515          	}// end else if
+    516          
+    517          	else
+    518          	{
+    519          		// error_uart();
+    520          
+    521          	}// end else
+    522          
+    523          	return cnt;
+    524          }
+    525          */
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    526          static void packFrameToStell(uint8 *buff, DLLPacket_t emPacket)
+   \                     packFrameToStell:
+    527          {
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000                REQUIRE ?V3
+   \   000000                REQUIRE ?V4
+   \   000000                REQUIRE ?V5
+   \   000000                REQUIRE ?V6
+   \   000000                REQUIRE ?V7
+   \   000000   74F0         MOV     A,#-0x10
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 16
+   \   000005                ; Auto size: 8
+   \   000005   74F8         MOV     A,#-0x8
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   EA           MOV     A,R2
+   \   00000B   FE           MOV     R6,A
+   \   00000C   EB           MOV     A,R3
+   \   00000D   FF           MOV     R7,A
+    528            
+    529            
+    530            //uint32 da;
+    531            
+    532            int i = 0;
+   \   00000E   7A00         MOV     R2,#0x0
+   \   000010   7B00         MOV     R3,#0x0
+    533            int j = 0;
+   \   000012   8A..         MOV     ?V2,R2
+   \   000014   8A..         MOV     ?V3,R2
+    534            int k = 0;
+    535            uint8 *pBuf = buff;
+    536           
+    537            uint32 pom = emPacket.appData.data;
+   \   000016   741B         MOV     A,#0x1b
+   \   000018   12....       LCALL   ?XSTACK_DISP0_8
+   \   00001B   78..         MOV     R0,#?V4
+   \   00001D   12....       LCALL   ?L_MOV_X
+    538            
+    539            
+    540            char dat[4] = {'0','0','0','0'};
+   \   000020   90....       MOV     DPTR,#`?<Constant {48, 48, 48, 48}>`
+   \   000023   7404         MOV     A,#0x4
+   \   000025   12....       LCALL   ?XSTACK_DISP102_8
+   \   000028   7404         MOV     A,#0x4
+   \   00002A   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
+    541            char daaat[4] = {'0','0','0','0'};
+   \   00002D   90....       MOV     DPTR,#`?<Constant {48, 48, 48, 48}>_1`
+   \   000030   AC..         MOV     R4,?XSP + 0
+   \   000032   AD..         MOV     R5,?XSP + 1
+   \   000034   7404         MOV     A,#0x4
+   \   000036   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
+   \   000039   8024         SJMP    ??packFrameToStell_0
+    542           // char *id; //= dat;
+    543            
+    544           
+    545              while(pom)
+    546              {
+    547                dat[i] = (pom % 16) + '0';
+   \                     ??packFrameToStell_1:
+   \   00003B   85....       MOV     ?V0,?V4
+   \   00003E   E5..         MOV     A,?V0
+   \   000040   540F         ANL     A,#0xf
+   \   000042   2430         ADD     A,#0x30
+   \   000044   C0E0         PUSH    A
+   \   000046   7404         MOV     A,#0x4
+   \   000048   12....       LCALL   ?XSTACK_DISP0_8
+   \   00004B   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_13:
+   \   00004E   D0E0         POP     A
+   \   000050   F0           MOVX    @DPTR,A
+    548                pom/=256;
+   \   000051   E4           CLR     A
+   \   000052   C5..         XCH     A,?V7
+   \   000054   C5..         XCH     A,?V6
+   \   000056   C5..         XCH     A,?V5
+   \   000058   F5..         MOV     ?V4,A
+    549                i++;
+   \   00005A   0A           INC     R2
+   \   00005B   EA           MOV     A,R2
+   \   00005C   7001         JNZ     ??packFrameToStell_0
+   \   00005E   0B           INC     R3
+    550              }
+   \                     ??packFrameToStell_0:
+   \   00005F   E5..         MOV     A,?V4
+   \   000061   45..         ORL     A,?V5
+   \   000063   45..         ORL     A,?V6
+   \   000065   45..         ORL     A,?V7
+   \   000067   70D2         JNZ     ??packFrameToStell_1
+    551            
+    552              k = 4 - i;
+   \   000069   7404         MOV     A,#0x4
+   \   00006B   C3           CLR     C
+   \   00006C   9A           SUBB    A,R2
+   \   00006D   F8           MOV     R0,A
+   \   00006E   E4           CLR     A
+   \   00006F   9B           SUBB    A,R3
+   \   000070   F9           MOV     R1,A
+    553              for(j = 0; j < k; j++)
+   \   000071   E8           MOV     A,R0
+   \   000072   FA           MOV     R2,A
+   \   000073   E9           MOV     A,R1
+   \   000074   FB           MOV     R3,A
+   \   000075   C3           CLR     C
+   \   000076   E8           MOV     A,R0
+   \   000077   9401         SUBB    A,#0x1
+   \   000079   E9           MOV     A,R1
+   \   00007A   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_4:
+   \   00007D   401A         JC      ??packFrameToStell_2
+    554              {
+    555                daaat[j] = '0';
+   \   00007F   7C30         MOV     R4,#0x30
+   \   000081   85..82       MOV     DPL,?XSP + 0
+   \   000084   85..83       MOV     DPH,?XSP + 1
+   \                     ??packFrameToStell_3:
+   \   000087   EC           MOV     A,R4
+   \   000088   F0           MOVX    @DPTR,A
+   \   000089   A3           INC     DPTR
+   \   00008A   EA           MOV     A,R2
+   \   00008B   24FF         ADD     A,#-0x1
+   \   00008D   1A           DEC     R2
+   \   00008E   EB           MOV     A,R3
+   \   00008F   34FF         ADDC    A,#-0x1
+   \   000091   FB           MOV     R3,A
+   \   000092   4A           ORL     A,R2
+   \   000093   70F2         JNZ     ??packFrameToStell_3
+    556                
+    557              }
+   \   000095   8A..         MOV     ?V2,R2
+   \   000097   8B..         MOV     ?V3,R3
+    558              i = 0;
+   \                     ??packFrameToStell_2:
+   \   000099   7A00         MOV     R2,#0x0
+   \   00009B   7B00         MOV     R3,#0x0
+   \   00009D   802F         SJMP    ??packFrameToStell_4
+    559              for(; j < 4; j++)
+    560              {   
+    561                daaat[k] = dat[i];
+   \                     ??packFrameToStell_5:
+   \   00009F   7404         MOV     A,#0x4
+   \   0000A1   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000A4   12....       LCALL   ?Subroutine5 & 0xFFFF
+   \                     ??CrossCallReturnLabel_7:
+   \   0000A7   C0E0         PUSH    A
+   \   0000A9   85..82       MOV     DPL,?XSP + 0
+   \   0000AC   85..83       MOV     DPH,?XSP + 1
+   \   0000AF   E582         MOV     A,DPL
+   \   0000B1   28           ADD     A,R0
+   \   0000B2   F582         MOV     DPL,A
+   \   0000B4   E583         MOV     A,DPH
+   \   0000B6   39           ADDC    A,R1
+   \   0000B7   F583         MOV     DPH,A
+   \   0000B9   D0E0         POP     A
+   \   0000BB   F0           MOVX    @DPTR,A
+    562                k++;
+   \   0000BC   08           INC     R0
+   \   0000BD   E8           MOV     A,R0
+   \   0000BE   7001         JNZ     ??packFrameToStell_6
+   \   0000C0   09           INC     R1
+    563                i++;
+   \                     ??packFrameToStell_6:
+   \   0000C1   0A           INC     R2
+   \   0000C2   EA           MOV     A,R2
+   \   0000C3   7001         JNZ     ??packFrameToStell_7
+   \   0000C5   0B           INC     R3
+    564                
+    565              }
+   \                     ??packFrameToStell_7:
+   \   0000C6   05..         INC     ?V2
+   \   0000C8   E5..         MOV     A,?V2
+   \   0000CA   7002         JNZ     ??packFrameToStell_4
+   \   0000CC   05..         INC     ?V3
+   \                     ??packFrameToStell_4:
+   \   0000CE   C3           CLR     C
+   \   0000CF   E5..         MOV     A,?V2
+   \   0000D1   9404         SUBB    A,#0x4
+   \   0000D3   E5..         MOV     A,?V3
+   \   0000D5   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_5:
+   \   0000D8   40C5         JC      ??packFrameToStell_5
+    566           
+    567                //uint8 len = 1 + 1 + 4 + 1 + 1;
+    568            *pBuf++ = 0x3E;
+   \   0000DA   8E82         MOV     DPL,R6
+   \   0000DC   8F83         MOV     DPH,R7
+   \   0000DE   743E         MOV     A,#0x3e
+   \   0000E0   F0           MOVX    @DPTR,A
+    569            
+    570            *pBuf++ = 0x23;
+   \   0000E1   A3           INC     DPTR
+   \   0000E2   7423         MOV     A,#0x23
+   \   0000E4   F0           MOVX    @DPTR,A
+    571            
+    572            
+    573            *pBuf++ = getSignalID(emPacket.appData.devID) + 0x30;
+   \   0000E5   EE           MOV     A,R6
+   \   0000E6   2402         ADD     A,#0x2
+   \   0000E8   F8           MOV     R0,A
+   \   0000E9   E4           CLR     A
+   \   0000EA   3F           ADDC    A,R7
+   \   0000EB   F9           MOV     R1,A
+   \   0000EC   E8           MOV     A,R0
+   \   0000ED   FC           MOV     R4,A
+   \   0000EE   E9           MOV     A,R1
+   \   0000EF   FD           MOV     R5,A
+   \   0000F0   8C82         MOV     DPL,R4
+   \   0000F2   8D83         MOV     DPH,R5
+   \   0000F4   A3           INC     DPTR
+   \   0000F5   A882         MOV     R0,DPL
+   \   0000F7   A983         MOV     R1,DPH
+   \   0000F9   7418         MOV     A,#0x18
+   \   0000FB   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000FE   E0           MOVX    A,@DPTR
+   \   0000FF   F5..         MOV     ?V0,A
+   \   000101   A3           INC     DPTR
+   \   000102   E0           MOVX    A,@DPTR
+   \   000103   F5..         MOV     ?V1,A
+   \   000105   7FFF         MOV     R7,#-0x1
+   \   000107   7E00         MOV     R6,#0x0
+   \                     ??packFrameToStell_8:
+   \   000109   EE           MOV     A,R6
+   \   00010A   25E0         ADD     A,0xE0 /* A   */
+   \   00010C   FA           MOV     R2,A
+   \   00010D   E4           CLR     A
+   \   00010E   33           RLC     A
+   \   00010F   FB           MOV     R3,A
+   \   000110   74..         MOV     A,#signalID & 0xff
+   \   000112   2A           ADD     A,R2
+   \   000113   F582         MOV     DPL,A
+   \   000115   74..         MOV     A,#(signalID >> 8) & 0xff
+   \   000117   3B           ADDC    A,R3
+   \   000118   F583         MOV     DPH,A
+   \   00011A   E0           MOVX    A,@DPTR
+   \   00011B   65..         XRL     A,?V0
+   \   00011D   7004         JNZ     ??packFrameToStell_9
+   \   00011F   A3           INC     DPTR
+   \   000120   E0           MOVX    A,@DPTR
+   \   000121   65..         XRL     A,?V1
+   \                     ??packFrameToStell_9:
+   \   000123   7002         JNZ     ??packFrameToStell_10
+   \   000125   EE           MOV     A,R6
+   \   000126   FF           MOV     R7,A
+   \                     ??packFrameToStell_10:
+   \   000127   7402         MOV     A,#0x2
+   \   000129   2E           ADD     A,R6
+   \   00012A   FE           MOV     R6,A
+   \   00012B   C3           CLR     C
+   \   00012C   9412         SUBB    A,#0x12
+   \   00012E   40D9         JC      ??packFrameToStell_8
+   \   000130   7430         MOV     A,#0x30
+   \   000132   2F           ADD     A,R7
+   \   000133   8C82         MOV     DPL,R4
+   \   000135   8D83         MOV     DPH,R5
+   \   000137   F0           MOVX    @DPTR,A
+    574            
+    575            *pBuf++ = 0x2C;
+   \   000138   8882         MOV     DPL,R0
+   \   00013A   8983         MOV     DPH,R1
+   \   00013C   742C         MOV     A,#0x2c
+   \   00013E   F0           MOVX    @DPTR,A
+    576            *pBuf++ = 0x23;
+   \   00013F   A3           INC     DPTR
+   \   000140   7423         MOV     A,#0x23
+   \   000142   F0           MOVX    @DPTR,A
+    577            
+    578            
+    579            *pBuf++ = emPacket.appData.packNum + 0x30;
+   \   000143   741A         MOV     A,#0x1a
+   \   000145   12....       LCALL   ?XSTACK_DISP0_8
+   \   000148   12....       LCALL   ?Subroutine2 & 0xFFFF
+    580            
+    581            *pBuf++ = 0x2C;
+    582            *pBuf++ = 0x23;
+   \                     ??CrossCallReturnLabel_0:
+   \   00014B   E8           MOV     A,R0
+   \   00014C   2405         ADD     A,#0x5
+   \   00014E   F8           MOV     R0,A
+   \   00014F   5001         JNC     ??packFrameToStell_11
+   \   000151   09           INC     R1
+    583            
+    584            
+    585            for(i = 0; i < 4; i++)
+   \                     ??packFrameToStell_11:
+   \   000152   7A00         MOV     R2,#0x0
+   \   000154   7B00         MOV     R3,#0x0
+    586            {
+    587              *pBuf++ =daaat[i] ;
+   \                     ??packFrameToStell_12:
+   \   000156   85..82       MOV     DPL,?XSP + 0
+   \   000159   85..83       MOV     DPH,?XSP + 1
+   \   00015C   12....       LCALL   ?Subroutine5 & 0xFFFF
+    588               //uartSend(data[i]);//+'0');
+    589              //HalLcdWriteString((char *)data[i], 0);
+    590              //HalLcdWriteString("-----------Simic-----------", 0);
+    591            }
+   \                     ??CrossCallReturnLabel_8:
+   \   00015F   8882         MOV     DPL,R0
+   \   000161   8983         MOV     DPH,R1
+   \   000163   F0           MOVX    @DPTR,A
+   \   000164   A3           INC     DPTR
+   \   000165   A882         MOV     R0,DPL
+   \   000167   A983         MOV     R1,DPH
+   \   000169   0A           INC     R2
+   \   00016A   EA           MOV     A,R2
+   \   00016B   7001         JNZ     ??packFrameToStell_13
+   \   00016D   0B           INC     R3
+   \                     ??packFrameToStell_13:
+   \   00016E   C3           CLR     C
+   \   00016F   9404         SUBB    A,#0x4
+   \   000171   EB           MOV     A,R3
+   \   000172   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_6:
+   \   000175   40DF         JC      ??packFrameToStell_12
+    592            
+    593            *pBuf++ = 0x2C;
+   \   000177   742C         MOV     A,#0x2c
+   \   000179   F0           MOVX    @DPTR,A
+    594            *pBuf++ = 0x23;
+   \   00017A   A3           INC     DPTR
+   \   00017B   7423         MOV     A,#0x23
+   \   00017D   F0           MOVX    @DPTR,A
+    595            
+    596            
+    597            *pBuf++ = emPacket.timeStamp + 0x30;  
+   \   00017E   741F         MOV     A,#0x1f
+   \   000180   12....       LCALL   ?XSTACK_DISP0_8
+   \   000183   12....       LCALL   ?Subroutine2 & 0xFFFF
+    598            
+    599            *pBuf++ = 0x2C;
+    600            *pBuf++ = 0x23;
+    601            
+    602            
+    603            *pBuf++ = emPacket.checkSum + 0x30;
+   \                     ??CrossCallReturnLabel_1:
+   \   000186   7420         MOV     A,#0x20
+   \   000188   12....       LCALL   ?XSTACK_DISP0_8
+   \   00018B   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_11:
+   \   00018E   A3           INC     DPTR
+   \   00018F   A3           INC     DPTR
+   \   000190   A3           INC     DPTR
+   \   000191   12....       LCALL   ?Subroutine3 & 0xFFFF
+    604            *pBuf++ = 0x3C;
+   \                     ??CrossCallReturnLabel_2:
+   \   000194   743C         MOV     A,#0x3c
+   \   000196   12....       LCALL   ?Subroutine3 & 0xFFFF
+    605            *pBuf++ = 0x00;
+   \                     ??CrossCallReturnLabel_3:
+   \   000199   A3           INC     DPTR
+   \   00019A   E4           CLR     A
+   \   00019B   F0           MOVX    @DPTR,A
+    606            /*
+    607            da = emPacket.appData.data;
+    608            id = (char*)&da;
+    609            id[4] = '\0';
+    610            HalLcdWriteString("-----------------------------Paket----------------------",0);
+    611            HalLcdWriteString(id,0);
+    612            HalLcdWriteString("-----------------------------Paket----------------------",0);
+    613            */
+    614          } 
+   \   00019C   7408         MOV     A,#0x8
+   \   00019E   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0001A1   7F08         MOV     R7,#0x8
+   \   0001A3   02....       LJMP    ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine5:
+   \   000000   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_14:
+   \   000003   E0           MOVX    A,@DPTR
+   \   000004   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine8:
+   \   000000   E582         MOV     A,DPL
+   \   000002   2A           ADD     A,R2
+   \   000003   F582         MOV     DPL,A
+   \   000005   E583         MOV     A,DPH
+   \   000007   3B           ADDC    A,R3
+   \   000008   F583         MOV     DPH,A
+   \   00000A   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine4:
+   \   000000   9400         SUBB    A,#0x0
+   \   000002   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   000004   65D0         XRL     A,PSW
+   \   000006   33           RLC     A
+   \   000007   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine3:
+   \   000000   12....       LCALL   ?Subroutine6 & 0xFFFF
+   \                     ??CrossCallReturnLabel_9:
+   \   000003   A3           INC     DPTR
+   \   000004   A3           INC     DPTR
+   \   000005   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_12:
+   \   000003   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_15:
+   \   000006   742C         MOV     A,#0x2c
+   \   000008   12....       LCALL   ?Subroutine6 & 0xFFFF
+   \                     ??CrossCallReturnLabel_10:
+   \   00000B   7423         MOV     A,#0x23
+   \   00000D   F0           MOVX    @DPTR,A
+   \   00000E   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine7:
+   \   000000   E0           MOVX    A,@DPTR
+   \   000001   2430         ADD     A,#0x30
+   \   000003   8882         MOV     DPL,R0
+   \   000005   8983         MOV     DPH,R1
+   \   000007   A3           INC     DPTR
+   \   000008   A3           INC     DPTR
+   \   000009   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine6:
+   \   000000   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_16:
+   \   000003   A3           INC     DPTR
+   \   000004   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine9:
+   \   000000   F0           MOVX    @DPTR,A
+   \   000001   8882         MOV     DPL,R0
+   \   000003   8983         MOV     DPH,R1
+   \   000005   A3           INC     DPTR
+   \   000006   A3           INC     DPTR
+   \   000007   A3           INC     DPTR
+   \   000008   22           RET
+    615          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    616          void dllDataRequest(Data_t *aData)
+   \                     dllDataRequest:
+    617          {
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 9
+   \   000005   74F7         MOV     A,#-0x9
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+    618                  //char *id;
+    619                  //uint16 idde;
+    620                  //uint8 num;
+    621                  //uint32 da;
+    622                  /*
+    623                  int iSignalID;
+    624          	int iData;
+    625          	int iPackNum;
+    626          	int iTimeStamp;
+    627          	int iCheckSum;
+    628                  */
+    629                  //uint8 *txBuffer;
+    630                  //uint8 *txIndex;
+    631                  //CircularBuffer_t *cTxBuffer;
+    632                  
+    633          	DLLPacket_t emPacket;
+    634          	//emPacket.appData = *aData;
+    635                  //emPacket.appData = aData;
+    636                  
+    637                  emPacket.appData.devID = aData->devID;
+   \   00000A   8A82         MOV     DPL,R2
+   \   00000C   8B83         MOV     DPH,R3
+   \   00000E   E0           MOVX    A,@DPTR
+   \   00000F   F8           MOV     R0,A
+   \   000010   A3           INC     DPTR
+   \   000011   E0           MOVX    A,@DPTR
+   \   000012   F9           MOV     R1,A
+   \   000013   85..82       MOV     DPL,?XSP + 0
+   \   000016   85..83       MOV     DPH,?XSP + 1
+   \   000019   E8           MOV     A,R0
+   \   00001A   F0           MOVX    @DPTR,A
+   \   00001B   A3           INC     DPTR
+   \   00001C   E9           MOV     A,R1
+   \   00001D   F0           MOVX    @DPTR,A
+    638                  emPacket.appData.data = aData->data;
+   \   00001E   8A82         MOV     DPL,R2
+   \   000020   8B83         MOV     DPH,R3
+   \   000022   A3           INC     DPTR
+   \   000023   A3           INC     DPTR
+   \   000024   A3           INC     DPTR
+   \   000025   12....       LCALL   ?XLOAD_R4567
+   \   000028   7403         MOV     A,#0x3
+   \   00002A   12....       LCALL   ?XSTACK_DISP0_8
+   \   00002D   12....       LCALL   ?XSTORE_R4567
+    639                  emPacket.appData.packNum = aData->packNum;
+   \   000030   8A82         MOV     DPL,R2
+   \   000032   8B83         MOV     DPH,R3
+   \   000034   A3           INC     DPTR
+   \   000035   A3           INC     DPTR
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   C0E0         PUSH    A
+   \   000039   7402         MOV     A,#0x2
+   \   00003B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00003E   D0E0         POP     A
+   \   000040   F0           MOVX    @DPTR,A
+    640                  emPacket.timeStamp = 0;
+   \   000041   7407         MOV     A,#0x7
+   \   000043   12....       LCALL   ?XSTACK_DISP0_8
+   \   000046   E4           CLR     A
+   \   000047   F0           MOVX    @DPTR,A
+    641          	emPacket.checkSum = checksum(&emPacket);
+   \   000048   7A00         MOV     R2,#0x0
+   \   00004A   A8..         MOV     R0,?XSP + 0
+   \   00004C   A9..         MOV     R1,?XSP + 1
+   \                     ??dllDataRequest_0:
+   \   00004E   8882         MOV     DPL,R0
+   \   000050   8983         MOV     DPH,R1
+   \   000052   E0           MOVX    A,@DPTR
+   \   000053   CA           XCH     A,R2
+   \   000054   6A           XRL     A,R2
+   \   000055   FA           MOV     R2,A
+   \   000056   A3           INC     DPTR
+   \   000057   A882         MOV     R0,DPL
+   \   000059   A983         MOV     R1,DPH
+   \   00005B   7408         MOV     A,#0x8
+   \   00005D   12....       LCALL   ?XSTACK_DISP0_8
+   \   000060   E582         MOV     A,DPL
+   \   000062   68           XRL     A,R0
+   \   000063   7003         JNZ     ??dllDataRequest_1
+   \   000065   E583         MOV     A,DPH
+   \   000067   69           XRL     A,R1
+   \                     ??dllDataRequest_1:
+   \   000068   70E4         JNZ     ??dllDataRequest_0
+   \   00006A   EA           MOV     A,R2
+   \   00006B   F0           MOVX    @DPTR,A
+    642                  
+    643                  //txBuffer = (uint8 *)uiTxBufferCC2530;
+    644                  //cTxBuffer = &cTxBufferCC2530;
+    645                  //txBuffer = (uint8 *)uiTxBufferCC2530;
+    646                  //txIndex = &txBufferCC2530Index;
+    647          	// ako bude bilo potrebe za slanjem vremenskog trenutka
+    648          	// radi iscrtavanja grafa obezbjedicemo mehanizam, inace
+    649          	// timeStamp = 0
+    650          	/*
+    651                  iSignalID = (int)getSignalID(emPacket.appData.devID);
+    652          	iData = (int)emPacket.appData.data;
+    653          	iPackNum = (int)emPacket.appData.packNum;
+    654          	iTimeStamp = (int)emPacket.timeStamp;
+    655          	iCheckSum = (int)emPacket.checkSum;
+    656                  */
+    657                  /*
+    658                  iSignalID = (unsigned)getSignalID(emPacket.appData.devID);
+    659          	iData = (unsigned)emPacket.appData.data;
+    660          	iPackNum = (unsigned)emPacket.appData.packNum;
+    661          	iTimeStamp = (unsigned)emPacket.timeStamp;
+    662          	iCheckSum = (unsigned)emPacket.checkSum;
+    663                  */
+    664                  
+    665          	 //HalLcdWriteString("Miso----------------------",0);
+    666                  /*
+    667                  txBufferCC2530Index = sprintf(uiTxBufferCC2530,
+    668                                                ">#%d,#%c,#%l,#%c,#%c",
+    669                                                getSignalID(emPacket.appData.devID),
+    670                                                emPacket.appData.packNum,
+    671                                                emPacket.appData.data,
+    672                                                emPacket.timeStamp,
+    673                                                emPacket.checkSum
+    674                                                );
+    675                  */
+    676                  /*
+    677                  txBufferCC2530Index = sprintf(uiTxBufferCC2530,
+    678                                                ">#%d,#%d,#%d,#%d,#%d",
+    679                                                iSignalID,
+    680                                                iPackNum,
+    681                                                iData,
+    682                                                iTimeStamp,
+    683                                                iCheckSum
+    684                                                );
+    685                  */
+    686                  packFrameToStell((uint8 *)uiTxBufferCC2530, emPacket);
+   \   00006C                ; Setup parameters for call to function packFrameToStell
+   \   00006C   85..82       MOV     DPL,?XSP + 0
+   \   00006F   85..83       MOV     DPH,?XSP + 1
+   \   000072   7409         MOV     A,#0x9
+   \   000074   12....       LCALL   ?PUSH_XSTACK8_X
+   \   000077   7A..         MOV     R2,#uiTxBufferCC2530 & 0xff
+   \   000079   7B..         MOV     R3,#(uiTxBufferCC2530 >> 8) & 0xff
+   \   00007B   12....       LCALL   `??packFrameToStell::?relay`; Banked call to: packFrameToStell
+   \   00007E   7409         MOV     A,#0x9
+   \   000080   12....       LCALL   ?DEALLOC_XSTACK8
+    687                  //array2circular(cTxBuffer, txBuffer, *txIndex);
+    688                  
+    689                  /*HalLcdWriteString("Velicina je:",0);
+    690                  uartSend(sizeof(uint32)+'0');
+    691                  HalLcdWriteString("",0);
+    692                  HalLcdWriteString("Velicina je:",0);
+    693                  */
+    694                  //halUARTWrite(cTxBuffer, 0);
+    695                  //HalLcdWriteString("Miso----------------------",0); 
+    696                  
+    697                 // halUARTWrite(port, cTxBuffer, 0);
+    698                  HalLcdWriteString(uiTxBufferCC2530, 0);
+   \   000083                ; Setup parameters for call to function HalLcdWriteString
+   \   000083   7900         MOV     R1,#0x0
+   \   000085   7A..         MOV     R2,#uiTxBufferCC2530 & 0xff
+   \   000087   7B..         MOV     R3,#(uiTxBufferCC2530 >> 8) & 0xff
+   \   000089   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+    699                  //HalLcdWriteString(uiTxBufferCC2530, 0);
+    700                  
+    701          	emFlagCC2530 = EMISSION_START;
+   \   00008C   90....       MOV     DPTR,#emFlagCC2530
+   \   00008F   7401         MOV     A,#0x1
+   \   000091   F0           MOVX    @DPTR,A
+    702          	
+    703          	//idde = emPacket.appData.devID;//
+    704                  
+    705                  //idde = aData->devID;
+    706                  
+    707                  //idde = (uint16)getSignalID(emPacket.appData.devID);//+ 0x30;
+    708                  
+    709                  //idde = aData->devID;
+    710                  //idde = aData.devID;
+    711                  
+    712                  //id = (char*)&emPacket.appData.data;
+    713                  //id = (char*)&emPacket.appData.devID;
+    714                  
+    715                  //da = emPacket.appData.data;
+    716                  
+    717                  //num = emPacket.timeStamp + 0x30;
+    718                 // num = emPacket.appData.packNum + 0x30;
+    719                  //num = emPacket.checkSum + 0x30;
+    720                  
+    721                  //id = (char*)&idde;
+    722                  //id = (char*)&da;
+    723                  //id = (char*)&num;
+    724                  
+    725                  //id[0] += 0x30;
+    726                  //id[1] += 0x30;
+    727                  
+    728                  //id[2] = '\0';
+    729                  //id[1] = '\0';
+    730                  //id[4] = '\0';
+    731                  
+    732                  //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+    733                  //HalLcdWriteString(id,0);
+    734                  //uartSend(emPacket.checkSum+'0');
+    735                  //HalLcdWriteString("", 0);
+    736                  //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+    737          
+    738          }
+   \   000092   7409         MOV     A,#0x9
+   \   000094   02....       LJMP    ?Subroutine1 & 0xFFFF
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??dllInit::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    dllInit
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??CallBackRegister::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    CallBackRegister
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??processFrameRx::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    processFrameRx
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??packFrameToStell::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    packFrameToStell
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??dllDataRequest::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    dllDataRequest
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "%*[^0123456789]%d%*[^...">`:
+   \   000000   252A5B5E     DB 25H, 2AH, 5BH, 5EH, 30H, 31H, 32H, 33H
+   \            30313233
+   \   000008   34353637     DB 34H, 35H, 36H, 37H, 38H, 39H, 5DH, 25H
+   \            38395D25
+   \   000010   64252A5B     DB 64H, 25H, 2AH, 5BH, 5EH, 30H, 31H, 32H
+   \            5E303132
+   \   000018   33343536     DB 33H, 34H, 35H, 36H, 37H, 38H, 39H, 5DH
+   \            3738395D
+   \   000020   2564252A     DB 25H, 64H, 25H, 2AH, 5BH, 5EH, 30H, 31H
+   \            5B5E3031
+   \   000028   32333435     DB 32H, 33H, 34H, 35H, 36H, 37H, 38H, 39H
+   \            36373839
+   \   000030   5D256425     DB 5DH, 25H, 64H, 25H, 2AH, 5BH, 5EH, 30H
+   \            2A5B5E30
+   \   000038   31323334     DB 31H, 32H, 33H, 34H, 35H, 36H, 37H, 38H
+   \            35363738
+   \   000040   395D2564     DB 39H, 5DH, 25H, 64H, 25H, 2AH, 5BH, 5EH
+   \            252A5B5E
+   \   000048   30313233     DB 30H, 31H, 32H, 33H, 34H, 35H, 36H, 37H
+   \            34353637
+   \   000050   38395D25     DB 38H, 39H, 5DH, 25H, 64H, 0
+   \            6400    
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant {48, 48, 48, 48}>`:
+   \   000000   30           DB 48
+   \   000001   30           DB 48
+   \   000002   30           DB 48
+   \   000003   30           DB 48
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant {48, 48, 48, 48}>_1`:
+   \   000000   30           DB 48
+   \   000001   30           DB 48
+   \   000002   30           DB 48
+   \   000003   30           DB 48
+
+   Maximum stack usage in bytes:
+
+   ISTACK XSTACK Function
+   ------ ------ --------
+      2      0   CallBackRegister
+      1     28   dllDataRequest
+        0     19   -> HalLcdWriteString
+        0     28   -> packFrameToStell
+      2      0   dllInit
+        2      0   -> circularInit
+      1     52   packFrameToStell
+      0     30   processFrameRx
+        0     30   -> sscanf
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      86  ?<Constant "%*[^0123456789]%d%*[^...">
+       4  ?<Constant {48, 48, 48, 48}>
+       4  ?<Constant {48, 48, 48, 48}>_1
+       7  ?Subroutine0
+       8  ?Subroutine1
+      15  ?Subroutine2
+       6  ?Subroutine3
+       8  ?Subroutine4
+       5  ?Subroutine5
+       5  ?Subroutine6
+      10  ?Subroutine7
+      11  ?Subroutine8
+       9  ?Subroutine9
+      14  CallBackRegister
+       6  CallBackRegister::?relay
+     260  cTxBufferCC2530
+       2  callBack
+     151  dllDataRequest
+       6  dllDataRequest::?relay
+      24  dllInit
+       6  dllInit::?relay
+       1  emFlagCC2530
+     422  packFrameToStell
+       6  packFrameToStell::?relay
+     216  processFrameRx
+       6  processFrameRx::?relay
+       9  recPack
+     260  rxBufferCC2530
+       1  rxBufferCC2530Index
+     260  rxBufferPC
+      18  signalID
+       1  stateCC2530
+       1  tmpCC2530
+       1  txBufferCC2530Index
+     256  uiRxBufferCC2530
+     256  uiTxBufferCC2530
+
+ 
+   911 bytes in segment BANKED_CODE
+    30 bytes in segment BANK_RELAYS
+   112 bytes in segment XDATA_ROM_C
+ 1 308 bytes in segment XDATA_Z
+ 
+    30 bytes of CODE     memory
+   112 bytes of CONST    memory
+   911 bytes of HUGECODE memory
+ 1 308 bytes of XDATA    memory
+
+Errors: none
+Warnings: none

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR C/C++ Compiler V9.30.3.3983 for 8051               13/Apr/2017  10:19:10
+// IAR C/C++ Compiler V9.30.3.3983 for 8051               03/May/2017  09:23:46
 // Copyright 2004-2016 IAR Systems AB.
 // Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 //
@@ -12,14 +12,15 @@
 //    Dptr setup         =  1,16
 //                          
 //    Source file        =  
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\common\hal_drivers.c
+//        C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Components\hal\common\hal_drivers.c
 //    Command line       =  
-//        -f
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg
+//        -f "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg"
 //        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRUE
 //        -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8 -DMAC_CFG_RX_MAX=5
-//        -DZDO_COORDINATOR -DRTR_NWK) -f
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+//        -DZDO_COORDINATOR -DRTR_NWK) -f "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg"
 //        (-DZIGBEEPRO -DSECURE=1 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
 //        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0x0422
 //        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
@@ -34,63 +35,66 @@
 //        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
 //        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
 //        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)
-//        -DREJOIN_POLL_RATE=440
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\common\hal_drivers.c
-//        -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D
-//        LCD_SUPPORTED=DEBUG -lC
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List
-//        -lA
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List
-//        --diag_suppress Pe001,Pa010 -o
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj
+//        -DREJOIN_POLL_RATE=440 "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Components\hal\common\hal_drivers.c" -D
+//        ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D
+//        LCD_SUPPORTED=DEBUG -lC "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List"
+//        -lA "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List"
+//        --diag_suppress Pe001,Pa010 -o "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj"
 //        -e --no_code_motion --debug --core=plain --dptr=16,1
 //        --data_model=large --code_model=banked
 //        --calling_convention=xdata_reentrant --place_constants=data_rom
-//        --nr_virtual_regs 16 -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\
-//        -I
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+//        --nr_virtual_regs 16 -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\"
+//        -I "C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\dll\"
 //        -Ohz --require_prototypes
 //    List file          =  
-//        C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List\hal_drivers.s51
+//        C:\Users\ljuic\Desktop\New
+//        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List\hal_drivers.s51
 //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -392,7 +396,7 @@ Hal_ProcessPoll     SYMBOL "Hal_ProcessPoll"
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
 
-// C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Components\hal\common\hal_drivers.c
+// C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\common\hal_drivers.c
 //    1 /**************************************************************************************************
 //    2   Filename:       hal_drivers.c
 //    3   Revised:        $Date: 2007-07-06 10:42:24 -0700 (Fri, 06 Jul 2007) $
@@ -468,36 +472,41 @@ Hal_ProcessPoll     SYMBOL "Hal_ProcessPoll"
 //   73 #include "hal_spi.h"
 //   74 #endif
 //   75 
-//   76 /**************************************************************************************************
-//   77  *                                      GLOBAL VARIABLES
-//   78  **************************************************************************************************/
+//   76 
+//   77 ////////////////////////////////////////////////////////////////////////////////////// 
+//   78 //#include "includes/dll.h"
+//   79 //#include "includes/look_up_table.h"
+//   80 ////////////////////////////////////////////////////////////////////////////////////// 
+//   81 /**************************************************************************************************
+//   82  *                                      GLOBAL VARIABLES
+//   83  **************************************************************************************************/
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   79 uint8 Hal_TaskID;
+//   84 uint8 Hal_TaskID;
 Hal_TaskID:
         DS 1
         REQUIRE __INIT_XDATA_Z
-//   80 
-//   81 extern void HalLedUpdate( void ); /* Notes: This for internal only so it shouldn't be in hal_led.h */
-//   82 
-//   83 /**************************************************************************************************
-//   84  * @fn      Hal_Init
-//   85  *
-//   86  * @brief   Hal Initialization function.
-//   87  *
-//   88  * @param   task_id - Hal TaskId
-//   89  *
-//   90  * @return  None
-//   91  **************************************************************************************************/
+//   85 
+//   86 extern void HalLedUpdate( void ); /* Notes: This for internal only so it shouldn't be in hal_led.h */
+//   87 
+//   88 /**************************************************************************************************
+//   89  * @fn      Hal_Init
+//   90  *
+//   91  * @brief   Hal Initialization function.
+//   92  *
+//   93  * @param   task_id - Hal TaskId
+//   94  *
+//   95  * @return  None
+//   96  **************************************************************************************************/
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//   92 void Hal_Init( uint8 task_id )
+//   97 void Hal_Init( uint8 task_id )
 Hal_Init:
           CFI Block cfiBlock0 Using cfiCommon0
           CFI Function Hal_Init
         CODE
-//   93 {
+//   98 {
         PUSH    DPL
           CFI DPL0 Frame(CFA_SP, 4)
           CFI CFA_SP SP+-4
@@ -506,16 +515,16 @@ Hal_Init:
           CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//   94   /* Register task ID */
-//   95   Hal_TaskID = task_id;
+//   99   /* Register task ID */
+//  100   Hal_TaskID = task_id;
         MOV     A,R1
         MOV     DPTR,#Hal_TaskID
         MOVX    @DPTR,A
-//   96 
-//   97 #ifdef CC2591_COMPRESSION_WORKAROUND
-//   98   osal_start_reload_timer( Hal_TaskID, PERIOD_RSSI_RESET_EVT, PERIOD_RSSI_RESET_TIMEOUT );
-//   99 #endif
-//  100 }
+//  101 
+//  102 #ifdef CC2591_COMPRESSION_WORKAROUND
+//  103   osal_start_reload_timer( Hal_TaskID, PERIOD_RSSI_RESET_EVT, PERIOD_RSSI_RESET_TIMEOUT );
+//  104 #endif
+//  105 }
           CFI EndBlock cfiBlock0
         REQUIRE ?Subroutine0
         ; // Fall through to label ?Subroutine0
@@ -535,24 +544,24 @@ Hal_Init:
           CFI DPL0 SameValue
         LJMP    ?BRET
           CFI EndBlock cfiBlock1
-//  101 
-//  102 /**************************************************************************************************
-//  103  * @fn      Hal_DriverInit
-//  104  *
-//  105  * @brief   Initialize HW - These need to be initialized before anyone.
-//  106  *
-//  107  * @param   task_id - Hal TaskId
-//  108  *
-//  109  * @return  None
-//  110  **************************************************************************************************/
+//  106 
+//  107 /**************************************************************************************************
+//  108  * @fn      Hal_DriverInit
+//  109  *
+//  110  * @brief   Initialize HW - These need to be initialized before anyone.
+//  111  *
+//  112  * @param   task_id - Hal TaskId
+//  113  *
+//  114  * @return  None
+//  115  **************************************************************************************************/
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  111 void HalDriverInit (void)
+//  116 void HalDriverInit (void)
 HalDriverInit:
           CFI Block cfiBlock2 Using cfiCommon0
           CFI Function HalDriverInit
         CODE
-//  112 {
+//  117 {
         FUNCALL HalDriverInit, HalAdcInit
         LOCFRAME ISTACK, 2, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -638,91 +647,91 @@ HalDriverInit:
           CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//  113   /* TIMER */
-//  114 #if (defined HAL_TIMER) && (HAL_TIMER == TRUE)
-//  115 #endif
-//  116 
-//  117   /* ADC */
-//  118 #if (defined HAL_ADC) && (HAL_ADC == TRUE)
-//  119   HalAdcInit();
-        ; Setup parameters for call to function HalAdcInit
-        LCALL   `??HalAdcInit::?relay`; Banked call to: HalAdcInit
+//  118   /* TIMER */
+//  119 #if (defined HAL_TIMER) && (HAL_TIMER == TRUE)
 //  120 #endif
 //  121 
-//  122   /* DMA */
-//  123 #if (defined HAL_DMA) && (HAL_DMA == TRUE)
-//  124   // Must be called before the init call to any module that uses DMA.
-//  125   HalDmaInit();
+//  122   /* ADC */
+//  123 #if (defined HAL_ADC) && (HAL_ADC == TRUE)
+//  124   HalAdcInit();
+        ; Setup parameters for call to function HalAdcInit
+        LCALL   `??HalAdcInit::?relay`; Banked call to: HalAdcInit
+//  125 #endif
+//  126 
+//  127   /* DMA */
+//  128 #if (defined HAL_DMA) && (HAL_DMA == TRUE)
+//  129   // Must be called before the init call to any module that uses DMA.
+//  130   HalDmaInit();
         ; Setup parameters for call to function HalDmaInit
         LCALL   `??HalDmaInit::?relay`; Banked call to: HalDmaInit
-//  126 #endif
-//  127 
-//  128   /* AES */
-//  129 #if (defined HAL_AES) && (HAL_AES == TRUE)
-//  130   HalAesInit();
-        ; Setup parameters for call to function HalAesInit
-        LCALL   `??HalAesInit::?relay`; Banked call to: HalAesInit
 //  131 #endif
 //  132 
-//  133   /* LCD */
-//  134 #if (defined HAL_LCD) && (HAL_LCD == TRUE)
-//  135   HalLcdInit();
-        ; Setup parameters for call to function HalLcdInit
-        LCALL   `??HalLcdInit::?relay`; Banked call to: HalLcdInit
+//  133   /* AES */
+//  134 #if (defined HAL_AES) && (HAL_AES == TRUE)
+//  135   HalAesInit();
+        ; Setup parameters for call to function HalAesInit
+        LCALL   `??HalAesInit::?relay`; Banked call to: HalAesInit
 //  136 #endif
 //  137 
-//  138   /* LED */
-//  139 #if (defined HAL_LED) && (HAL_LED == TRUE)
-//  140   HalLedInit();
-        ; Setup parameters for call to function HalLedInit
-        LCALL   `??HalLedInit::?relay`; Banked call to: HalLedInit
+//  138   /* LCD */
+//  139 #if (defined HAL_LCD) && (HAL_LCD == TRUE)
+//  140   HalLcdInit();
+        ; Setup parameters for call to function HalLcdInit
+        LCALL   `??HalLcdInit::?relay`; Banked call to: HalLcdInit
 //  141 #endif
 //  142 
-//  143   /* UART */
-//  144 #if (defined HAL_UART) && (HAL_UART == TRUE)
-//  145   HalUARTInit();
-        ; Setup parameters for call to function HalUARTInit
-        LCALL   `??HalUARTInit::?relay`; Banked call to: HalUARTInit
+//  143   /* LED */
+//  144 #if (defined HAL_LED) && (HAL_LED == TRUE)
+//  145   HalLedInit();
+        ; Setup parameters for call to function HalLedInit
+        LCALL   `??HalLedInit::?relay`; Banked call to: HalLedInit
 //  146 #endif
 //  147 
-//  148   /* KEY */
-//  149 #if (defined HAL_KEY) && (HAL_KEY == TRUE)
-//  150   HalKeyInit();
+//  148   /* UART */
+//  149 #if (defined HAL_UART) && (HAL_UART == TRUE)
+//  150   HalUARTInit();
+        ; Setup parameters for call to function HalUARTInit
+        LCALL   `??HalUARTInit::?relay`; Banked call to: HalUARTInit
+//  151 #endif
+//  152 
+//  153   /* KEY */
+//  154 #if (defined HAL_KEY) && (HAL_KEY == TRUE)
+//  155   HalKeyInit();
         ; Setup parameters for call to function HalKeyInit
         LCALL   `??HalKeyInit::?relay`; Banked call to: HalKeyInit
-//  151 #endif
-//  152   
-//  153   /* SPI */
-//  154 #if (defined HAL_SPI) && (HAL_SPI == TRUE)
-//  155   HalSpiInit();
 //  156 #endif
-//  157 
-//  158   /* HID */
-//  159 #if (defined HAL_HID) && (HAL_HID == TRUE)
-//  160   usbHidInit();
+//  157   
+//  158   /* SPI */
+//  159 #if (defined HAL_SPI) && (HAL_SPI == TRUE)
+//  160   HalSpiInit();
 //  161 #endif
-//  162 }
+//  162 
+//  163   /* HID */
+//  164 #if (defined HAL_HID) && (HAL_HID == TRUE)
+//  165   usbHidInit();
+//  166 #endif
+//  167 }
         SJMP    ?Subroutine0
           CFI EndBlock cfiBlock2
-//  163 
-//  164 /**************************************************************************************************
-//  165  * @fn      Hal_ProcessEvent
-//  166  *
-//  167  * @brief   Hal Process Event
-//  168  *
-//  169  * @param   task_id - Hal TaskId
-//  170  *          events - events
+//  168 
+//  169 /**************************************************************************************************
+//  170  * @fn      Hal_ProcessEvent
 //  171  *
-//  172  * @return  None
-//  173  **************************************************************************************************/
+//  172  * @brief   Hal Process Event
+//  173  *
+//  174  * @param   task_id - Hal TaskId
+//  175  *          events - events
+//  176  *
+//  177  * @return  None
+//  178  **************************************************************************************************/
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  174 uint16 Hal_ProcessEvent( uint8 task_id, uint16 events )
+//  179 uint16 Hal_ProcessEvent( uint8 task_id, uint16 events )
 Hal_ProcessEvent:
           CFI Block cfiBlock3 Using cfiCommon0
           CFI Function Hal_ProcessEvent
         CODE
-//  175 {
+//  180 {
         FUNCALL Hal_ProcessEvent, osal_msg_receive
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -811,99 +820,99 @@ Hal_ProcessEvent:
         MOV     R6,A
         MOV     A,R3
         MOV     R7,A
-//  176   uint8 *msgPtr;
-//  177 
-//  178   (void)task_id;  // Intentionally unreferenced parameter
-//  179 
-//  180   if ( events & SYS_EVENT_MSG )
+//  181   uint8 *msgPtr;
+//  182 
+//  183   (void)task_id;  // Intentionally unreferenced parameter
+//  184 
+//  185   if ( events & SYS_EVENT_MSG )
         ANL     A,#0x80
         JZ      ??Hal_ProcessEvent_0
-//  181   {
-//  182     msgPtr = osal_msg_receive(Hal_TaskID);
+//  186   {
+//  187     msgPtr = osal_msg_receive(Hal_TaskID);
         ; Setup parameters for call to function osal_msg_receive
         SJMP    ??Hal_ProcessEvent_1
-//  183 
-//  184     while (msgPtr)
-//  185     {
-//  186       /* Do something here - for now, just deallocate the msg and move on */
-//  187 
-//  188       /* De-allocate */
-//  189       osal_msg_deallocate( msgPtr );
+//  188 
+//  189     while (msgPtr)
+//  190     {
+//  191       /* Do something here - for now, just deallocate the msg and move on */
+//  192 
+//  193       /* De-allocate */
+//  194       osal_msg_deallocate( msgPtr );
 ??Hal_ProcessEvent_2:
         ; Setup parameters for call to function osal_msg_deallocate
         LCALL   `??osal_msg_deallocate::?relay`; Banked call to: osal_msg_deallocate
-//  190       /* Next */
-//  191       msgPtr = osal_msg_receive( Hal_TaskID );
+//  195       /* Next */
+//  196       msgPtr = osal_msg_receive( Hal_TaskID );
         ; Setup parameters for call to function osal_msg_receive
 ??Hal_ProcessEvent_1:
         MOV     DPTR,#Hal_TaskID
         MOVX    A,@DPTR
         MOV     R1,A
         LCALL   `??osal_msg_receive::?relay`; Banked call to: osal_msg_receive
-//  192     }
+//  197     }
         MOV     A,R2
         ORL     A,R3
         JNZ     ??Hal_ProcessEvent_2
-//  193     return events ^ SYS_EVENT_MSG;
+//  198     return events ^ SYS_EVENT_MSG;
         MOV     A,R6
         MOV     R2,A
         MOV     A,R7
         XRL     A,#0x80
         SJMP    ??Hal_ProcessEvent_3
-//  194   }
-//  195 
-//  196 #if (defined HAL_BUZZER) && (HAL_BUZZER == TRUE)
-//  197   if (events & HAL_BUZZER_EVENT)
-//  198   {
-//  199     HalBuzzerStop();
-//  200     return events ^ HAL_BUZZER_EVENT;
-//  201   }
-//  202 #endif
-//  203 
-//  204 #ifdef CC2591_COMPRESSION_WORKAROUND
-//  205   if ( events & PERIOD_RSSI_RESET_EVT )
-//  206   {
-//  207     macRxResetRssi();
-//  208     return (events ^ PERIOD_RSSI_RESET_EVT);
-//  209   }
-//  210 #endif
-//  211 
-//  212   if ( events & HAL_LED_BLINK_EVENT )
+//  199   }
+//  200 
+//  201 #if (defined HAL_BUZZER) && (HAL_BUZZER == TRUE)
+//  202   if (events & HAL_BUZZER_EVENT)
+//  203   {
+//  204     HalBuzzerStop();
+//  205     return events ^ HAL_BUZZER_EVENT;
+//  206   }
+//  207 #endif
+//  208 
+//  209 #ifdef CC2591_COMPRESSION_WORKAROUND
+//  210   if ( events & PERIOD_RSSI_RESET_EVT )
+//  211   {
+//  212     macRxResetRssi();
+//  213     return (events ^ PERIOD_RSSI_RESET_EVT);
+//  214   }
+//  215 #endif
+//  216 
+//  217   if ( events & HAL_LED_BLINK_EVENT )
 ??Hal_ProcessEvent_0:
         MOV     A,R6
         ANL     A,#0x20
         JZ      ??Hal_ProcessEvent_4
-//  213   {
-//  214 #if (defined (BLINK_LEDS)) && (HAL_LED == TRUE)
-//  215     HalLedUpdate();
+//  218   {
+//  219 #if (defined (BLINK_LEDS)) && (HAL_LED == TRUE)
+//  220     HalLedUpdate();
         ; Setup parameters for call to function HalLedUpdate
         LCALL   `??HalLedUpdate::?relay`; Banked call to: HalLedUpdate
-//  216 #endif /* BLINK_LEDS && HAL_LED */
-//  217     return events ^ HAL_LED_BLINK_EVENT;
+//  221 #endif /* BLINK_LEDS && HAL_LED */
+//  222     return events ^ HAL_LED_BLINK_EVENT;
         MOV     A,R6
         XRL     A,#0x20
         SJMP    ??Hal_ProcessEvent_5
-//  218   }
-//  219 
-//  220   if (events & HAL_KEY_EVENT)
+//  223   }
+//  224 
+//  225   if (events & HAL_KEY_EVENT)
 ??Hal_ProcessEvent_4:
         MOV     A,R6
         ANL     A,#0x10
         JZ      ??Hal_ProcessEvent_6
-//  221   {
-//  222 #if (defined HAL_KEY) && (HAL_KEY == TRUE)
-//  223     /* Check for keys */
-//  224     HalKeyPoll();
+//  226   {
+//  227 #if (defined HAL_KEY) && (HAL_KEY == TRUE)
+//  228     /* Check for keys */
+//  229     HalKeyPoll();
         ; Setup parameters for call to function HalKeyPoll
         LCALL   `??HalKeyPoll::?relay`; Banked call to: HalKeyPoll
-//  225 
-//  226     /* if interrupt disabled, do next polling */
-//  227     if (!Hal_KeyIntEnable)
+//  230 
+//  231     /* if interrupt disabled, do next polling */
+//  232     if (!Hal_KeyIntEnable)
         MOV     DPTR,#Hal_KeyIntEnable
         MOVX    A,@DPTR
         JNZ     ??Hal_ProcessEvent_7
-//  228     {
-//  229       osal_start_timerEx( Hal_TaskID, HAL_KEY_EVENT, 100);
+//  233     {
+//  234       osal_start_timerEx( Hal_TaskID, HAL_KEY_EVENT, 100);
         ; Setup parameters for call to function osal_start_timerEx
         MOV     DPTR,#__Constant_64
         LCALL   ?PUSH_XSTACK8_X_FOUR
@@ -917,9 +926,9 @@ Hal_ProcessEvent:
         MOV     A,#0x4
         LCALL   ?DEALLOC_XSTACK8
           CFI CFA_XSP16 add(XSP16, 10)
-//  230     }
-//  231 #endif
-//  232     return events ^ HAL_KEY_EVENT;
+//  235     }
+//  236 #endif
+//  237     return events ^ HAL_KEY_EVENT;
 ??Hal_ProcessEvent_7:
         MOV     A,R6
         XRL     A,#0x10
@@ -929,59 +938,71 @@ Hal_ProcessEvent:
 ??Hal_ProcessEvent_3:
         MOV     R3,A
         SJMP    ??Hal_ProcessEvent_8
-//  233   }
-//  234 
-//  235 #if defined POWER_SAVING
-//  236   if ( events & HAL_SLEEP_TIMER_EVENT )
-//  237   {
-//  238     halRestoreSleepLevel();
-//  239     return events ^ HAL_SLEEP_TIMER_EVENT;
-//  240   }
-//  241 
-//  242   if ( events & HAL_PWRMGR_HOLD_EVENT )
-//  243   {
-//  244     (void)osal_pwrmgr_task_state(Hal_TaskID, PWRMGR_HOLD);
-//  245 
-//  246     (void)osal_stop_timerEx(Hal_TaskID, HAL_PWRMGR_CONSERVE_EVENT);
-//  247     (void)osal_clear_event(Hal_TaskID, HAL_PWRMGR_CONSERVE_EVENT);
-//  248 
-//  249     return (events & ~(HAL_PWRMGR_HOLD_EVENT | HAL_PWRMGR_CONSERVE_EVENT));
-//  250   }
-//  251 
-//  252   if ( events & HAL_PWRMGR_CONSERVE_EVENT )
-//  253   {
-//  254     (void)osal_pwrmgr_task_state(Hal_TaskID, PWRMGR_CONSERVE);
-//  255     return events ^ HAL_PWRMGR_CONSERVE_EVENT;
-//  256   }
-//  257 #endif
-//  258 
-//  259   return 0;
+//  238   }
+//  239 
+//  240 #if defined POWER_SAVING
+//  241   if ( events & HAL_SLEEP_TIMER_EVENT )
+//  242   {
+//  243     halRestoreSleepLevel();
+//  244     return events ^ HAL_SLEEP_TIMER_EVENT;
+//  245   }
+//  246 
+//  247   if ( events & HAL_PWRMGR_HOLD_EVENT )
+//  248   {
+//  249     (void)osal_pwrmgr_task_state(Hal_TaskID, PWRMGR_HOLD);
+//  250 
+//  251     (void)osal_stop_timerEx(Hal_TaskID, HAL_PWRMGR_CONSERVE_EVENT);
+//  252     (void)osal_clear_event(Hal_TaskID, HAL_PWRMGR_CONSERVE_EVENT);
+//  253 
+//  254     return (events & ~(HAL_PWRMGR_HOLD_EVENT | HAL_PWRMGR_CONSERVE_EVENT));
+//  255   }
+//  256 
+//  257   if ( events & HAL_PWRMGR_CONSERVE_EVENT )
+//  258   {
+//  259     (void)osal_pwrmgr_task_state(Hal_TaskID, PWRMGR_CONSERVE);
+//  260     return events ^ HAL_PWRMGR_CONSERVE_EVENT;
+//  261   }
+//  262  ////////////////////////////////////////////////////////////////////////////////////// 
+//  263   /*if (events & HAL_UART_EVENT)
+//  264   {
+//  265     //HalBuzzerStop();
+//  266     HalUARTRead(HAL_UART_PORT_0, uartConfig.rx.pBuffer, 128);
+//  267     
+//  268     
+//  269     //osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
+//  270     osal_start_timerEx (Hal_TaskID, HAL_UART_EVENT, 1000);
+//  271     return events ^ HAL_UART_EVENT;
+//  272   }*/
+//  273   //////////////////////////////////////////////////////////////////////////////////////
+//  274 #endif
+//  275 
+//  276   return 0;
 ??Hal_ProcessEvent_6:
         MOV     R2,#0x0
         MOV     R3,#0x0
 ??Hal_ProcessEvent_8:
         MOV     R7,#0x2
         LJMP    ?BANKED_LEAVE_XDATA
-//  260 }
+//  277 }
           CFI EndBlock cfiBlock3
-//  261 
-//  262 /**************************************************************************************************
-//  263  * @fn      Hal_ProcessPoll
-//  264  *
-//  265  * @brief   This routine will be called by OSAL to poll UART, TIMER...
-//  266  *
-//  267  * @param   task_id - Hal TaskId
-//  268  *
-//  269  * @return  None
-//  270  **************************************************************************************************/
+//  278 
+//  279 /**************************************************************************************************
+//  280  * @fn      Hal_ProcessPoll
+//  281  *
+//  282  * @brief   This routine will be called by OSAL to poll UART, TIMER...
+//  283  *
+//  284  * @param   task_id - Hal TaskId
+//  285  *
+//  286  * @return  None
+//  287  **************************************************************************************************/
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  271 void Hal_ProcessPoll ()
+//  288 void Hal_ProcessPoll ()
 Hal_ProcessPoll:
           CFI Block cfiBlock4 Using cfiCommon0
           CFI Function Hal_ProcessPoll
         CODE
-//  272 {
+//  289 {
         FUNCALL Hal_ProcessPoll, HalUARTPoll
         LOCFRAME ISTACK, 2, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -1001,29 +1022,29 @@ Hal_ProcessPoll:
           CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//  273 #if defined( POWER_SAVING )
-//  274   /* Allow sleep before the next OSAL event loop */
-//  275   ALLOW_SLEEP_MODE();
-//  276 #endif
-//  277   
-//  278   /* UART Poll */
-//  279 #if (defined HAL_UART) && (HAL_UART == TRUE)
-//  280   HalUARTPoll();
+//  290 #if defined( POWER_SAVING )
+//  291   /* Allow sleep before the next OSAL event loop */
+//  292   ALLOW_SLEEP_MODE();
+//  293 #endif
+//  294   
+//  295   /* UART Poll */
+//  296 #if (defined HAL_UART) && (HAL_UART == TRUE)
+//  297   HalUARTPoll();
         ; Setup parameters for call to function HalUARTPoll
         LCALL   `??HalUARTPoll::?relay`; Banked call to: HalUARTPoll
-//  281 #endif
-//  282   
-//  283   /* SPI Poll */
-//  284 #if (defined HAL_SPI) && (HAL_SPI == TRUE)
-//  285   HalSpiPoll();
-//  286 #endif
-//  287 
-//  288   /* HID poll */
-//  289 #if (defined HAL_HID) && (HAL_HID == TRUE)
-//  290   usbHidProcessEvents();
-//  291 #endif
-//  292  
-//  293 }
+//  298 #endif
+//  299   
+//  300   /* SPI Poll */
+//  301 #if (defined HAL_SPI) && (HAL_SPI == TRUE)
+//  302   HalSpiPoll();
+//  303 #endif
+//  304 
+//  305   /* HID poll */
+//  306 #if (defined HAL_HID) && (HAL_HID == TRUE)
+//  307   usbHidProcessEvents();
+//  308 #endif
+//  309  
+//  310 }
         LJMP    ?Subroutine0 & 0xFFFF
           CFI EndBlock cfiBlock4
 
@@ -1061,10 +1082,10 @@ __Constant_64:
         DC24    Hal_ProcessPoll
 
         END
-//  294 
-//  295 /**************************************************************************************************
-//  296 **************************************************************************************************/
-//  297 
+//  311 
+//  312 /**************************************************************************************************
+//  313 **************************************************************************************************/
+//  314 
 // 
 // 157 bytes in segment BANKED_CODE
 //  24 bytes in segment BANK_RELAYS

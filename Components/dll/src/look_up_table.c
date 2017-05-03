@@ -47,7 +47,7 @@ void updateCmd(Data_t *pData)
   }
   if(i < 20)
   {
-      lutData[i].data = pData->data;
+      lutData[i].cmd = pData->data;
       //dataRdy = 1;
   }
 }

@@ -1,0 +1,1161 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V9.30.3.3983 for 8051                03/May/2017  09:23:46
+# Copyright 2004-2016 IAR Systems AB.
+# Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
+#
+#    Core               =  plain
+#    Code model         =  banked
+#    Data model         =  large
+#    Calling convention =  xdata reentrant
+#    Constant location  =  data_rom
+#    Dptr setup         =  1,16
+#                          
+#    Source file        =  
+#        C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Components\dll\src\look_up_table.c
+#    Command line       =  
+#        -f "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg"
+#        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRUE
+#        -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8 -DMAC_CFG_RX_MAX=5
+#        -DZDO_COORDINATOR -DRTR_NWK) -f "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg"
+#        (-DZIGBEEPRO -DSECURE=1 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+#        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0x0422
+#        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+#        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+#        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+#        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+#        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+#        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+#        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+#        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+#        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+#        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+#        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+#        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)
+#        -DREJOIN_POLL_RATE=440 "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Components\dll\src\look_up_table.c" -D
+#        ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D
+#        LCD_SUPPORTED=DEBUG -lC "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List"
+#        -lA "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List"
+#        --diag_suppress Pe001,Pa010 -o "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj"
+#        -e --no_code_motion --debug --core=plain --dptr=16,1
+#        --data_model=large --code_model=banked
+#        --calling_convention=xdata_reentrant --place_constants=data_rom
+#        --nr_virtual_regs 16 -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\"
+#        -I "C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\dll\"
+#        -Ohz --require_prototypes
+#    List file          =  
+#        C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\List\look_up_table.lst
+#    Object file        =  
+#        C:\Users\ljuic\Desktop\New
+#        folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Obj\look_up_table.r51
+#
+###############################################################################
+
+C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_table.c
+      1          #include "includes/look_up_table.h"
+      2          #include "includes/dll.h"
+      3          
+      4          #include "hal_lcd.h"
+      5          //*****************************************************************************
+      6          //
+      7          // Extern variables
+      8          //
+      9          // treba promijeniti naziv ova dva bafera u circularBuffer.h
+     10          //
+     11          //*****************************************************************************
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     12          Data_t app_packet;
+   \                     app_packet:
+   \   000000                DS 7
+   \   000007                REQUIRE __INIT_XDATA_Z
+     13          
+     14          //static LookUpTable_t lutData[20];
+     15          extern LookUpTable_t lutData[20];
+     16          //extern uint8 dataRdy;
+     17          //*****************************************************************************
+     18          //
+     19          // Local variables
+     20          //
+     21          //*****************************************************************************
+     22          
+     23          
+     24          
+     25          //*****************************************************************************
+     26          //
+     27          // Function definition
+     28          //
+     29          //*****************************************************************************
+     30          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     31          void lookUpInit(void)
+   \                     lookUpInit:
+     32          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     33          	CallBackRegister(updateCmd);
+   \   000004                ; Setup parameters for call to function CallBackRegister
+   \   000004   7A..         MOV     R2,#`??updateCmd::?relay` & 0xff
+   \   000006   7B..         MOV     R3,#(`??updateCmd::?relay` >> 8) & 0xff
+   \   000008   12....       LCALL   `??CallBackRegister::?relay`; Banked call to: CallBackRegister
+     34          }
+   \   00000B                REQUIRE ?Subroutine0
+   \   00000B                ; // Fall through to label ?Subroutine0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   D083         POP     DPH
+   \   000002   D082         POP     DPL
+   \   000004   02....       LJMP    ?BRET
+     35          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     36          void updateCmd(Data_t *pData)
+   \                     updateCmd:
+     37          {
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000                REQUIRE ?V3
+   \   000000   74F4         MOV     A,#-0xc
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 12
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FC           MOV     R4,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FD           MOV     R5,A
+     38            int i = 0;
+   \   000009   7A00         MOV     R2,#0x0
+   \   00000B   7B00         MOV     R3,#0x0
+   \   00000D   8029         SJMP    ??updateCmd_0
+     39            while(lutData[i].devID != 0 && lutData[i].devID != pData->devID && i<20)
+   \                     ??updateCmd_1:
+   \   00000F   EA           MOV     A,R2
+   \   000010   F8           MOV     R0,A
+   \   000011   EB           MOV     A,R3
+   \   000012   F9           MOV     R1,A
+   \   000013   E8           MOV     A,R0
+   \   000014   75F00A       MOV     B,#0xa
+   \   000017   A4           MUL     AB
+   \   000018   F8           MOV     R0,A
+   \   000019   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_0:
+   \   00001C   8C82         MOV     DPL,R4
+   \   00001E   8D83         MOV     DPH,R5
+   \   000020   E0           MOVX    A,@DPTR
+   \   000021   68           XRL     A,R0
+   \   000022   7003         JNZ     ??updateCmd_2
+   \   000024   A3           INC     DPTR
+   \   000025   E0           MOVX    A,@DPTR
+   \   000026   69           XRL     A,R1
+   \                     ??updateCmd_2:
+   \   000027   6047         JZ      ??updateCmd_3
+   \   000029   C3           CLR     C
+   \   00002A   EA           MOV     A,R2
+   \   00002B   9414         SUBB    A,#0x14
+   \   00002D   EB           MOV     A,R3
+   \   00002E   12....       LCALL   ??Subroutine11_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_14:
+   \   000031   503D         JNC     ??updateCmd_3
+     40            {
+     41              i++;
+   \   000033   0A           INC     R2
+   \   000034   EA           MOV     A,R2
+   \   000035   7001         JNZ     ??updateCmd_0
+   \   000037   0B           INC     R3
+     42            }
+   \                     ??updateCmd_0:
+   \   000038   EA           MOV     A,R2
+   \   000039   F8           MOV     R0,A
+   \   00003A   EB           MOV     A,R3
+   \   00003B   F9           MOV     R1,A
+   \   00003C   E8           MOV     A,R0
+   \   00003D   75F00A       MOV     B,#0xa
+   \   000040   A4           MUL     AB
+   \   000041   F8           MOV     R0,A
+   \   000042   AEF0         MOV     R6,B
+   \   000044   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \                     ??CrossCallReturnLabel_1:
+   \   000047   E8           MOV     A,R0
+   \   000048   49           ORL     A,R1
+   \   000049   70C4         JNZ     ??updateCmd_1
+     43            if(lutData[i].devID == 0)
+     44            {
+     45                lutData[i].devID = pData->devID;
+   \   00004B   8C82         MOV     DPL,R4
+   \   00004D   8D83         MOV     DPH,R5
+   \   00004F   E0           MOVX    A,@DPTR
+   \   000050   FE           MOV     R6,A
+   \   000051   A3           INC     DPTR
+   \   000052   E0           MOVX    A,@DPTR
+   \   000053   FF           MOV     R7,A
+   \   000054   EA           MOV     A,R2
+   \   000055   F8           MOV     R0,A
+   \   000056   EB           MOV     A,R3
+   \   000057   F9           MOV     R1,A
+   \   000058   E8           MOV     A,R0
+   \   000059   75F00A       MOV     B,#0xa
+   \   00005C   A4           MUL     AB
+   \   00005D   F8           MOV     R0,A
+   \   00005E   85F0..       MOV     ?V0,B
+   \   000061   75F00A       MOV     B,#0xa
+   \   000064   E9           MOV     A,R1
+   \   000065   A4           MUL     AB
+   \   000066   25..         ADD     A,?V0
+   \   000068   12....       LCALL   ?Subroutine9 & 0xFFFF
+     46                //lutData[i].devAddress = devAddress;
+     47            }
+   \                     ??CrossCallReturnLabel_10:
+   \   00006B   EE           MOV     A,R6
+   \   00006C   F0           MOVX    @DPTR,A
+   \   00006D   A3           INC     DPTR
+   \   00006E   EF           MOV     A,R7
+   \   00006F   F0           MOVX    @DPTR,A
+     48            if(i < 20)
+   \                     ??updateCmd_3:
+   \   000070   C3           CLR     C
+   \   000071   EA           MOV     A,R2
+   \   000072   9414         SUBB    A,#0x14
+   \   000074   EB           MOV     A,R3
+   \   000075   12....       LCALL   ??Subroutine11_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_15:
+   \   000078   502C         JNC     ??updateCmd_4
+     49            {
+     50                lutData[i].cmd = pData->data;
+   \   00007A   8C82         MOV     DPL,R4
+   \   00007C   8D83         MOV     DPH,R5
+   \   00007E   A3           INC     DPTR
+   \   00007F   A3           INC     DPTR
+   \   000080   A3           INC     DPTR
+   \   000081   78..         MOV     R0,#?V0
+   \   000083   12....       LCALL   ?L_MOV_X
+   \   000086   EA           MOV     A,R2
+   \   000087   75F00A       MOV     B,#0xa
+   \   00008A   A4           MUL     AB
+   \   00008B   FA           MOV     R2,A
+   \   00008C   A8F0         MOV     R0,B
+   \   00008E   75F00A       MOV     B,#0xa
+   \   000091   EB           MOV     A,R3
+   \   000092   A4           MUL     AB
+   \   000093   28           ADD     A,R0
+   \   000094   FB           MOV     R3,A
+   \   000095   74..         MOV     A,#(lutData + 8) & 0xff
+   \   000097   2A           ADD     A,R2
+   \   000098   F582         MOV     DPL,A
+   \   00009A   74..         MOV     A,#((lutData + 8) >> 8) & 0xff
+   \   00009C   3B           ADDC    A,R3
+   \   00009D   F583         MOV     DPH,A
+   \   00009F   E5..         MOV     A,?V0
+   \   0000A1   F0           MOVX    @DPTR,A
+   \   0000A2   A3           INC     DPTR
+   \   0000A3   E5..         MOV     A,?V1
+   \   0000A5   F0           MOVX    @DPTR,A
+     51                //dataRdy = 1;
+     52            }
+     53          }
+   \                     ??updateCmd_4:
+   \   0000A6                REQUIRE ?Subroutine1
+   \   0000A6                ; // Fall through to label ?Subroutine1
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine1:
+   \   000000   7F04         MOV     R7,#0x4
+   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine4:
+   \   000000   75F00A       MOV     B,#0xa
+   \   000003   E9           MOV     A,R1
+   \   000004   A4           MUL     AB
+   \   000005   2E           ADD     A,R6
+   \   000006   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_11:
+   \   000009   E0           MOVX    A,@DPTR
+   \   00000A   F8           MOV     R0,A
+   \   00000B   A3           INC     DPTR
+   \   00000C   E0           MOVX    A,@DPTR
+   \   00000D   F9           MOV     R1,A
+   \   00000E   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine9:
+   \   000000   F9           MOV     R1,A
+   \   000001   74..         MOV     A,#lutData & 0xff
+   \   000003   28           ADD     A,R0
+   \   000004   F582         MOV     DPL,A
+   \   000006   74..         MOV     A,#(lutData >> 8) & 0xff
+   \   000008   39           ADDC    A,R1
+   \   000009   F583         MOV     DPH,A
+   \   00000B   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ??Subroutine11_0:
+   \   000000   9400         SUBB    A,#0x0
+   \   000002   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   000004   65D0         XRL     A,PSW
+   \   000006   33           RLC     A
+   \   000007   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     54          void updateLookUpTable(Data_t pData, uint16 devAddress)
+   \                     updateLookUpTable:
+     55          {
+   \   000000                REQUIRE ?V0
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FC           MOV     R4,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FD           MOV     R5,A
+     56            int i = 0;
+   \   000009   7800         MOV     R0,#0x0
+   \   00000B   7900         MOV     R1,#0x0
+   \   00000D   8025         SJMP    ??updateLookUpTable_0
+     57           // char *id;
+     58            //uint32 idde;
+     59            while(lutData[i].devID != 0 && lutData[i].devID != pData.devID && i<20)
+   \                     ??updateLookUpTable_1:
+   \   00000F   E8           MOV     A,R0
+   \   000010   FA           MOV     R2,A
+   \   000011   E9           MOV     A,R1
+   \   000012   FB           MOV     R3,A
+   \   000013   EA           MOV     A,R2
+   \   000014   75F00A       MOV     B,#0xa
+   \   000017   A4           MUL     AB
+   \   000018   FA           MOV     R2,A
+   \   000019   12....       LCALL   ?Subroutine5 & 0xFFFF
+   \                     ??CrossCallReturnLabel_2:
+   \   00001C   7409         MOV     A,#0x9
+   \   00001E   12....       LCALL   ?XSTACK_DISP0_8
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   6A           XRL     A,R2
+   \   000023   7003         JNZ     ??updateLookUpTable_2
+   \   000025   A3           INC     DPTR
+   \   000026   E0           MOVX    A,@DPTR
+   \   000027   6B           XRL     A,R3
+   \                     ??updateLookUpTable_2:
+   \   000028   6054         JZ      ??updateLookUpTable_3
+   \   00002A   12....       LCALL   ?Subroutine3 & 0xFFFF
+   \                     ??CrossCallReturnLabel_16:
+   \   00002D   504F         JNC     ??updateLookUpTable_3
+     60            {
+     61              i++;
+   \   00002F   08           INC     R0
+   \   000030   E8           MOV     A,R0
+   \   000031   7001         JNZ     ??updateLookUpTable_0
+   \   000033   09           INC     R1
+     62            }
+   \                     ??updateLookUpTable_0:
+   \   000034   E8           MOV     A,R0
+   \   000035   FA           MOV     R2,A
+   \   000036   E9           MOV     A,R1
+   \   000037   FB           MOV     R3,A
+   \   000038   EA           MOV     A,R2
+   \   000039   75F00A       MOV     B,#0xa
+   \   00003C   A4           MUL     AB
+   \   00003D   FA           MOV     R2,A
+   \   00003E   AEF0         MOV     R6,B
+   \   000040   12....       LCALL   ?Subroutine5 & 0xFFFF
+   \                     ??CrossCallReturnLabel_3:
+   \   000043   EA           MOV     A,R2
+   \   000044   4B           ORL     A,R3
+   \   000045   70C8         JNZ     ??updateLookUpTable_1
+     63            if(lutData[i].devID == 0)
+     64            {
+     65                lutData[i].devID = (uint16)pData.devID;
+   \   000047   E8           MOV     A,R0
+   \   000048   FA           MOV     R2,A
+   \   000049   E9           MOV     A,R1
+   \   00004A   FB           MOV     R3,A
+   \   00004B   EA           MOV     A,R2
+   \   00004C   75F00A       MOV     B,#0xa
+   \   00004F   A4           MUL     AB
+   \   000050   FA           MOV     R2,A
+   \   000051   75F00A       MOV     B,#0xa
+   \   000054   EB           MOV     A,R3
+   \   000055   A4           MUL     AB
+   \   000056   2E           ADD     A,R6
+   \   000057   FB           MOV     R3,A
+   \   000058   74..         MOV     A,#lutData & 0xff
+   \   00005A   2A           ADD     A,R2
+   \   00005B   FA           MOV     R2,A
+   \   00005C   74..         MOV     A,#(lutData >> 8) & 0xff
+   \   00005E   3B           ADDC    A,R3
+   \   00005F   FB           MOV     R3,A
+   \   000060   7409         MOV     A,#0x9
+   \   000062   12....       LCALL   ?XSTACK_DISP0_8
+   \   000065   E0           MOVX    A,@DPTR
+   \   000066   FE           MOV     R6,A
+   \   000067   A3           INC     DPTR
+   \   000068   E0           MOVX    A,@DPTR
+   \   000069   FF           MOV     R7,A
+   \   00006A   8A82         MOV     DPL,R2
+   \   00006C   8B83         MOV     DPH,R3
+   \   00006E   EE           MOV     A,R6
+   \   00006F   F0           MOVX    @DPTR,A
+   \   000070   A3           INC     DPTR
+   \   000071   EF           MOV     A,R7
+   \   000072   F0           MOVX    @DPTR,A
+     66                //idde =  lutData[i].devID;
+     67                //idde =  lutData[i].data;
+     68                //id = (char*)&idde;
+     69                //id[2] = '\0';
+     70                lutData[i].devAddress = devAddress;
+   \   000073   8A82         MOV     DPL,R2
+   \   000075   8B83         MOV     DPH,R3
+   \   000077   A3           INC     DPTR
+   \   000078   A3           INC     DPTR
+   \   000079   EC           MOV     A,R4
+   \   00007A   F0           MOVX    @DPTR,A
+   \   00007B   A3           INC     DPTR
+   \   00007C   ED           MOV     A,R5
+   \   00007D   F0           MOVX    @DPTR,A
+     71            }
+     72            if(i < 20)
+   \                     ??updateLookUpTable_3:
+   \   00007E   12....       LCALL   ?Subroutine3 & 0xFFFF
+   \                     ??CrossCallReturnLabel_17:
+   \   000081   5024         JNC     ??updateLookUpTable_4
+     73            {
+     74                lutData[i].data = pData.data;
+   \   000083   740C         MOV     A,#0xc
+   \   000085   12....       LCALL   ?XSTACK_DISP0_8
+   \   000088   12....       LCALL   ?XLOAD_R4567
+   \   00008B   E8           MOV     A,R0
+   \   00008C   75F00A       MOV     B,#0xa
+   \   00008F   A4           MUL     AB
+   \   000090   F8           MOV     R0,A
+   \   000091   AAF0         MOV     R2,B
+   \   000093   75F00A       MOV     B,#0xa
+   \   000096   E9           MOV     A,R1
+   \   000097   A4           MUL     AB
+   \   000098   2A           ADD     A,R2
+   \   000099   F9           MOV     R1,A
+   \   00009A   74..         MOV     A,#(lutData + 4) & 0xff
+   \   00009C   28           ADD     A,R0
+   \   00009D   F582         MOV     DPL,A
+   \   00009F   74..         MOV     A,#((lutData + 4) >> 8) & 0xff
+   \   0000A1   39           ADDC    A,R1
+   \   0000A2   F583         MOV     DPH,A
+   \   0000A4   12....       LCALL   ?XSTORE_R4567
+     75                //idde =  lutData[i].data;
+     76                //id = (char*)&idde;
+     77                //id[4] = '\0';
+     78                //dataRdy = 1;
+     79            }
+     80              
+     81                 // HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
+     82                 // HalLcdWriteString(id,0);
+     83                 // HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
+     84          }
+   \                     ??updateLookUpTable_4:
+   \   0000A7                REQUIRE ?Subroutine2
+   \   0000A7                ; // Fall through to label ?Subroutine2
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   7F01         MOV     R7,#0x1
+   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine5:
+   \   000000   75F00A       MOV     B,#0xa
+   \   000003   EB           MOV     A,R3
+   \   000004   A4           MUL     AB
+   \   000005   2E           ADD     A,R6
+   \   000006   FB           MOV     R3,A
+   \   000007   74..         MOV     A,#lutData & 0xff
+   \   000009   2A           ADD     A,R2
+   \   00000A   F582         MOV     DPL,A
+   \   00000C   74..         MOV     A,#(lutData >> 8) & 0xff
+   \   00000E   3B           ADDC    A,R3
+   \   00000F   F583         MOV     DPH,A
+   \   000011   E0           MOVX    A,@DPTR
+   \   000012   FA           MOV     R2,A
+   \   000013   A3           INC     DPTR
+   \   000014   E0           MOVX    A,@DPTR
+   \   000015   FB           MOV     R3,A
+   \   000016   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine3:
+   \   000000   C3           CLR     C
+   \   000001   E8           MOV     A,R0
+   \   000002   9414         SUBB    A,#0x14
+   \   000004   E9           MOV     A,R1
+   \   000005                REQUIRE ??Subroutine11_0
+   \   000005                ; // Fall through to label ??Subroutine11_0
+     85          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+     86          uint16 lookForAddr(uint16 devID)
+   \                     lookForAddr:
+     87          {
+   \   000000                REQUIRE ?V0
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+     88            int i = 0;
+   \   000005   7800         MOV     R0,#0x0
+   \   000007   7900         MOV     R1,#0x0
+     89            uint16 devAddress = 0;
+   \   000009   7E00         MOV     R6,#0x0
+   \   00000B   7F00         MOV     R7,#0x0
+   \   00000D   8005         SJMP    ??lookForAddr_0
+     90            while(lutData[i].devID != 0 && lutData[i].devID != devID)
+     91            {
+     92              i++;
+   \                     ??lookForAddr_1:
+   \   00000F   08           INC     R0
+   \   000010   E8           MOV     A,R0
+   \   000011   7001         JNZ     ??lookForAddr_0
+   \   000013   09           INC     R1
+     93            }
+   \                     ??lookForAddr_0:
+   \   000014   E8           MOV     A,R0
+   \   000015   FC           MOV     R4,A
+   \   000016   E9           MOV     A,R1
+   \   000017   FD           MOV     R5,A
+   \   000018   EC           MOV     A,R4
+   \   000019   75F00A       MOV     B,#0xa
+   \   00001C   A4           MUL     AB
+   \   00001D   FC           MOV     R4,A
+   \   00001E   85F0..       MOV     ?V0,B
+   \   000021   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_8:
+   \   000024   FC           MOV     R4,A
+   \   000025   A3           INC     DPTR
+   \   000026   E0           MOVX    A,@DPTR
+   \   000027   FD           MOV     R5,A
+   \   000028   EC           MOV     A,R4
+   \   000029   4D           ORL     A,R5
+   \   00002A   600A         JZ      ??lookForAddr_2
+   \   00002C   12....       LCALL   ?Subroutine6 & 0xFFFF
+   \                     ??CrossCallReturnLabel_4:
+   \   00002F   7003         JNZ     ??lookForAddr_3
+   \   000031   A3           INC     DPTR
+   \   000032   E0           MOVX    A,@DPTR
+   \   000033   6B           XRL     A,R3
+   \                     ??lookForAddr_3:
+   \   000034   70D9         JNZ     ??lookForAddr_1
+     94            if(lutData[i].devID == devID)
+   \                     ??lookForAddr_2:
+   \   000036   12....       LCALL   ?Subroutine6 & 0xFFFF
+   \                     ??CrossCallReturnLabel_5:
+   \   000039   7003         JNZ     ??lookForAddr_4
+   \   00003B   A3           INC     DPTR
+   \   00003C   E0           MOVX    A,@DPTR
+   \   00003D   6B           XRL     A,R3
+   \                     ??lookForAddr_4:
+   \   00003E   701D         JNZ     ??lookForAddr_5
+     95            {
+     96              devAddress = lutData[i].devAddress;
+   \   000040   E8           MOV     A,R0
+   \   000041   75F00A       MOV     B,#0xa
+   \   000044   A4           MUL     AB
+   \   000045   AAF0         MOV     R2,B
+   \   000047   75F00A       MOV     B,#0xa
+   \   00004A   E9           MOV     A,R1
+   \   00004B   A4           MUL     AB
+   \   00004C   2A           ADD     A,R2
+   \   00004D   F9           MOV     R1,A
+   \   00004E   74..         MOV     A,#(lutData + 2) & 0xff
+   \   000050   2C           ADD     A,R4
+   \   000051   F582         MOV     DPL,A
+   \   000053   74..         MOV     A,#((lutData + 2) >> 8) & 0xff
+   \   000055   39           ADDC    A,R1
+   \   000056   F583         MOV     DPH,A
+   \   000058   E0           MOVX    A,@DPTR
+   \   000059   FE           MOV     R6,A
+   \   00005A   A3           INC     DPTR
+   \   00005B   E0           MOVX    A,@DPTR
+   \   00005C   FF           MOV     R7,A
+     97            }
+     98            return devAddress;
+   \                     ??lookForAddr_5:
+   \   00005D   EE           MOV     A,R6
+   \   00005E   FA           MOV     R2,A
+   \   00005F   EF           MOV     A,R7
+   \   000060   FB           MOV     R3,A
+   \   000061   02....       LJMP    ?Subroutine2 & 0xFFFF
+     99          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine6:
+   \   000000   E8           MOV     A,R0
+   \   000001   FC           MOV     R4,A
+   \   000002   E9           MOV     A,R1
+   \   000003   FD           MOV     R5,A
+   \   000004   EC           MOV     A,R4
+   \   000005   75F00A       MOV     B,#0xa
+   \   000008   A4           MUL     AB
+   \   000009   FC           MOV     R4,A
+   \   00000A   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_9:
+   \   00000D   6A           XRL     A,R2
+   \   00000E   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine8:
+   \   000000   75F00A       MOV     B,#0xa
+   \   000003   ED           MOV     A,R5
+   \   000004   A4           MUL     AB
+   \   000005   25..         ADD     A,?V0
+   \   000007   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \                     ??CrossCallReturnLabel_13:
+   \   00000A   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine10:
+   \   000000   FD           MOV     R5,A
+   \   000001   74..         MOV     A,#lutData & 0xff
+   \   000003   2C           ADD     A,R4
+   \   000004   F582         MOV     DPL,A
+   \   000006   74..         MOV     A,#(lutData >> 8) & 0xff
+   \   000008   3D           ADDC    A,R5
+   \   000009   F583         MOV     DPH,A
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   22           RET
+    100          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    101          int16 getIDFromPkt(afMSGCommandFormat_t *cmd)
+   \                     getIDFromPkt:
+    102          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    103          	/*uint8 i = 0;
+    104          	uint16 devID = 0;
+    105          	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
+    106          	{
+    107          		i++;
+    108          	}
+    109          	if (*(cmd->Data + i) == START_DELIMITER)
+    110          	{
+    111          		devID = (*(cmd->Data + i))<<8;
+    112          		devID +=*(cmd->Data + i + 1);
+    113          	}
+    114          	return devID;*/
+    115                  uint16 devID = 0;
+    116                  //char * id;
+    117                  
+    118                  //devID = (uint16)(*(cmd->Data+1))<<8;
+    119          	//devID +=(uint16)*(cmd->Data );
+    120                  devID = (uint16)(*(cmd->Data + 1))<<8;
+    121          	devID +=(uint16)*(cmd->Data);
+    122                  //id = (char*)&devID;
+    123                  //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+    124                  //HalLcdWriteString(id,0);
+    125                  //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+    126                  return devID;
+   \   000004   8A82         MOV     DPL,R2
+   \   000006   8B83         MOV     DPH,R3
+   \   000008   A3           INC     DPTR
+   \   000009   A3           INC     DPTR
+   \   00000A   A3           INC     DPTR
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   F8           MOV     R0,A
+   \   00000D   A3           INC     DPTR
+   \   00000E   E0           MOVX    A,@DPTR
+   \   00000F   F9           MOV     R1,A
+   \   000010   8882         MOV     DPL,R0
+   \   000012   8983         MOV     DPH,R1
+   \   000014   A3           INC     DPTR
+   \   000015   E0           MOVX    A,@DPTR
+   \   000016   FB           MOV     R3,A
+   \   000017   8882         MOV     DPL,R0
+   \   000019   8983         MOV     DPH,R1
+   \   00001B   E0           MOVX    A,@DPTR
+   \   00001C   FA           MOV     R2,A
+   \   00001D   02....       LJMP    ?Subroutine0 & 0xFFFF
+    127          }
+    128          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    129          int32 getDataFromPkt(afMSGCommandFormat_t *cmd)
+   \                     getDataFromPkt:
+    130          {
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000                REQUIRE ?V3
+   \   000000                REQUIRE ?V4
+   \   000000                REQUIRE ?V5
+   \   000000                REQUIRE ?V6
+   \   000000                REQUIRE ?V7
+   \   000000   74F0         MOV     A,#-0x10
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 16
+   \   000005                ; Auto size: 0
+    131          	/*uint8 i = 0;
+    132                  uint8 j = 0;
+    133          	uint32 data = 0;
+    134          	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
+    135          	{
+    136          		i++;
+    137          	}
+    138          	if (*(cmd->Data + i) == START_DELIMITER)
+    139          	{
+    140          		for(j = 0; j < 3; j++)
+    141                          {
+    142                            data +=(*(cmd->Data + i + j + 2))<<8;
+    143                          }
+    144                          j++;
+    145                          data +=(*(cmd->Data + i + j + 2));
+    146          	}
+    147          	return data;*/
+    148                  //char * id;
+    149                  uint8 i = 0;
+   \   000005   7E00         MOV     R6,#0x0
+    150                  uint32 data = 0x00000000;
+   \   000007   8E..         MOV     ?V0,R6
+   \   000009   8E..         MOV     ?V1,R6
+   \   00000B   8E..         MOV     ?V2,R6
+   \   00000D   8E..         MOV     ?V3,R6
+    151                  
+    152                  for(i = 0; i < cmd->DataLength - 2; i++)
+   \   00000F   8054         SJMP    ??getDataFromPkt_0
+    153                  {
+    154                    data +=(uint32)(*(cmd->Data + cmd->DataLength - 1 - i))<<(8*(cmd->DataLength - 3 - i));
+   \                     ??getDataFromPkt_1:
+   \   000011   8A82         MOV     DPL,R2
+   \   000013   8B83         MOV     DPH,R3
+   \   000015   A3           INC     DPTR
+   \   000016   0C           INC     R4
+   \   000017   0C           INC     R4
+   \   000018   A3           INC     DPTR
+   \   000019   E0           MOVX    A,@DPTR
+   \   00001A   FD           MOV     R5,A
+   \   00001B   C3           CLR     C
+   \   00001C   E4           CLR     A
+   \   00001D   98           SUBB    A,R0
+   \   00001E   F5..         MOV     ?V4,A
+   \   000020   95E0         SUBB    A,0xE0 /* A   */
+   \   000022   F5..         MOV     ?V5,A
+   \   000024   8A82         MOV     DPL,R2
+   \   000026   8B83         MOV     DPH,R3
+   \   000028   A3           INC     DPTR
+   \   000029   A3           INC     DPTR
+   \   00002A   A3           INC     DPTR
+   \   00002B   E0           MOVX    A,@DPTR
+   \   00002C   2C           ADD     A,R4
+   \   00002D   F8           MOV     R0,A
+   \   00002E   A3           INC     DPTR
+   \   00002F   E0           MOVX    A,@DPTR
+   \   000030   3D           ADDC    A,R5
+   \   000031   F9           MOV     R1,A
+   \   000032   E8           MOV     A,R0
+   \   000033   25..         ADD     A,?V4
+   \   000035   F8           MOV     R0,A
+   \   000036   E9           MOV     A,R1
+   \   000037   35..         ADDC    A,?V5
+   \   000039   F9           MOV     R1,A
+   \   00003A   E8           MOV     A,R0
+   \   00003B   24FF         ADD     A,#-0x1
+   \   00003D   F582         MOV     DPL,A
+   \   00003F   E9           MOV     A,R1
+   \   000040   34FF         ADDC    A,#-0x1
+   \   000042   F583         MOV     DPH,A
+   \   000044   E0           MOVX    A,@DPTR
+   \   000045   F5..         MOV     ?V4,A
+   \   000047   E4           CLR     A
+   \   000048   F5..         MOV     ?V5,A
+   \   00004A   F5..         MOV     ?V6,A
+   \   00004C   F5..         MOV     ?V7,A
+   \   00004E   EC           MOV     A,R4
+   \   00004F   24FD         ADD     A,#-0x3
+   \   000051   C3           CLR     C
+   \   000052   9E           SUBB    A,R6
+   \   000053   33           RLC     A
+   \   000054   33           RLC     A
+   \   000055   33           RLC     A
+   \   000056   54F8         ANL     A,#0xf8
+   \   000058   78..         MOV     R0,#?V4
+   \   00005A   12....       LCALL   ?L_SHL
+   \   00005D   78..         MOV     R0,#?V0
+   \   00005F   79..         MOV     R1,#?V4
+   \   000061   12....       LCALL   ?L_ADD
+    155                    
+    156                  }
+   \   000064   0E           INC     R6
+   \                     ??getDataFromPkt_0:
+   \   000065   EE           MOV     A,R6
+   \   000066   F8           MOV     R0,A
+   \   000067   8A82         MOV     DPL,R2
+   \   000069   8B83         MOV     DPH,R3
+   \   00006B   A3           INC     DPTR
+   \   00006C   E0           MOVX    A,@DPTR
+   \   00006D   24FE         ADD     A,#-0x2
+   \   00006F   FC           MOV     R4,A
+   \   000070   A3           INC     DPTR
+   \   000071   E0           MOVX    A,@DPTR
+   \   000072   34FF         ADDC    A,#-0x1
+   \   000074   FD           MOV     R5,A
+   \   000075   C3           CLR     C
+   \   000076   E8           MOV     A,R0
+   \   000077   9C           SUBB    A,R4
+   \   000078   E4           CLR     A
+   \   000079   9D           SUBB    A,R5
+   \   00007A   4095         JC      ??getDataFromPkt_1
+    157                  /*
+    158                  data =(uint32)(*(cmd->Data + 5))<<24;
+    159                  data +=(uint32)(*(cmd->Data + 4))<<16;
+    160                  data +=(uint32)(*(cmd->Data + 3))<<8;        
+    161                  data +=(uint32)(*(cmd->Data + 2));
+    162                  */
+    163                  //id = (char*)&data;
+    164                  //HalLcdWriteString("-----------------------------GetData----------------------",0);
+    165                  //HalLcdWriteString(id,0);
+    166                  //HalLcdWriteString("-----------------------------GetData----------------------",0);
+    167                  return data;
+   \   00007C   AA..         MOV     R2,?V0
+   \   00007E   AB..         MOV     R3,?V1
+   \   000080   AC..         MOV     R4,?V2
+   \   000082   AD..         MOV     R5,?V3
+   \   000084   7F08         MOV     R7,#0x8
+   \   000086   02....       LJMP    ?BANKED_LEAVE_XDATA
+    168          }
+    169          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    170          int32 getCmd(uint16 devID)
+   \                     getCmd:
+    171          {
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000                REQUIRE ?V3
+   \   000000   74F4         MOV     A,#-0xc
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 12
+   \   000005                ; Auto size: 0
+    172            int i = 0;
+   \   000005   7800         MOV     R0,#0x0
+   \   000007   7900         MOV     R1,#0x0
+    173            uint32 data = 1500;
+   \   000009   75..DC       MOV     ?V0,#-0x24
+   \   00000C   75..05       MOV     ?V1,#0x5
+   \   00000F   88..         MOV     ?V2,R0
+   \   000011   88..         MOV     ?V3,R0
+   \   000013   8005         SJMP    ??getCmd_0
+    174            while(lutData[i].devID != devID && i < 20) //
+    175          	//while(DataID[i].devID != 0 && DataID[i].devID != devID && i < 20)
+    176            {
+    177              i++;
+   \                     ??getCmd_1:
+   \   000015   08           INC     R0
+   \   000016   E8           MOV     A,R0
+   \   000017   7001         JNZ     ??getCmd_0
+   \   000019   09           INC     R1
+    178            }
+   \                     ??getCmd_0:
+   \   00001A   E8           MOV     A,R0
+   \   00001B   FC           MOV     R4,A
+   \   00001C   E9           MOV     A,R1
+   \   00001D   FD           MOV     R5,A
+   \   00001E   EC           MOV     A,R4
+   \   00001F   75F00A       MOV     B,#0xa
+   \   000022   A4           MUL     AB
+   \   000023   FC           MOV     R4,A
+   \   000024   AEF0         MOV     R6,B
+   \   000026   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_6:
+   \   000029   7003         JNZ     ??getCmd_2
+   \   00002B   A3           INC     DPTR
+   \   00002C   E0           MOVX    A,@DPTR
+   \   00002D   6B           XRL     A,R3
+   \                     ??getCmd_2:
+   \   00002E   6005         JZ      ??getCmd_3
+   \   000030   12....       LCALL   ?Subroutine3 & 0xFFFF
+   \                     ??CrossCallReturnLabel_18:
+   \   000033   40E0         JC      ??getCmd_1
+    179            if(lutData[i].devID == devID)
+   \                     ??getCmd_3:
+   \   000035   E8           MOV     A,R0
+   \   000036   FC           MOV     R4,A
+   \   000037   E9           MOV     A,R1
+   \   000038   FD           MOV     R5,A
+   \   000039   EC           MOV     A,R4
+   \   00003A   75F00A       MOV     B,#0xa
+   \   00003D   A4           MUL     AB
+   \   00003E   FC           MOV     R4,A
+   \   00003F   12....       LCALL   ?Subroutine7 & 0xFFFF
+   \                     ??CrossCallReturnLabel_7:
+   \   000042   7003         JNZ     ??getCmd_4
+   \   000044   A3           INC     DPTR
+   \   000045   E0           MOVX    A,@DPTR
+   \   000046   6B           XRL     A,R3
+   \                     ??getCmd_4:
+   \   000047   7018         JNZ     ??getCmd_5
+    180            {
+    181              data = lutData[i].cmd;
+   \   000049   75F00A       MOV     B,#0xa
+   \   00004C   E9           MOV     A,R1
+   \   00004D   A4           MUL     AB
+   \   00004E   2E           ADD     A,R6
+   \   00004F   F9           MOV     R1,A
+   \   000050   74..         MOV     A,#(lutData + 8) & 0xff
+   \   000052   2C           ADD     A,R4
+   \   000053   F582         MOV     DPL,A
+   \   000055   74..         MOV     A,#((lutData + 8) >> 8) & 0xff
+   \   000057   39           ADDC    A,R1
+   \   000058   F583         MOV     DPH,A
+   \   00005A   E0           MOVX    A,@DPTR
+   \   00005B   F5..         MOV     ?V0,A
+   \   00005D   A3           INC     DPTR
+   \   00005E   E0           MOVX    A,@DPTR
+   \   00005F   F5..         MOV     ?V1,A
+    182            }
+    183            return data;
+   \                     ??getCmd_5:
+   \   000061   AA..         MOV     R2,?V0
+   \   000063   AB..         MOV     R3,?V1
+   \   000065   AC..         MOV     R4,?V2
+   \   000067   AD..         MOV     R5,?V3
+   \   000069   02....       LJMP    ?Subroutine1 & 0xFFFF
+    184          }
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine7:
+   \   000000   75F00A       MOV     B,#0xa
+   \   000003   ED           MOV     A,R5
+   \   000004   A4           MUL     AB
+   \   000005   2E           ADD     A,R6
+   \   000006   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \                     ??CrossCallReturnLabel_12:
+   \   000009   6A           XRL     A,R2
+   \   00000A   22           RET
+    185          
+    186          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    187          void sendDataToPC(LookUpTable_t *lutData)//uint32_t data, uint16_t devID, uint8_t port);
+   \                     sendDataToPC:
+    188          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    189            
+    190           
+    191            //char * id;
+    192            //uint16 idde;
+    193           // uint32 da;
+    194            //uint8 num;
+    195            
+    196            app_packet.data = lutData->data;
+   \   000005   8A82         MOV     DPL,R2
+   \   000007   8B83         MOV     DPH,R3
+   \   000009   A3           INC     DPTR
+   \   00000A   A3           INC     DPTR
+   \   00000B   A3           INC     DPTR
+   \   00000C   A3           INC     DPTR
+   \   00000D   12....       LCALL   ?XLOAD_R4567
+   \   000010   90....       MOV     DPTR,#app_packet + 3
+   \   000013   12....       LCALL   ?XSTORE_R4567
+    197            app_packet.devID = lutData->devID;
+   \   000016   8A82         MOV     DPL,R2
+   \   000018   8B83         MOV     DPH,R3
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   F8           MOV     R0,A
+   \   00001C   A3           INC     DPTR
+   \   00001D   E0           MOVX    A,@DPTR
+   \   00001E   F9           MOV     R1,A
+   \   00001F   90....       MOV     DPTR,#app_packet
+   \   000022   E8           MOV     A,R0
+   \   000023   F0           MOVX    @DPTR,A
+   \   000024   A3           INC     DPTR
+   \   000025   E9           MOV     A,R1
+   \   000026   F0           MOVX    @DPTR,A
+    198            app_packet.packNum = 0;
+   \   000027   A3           INC     DPTR
+   \   000028   E4           CLR     A
+   \   000029   F0           MOVX    @DPTR,A
+    199            
+    200            //app_packet->data = lutData->data;
+    201            //app_packet->devID = lutData->devID;
+    202            ///app_packet->packNum = 0;
+    203            
+    204            //idde = app_packet.devID;
+    205           // da = app_packet.data;
+    206            //num = app_packet.packNum + 0x30;
+    207            //id = (char*)&idde;
+    208           // id = (char*)&da;
+    209           // id = (char*)&num;
+    210            //id[2] = '\0';
+    211            //id[4] = '\0';
+    212            //id[1] = '\0';
+    213          
+    214            // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
+    215            // HalLcdWriteString(id,0);
+    216            // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
+    217            
+    218            dllDataRequest(&app_packet);
+   \   00002A                ; Setup parameters for call to function dllDataRequest
+   \   00002A   7A..         MOV     R2,#app_packet & 0xff
+   \   00002C   7B..         MOV     R3,#(app_packet >> 8) & 0xff
+   \   00002E   12....       LCALL   `??dllDataRequest::?relay`; Banked call to: dllDataRequest
+    219            //HalLcdWriteString("Milos----------------------",0); 
+    220          }
+   \   000031   02....       LJMP    ?Subroutine2 & 0xFFFF
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??lookUpInit::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    lookUpInit
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??updateCmd::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    updateCmd
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??updateLookUpTable::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    updateLookUpTable
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??lookForAddr::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    lookForAddr
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??getIDFromPkt::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    getIDFromPkt
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??getDataFromPkt::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    getDataFromPkt
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??getCmd::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    getCmd
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??sendDataToPC::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    sendDataToPC
+
+   Maximum stack usage in bytes:
+
+   ISTACK XSTACK Function
+   ------ ------ --------
+      0     12   getCmd
+      0     16   getDataFromPkt
+      2      0   getIDFromPkt
+      0      9   lookForAddr
+      2      0   lookUpInit
+        2      0   -> CallBackRegister
+      0      9   sendDataToPC
+        0      9   -> dllDataRequest
+      0     12   updateCmd
+      0     16   updateLookUpTable
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       8  ??Subroutine11_0
+       7  ?Subroutine0
+       5  ?Subroutine1
+      13  ?Subroutine10
+       5  ?Subroutine2
+       5  ?Subroutine3
+      15  ?Subroutine4
+      23  ?Subroutine5
+      15  ?Subroutine6
+      11  ?Subroutine7
+      11  ?Subroutine8
+      12  ?Subroutine9
+       7  app_packet
+     108  getCmd
+       6  getCmd::?relay
+     137  getDataFromPkt
+       6  getDataFromPkt::?relay
+      32  getIDFromPkt
+       6  getIDFromPkt::?relay
+     100  lookForAddr
+       6  lookForAddr::?relay
+      11  lookUpInit
+       6  lookUpInit::?relay
+      52  sendDataToPC
+       6  sendDataToPC::?relay
+     166  updateCmd
+       6  updateCmd::?relay
+     167  updateLookUpTable
+       6  updateLookUpTable::?relay
+
+ 
+ 903 bytes in segment BANKED_CODE
+  48 bytes in segment BANK_RELAYS
+   7 bytes in segment XDATA_Z
+ 
+  48 bytes of CODE     memory
+ 903 bytes of HUGECODE memory
+   7 bytes of XDATA    memory
+
+Errors: none
+Warnings: none

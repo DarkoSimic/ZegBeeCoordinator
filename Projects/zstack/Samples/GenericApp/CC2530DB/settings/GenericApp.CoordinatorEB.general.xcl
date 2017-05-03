@@ -1,10 +1,10 @@
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\8051\bin\8051proc.dll" 
+"D:\Programi\IAR\8051\bin\8051proc.dll" 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\8051\bin\8051emu_cc.dll" 
+"D:\Programi\IAR\8051\bin\8051emu_cc.dll" 
 
-"C:\Users\bsavanovic\Desktop\Coordinator\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Exe\GenericApp.hex" 
+"C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\GenericApp\CC2530DB\CoordinatorEB\Exe\GenericApp.hex" 
 
---plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\8051\bin\8051bat.dll" 
+--plugin "D:\Programi\IAR\8051\bin\8051bat.dll" 
 
 
 

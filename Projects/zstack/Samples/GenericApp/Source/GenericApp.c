@@ -127,7 +127,7 @@
 // magnetic switch macros end
    
 
-#define HAL_UART_ISR 1
+#define HAL_UART_ISR 2
 
 #define HAL_UART_MSECS_TO_TICKS    33
 
@@ -158,6 +158,7 @@ CircularBuffer_t cMain;
 uint8 dataRdy;
 LookUpTable_t lutData[20];
 uint8 *rxBuffer;
+halUARTCfg_t uartConfig;
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 uint8 coin = 1;

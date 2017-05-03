@@ -11,7 +11,7 @@
 //#include "cmsis_os.h"
 
 #include <stdio.h>
-#include <stdint.h>
+//#include <stdint.h>
 //#include <stdlib.h>
 #include "hal_types.h"
 //*****************************************************************************
@@ -382,12 +382,8 @@ uint16 processFrameRx(uint8 *frame)
 	int iPackNum;
 	int iTimeStamp;
 	int iCheckSum;
-	sscanf((char *)frame,
-                      "%*[^0123456789]%d\
-                       %*[^0123456789]%d\
-                       %*[^0123456789]%d\
-                       %*[^0123456789]%d\
-                       %*[^0123456789]%d",
+	sscanf((char *)frame, 
+               "%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d",
                        &iSignalID,
                        &iPackNum,
                        &iData,
