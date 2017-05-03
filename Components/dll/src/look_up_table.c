@@ -54,8 +54,10 @@ void updateCmd(Data_t *pData)
 void updateLookUpTable(Data_t pData, uint16 devAddress)
 {
   int i = 0;
- // char *id;
-  //uint32 idde;
+/*
+  char *id;
+  uint32 idde;
+  */
   while(lutData[i].devID != 0 && lutData[i].devID != pData.devID && i<20)
   {
     i++;
@@ -63,10 +65,12 @@ void updateLookUpTable(Data_t pData, uint16 devAddress)
   if(lutData[i].devID == 0)
   {
       lutData[i].devID = (uint16)pData.devID;
-      //idde =  lutData[i].devID;
-      //idde =  lutData[i].data;
-      //id = (char*)&idde;
-      //id[2] = '\0';
+      /*
+      idde =  lutData[i].devID;
+      idde =  lutData[i].data;
+      id = (char*)&idde;
+      id[2] = '\0';
+      */
       lutData[i].devAddress = devAddress;
   }
   if(i < 20)
@@ -78,7 +82,7 @@ void updateLookUpTable(Data_t pData, uint16 devAddress)
       //dataRdy = 1;
   }
     
-       // HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
+       //HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
        // HalLcdWriteString(id,0);
        // HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
 }

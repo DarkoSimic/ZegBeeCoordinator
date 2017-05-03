@@ -111,11 +111,30 @@ void HalUARTInit(void)
 #endif
   */
 //#if HAL_UART_ISR
-  HalUARTInitISR();
+ // HalUARTInitISR();
   
+  
+    CLKCONCMD =0x00;                                                            //Podesavanje clocka na 32MHz
+    P2INP = 0x60;
+  /*
+    PERCFG = 0x02;
+    //PERCFG = 0x00;                                                              //Podesavanje primarnih funkcija modula 
+    P0SEL = 0x0C;                                                               //Podesavanje osnovne ili periferne funkcije odredjenog pina(0-osnovna ; 1-periferna)
+    
+  
+    U0CSR = 0xC0;                                                               //Prvi bit 1 je UART mode
+    U0GCR = 0x08;                                                               //Poslednjih 5 bita odredjuje baud rate exponent vrijednost
+ 
+    
+    U0BAUD = 0x3A;  
+  */
  // halUARTCfg_t uartConfig;
 	
   // initialize structure for uart config
+  
+  //P2INP = 0x40;
+  //CLKCONCMD =0x00; 
+
   uartConfig.configured = TRUE;
   uartConfig.baudRate = HAL_UART_BR_9600;
   uartConfig.flowControl = FALSE;
@@ -132,7 +151,8 @@ void HalUARTInit(void)
   uartConfig.rx.maxBufSize = HAL_UART_ISR_RX_MAX;
   uartConfig.rx.pBuffer = RX_BUFFER;
   
-  
+    HalUARTInitISR();
+
   
 //#endif
   /*
@@ -156,7 +176,7 @@ uint8 HalUARTOpen(uint8 port, halUARTCfg_t *config)
 {
   (void)port;
   (void)config;
-
+/*
 #if (HAL_UART_DMA == 1)
   if (port == HAL_UART_PORT_0)  HalUARTOpenDMA(config);
 #endif
@@ -168,14 +188,15 @@ uint8 HalUARTOpen(uint8 port, halUARTCfg_t *config)
   if (port == HAL_UART_PORT_0)  HalUARTOpenISR(config);
 #endif
   
-  
+  */
 #if (HAL_UART_ISR == 2)
   if (port == HAL_UART_PORT_1)  HalUARTOpenISR(config);
 #endif
+  /*
 #if (HAL_UART_USB)
   HalUARTOpenUSB(config);
 #endif
-  
+  */
   return HAL_UART_SUCCESS;
 }
 
@@ -261,7 +282,13 @@ uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
 
 
 #if (HAL_UART_ISR == 2)
-  if (port == HAL_UART_PORT_1)  return HalUARTWriteISR(buf, len);
+  
+  if (port == HAL_UART_PORT_1) 
+  {
+    HalLcdWriteString("Sico----------------------",0);
+    return HalUARTWriteISR(buf, len);
+  }
+  //return HalUARTWriteISR(buf, len);
 #endif
 
 #if HAL_UART_USB
@@ -382,7 +409,11 @@ uint16 Hal_UART_RxBufLen( uint8 port )
 void halProcessUartInterrupt (void)
 {
   //osal_set_event(Hal_TaskID, HAL_UART_EVENT);
-  osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
+  //if(MIN_FRAME_SIZE <= HalUARTReadISR(RX_BUFFER, 128))
+  if(HalUARTReadISR(RX_BUFFER, 128))    ////////////////////////////////////////////////////////////////// ovdje treba uporediti sa minimalnom velicinom bafera, definisati MIN_FRAME_SIZE
+  {
+    osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
+  }
 }
 ////////////////////////////////////////////////////////////////////////////////////// 
 /******************************************************************************

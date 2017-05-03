@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR C/C++ Compiler V9.30.3.3983 for 8051               03/May/2017  09:23:45
+// IAR C/C++ Compiler V9.30.3.3983 for 8051               03/May/2017  16:53:08
 // Copyright 2004-2016 IAR Systems AB.
 // Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 //
@@ -344,8 +344,8 @@
           CFI ?RET_LOW Frame(CFA_SP, 1)
           CFI EndCommon cfiCommon1
         
-HalLcdWriteString   SYMBOL "HalLcdWriteString"
-`??HalLcdWriteString::?relay` SYMBOL "?relay", HalLcdWriteString
+HalUARTWrite        SYMBOL "HalUARTWrite"
+`??HalUARTWrite::?relay` SYMBOL "?relay", HalUARTWrite
 circularInit        SYMBOL "circularInit"
 `??circularInit::?relay` SYMBOL "?relay", circularInit
 sscanf              SYMBOL "sscanf"
@@ -359,14 +359,14 @@ dllInit             SYMBOL "dllInit"
 processFrameRx      SYMBOL "processFrameRx"
 `??processFrameRx::?relay` SYMBOL "?relay", processFrameRx
 
-        EXTERN `??HalLcdWriteString::?relay`
-        FUNCTION `??HalLcdWriteString::?relay`,00H
+        EXTERN `??HalUARTWrite::?relay`
+        FUNCTION `??HalUARTWrite::?relay`,00H
         EXTERN `??circularInit::?relay`
         FUNCTION `??circularInit::?relay`,00H
         EXTERN `??sscanf::?relay`
         FUNCTION `??sscanf::?relay`,00H
-        EXTERN HalLcdWriteString
-        FUNCTION HalLcdWriteString,0202H
+        EXTERN HalUARTWrite
+        FUNCTION HalUARTWrite,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 19, STACK
@@ -486,124 +486,125 @@ rxBufferCC2530:
         DS 260
         REQUIRE __INIT_XDATA_Z
 //   72 
-//   73 //*****************************************************************************
-//   74 //
-//   75 // Local variables
-//   76 //
-//   77 //*****************************************************************************
-//   78 //DLLState_t statePC;
+//   73 //halUARTCfg_t uartConfig;
+//   74 //*****************************************************************************
+//   75 //
+//   76 // Local variables
+//   77 //
+//   78 //*****************************************************************************
+//   79 //DLLState_t statePC;
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   79 DLLState_t stateCC2530;
+//   80 DLLState_t stateCC2530;
 stateCC2530:
         DS 1
         REQUIRE __INIT_XDATA_Z
-//   80 //uint8 emFlagPC;
+//   81 //uint8 emFlagPC;
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   81 uint8 emFlagCC2530;
+//   82 uint8 emFlagCC2530;
 emFlagCC2530:
         DS 1
         REQUIRE __INIT_XDATA_Z
-//   82 
-//   83 //char uiTxBufferPC[MAX_BUFFER_LENGHT];
-//   84 //uint8 uiRxBufferPC[MAX_BUFFER_LENGHT];
-//   85 
+//   83 
+//   84 //char uiTxBufferPC[MAX_BUFFER_LENGHT];
+//   85 //uint8 uiRxBufferPC[MAX_BUFFER_LENGHT];
+//   86 
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   86 char uiTxBufferCC2530[MAX_BUFFER_LENGHT];
+//   87 char uiTxBufferCC2530[MAX_BUFFER_LENGHT];
 uiTxBufferCC2530:
         DS 256
         REQUIRE __INIT_XDATA_Z
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   87 uint8 uiRxBufferCC2530[MAX_BUFFER_LENGHT];
+//   88 uint8 uiRxBufferCC2530[MAX_BUFFER_LENGHT];
 uiRxBufferCC2530:
         DS 256
         REQUIRE __INIT_XDATA_Z
-//   88 
-//   89 //uint8 rxBufferPCIndex;
-//   90 //uint8 txBufferPCIndex;
-//   91 
+//   89 
+//   90 //uint8 rxBufferPCIndex;
+//   91 //uint8 txBufferPCIndex;
+//   92 
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   92 uint8 rxBufferCC2530Index;
+//   93 uint8 rxBufferCC2530Index;
 rxBufferCC2530Index:
         DS 1
         REQUIRE __INIT_XDATA_Z
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   93 uint8 txBufferCC2530Index;
+//   94 uint8 txBufferCC2530Index;
 txBufferCC2530Index:
         DS 1
         REQUIRE __INIT_XDATA_Z
-//   94 
-//   95 //uint8 tmpPC;
+//   95 
+//   96 //uint8 tmpPC;
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   96 uint8 tmpCC2530;
+//   97 uint8 tmpCC2530;
 tmpCC2530:
         DS 1
         REQUIRE __INIT_XDATA_Z
-//   97 
-//   98 //CircularBuffer_t cTxBufferPC;
+//   98 
+//   99 //CircularBuffer_t cTxBufferPC;
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   99 CircularBuffer_t cTxBufferCC2530;
+//  100 CircularBuffer_t cTxBufferCC2530;
 cTxBufferCC2530:
         DS 260
         REQUIRE __INIT_XDATA_Z
-//  100 
+//  101 
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//  101 DLLPacket_t recPack;
+//  102 DLLPacket_t recPack;
 recPack:
         DS 9
         REQUIRE __INIT_XDATA_Z
-//  102 
+//  103 
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA16
-//  103 static CallBack_t callBack;
+//  104 static CallBack_t callBack;
 callBack:
         DS 2
         REQUIRE __INIT_XDATA_Z
-//  104 
-//  105 //*****************************************************************************
-//  106 //
-//  107 // Function definition
-//  108 //
-//  109 //*****************************************************************************
-//  110 
-//  111 //*****************************************************************************
-//  112 //
-//  113 //! Data link layer initialization function
-//  114 //!
-//  115 //! This function initializes states and indexes,
-//  116 //! configures communication ports, one of \b PC or \b CC2530 and their
-//  117 //! baudrates, one of \b BAUDRATE_PC \b BAUDRATE_CC2530. Creates two threads
-//  118 //! for communication wia UART interface.
-//  119 //!
-//  120 //! \return None.
-//  121 //
-//  122 //*****************************************************************************
+//  105 
+//  106 //*****************************************************************************
+//  107 //
+//  108 // Function definition
+//  109 //
+//  110 //*****************************************************************************
+//  111 
+//  112 //*****************************************************************************
+//  113 //
+//  114 //! Data link layer initialization function
+//  115 //!
+//  116 //! This function initializes states and indexes,
+//  117 //! configures communication ports, one of \b PC or \b CC2530 and their
+//  118 //! baudrates, one of \b BAUDRATE_PC \b BAUDRATE_CC2530. Creates two threads
+//  119 //! for communication wia UART interface.
+//  120 //!
+//  121 //! \return None.
+//  122 //
+//  123 //*****************************************************************************
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  123 void dllInit(void)
+//  124 void dllInit(void)
 dllInit:
           CFI Block cfiBlock0 Using cfiCommon0
           CFI Function dllInit
         CODE
-//  124 {
+//  125 {
         FUNCALL dllInit, circularInit
         LOCFRAME ISTACK, 2, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -623,70 +624,74 @@ dllInit:
           CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//  125 	//osThreadDef(communicationThread, osPriorityHigh, 2, 0);
-//  126 
-//  127 	//uint8 portPC = PC;
-//  128 	//uint8 portCC2530 = CC2530;
-//  129 
-//  130 	//statePC = IDLE;
-//  131 	stateCC2530 = IDLE;
+//  126 	//osThreadDef(communicationThread, osPriorityHigh, 2, 0);
+//  127 
+//  128 	//uint8 portPC = PC;
+//  129 	//uint8 portCC2530 = CC2530;
+//  130 
+//  131 	//statePC = IDLE;
+//  132 	stateCC2530 = IDLE;
         MOV     DPTR,#stateCC2530
         CLR     A
         MOVX    @DPTR,A
-//  132 	//rxBufferPCIndex = 0;
-//  133 	//txBufferPCIndex = 0;
-//  134 	rxBufferCC2530Index = 0;
+//  133 	//rxBufferPCIndex = 0;
+//  134 	//txBufferPCIndex = 0;
+//  135 	rxBufferCC2530Index = 0;
         MOV     DPTR,#rxBufferCC2530Index
         MOVX    @DPTR,A
-//  135 	txBufferCC2530Index = 0;
+//  136 	txBufferCC2530Index = 0;
         MOV     DPTR,#txBufferCC2530Index
         MOVX    @DPTR,A
-//  136 
-//  137 	//circularInit(&cTxBufferPC);
-//  138 	circularInit(&cTxBufferCC2530);
+//  137 
+//  138 	//circularInit(&cTxBufferPC);
+//  139 	circularInit(&cTxBufferCC2530);
         ; Setup parameters for call to function circularInit
         MOV     R2,#cTxBufferCC2530 & 0xff
         MOV     R3,#(cTxBufferCC2530 >> 8) & 0xff
         LCALL   `??circularInit::?relay`; Banked call to: circularInit
-//  139         /*CircularBuffer_t *cRxBuffer;
-//  140 	CircularBuffer_t *cTxBuffer;
-//  141         cRxBuffer = &rxBufferCC2530;
-//  142         cTxBuffer = &cTxBufferCC2530;
-//  143         */
-//  144      /*   
-//  145         
-//  146         uint8 port  = *(uint8 *)(arg);
-//  147 	uint8 *tmp;
-//  148 	uint8 *rxBuffer;
-//  149         uint8 *txBuffer;
-//  150 	uint8 *txIndex;
-//  151 	uint8 *rxIndex;
-//  152 	uint8 *emFlag;
-//  153 	DLLState_t *state;
-//  154 	CircularBuffer_t *cRxBuffer;
-//  155 	CircularBuffer_t *cTxBuffer;
-//  156         
-//  157         tmp = &tmpCC2530;
-//  158         state = &stateCC2530;
-//  159         txBuffer = (uint8 *)uiTxBufferCC2530;
-//  160         rxBuffer = uiRxBufferCC2530;
-//  161         txIndex = &txBufferCC2530Index;
-//  162         rxIndex = &rxBufferCC2530Index;
-//  163         emFlag = &emFlagCC2530;
-//  164         cRxBuffer = &rxBufferCC2530;
-//  165         cTxBuffer = &cTxBufferCC2530;
-//  166 */
-//  167 	//halUARTOpenPort(PC, BAUDRATE_PC , 1, 0);
-//  168 	//halUARTOpenPort(CC2530, BAUDRATE_CC2530, 1, 0);
-//  169         
-//  170         
-//  171         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  172         // Ovdje treba initUart
-//  173         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  174 
-//  175 	//tID_PC_Communication = osThreadCreate( osThread(communicationThread), (void *)(&portPC));
-//  176 	//tID_CC2530_Communication = osThreadCreate( osThread(communicationThread), (void *)(&portCC2530));
-//  177 }
+//  140         
+//  141        // HalUARTClose(HAL_UART_PORT_1);
+//  142         //HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
+//  143         
+//  144         /*CircularBuffer_t *cRxBuffer;
+//  145 	CircularBuffer_t *cTxBuffer;
+//  146         cRxBuffer = &rxBufferCC2530;
+//  147         cTxBuffer = &cTxBufferCC2530;
+//  148         */
+//  149      /*   
+//  150         
+//  151         uint8 port  = *(uint8 *)(arg);
+//  152 	uint8 *tmp;
+//  153 	uint8 *rxBuffer;
+//  154         uint8 *txBuffer;
+//  155 	uint8 *txIndex;
+//  156 	uint8 *rxIndex;
+//  157 	uint8 *emFlag;
+//  158 	DLLState_t *state;
+//  159 	CircularBuffer_t *cRxBuffer;
+//  160 	CircularBuffer_t *cTxBuffer;
+//  161         
+//  162         tmp = &tmpCC2530;
+//  163         state = &stateCC2530;
+//  164         txBuffer = (uint8 *)uiTxBufferCC2530;
+//  165         rxBuffer = uiRxBufferCC2530;
+//  166         txIndex = &txBufferCC2530Index;
+//  167         rxIndex = &rxBufferCC2530Index;
+//  168         emFlag = &emFlagCC2530;
+//  169         cRxBuffer = &rxBufferCC2530;
+//  170         cTxBuffer = &cTxBufferCC2530;
+//  171 */
+//  172 	//halUARTOpenPort(PC, BAUDRATE_PC , 1, 0);
+//  173 	//halUARTOpenPort(CC2530, BAUDRATE_CC2530, 1, 0);
+//  174         
+//  175         
+//  176         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  177         // Ovdje treba initUart
+//  178         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  179 
+//  180 	//tID_PC_Communication = osThreadCreate( osThread(communicationThread), (void *)(&portPC));
+//  181 	//tID_CC2530_Communication = osThreadCreate( osThread(communicationThread), (void *)(&portCC2530));
+//  182 }
           CFI EndBlock cfiBlock0
         REQUIRE ?Subroutine0
         ; // Fall through to label ?Subroutine0
@@ -706,24 +711,24 @@ dllInit:
           CFI DPL0 SameValue
         LJMP    ?BRET
           CFI EndBlock cfiBlock1
-//  178 
-//  179 //*****************************************************************************
-//  180 //
-//  181 //! Register callback function.
-//  182 //!
-//  183 //! \param cb is pointer on the function.
-//  184 //!
-//  185 //! \return None.
-//  186 //
-//  187 //*****************************************************************************
+//  183 
+//  184 //*****************************************************************************
+//  185 //
+//  186 //! Register callback function.
+//  187 //!
+//  188 //! \param cb is pointer on the function.
+//  189 //!
+//  190 //! \return None.
+//  191 //
+//  192 //*****************************************************************************
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  188 void CallBackRegister(CallBack_t cb)
+//  193 void CallBackRegister(CallBack_t cb)
 CallBackRegister:
           CFI Block cfiBlock2 Using cfiCommon0
           CFI Function CallBackRegister
         CODE
-//  189 {
+//  194 {
         PUSH    DPL
           CFI DPL0 Frame(CFA_SP, 4)
           CFI CFA_SP SP+-4
@@ -732,209 +737,209 @@ CallBackRegister:
           CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//  190 	callBack = cb;
+//  195 	callBack = cb;
         MOV     DPTR,#callBack
         MOV     A,R2
         MOVX    @DPTR,A
         INC     DPTR
         MOV     A,R3
         MOVX    @DPTR,A
-//  191 }
+//  196 }
         SJMP    ?Subroutine0
           CFI EndBlock cfiBlock2
-//  192 
-//  193 //*****************************************************************************
-//  194 //
-//  195 //! Function handles comminucation. Handles RX or TX on active ports.
-//  196 //!
-//  197 //! \param arg is pointer on port.
-//  198 //!
-//  199 //! This function sends data from app layer forward and delivers data to app
-//  200 //! layer.
+//  197 
+//  198 //*****************************************************************************
+//  199 //
+//  200 //! Function handles comminucation. Handles RX or TX on active ports.
 //  201 //!
-//  202 //! \return None.
-//  203 //
-//  204 //*****************************************************************************
-//  205 /*
-//  206 void communicationThread(void const *arg)
-//  207 {
-//  208 	uint8 port  = *(uint8 *)(arg);
-//  209 	uint8 *tmp;
-//  210 	uint8 *rxBuffer;
-//  211         uint8 *txBuffer;
-//  212 	uint8 *txIndex;
-//  213 	uint8 *rxIndex;
-//  214 	uint8 *emFlag;
-//  215 	DLLState_t *state;
-//  216 	CircularBuffer_t *cRxBuffer;
-//  217 	CircularBuffer_t *cTxBuffer;
-//  218 
-//  219 	if (PC == port)
-//  220 	{
-//  221 		tmp = &tmpPC;
-//  222 		state = &statePC;
-//  223 		txBuffer = (uint8 *)uiTxBufferPC;
-//  224 		rxBuffer = uiRxBufferPC;
-//  225 		txIndex = &txBufferPCIndex;
-//  226 		rxIndex = &rxBufferPCIndex;
-//  227 		emFlag = &emFlagPC;
-//  228 		cRxBuffer = &rxBufferPC;
-//  229 		cTxBuffer = &cTxBufferPC;
-//  230 	}
-//  231 	else if (CC2530 == port)
-//  232 	{
-//  233   	tmp = &tmpCC2530;
-//  234 		state = &stateCC2530;
-//  235 		txBuffer = (uint8 *)uiTxBufferCC2530;
-//  236 		rxBuffer = uiRxBufferCC2530;
-//  237 		txIndex = &txBufferCC2530Index;
-//  238 		rxIndex = &rxBufferCC2530Index;
-//  239 		emFlag = &emFlagCC2530;
-//  240 		cRxBuffer = &rxBufferCC2530;
-//  241 		cTxBuffer = &cTxBufferCC2530;
-//  242 	}
-//  243 
-//  244 	while (1)
-//  245 	{
-//  246 		osDelay(10);
-//  247 		switch ((*state))
-//  248 		{
-//  249 			case IDLE:
-//  250 				if (circularGet(cRxBuffer, tmp))	//zastita!!!
-//  251 				{
-//  252 					if (START_DELIMITER == (*tmp))
-//  253 					{
-//  254 						*rxIndex = 0;
-//  255 						*state = RECEPTION;
-//  256 					}
-//  257 					else
+//  202 //! \param arg is pointer on port.
+//  203 //!
+//  204 //! This function sends data from app layer forward and delivers data to app
+//  205 //! layer.
+//  206 //!
+//  207 //! \return None.
+//  208 //
+//  209 //*****************************************************************************
+//  210 /*
+//  211 void communicationThread(void const *arg)
+//  212 {
+//  213 	uint8 port  = *(uint8 *)(arg);
+//  214 	uint8 *tmp;
+//  215 	uint8 *rxBuffer;
+//  216         uint8 *txBuffer;
+//  217 	uint8 *txIndex;
+//  218 	uint8 *rxIndex;
+//  219 	uint8 *emFlag;
+//  220 	DLLState_t *state;
+//  221 	CircularBuffer_t *cRxBuffer;
+//  222 	CircularBuffer_t *cTxBuffer;
+//  223 
+//  224 	if (PC == port)
+//  225 	{
+//  226 		tmp = &tmpPC;
+//  227 		state = &statePC;
+//  228 		txBuffer = (uint8 *)uiTxBufferPC;
+//  229 		rxBuffer = uiRxBufferPC;
+//  230 		txIndex = &txBufferPCIndex;
+//  231 		rxIndex = &rxBufferPCIndex;
+//  232 		emFlag = &emFlagPC;
+//  233 		cRxBuffer = &rxBufferPC;
+//  234 		cTxBuffer = &cTxBufferPC;
+//  235 	}
+//  236 	else if (CC2530 == port)
+//  237 	{
+//  238   	tmp = &tmpCC2530;
+//  239 		state = &stateCC2530;
+//  240 		txBuffer = (uint8 *)uiTxBufferCC2530;
+//  241 		rxBuffer = uiRxBufferCC2530;
+//  242 		txIndex = &txBufferCC2530Index;
+//  243 		rxIndex = &rxBufferCC2530Index;
+//  244 		emFlag = &emFlagCC2530;
+//  245 		cRxBuffer = &rxBufferCC2530;
+//  246 		cTxBuffer = &cTxBufferCC2530;
+//  247 	}
+//  248 
+//  249 	while (1)
+//  250 	{
+//  251 		osDelay(10);
+//  252 		switch ((*state))
+//  253 		{
+//  254 			case IDLE:
+//  255 				if (circularGet(cRxBuffer, tmp))	//zastita!!!
+//  256 				{
+//  257 					if (START_DELIMITER == (*tmp))
 //  258 					{
-//  259 						*state = IDLE;
-//  260 
+//  259 						*rxIndex = 0;
+//  260 						*state = RECEPTION;
 //  261 					}
-//  262 				}
-//  263 				else if (EMISSION_START == (*emFlag))
-//  264 				{
-//  265 					*state = EMISSION;
-//  266 				}
-//  267 
-//  268 				else
+//  262 					else
+//  263 					{
+//  264 						*state = IDLE;
+//  265 
+//  266 					}
+//  267 				}
+//  268 				else if (EMISSION_START == (*emFlag))
 //  269 				{
-//  270 					*state = IDLE;
-//  271 
-//  272 				}
-//  273 				break;
-//  274 			case RECEPTION:
-//  275 				do
-//  276 				{
-//  277 					if (circularGet(cRxBuffer, tmp)) // zastita!!!
-//  278 					{
-//  279 						if (START_DELIMITER == (*tmp))
-//  280 						{
-//  281 							*rxIndex = 0;
-//  282 						}
-//  283 						else
-//  284 						{
-//  285 							rxBuffer[(*rxIndex)++] = *tmp;
-//  286 						}
-//  287 					}
-//  288 				} while(STOP_DELIMITER != *tmp);
-//  289 				*state = IDLE;				//
-//  290 				processFrameRx(rxBuffer, *rxIndex, port);
-//  291 			break;
-//  292 			case EMISSION:
-//  293 				array2circular(cTxBuffer, txBuffer, *txIndex);
-//  294 				halUARTWrite(port, cTxBuffer, 0);
-//  295 				*txIndex = 0;
-//  296 				*state = IDLE;
-//  297 			break;
-//  298 			default:
-//  299 				// error state!!!
-//  300 			break;
-//  301 		}
-//  302 	}
-//  303 }
-//  304 */
-//  305 //*****************************************************************************
-//  306 //
-//  307 //! Get the signal ID.
-//  308 //!
-//  309 //! \param deviceAddress is device address.
-//  310 //!
-//  311 //! For given a device address, this function returns the corresponding
-//  312 //! signal ID.
+//  270 					*state = EMISSION;
+//  271 				}
+//  272 
+//  273 				else
+//  274 				{
+//  275 					*state = IDLE;
+//  276 
+//  277 				}
+//  278 				break;
+//  279 			case RECEPTION:
+//  280 				do
+//  281 				{
+//  282 					if (circularGet(cRxBuffer, tmp)) // zastita!!!
+//  283 					{
+//  284 						if (START_DELIMITER == (*tmp))
+//  285 						{
+//  286 							*rxIndex = 0;
+//  287 						}
+//  288 						else
+//  289 						{
+//  290 							rxBuffer[(*rxIndex)++] = *tmp;
+//  291 						}
+//  292 					}
+//  293 				} while(STOP_DELIMITER != *tmp);
+//  294 				*state = IDLE;				//
+//  295 				processFrameRx(rxBuffer, *rxIndex, port);
+//  296 			break;
+//  297 			case EMISSION:
+//  298 				array2circular(cTxBuffer, txBuffer, *txIndex);
+//  299 				halUARTWrite(port, cTxBuffer, 0);
+//  300 				*txIndex = 0;
+//  301 				*state = IDLE;
+//  302 			break;
+//  303 			default:
+//  304 				// error state!!!
+//  305 			break;
+//  306 		}
+//  307 	}
+//  308 }
+//  309 */
+//  310 //*****************************************************************************
+//  311 //
+//  312 //! Get the signal ID.
 //  313 //!
-//  314 //! \return Returns signal ID, or -1 if \e deviceAddress is not supported.
-//  315 //
-//  316 //*****************************************************************************
-//  317 static uint8 getSignalID(const uint16 deviceAddress)
-//  318 {
-//  319 	uint8 i;
-//  320         //uint8 j;
-//  321         char *id;
-//  322         //char idde;
-//  323         uint16 idde;
-//  324         
-//  325 	uint8 retVal = 255;
-//  326 	for (i = 0; i < sizeof(signalID); i+=2)
-//  327 	{
-//  328             
-//  329 		if (deviceAddress == signalID[i])
-//  330 		{
-//  331 			retVal = i;
-//  332                         
-//  333                         
-//  334 		}
-//  335                 //idde = deviceAddress;//i + 0x30;//signalID[i];
-//  336                 idde = signalID[i];//i + 0x30;//signalID[i];
-//  337                 id = (char*)&idde;
-//  338                 //id[0] = idde;
-//  339                // id[1] = '\0';
-//  340                 id[2] = '\0';
-//  341                 //HalLcdWriteString("-----------------------------SignalID----------------------",0);
-//  342                // HalLcdWriteString(id,0);
-//  343                 /*for(j=0;j<3;j++)
-//  344                 {
-//  345                   uartSend(*(id + j));
-//  346                   
-//  347                 }*/
-//  348                 //HalLcdWriteString("-----------------------------SignalID----------------------",0);
-//  349                 idde = deviceAddress;//i + 0x30;
-//  350                 //signalID[i];id = (char*)&idde;
-//  351                 //HalLcdWriteString("-----------------------------deviceAddress----------------------",0);
-//  352                 //HalLcdWriteString(id,0);
-//  353                 /*for(j=0;j<3;j++)
-//  354                 {
-//  355                   uartSend(*(id + j));
-//  356                   
-//  357                 }*/
-//  358                 //HalLcdWriteString("-----------------------------deviceAddress----------------------",0);
-//  359 	}
-//  360 	return retVal;
-//  361 }
-//  362 
-//  363 //*****************************************************************************
-//  364 //
-//  365 //! Process received data.
-//  366 //!
-//  367 //! \param frame is pointer on the received frame.
-//  368 //! \param len is lenght of received frame.
-//  369 //! \param port is number of port.
-//  370 //!
-//  371 //! Function process received frame, converts, checks checksum and validation
-//  372 //! of signal ID (supported devices)
-//  373 //!
-//  374 //! \return Returns signal ID, or -1 if \e deviceAddress is not supported.
-//  375 //
-//  376 //*****************************************************************************
+//  314 //! \param deviceAddress is device address.
+//  315 //!
+//  316 //! For given a device address, this function returns the corresponding
+//  317 //! signal ID.
+//  318 //!
+//  319 //! \return Returns signal ID, or -1 if \e deviceAddress is not supported.
+//  320 //
+//  321 //*****************************************************************************
+//  322 static uint8 getSignalID(const uint16 deviceAddress)
+//  323 {
+//  324 	uint8 i;
+//  325         //uint8 j;
+//  326         char *id;
+//  327         //char idde;
+//  328         uint16 idde;
+//  329         
+//  330 	uint8 retVal = 255;
+//  331 	for (i = 0; i < sizeof(signalID); i+=2)
+//  332 	{
+//  333             
+//  334 		if (deviceAddress == signalID[i])
+//  335 		{
+//  336 			retVal = i;
+//  337                         
+//  338                         
+//  339 		}
+//  340                 //idde = deviceAddress;//i + 0x30;//signalID[i];
+//  341                 idde = signalID[i];//i + 0x30;//signalID[i];
+//  342                 id = (char*)&idde;
+//  343                 //id[0] = idde;
+//  344                // id[1] = '\0';
+//  345                 id[2] = '\0';
+//  346                 //HalLcdWriteString("-----------------------------SignalID----------------------",0);
+//  347                // HalLcdWriteString(id,0);
+//  348                 /*for(j=0;j<3;j++)
+//  349                 {
+//  350                   uartSend(*(id + j));
+//  351                   
+//  352                 }*/
+//  353                 //HalLcdWriteString("-----------------------------SignalID----------------------",0);
+//  354                 idde = deviceAddress;//i + 0x30;
+//  355                 //signalID[i];id = (char*)&idde;
+//  356                 //HalLcdWriteString("-----------------------------deviceAddress----------------------",0);
+//  357                 //HalLcdWriteString(id,0);
+//  358                 /*for(j=0;j<3;j++)
+//  359                 {
+//  360                   uartSend(*(id + j));
+//  361                   
+//  362                 }*/
+//  363                 //HalLcdWriteString("-----------------------------deviceAddress----------------------",0);
+//  364 	}
+//  365 	return retVal;
+//  366 }
+//  367 
+//  368 //*****************************************************************************
+//  369 //
+//  370 //! Process received data.
+//  371 //!
+//  372 //! \param frame is pointer on the received frame.
+//  373 //! \param len is lenght of received frame.
+//  374 //! \param port is number of port.
+//  375 //!
+//  376 //! Function process received frame, converts, checks checksum and validation
+//  377 //! of signal ID (supported devices)
+//  378 //!
+//  379 //! \return Returns signal ID, or -1 if \e deviceAddress is not supported.
+//  380 //
+//  381 //*****************************************************************************
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  377 uint16 processFrameRx(uint8 *frame)
+//  382 uint16 processFrameRx(uint8 *frame)
 processFrameRx:
           CFI Block cfiBlock3 Using cfiCommon0
           CFI Function processFrameRx
         CODE
-//  378 {
+//  383 {
         FUNCALL processFrameRx, sscanf
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -967,20 +972,20 @@ processFrameRx:
         MOV     A,#-0xa
         LCALL   ?ALLOC_XSTACK8
           CFI CFA_XSP16 add(XSP16, 20)
-//  379 	Data_t *cbData;
-//  380 	int iSignalID;
-//  381 	int iData;
-//  382 	int iPackNum;
-//  383 	int iTimeStamp;
-//  384 	int iCheckSum;
-//  385 	sscanf((char *)frame, 
-//  386                "%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d",
-//  387                        &iSignalID,
-//  388                        &iPackNum,
-//  389                        &iData,
-//  390                        &iTimeStamp,
-//  391                        &iCheckSum
-//  392                        );
+//  384 	Data_t *cbData;
+//  385 	int iSignalID;
+//  386 	int iData;
+//  387 	int iPackNum;
+//  388 	int iTimeStamp;
+//  389 	int iCheckSum;
+//  390 	sscanf((char *)frame, 
+//  391                "%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d",
+//  392                        &iSignalID,
+//  393                        &iPackNum,
+//  394                        &iData,
+//  395                        &iTimeStamp,
+//  396                        &iCheckSum
+//  397                        );
         ; Setup parameters for call to function sscanf
         MOV     R0,?XSP + 0
         MOV     R1,?XSP + 1
@@ -1023,7 +1028,7 @@ processFrameRx:
         MOV     A,#0xa
         LCALL   ?DEALLOC_XSTACK8
           CFI CFA_XSP16 add(XSP16, 20)
-//  393 	recPack.appData.devID = signalID[iSignalID];
+//  398 	recPack.appData.devID = signalID[iSignalID];
         MOV     A,#0x8
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
@@ -1054,13 +1059,13 @@ processFrameRx:
         INC     DPTR
         MOV     A,R1
         MOVX    @DPTR,A
-//  394 	recPack.appData.packNum = (uint32)iPackNum & 0xff;
+//  399 	recPack.appData.packNum = (uint32)iPackNum & 0xff;
         MOV     A,#0x4
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
         MOV     DPTR,#recPack + 2
         MOVX    @DPTR,A
-//  395 	recPack.appData.data = (uint32)iData & 0xffffffff;
+//  400 	recPack.appData.data = (uint32)iData & 0xffffffff;
         MOV     A,#0x6
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
@@ -1082,27 +1087,27 @@ processFrameRx:
         MOVX    @DPTR,A
         INC     DPTR
         MOVX    @DPTR,A
-//  396 	recPack.timeStamp = (uint32)iTimeStamp & 0xff;
+//  401 	recPack.timeStamp = (uint32)iTimeStamp & 0xff;
         MOV     A,#0x2
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
         MOV     DPTR,#recPack + 7
         MOVX    @DPTR,A
-//  397 	recPack.checkSum = (uint32)iCheckSum & 0xff;
+//  402 	recPack.checkSum = (uint32)iCheckSum & 0xff;
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
         MOVX    A,@DPTR
         MOV     DPTR,#recPack + 8
         MOVX    @DPTR,A
-//  398 
-//  399 	cbData = (struct sData *)(&recPack);
-//  400 
-//  401 
-//  402 //if (checksum(recPack) == recPack->checkSum)
-//  403 //{
-//  404 //	if (devAddressSupport(recPack->appData.devID))
-//  405 //	{
-//  406 			callBack(cbData);
+//  403 
+//  404 	cbData = (struct sData *)(&recPack);
+//  405 
+//  406 
+//  407 //if (checksum(recPack) == recPack->checkSum)
+//  408 //{
+//  409 //	if (devAddressSupport(recPack->appData.devID))
+//  410 //	{
+//  411 			callBack(cbData);
         ; Setup parameters for indirect call
         MOV     R2,#recPack & 0xff
         MOV     R3,#(recPack >> 8) & 0xff
@@ -1114,10 +1119,10 @@ processFrameRx:
         MOV     DPH,A
         MOV     DPL,R0
         LCALL   ?CALL_IND
-//  407 
-//  408 //	}
-//  409 		//return 1;
-//  410                 return recPack.appData.devID;
+//  412 
+//  413 //	}
+//  414 		//return 1;
+//  415                 return recPack.appData.devID;
         MOV     DPTR,#recPack
         MOVX    A,@DPTR
         MOV     R2,A
@@ -1128,15 +1133,15 @@ processFrameRx:
           CFI EndBlock cfiBlock3
         REQUIRE ?Subroutine1
         ; // Fall through to label ?Subroutine1
-//  411 //}
-//  412 //else
-//  413 //{
-//  414 //	error_checkSum();
-//  415 //	recPack = NULL;
-//  416 //	return 0;
-//  417 //}
-//  418 
-//  419 }
+//  416 //}
+//  417 //else
+//  418 //{
+//  419 //	error_checkSum();
+//  420 //	recPack = NULL;
+//  421 //	return 0;
+//  422 //}
+//  423 
+//  424 }
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 ?Subroutine1:
@@ -1161,120 +1166,120 @@ processFrameRx:
         MOV     R7,#0x2
         LJMP    ?BANKED_LEAVE_XDATA
           CFI EndBlock cfiBlock4
-//  420 
-//  421 
-//  422 //*****************************************************************************
-//  423 //
-//  424 //! Calculating checksum.
-//  425 //!
-//  426 //! \param frame is pointer on frame on which one is needed to calculated.
-//  427 //!
-//  428 //! Function caluculates checksum executing XOR operation on evert member of
-//  429 //! \b frame.
+//  425 
+//  426 
+//  427 //*****************************************************************************
+//  428 //
+//  429 //! Calculating checksum.
 //  430 //!
-//  431 //! \return Returns result of sumary operation.
-//  432 //
-//  433 //*****************************************************************************
-//  434 static uint8 checksum(DLLPacket_t *frame)
-//  435 {
-//  436 	uint8 sum  = 0x00;
-//  437 	uint8 *ptr = (uint8 *)(frame);
-//  438 	uint8 *end = &frame->checkSum;
-//  439 	while(ptr != end)
-//  440 	{
-//  441 		sum ^= *ptr;
-//  442 		ptr++;
-//  443 	}
-//  444 
-//  445 	return sum;
-//  446 
-//  447 }
-//  448 
-//  449 //*****************************************************************************
-//  450 //
-//  451 //! Checks a devices address.
-//  452 //!
-//  453 //! \param devAddress is device address.
-//  454 //!
-//  455 //! This function determines if a device address is supported.
-//  456 //!
-//  457 //! \return Returns \b true if address is supported, or \b false otherwise.
-//  458 //
-//  459 //*****************************************************************************
-//  460 /*
-//  461 static uint8 devAddressSupport(uint16 devAddress)
-//  462 {
-//  463 	return( (devAddress == TEMP_SENSOR_INSIDE) ||
-//  464 					(devAddress == TEMP_SENSOR_OUTSIDE) ||
-//  465 					(devAddress == PRESSURE_SENSOR_INSIDE) ||
-//  466  					(devAddress == PRESSURE_SENSOR_OUTSIDE) ||
-//  467 					(devAddress == HUMIDITY_SENSOR_INSIDE) ||
-//  468 					(devAddress == HUMIDITY_SENSOR_OUTSIDE) ||
-//  469 					(devAddress == DOOR) ||
-//  470 					(devAddress == WINDOW) ||
-//  471 					(devAddress == MOTION_SENSOR)
-//  472 					);
-//  473 }
-//  474 */
-//  475 //*****************************************************************************
-//  476 //
-//  477 //! Function that handles data services.
-//  478 //!
-//  479 //! \param aData is pointer on data structure.
-//  480 //! \param port indicates port number.
-//  481 //!
-//  482 //! This function prepare data to be ready to send and sets state flag to
-//  483 //! signals the thread to perform an action.
-//  484 //!
-//  485 //! \return None.
-//  486 //
-//  487 //*****************************************************************************
-//  488 /*
-//  489 static uint8 halUARTWrite(CircularBuffer_t *txBuffer, uint8 len)
-//  490 {
-//  491 	uint8 cnt = 0;
-//  492 	uint8 i;
-//  493 	uint8 data;
-//  494 
-//  495 	if (0 == len)
-//  496 	{
-//  497 		while(!circularIsEmpty(txBuffer))
-//  498 		{
-//  499 			circularGet(txBuffer, &data);
-//  500                         uartSend(data);
-//  501 			cnt++;
-//  502 
-//  503 		}// end while
-//  504 	}// end if
-//  505 
-//  506 	else if (len < circularSize(txBuffer))
-//  507 	{
-//  508 		for (i = 0; i < len; i++)
-//  509 		{
-//  510 			circularGet(txBuffer, &data);
-//  511 			uartSend(data);
-//  512 		}// end for
-//  513 		cnt = i;
-//  514 
-//  515 	}// end else if
-//  516 
-//  517 	else
-//  518 	{
-//  519 		// error_uart();
-//  520 
-//  521 	}// end else
-//  522 
-//  523 	return cnt;
-//  524 }
-//  525 */
+//  431 //! \param frame is pointer on frame on which one is needed to calculated.
+//  432 //!
+//  433 //! Function caluculates checksum executing XOR operation on evert member of
+//  434 //! \b frame.
+//  435 //!
+//  436 //! \return Returns result of sumary operation.
+//  437 //
+//  438 //*****************************************************************************
+//  439 static uint8 checksum(DLLPacket_t *frame)
+//  440 {
+//  441 	uint8 sum  = 0x00;
+//  442 	uint8 *ptr = (uint8 *)(frame);
+//  443 	uint8 *end = &frame->checkSum;
+//  444 	while(ptr != end)
+//  445 	{
+//  446 		sum ^= *ptr;
+//  447 		ptr++;
+//  448 	}
+//  449 
+//  450 	return sum;
+//  451 
+//  452 }
+//  453 
+//  454 //*****************************************************************************
+//  455 //
+//  456 //! Checks a devices address.
+//  457 //!
+//  458 //! \param devAddress is device address.
+//  459 //!
+//  460 //! This function determines if a device address is supported.
+//  461 //!
+//  462 //! \return Returns \b true if address is supported, or \b false otherwise.
+//  463 //
+//  464 //*****************************************************************************
+//  465 /*
+//  466 static uint8 devAddressSupport(uint16 devAddress)
+//  467 {
+//  468 	return( (devAddress == TEMP_SENSOR_INSIDE) ||
+//  469 					(devAddress == TEMP_SENSOR_OUTSIDE) ||
+//  470 					(devAddress == PRESSURE_SENSOR_INSIDE) ||
+//  471  					(devAddress == PRESSURE_SENSOR_OUTSIDE) ||
+//  472 					(devAddress == HUMIDITY_SENSOR_INSIDE) ||
+//  473 					(devAddress == HUMIDITY_SENSOR_OUTSIDE) ||
+//  474 					(devAddress == DOOR) ||
+//  475 					(devAddress == WINDOW) ||
+//  476 					(devAddress == MOTION_SENSOR)
+//  477 					);
+//  478 }
+//  479 */
+//  480 //*****************************************************************************
+//  481 //
+//  482 //! Function that handles data services.
+//  483 //!
+//  484 //! \param aData is pointer on data structure.
+//  485 //! \param port indicates port number.
+//  486 //!
+//  487 //! This function prepare data to be ready to send and sets state flag to
+//  488 //! signals the thread to perform an action.
+//  489 //!
+//  490 //! \return None.
+//  491 //
+//  492 //*****************************************************************************
+//  493 /*
+//  494 static uint8 halUARTWrite(CircularBuffer_t *txBuffer, uint8 len)
+//  495 {
+//  496 	uint8 cnt = 0;
+//  497 	uint8 i;
+//  498 	uint8 data;
+//  499 
+//  500 	if (0 == len)
+//  501 	{
+//  502 		while(!circularIsEmpty(txBuffer))
+//  503 		{
+//  504 			circularGet(txBuffer, &data);
+//  505                         uartSend(data);
+//  506 			cnt++;
+//  507 
+//  508 		}// end while
+//  509 	}// end if
+//  510 
+//  511 	else if (len < circularSize(txBuffer))
+//  512 	{
+//  513 		for (i = 0; i < len; i++)
+//  514 		{
+//  515 			circularGet(txBuffer, &data);
+//  516 			uartSend(data);
+//  517 		}// end for
+//  518 		cnt = i;
+//  519 
+//  520 	}// end else if
+//  521 
+//  522 	else
+//  523 	{
+//  524 		// error_uart();
+//  525 
+//  526 	}// end else
+//  527 
+//  528 	return cnt;
+//  529 }
+//  530 */
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  526 static void packFrameToStell(uint8 *buff, DLLPacket_t emPacket)
+//  531 static void packFrameToStell(uint8 *buff, DLLPacket_t emPacket)
 packFrameToStell:
           CFI Block cfiBlock5 Using cfiCommon0
           CFI Function packFrameToStell
         CODE
-//  527 {
+//  532 {
         REQUIRE ?V0
         REQUIRE ?V1
         REQUIRE ?V2
@@ -1312,45 +1317,45 @@ packFrameToStell:
         MOV     R6,A
         MOV     A,R3
         MOV     R7,A
-//  528   
-//  529   
-//  530   //uint32 da;
-//  531   
-//  532   int i = 0;
+//  533   
+//  534   
+//  535   //uint32 da;
+//  536   
+//  537   int i = 0;
         MOV     R2,#0x0
         MOV     R3,#0x0
-//  533   int j = 0;
+//  538   int j = 0;
         MOV     ?V2,R2
         MOV     ?V3,R2
-//  534   int k = 0;
-//  535   uint8 *pBuf = buff;
-//  536  
-//  537   uint32 pom = emPacket.appData.data;
+//  539   int k = 0;
+//  540   uint8 *pBuf = buff;
+//  541  
+//  542   uint32 pom = emPacket.appData.data;
         MOV     A,#0x1b
         LCALL   ?XSTACK_DISP0_8
         MOV     R0,#?V4
         LCALL   ?L_MOV_X
-//  538   
-//  539   
-//  540   char dat[4] = {'0','0','0','0'};
+//  543   
+//  544   
+//  545   char dat[4] = {'0','0','0','0'};
         MOV     DPTR,#`?<Constant {48, 48, 48, 48}>`
         MOV     A,#0x4
         LCALL   ?XSTACK_DISP102_8
         MOV     A,#0x4
         LCALL   ?MOVE_LONG8_XDATA_XDATA
-//  541   char daaat[4] = {'0','0','0','0'};
+//  546   char daaat[4] = {'0','0','0','0'};
         MOV     DPTR,#`?<Constant {48, 48, 48, 48}>_1`
         MOV     R4,?XSP + 0
         MOV     R5,?XSP + 1
         MOV     A,#0x4
         LCALL   ?MOVE_LONG8_XDATA_XDATA
         SJMP    ??packFrameToStell_0
-//  542  // char *id; //= dat;
-//  543   
-//  544  
-//  545     while(pom)
-//  546     {
-//  547       dat[i] = (pom % 16) + '0';
+//  547  // char *id; //= dat;
+//  548   
+//  549  
+//  550     while(pom)
+//  551     {
+//  552       dat[i] = (pom % 16) + '0';
 ??packFrameToStell_1:
         MOV     ?V0,?V4
         MOV     A,?V0
@@ -1365,26 +1370,26 @@ packFrameToStell:
         POP     A
           CFI CFA_SP SP+0
         MOVX    @DPTR,A
-//  548       pom/=256;
+//  553       pom/=256;
         CLR     A
         XCH     A,?V7
         XCH     A,?V6
         XCH     A,?V5
         MOV     ?V4,A
-//  549       i++;
+//  554       i++;
         INC     R2
         MOV     A,R2
         JNZ     ??packFrameToStell_0
         INC     R3
-//  550     }
+//  555     }
 ??packFrameToStell_0:
         MOV     A,?V4
         ORL     A,?V5
         ORL     A,?V6
         ORL     A,?V7
         JNZ     ??packFrameToStell_1
-//  551   
-//  552     k = 4 - i;
+//  556   
+//  557     k = 4 - i;
         MOV     A,#0x4
         CLR     C
         SUBB    A,R2
@@ -1392,7 +1397,7 @@ packFrameToStell:
         CLR     A
         SUBB    A,R3
         MOV     R1,A
-//  553     for(j = 0; j < k; j++)
+//  558     for(j = 0; j < k; j++)
         MOV     A,R0
         MOV     R2,A
         MOV     A,R1
@@ -1404,8 +1409,8 @@ packFrameToStell:
         LCALL   ?Subroutine4 & 0xFFFF
 ??CrossCallReturnLabel_4:
         JC      ??packFrameToStell_2
-//  554     {
-//  555       daaat[j] = '0';
+//  559     {
+//  560       daaat[j] = '0';
         MOV     R4,#0x30
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
@@ -1421,18 +1426,18 @@ packFrameToStell:
         MOV     R3,A
         ORL     A,R2
         JNZ     ??packFrameToStell_3
-//  556       
-//  557     }
+//  561       
+//  562     }
         MOV     ?V2,R2
         MOV     ?V3,R3
-//  558     i = 0;
+//  563     i = 0;
 ??packFrameToStell_2:
         MOV     R2,#0x0
         MOV     R3,#0x0
         SJMP    ??packFrameToStell_4
-//  559     for(; j < 4; j++)
-//  560     {   
-//  561       daaat[k] = dat[i];
+//  564     for(; j < 4; j++)
+//  565     {   
+//  566       daaat[k] = dat[i];
 ??packFrameToStell_5:
         MOV     A,#0x4
         LCALL   ?XSTACK_DISP0_8
@@ -1451,19 +1456,19 @@ packFrameToStell:
         POP     A
           CFI CFA_SP SP+0
         MOVX    @DPTR,A
-//  562       k++;
+//  567       k++;
         INC     R0
         MOV     A,R0
         JNZ     ??packFrameToStell_6
         INC     R1
-//  563       i++;
+//  568       i++;
 ??packFrameToStell_6:
         INC     R2
         MOV     A,R2
         JNZ     ??packFrameToStell_7
         INC     R3
-//  564       
-//  565     }
+//  569       
+//  570     }
 ??packFrameToStell_7:
         INC     ?V2
         MOV     A,?V2
@@ -1477,21 +1482,21 @@ packFrameToStell:
         LCALL   ?Subroutine4 & 0xFFFF
 ??CrossCallReturnLabel_5:
         JC      ??packFrameToStell_5
-//  566  
-//  567       //uint8 len = 1 + 1 + 4 + 1 + 1;
-//  568   *pBuf++ = 0x3E;
+//  571  
+//  572       //uint8 len = 1 + 1 + 4 + 1 + 1;
+//  573   *pBuf++ = 0x3E;
         MOV     DPL,R6
         MOV     DPH,R7
         MOV     A,#0x3e
         MOVX    @DPTR,A
-//  569   
-//  570   *pBuf++ = 0x23;
+//  574   
+//  575   *pBuf++ = 0x23;
         INC     DPTR
         MOV     A,#0x23
         MOVX    @DPTR,A
-//  571   
-//  572   
-//  573   *pBuf++ = getSignalID(emPacket.appData.devID) + 0x30;
+//  576   
+//  577   
+//  578   *pBuf++ = getSignalID(emPacket.appData.devID) + 0x30;
         MOV     A,R6
         ADD     A,#0x2
         MOV     R0,A
@@ -1551,47 +1556,47 @@ packFrameToStell:
         MOV     DPL,R4
         MOV     DPH,R5
         MOVX    @DPTR,A
-//  574   
-//  575   *pBuf++ = 0x2C;
+//  579   
+//  580   *pBuf++ = 0x2C;
         MOV     DPL,R0
         MOV     DPH,R1
         MOV     A,#0x2c
         MOVX    @DPTR,A
-//  576   *pBuf++ = 0x23;
+//  581   *pBuf++ = 0x23;
         INC     DPTR
         MOV     A,#0x23
         MOVX    @DPTR,A
-//  577   
-//  578   
-//  579   *pBuf++ = emPacket.appData.packNum + 0x30;
+//  582   
+//  583   
+//  584   *pBuf++ = emPacket.appData.packNum + 0x30;
         MOV     A,#0x1a
         LCALL   ?XSTACK_DISP0_8
         LCALL   ?Subroutine2 & 0xFFFF
-//  580   
-//  581   *pBuf++ = 0x2C;
-//  582   *pBuf++ = 0x23;
+//  585   
+//  586   *pBuf++ = 0x2C;
+//  587   *pBuf++ = 0x23;
 ??CrossCallReturnLabel_0:
         MOV     A,R0
         ADD     A,#0x5
         MOV     R0,A
         JNC     ??packFrameToStell_11
         INC     R1
-//  583   
-//  584   
-//  585   for(i = 0; i < 4; i++)
+//  588   
+//  589   
+//  590   for(i = 0; i < 4; i++)
 ??packFrameToStell_11:
         MOV     R2,#0x0
         MOV     R3,#0x0
-//  586   {
-//  587     *pBuf++ =daaat[i] ;
+//  591   {
+//  592     *pBuf++ =daaat[i] ;
 ??packFrameToStell_12:
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
         LCALL   ?Subroutine5 & 0xFFFF
-//  588      //uartSend(data[i]);//+'0');
-//  589     //HalLcdWriteString((char *)data[i], 0);
-//  590     //HalLcdWriteString("-----------Simic-----------", 0);
-//  591   }
+//  593      //uartSend(data[i]);//+'0');
+//  594     //HalLcdWriteString((char *)data[i], 0);
+//  595     //HalLcdWriteString("-----------Simic-----------", 0);
+//  596   }
 ??CrossCallReturnLabel_8:
         MOV     DPL,R0
         MOV     DPH,R1
@@ -1610,26 +1615,26 @@ packFrameToStell:
         LCALL   ?Subroutine4 & 0xFFFF
 ??CrossCallReturnLabel_6:
         JC      ??packFrameToStell_12
-//  592   
-//  593   *pBuf++ = 0x2C;
+//  597   
+//  598   *pBuf++ = 0x2C;
         MOV     A,#0x2c
         MOVX    @DPTR,A
-//  594   *pBuf++ = 0x23;
+//  599   *pBuf++ = 0x23;
         INC     DPTR
         MOV     A,#0x23
         MOVX    @DPTR,A
-//  595   
-//  596   
-//  597   *pBuf++ = emPacket.timeStamp + 0x30;  
+//  600   
+//  601   
+//  602   *pBuf++ = emPacket.timeStamp + 0x30;  
         MOV     A,#0x1f
         LCALL   ?XSTACK_DISP0_8
         LCALL   ?Subroutine2 & 0xFFFF
-//  598   
-//  599   *pBuf++ = 0x2C;
-//  600   *pBuf++ = 0x23;
-//  601   
-//  602   
-//  603   *pBuf++ = emPacket.checkSum + 0x30;
+//  603   
+//  604   *pBuf++ = 0x2C;
+//  605   *pBuf++ = 0x23;
+//  606   
+//  607   
+//  608   *pBuf++ = emPacket.checkSum + 0x30;
 ??CrossCallReturnLabel_1:
         MOV     A,#0x20
         LCALL   ?XSTACK_DISP0_8
@@ -1639,24 +1644,24 @@ packFrameToStell:
         INC     DPTR
         INC     DPTR
         LCALL   ?Subroutine3 & 0xFFFF
-//  604   *pBuf++ = 0x3C;
+//  609   *pBuf++ = 0x3C;
 ??CrossCallReturnLabel_2:
         MOV     A,#0x3c
         LCALL   ?Subroutine3 & 0xFFFF
-//  605   *pBuf++ = 0x00;
+//  610   *pBuf++ = 0x00;
 ??CrossCallReturnLabel_3:
         INC     DPTR
         CLR     A
         MOVX    @DPTR,A
-//  606   /*
-//  607   da = emPacket.appData.data;
-//  608   id = (char*)&da;
-//  609   id[4] = '\0';
-//  610   HalLcdWriteString("-----------------------------Paket----------------------",0);
-//  611   HalLcdWriteString(id,0);
-//  612   HalLcdWriteString("-----------------------------Paket----------------------",0);
-//  613   */
-//  614 } 
+//  611   /*
+//  612   da = emPacket.appData.data;
+//  613   id = (char*)&da;
+//  614   id[4] = '\0';
+//  615   HalLcdWriteString("-----------------------------Paket----------------------",0);
+//  616   HalLcdWriteString(id,0);
+//  617   HalLcdWriteString("-----------------------------Paket----------------------",0);
+//  618   */
+//  619 } 
         MOV     A,#0x8
         LCALL   ?DEALLOC_XSTACK8
           CFI CFA_XSP16 add(XSP16, 16)
@@ -2317,15 +2322,15 @@ packFrameToStell:
           CFI EndBlock cfiCond36
           CFI EndBlock cfiCond37
           CFI EndBlock cfiPicker38
-//  615 
+//  620 
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  616 void dllDataRequest(Data_t *aData)
+//  621 void dllDataRequest(Data_t *aData)
 dllDataRequest:
           CFI Block cfiBlock39 Using cfiCommon0
           CFI Function dllDataRequest
         CODE
-//  617 {
+//  622 {
         FUNCALL dllDataRequest, packFrameToStell
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2337,7 +2342,7 @@ dllDataRequest:
         ARGFRAME XSTACK, 28, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL dllDataRequest, HalLcdWriteString
+        FUNCALL dllDataRequest, HalUARTWrite
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
         LOCFRAME XSTACK, 19, STACK
@@ -2369,26 +2374,26 @@ dllDataRequest:
         MOV     A,#-0x9
         LCALL   ?ALLOC_XSTACK8
           CFI CFA_XSP16 add(XSP16, 19)
-//  618         //char *id;
-//  619         //uint16 idde;
-//  620         //uint8 num;
-//  621         //uint32 da;
-//  622         /*
-//  623         int iSignalID;
-//  624 	int iData;
-//  625 	int iPackNum;
-//  626 	int iTimeStamp;
-//  627 	int iCheckSum;
-//  628         */
-//  629         //uint8 *txBuffer;
-//  630         //uint8 *txIndex;
-//  631         //CircularBuffer_t *cTxBuffer;
-//  632         
-//  633 	DLLPacket_t emPacket;
-//  634 	//emPacket.appData = *aData;
-//  635         //emPacket.appData = aData;
-//  636         
-//  637         emPacket.appData.devID = aData->devID;
+//  623         //char *id;
+//  624         //uint16 idde;
+//  625         //uint8 num;
+//  626         //uint32 da;
+//  627         /*
+//  628         int iSignalID;
+//  629 	int iData;
+//  630 	int iPackNum;
+//  631 	int iTimeStamp;
+//  632 	int iCheckSum;
+//  633         */
+//  634         //uint8 *txBuffer;
+//  635         //uint8 *txIndex;
+//  636         //CircularBuffer_t *cTxBuffer;
+//  637         
+//  638 	DLLPacket_t emPacket;
+//  639 	//emPacket.appData = *aData;
+//  640         //emPacket.appData = aData;
+//  641         
+//  642         emPacket.appData.devID = aData->devID;
         MOV     DPL,R2
         MOV     DPH,R3
         MOVX    A,@DPTR
@@ -2403,7 +2408,7 @@ dllDataRequest:
         INC     DPTR
         MOV     A,R1
         MOVX    @DPTR,A
-//  638         emPacket.appData.data = aData->data;
+//  643         emPacket.appData.data = aData->data;
         MOV     DPL,R2
         MOV     DPH,R3
         INC     DPTR
@@ -2413,7 +2418,7 @@ dllDataRequest:
         MOV     A,#0x3
         LCALL   ?XSTACK_DISP0_8
         LCALL   ?XSTORE_R4567
-//  639         emPacket.appData.packNum = aData->packNum;
+//  644         emPacket.appData.packNum = aData->packNum;
         MOV     DPL,R2
         MOV     DPH,R3
         INC     DPTR
@@ -2426,12 +2431,12 @@ dllDataRequest:
         POP     A
           CFI CFA_SP SP+0
         MOVX    @DPTR,A
-//  640         emPacket.timeStamp = 0;
+//  645         emPacket.timeStamp = 0;
         MOV     A,#0x7
         LCALL   ?XSTACK_DISP0_8
         CLR     A
         MOVX    @DPTR,A
-//  641 	emPacket.checkSum = checksum(&emPacket);
+//  646 	emPacket.checkSum = checksum(&emPacket);
         MOV     R2,#0x0
         MOV     R0,?XSP + 0
         MOV     R1,?XSP + 1
@@ -2456,51 +2461,51 @@ dllDataRequest:
         JNZ     ??dllDataRequest_0
         MOV     A,R2
         MOVX    @DPTR,A
-//  642         
-//  643         //txBuffer = (uint8 *)uiTxBufferCC2530;
-//  644         //cTxBuffer = &cTxBufferCC2530;
-//  645         //txBuffer = (uint8 *)uiTxBufferCC2530;
-//  646         //txIndex = &txBufferCC2530Index;
-//  647 	// ako bude bilo potrebe za slanjem vremenskog trenutka
-//  648 	// radi iscrtavanja grafa obezbjedicemo mehanizam, inace
-//  649 	// timeStamp = 0
-//  650 	/*
-//  651         iSignalID = (int)getSignalID(emPacket.appData.devID);
-//  652 	iData = (int)emPacket.appData.data;
-//  653 	iPackNum = (int)emPacket.appData.packNum;
-//  654 	iTimeStamp = (int)emPacket.timeStamp;
-//  655 	iCheckSum = (int)emPacket.checkSum;
-//  656         */
-//  657         /*
-//  658         iSignalID = (unsigned)getSignalID(emPacket.appData.devID);
-//  659 	iData = (unsigned)emPacket.appData.data;
-//  660 	iPackNum = (unsigned)emPacket.appData.packNum;
-//  661 	iTimeStamp = (unsigned)emPacket.timeStamp;
-//  662 	iCheckSum = (unsigned)emPacket.checkSum;
-//  663         */
-//  664         
-//  665 	 //HalLcdWriteString("Miso----------------------",0);
-//  666         /*
-//  667         txBufferCC2530Index = sprintf(uiTxBufferCC2530,
-//  668                                       ">#%d,#%c,#%l,#%c,#%c",
-//  669                                       getSignalID(emPacket.appData.devID),
-//  670                                       emPacket.appData.packNum,
-//  671                                       emPacket.appData.data,
-//  672                                       emPacket.timeStamp,
-//  673                                       emPacket.checkSum
-//  674                                       );
-//  675         */
-//  676         /*
-//  677         txBufferCC2530Index = sprintf(uiTxBufferCC2530,
-//  678                                       ">#%d,#%d,#%d,#%d,#%d",
-//  679                                       iSignalID,
-//  680                                       iPackNum,
-//  681                                       iData,
-//  682                                       iTimeStamp,
-//  683                                       iCheckSum
-//  684                                       );
-//  685         */
-//  686         packFrameToStell((uint8 *)uiTxBufferCC2530, emPacket);
+//  647         
+//  648         //txBuffer = (uint8 *)uiTxBufferCC2530;
+//  649         //cTxBuffer = &cTxBufferCC2530;
+//  650         //txBuffer = (uint8 *)uiTxBufferCC2530;
+//  651         //txIndex = &txBufferCC2530Index;
+//  652 	// ako bude bilo potrebe za slanjem vremenskog trenutka
+//  653 	// radi iscrtavanja grafa obezbjedicemo mehanizam, inace
+//  654 	// timeStamp = 0
+//  655 	/*
+//  656         iSignalID = (int)getSignalID(emPacket.appData.devID);
+//  657 	iData = (int)emPacket.appData.data;
+//  658 	iPackNum = (int)emPacket.appData.packNum;
+//  659 	iTimeStamp = (int)emPacket.timeStamp;
+//  660 	iCheckSum = (int)emPacket.checkSum;
+//  661         */
+//  662         /*
+//  663         iSignalID = (unsigned)getSignalID(emPacket.appData.devID);
+//  664 	iData = (unsigned)emPacket.appData.data;
+//  665 	iPackNum = (unsigned)emPacket.appData.packNum;
+//  666 	iTimeStamp = (unsigned)emPacket.timeStamp;
+//  667 	iCheckSum = (unsigned)emPacket.checkSum;
+//  668         */
+//  669         
+//  670 	 //HalLcdWriteString("Miso----------------------",0);
+//  671         /*
+//  672         txBufferCC2530Index = sprintf(uiTxBufferCC2530,
+//  673                                       ">#%d,#%c,#%l,#%c,#%c",
+//  674                                       getSignalID(emPacket.appData.devID),
+//  675                                       emPacket.appData.packNum,
+//  676                                       emPacket.appData.data,
+//  677                                       emPacket.timeStamp,
+//  678                                       emPacket.checkSum
+//  679                                       );
+//  680         */
+//  681         /*
+//  682         txBufferCC2530Index = sprintf(uiTxBufferCC2530,
+//  683                                       ">#%d,#%d,#%d,#%d,#%d",
+//  684                                       iSignalID,
+//  685                                       iPackNum,
+//  686                                       iData,
+//  687                                       iTimeStamp,
+//  688                                       iCheckSum
+//  689                                       );
+//  690         */
+//  691         packFrameToStell((uint8 *)uiTxBufferCC2530, emPacket);
         ; Setup parameters for call to function packFrameToStell
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
@@ -2513,66 +2518,73 @@ dllDataRequest:
         MOV     A,#0x9
         LCALL   ?DEALLOC_XSTACK8
           CFI CFA_XSP16 add(XSP16, 19)
-//  687         //array2circular(cTxBuffer, txBuffer, *txIndex);
-//  688         
-//  689         /*HalLcdWriteString("Velicina je:",0);
-//  690         uartSend(sizeof(uint32)+'0');
-//  691         HalLcdWriteString("",0);
-//  692         HalLcdWriteString("Velicina je:",0);
-//  693         */
-//  694         //halUARTWrite(cTxBuffer, 0);
-//  695         //HalLcdWriteString("Miso----------------------",0); 
-//  696         
-//  697        // halUARTWrite(port, cTxBuffer, 0);
-//  698         HalLcdWriteString(uiTxBufferCC2530, 0);
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
+//  692         //array2circular(cTxBuffer, txBuffer, *txIndex);
+//  693         
+//  694         /*HalLcdWriteString("Velicina je:",0);
+//  695         uartSend(sizeof(uint32)+'0');
+//  696         HalLcdWriteString("",0);
+//  697         HalLcdWriteString("Velicina je:",0);
+//  698         */
+//  699         //halUARTWrite(cTxBuffer, 0);
+//  700         //HalLcdWriteString("Miso----------------------",0); 
+//  701         
+//  702        // halUARTWrite(port, cTxBuffer, 0);
+//  703         
+//  704          //HalLcdWriteString(uiTxBufferCC2530, 0);
+//  705         
+//  706         
+//  707         HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 1);
+        ; Setup parameters for call to function HalUARTWrite
+        MOV     R4,#0x1
+        MOV     R5,#0x0
         MOV     R2,#uiTxBufferCC2530 & 0xff
         MOV     R3,#(uiTxBufferCC2530 >> 8) & 0xff
-        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
-//  699         //HalLcdWriteString(uiTxBufferCC2530, 0);
-//  700         
-//  701 	emFlagCC2530 = EMISSION_START;
+        MOV     R1,#0x1
+        LCALL   `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
+//  708         
+//  709         //HalLcdWriteString(uiTxBufferCC2530, 0);
+//  710         
+//  711 	emFlagCC2530 = EMISSION_START;
         MOV     DPTR,#emFlagCC2530
         MOV     A,#0x1
         MOVX    @DPTR,A
-//  702 	
-//  703 	//idde = emPacket.appData.devID;//
-//  704         
-//  705         //idde = aData->devID;
-//  706         
-//  707         //idde = (uint16)getSignalID(emPacket.appData.devID);//+ 0x30;
-//  708         
-//  709         //idde = aData->devID;
-//  710         //idde = aData.devID;
-//  711         
-//  712         //id = (char*)&emPacket.appData.data;
-//  713         //id = (char*)&emPacket.appData.devID;
+//  712 	
+//  713 	//idde = emPacket.appData.devID;//
 //  714         
-//  715         //da = emPacket.appData.data;
+//  715         //idde = aData->devID;
 //  716         
-//  717         //num = emPacket.timeStamp + 0x30;
-//  718        // num = emPacket.appData.packNum + 0x30;
-//  719         //num = emPacket.checkSum + 0x30;
-//  720         
-//  721         //id = (char*)&idde;
-//  722         //id = (char*)&da;
-//  723         //id = (char*)&num;
+//  717         //idde = (uint16)getSignalID(emPacket.appData.devID);//+ 0x30;
+//  718         
+//  719         //idde = aData->devID;
+//  720         //idde = aData.devID;
+//  721         
+//  722         //id = (char*)&emPacket.appData.data;
+//  723         //id = (char*)&emPacket.appData.devID;
 //  724         
-//  725         //id[0] += 0x30;
-//  726         //id[1] += 0x30;
-//  727         
-//  728         //id[2] = '\0';
-//  729         //id[1] = '\0';
-//  730         //id[4] = '\0';
-//  731         
-//  732         //HalLcdWriteString("-----------------------------Borislav----------------------",0);
-//  733         //HalLcdWriteString(id,0);
-//  734         //uartSend(emPacket.checkSum+'0');
-//  735         //HalLcdWriteString("", 0);
-//  736         //HalLcdWriteString("-----------------------------Borislav----------------------",0);
-//  737 
-//  738 }
+//  725         //da = emPacket.appData.data;
+//  726         
+//  727         //num = emPacket.timeStamp + 0x30;
+//  728        // num = emPacket.appData.packNum + 0x30;
+//  729         //num = emPacket.checkSum + 0x30;
+//  730         
+//  731         //id = (char*)&idde;
+//  732         //id = (char*)&da;
+//  733         //id = (char*)&num;
+//  734         
+//  735         //id[0] += 0x30;
+//  736         //id[1] += 0x30;
+//  737         
+//  738         //id[2] = '\0';
+//  739         //id[1] = '\0';
+//  740         //id[4] = '\0';
+//  741         
+//  742         //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+//  743         //HalLcdWriteString(id,0);
+//  744         //uartSend(emPacket.checkSum+'0');
+//  745         //HalLcdWriteString("", 0);
+//  746         //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+//  747 
+//  748 }
         MOV     A,#0x9
         LJMP    ?Subroutine1 & 0xFFFF
           CFI EndBlock cfiBlock39
@@ -2647,14 +2659,14 @@ dllDataRequest:
 
         END
 // 
-//   911 bytes in segment BANKED_CODE
+//   915 bytes in segment BANKED_CODE
 //    30 bytes in segment BANK_RELAYS
 //   112 bytes in segment XDATA_ROM_C
 // 1 308 bytes in segment XDATA_Z
 // 
 //    30 bytes of CODE     memory
 //   112 bytes of CONST    memory
-//   911 bytes of HUGECODE memory
+//   915 bytes of HUGECODE memory
 // 1 308 bytes of XDATA    memory
 //
 //Errors: none

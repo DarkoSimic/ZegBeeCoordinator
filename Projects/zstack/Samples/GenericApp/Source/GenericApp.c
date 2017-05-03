@@ -154,7 +154,7 @@
  * GLOBAL VARIABLES
  */
 ////////////////////////////////////////////////////////////////////////////////////////////
-CircularBuffer_t cMain;
+//CircularBuffer_t cMain;
 uint8 dataRdy;
 LookUpTable_t lutData[20];
 uint8 *rxBuffer;
@@ -323,15 +323,16 @@ void GenericApp_Init( uint8 task_id )
   //halInitDriver();
     dllInit();
     lookUpInit();
-    circularInit(&cMain);
-    
+   // circularInit(&cMain);
+    //HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
+    //HalUARTSuspend();
      //halGPIOOutput(HW_PORT_D, 0x03, 0);
 
-    circularPut(&cMain, 'T');
+    /*circularPut(&cMain, 'T');
     circularPut(&cMain, 'E');
     circularPut(&cMain, 'S');
     circularPut(&cMain, 'T');
-    
+    */
    // halUARTWrite(PC, &cMain, 0);
   
 ////////////////////////////////////////////////////////////////////////////////////////////  
@@ -527,7 +528,7 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
     char theMessage[MAX_NUMBER_OF_ENDDEVICES][25];
 
 
-    
+    //rxBuffer = uartConfig.rx.pBuffer;
     ID = processFrameRx(rxBuffer);
     
     
@@ -876,7 +877,7 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       
       updateLookUpTable(Data, addr);
       //HalLcdWriteString(id,0); 
-      //HalLcdWriteString("Sina----------------------",0); 
+    // HalLcdWriteString("Sina----------------------",0); 
       
  ///////////////////////////////////////////////////////////////////////////////
  //zakomentarisao
@@ -1000,7 +1001,7 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 static void GenericApp_SendTheMessage( void )
 {
   uint8 i;
-  //char * id;
+ // char * id;
   //uint32 data;
   
   for(i = 0; i < 20; i++)
@@ -1011,10 +1012,10 @@ static void GenericApp_SendTheMessage( void )
       sendDataToPC(&lutData[i]);
       
       //id = (char*)&lutData[i].devID;
-     // id[2] = '\0';
-       // HalLcdWriteString("-----------------------------Borislav  Send----------------------",0);
-       // HalLcdWriteString(id,0);
-       // HalLcdWriteString("-----------------------------Borislav  Send----------------------",0);
+     //id[2] = '\0';
+        //HalLcdWriteString("-----------------------------Borislav  Send----------------------",0);
+        //HalLcdWriteString(id,0);
+        //HalLcdWriteString("-----------------------------Borislav  Send----------------------",0);
       //HalLcdWriteString("Sinisa-------------petlja-----",0);
     }
   } 

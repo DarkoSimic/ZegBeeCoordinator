@@ -51,6 +51,8 @@
 #include "MT_UART.h"
 #endif
 
+#include <ioCC2530.h>
+#include "hal_lcd.h"
 /*********************************************************************
  * MACROS
  */
@@ -234,23 +236,80 @@ static void HalUARTResumeISR(void);
  *
  * @return  none
  *****************************************************************************/
+/*
+void initUART1()
+{
+    CLKCONCMD =0x00;                                                            //Podesavanje clocka na 32MHz
+    
+  
+    PERCFG = 0x02;                                                              //Podesavanje primarnih funkcija modula 
+    P1SEL = 0xC0;                                                               //Podesavanje osnovne ili periferne funkcije odredjenog pina(0-osnovna ; 1-periferna)
+    
+  
+    U1CSR = 0xC0;                                                               //Prvi bit 1 je UART mode
+    U1GCR = 0x08;                                                               //Poslednjih 5 bita odredjuje baud rate exponent vrijednost
+ 
+    
+    U1BAUD = 0x3A;                                                              //Postavja baud rate na 9600
+    
+
+}
+*/
 static void HalUARTInitISR(void)
 {
+  
   // Set P2 priority - USART0 over USART1 if both are defined.
   P2DIR &= ~P2DIR_PRIPO;
   P2DIR |= HAL_UART_PRIPO;
 
+  //P2DIR &=0x7F;
+  //P2DIR |=0x40;
+  /*
 #if (HAL_UART_ISR == 1)
   PERCFG &= ~HAL_UART_PERCFG_BIT;    // Set UART0 I/O location to P0.
 #else
   PERCFG |= HAL_UART_PERCFG_BIT;     // Set UART1 I/O location to P1.
 #endif
+  */
+      PERCFG = 0x02;
+    //PERCFG = 0x00;                                                              //Podesavanje primarnih funkcija modula 
+    P0SEL = 0x0C;                                                               //Podesavanje osnovne ili periferne funkcije odredjenog pina(0-osnovna ; 1-periferna)
+    
+  
+    U0CSR = 0xC0;                                                               //Prvi bit 1 je UART mode
+    U0GCR = 0x08;                                                               //Poslednjih 5 bita odredjuje baud rate exponent vrijednost
+ 
+    
+    U0BAUD = 0x3A; 
+    
+    P1SEL = 0xC0;                                                               //Podesavanje osnovne ili periferne funkcije odredjenog pina(0-osnovna ; 1-periferna)
+    
+  
+    U1CSR = 0xC0;                                                               //Prvi bit 1 je UART mode
+    U1GCR = 0x08;                                                               //Poslednjih 5 bita odredjuje baud rate exponent vrijednost
+ 
+    
+    U1BAUD = 0x3A; 
+    /*
   PxSEL  |= HAL_UART_Px_RX_TX;       // Enable Tx and Rx on P1.
   ADCCFG &= ~HAL_UART_Px_RX_TX;      // Make sure ADC doesnt use this.
   UxCSR = CSR_MODE;                  // Mode is UART Mode.
   UxUCR = UCR_FLUSH;                 // Flush it.
+    */
+  /*
+  CLKCONCMD =0x00;                                                            //Podesavanje clocka na 32MHz
+    
   
+    PERCFG = 0x02;                                                              //Podesavanje primarnih funkcija modula 
+    P1SEL = 0xC0;                                                               //Podesavanje osnovne ili periferne funkcije odredjenog pina(0-osnovna ; 1-periferna)
+    
   
+    U1CSR = 0xC0;                                                               //Prvi bit 1 je UART mode
+    U1GCR = 0x08;                                                               //Poslednjih 5 bita odredjuje baud rate exponent vrijednost
+ 
+    
+    U1BAUD = 0x3A;                                                              //Postavja baud rate na 9600
+  */
 }
 
 /******************************************************************************
@@ -293,44 +352,57 @@ static void HalUARTOpenISR(halUARTCfg_t *config)
   if (config->baudRate == HAL_UART_BR_57600 ||
       config->baudRate == HAL_UART_BR_115200)
   {
-    UxBAUD = 216;
+    //UxBAUD = 216;
+    U1BAUD = 216;
   }
   else
   {
-    UxBAUD = 59;
+    //UxBAUD = 59;
+    U1BAUD = 59;
   }
   
   switch (config->baudRate)
   {
     case HAL_UART_BR_9600:
-      UxGCR = 8;
+      //UxGCR = 8;
+      U1GCR = 8;
       break;
     case HAL_UART_BR_19200:
-      UxGCR = 9;
+      //UxGCR = 9;
+      U1GCR = 9;
       break;
     case HAL_UART_BR_38400:
     case HAL_UART_BR_57600:
-      UxGCR = 10;
+      //UxGCR = 10;
+      U1GCR = 10;
       break;
     default:
-      UxGCR = 11;
+      //UxGCR = 11;
+      U1GCR = 11;
       break;
   }
 
   // 8 bits/char; no parity; 1 stop bit; stop bit hi.
   if (config->flowControl)
   {
-    UxUCR = UCR_FLOW | UCR_STOP;
-    PxSEL |= HAL_UART_Px_RTS | HAL_UART_Px_CTS;
+    //UxUCR = UCR_FLOW | UCR_STOP;
+    U1UCR = UCR_FLOW | UCR_STOP;
+    //PxSEL |= HAL_UART_Px_RTS | HAL_UART_Px_CTS;
+    P1SEL |= HAL_UART_Px_RTS | HAL_UART_Px_CTS;
   }
   else
   {
-    UxUCR = UCR_STOP;
+    //UxUCR = UCR_STOP;
+    U1UCR = UCR_STOP;
   }
-
+/*
   UxCSR |= CSR_RE;
   URXxIE = 1;
   UTXxIF = 1;  // Prime the ISR pump.
+  */
+  U1CSR |= CSR_RE;
+  URX1IE = 1;
+  UTX1IF = 1;
 }
 
 /*****************************************************************************
@@ -373,10 +445,11 @@ uint16 HalUARTReadISR(uint8 *buf, uint16 len)
 uint16 HalUARTWriteISR(uint8 *buf, uint16 len)
 {
   uint16 cnt;
-  
+  uint8 i = 0;
   // Enforce all or none.
   if (HalUARTTxAvailISR() < len)
   {
+    HalLcdWriteString("Miso----------------------",0);
     return 0;
   }
 
@@ -384,18 +457,28 @@ uint16 HalUARTWriteISR(uint8 *buf, uint16 len)
   {
     isrCfg.txBuf[isrCfg.txTail] = *buf++;
     isrCfg.txMT = 0;
-
+    
     if (isrCfg.txTail >= HAL_UART_ISR_TX_MAX-1)
     {
       isrCfg.txTail = 0;
+        HalLcdWriteString("Simic----------------------",0);
     }
     else
     {
       isrCfg.txTail++;
+      HalLcdWriteString("Savan----------------------",0);
     }
 
     // Keep re-enabling ISR as it might be keeping up with this loop due to other ints.
-    IEN2 |= UTXxIE;  
+   // IEN2 |= UTXxIE;  
+  }
+  for(i=0;i<len;i++)
+  {
+   U1DBUF = '1';//*(buf + i);
+    //HalLcdWriteString("Micin----------------------",0);
+    while((U1CSR & 0x01) == 0x01)
+    {
+    }
   }
 
   return cnt;

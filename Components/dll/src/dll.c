@@ -70,6 +70,7 @@ osThreadId tID_CC2530_Communication;
 CircularBuffer_t rxBufferPC;
 CircularBuffer_t rxBufferCC2530;
 
+//halUARTCfg_t uartConfig;
 //*****************************************************************************
 //
 // Local variables
@@ -136,6 +137,10 @@ void dllInit(void)
 
 	//circularInit(&cTxBufferPC);
 	circularInit(&cTxBufferCC2530);
+        
+       // HalUARTClose(HAL_UART_PORT_1);
+        //HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
+        
         /*CircularBuffer_t *cRxBuffer;
 	CircularBuffer_t *cTxBuffer;
         cRxBuffer = &rxBufferCC2530;
@@ -695,7 +700,12 @@ void dllDataRequest(Data_t *aData)
         //HalLcdWriteString("Miso----------------------",0); 
         
        // halUARTWrite(port, cTxBuffer, 0);
-        HalLcdWriteString(uiTxBufferCC2530, 0);
+        
+         //HalLcdWriteString(uiTxBufferCC2530, 0);
+        
+        
+        HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 1);
+        
         //HalLcdWriteString(uiTxBufferCC2530, 0);
         
 	emFlagCC2530 = EMISSION_START;

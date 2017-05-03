@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V9.30.3.3983 for 8051                03/May/2017  09:23:46
+# IAR C/C++ Compiler V9.30.3.3983 for 8051                03/May/2017  16:53:08
 # Copyright 2004-2016 IAR Systems AB.
 # Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 #
@@ -367,9 +367,11 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000009   7800         MOV     R0,#0x0
    \   00000B   7900         MOV     R1,#0x0
    \   00000D   8025         SJMP    ??updateLookUpTable_0
-     57           // char *id;
-     58            //uint32 idde;
-     59            while(lutData[i].devID != 0 && lutData[i].devID != pData.devID && i<20)
+     57          /*
+     58            char *id;
+     59            uint32 idde;
+     60            */
+     61            while(lutData[i].devID != 0 && lutData[i].devID != pData.devID && i<20)
    \                     ??updateLookUpTable_1:
    \   00000F   E8           MOV     A,R0
    \   000010   FA           MOV     R2,A
@@ -394,13 +396,13 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   00002A   12....       LCALL   ?Subroutine3 & 0xFFFF
    \                     ??CrossCallReturnLabel_16:
    \   00002D   504F         JNC     ??updateLookUpTable_3
-     60            {
-     61              i++;
+     62            {
+     63              i++;
    \   00002F   08           INC     R0
    \   000030   E8           MOV     A,R0
    \   000031   7001         JNZ     ??updateLookUpTable_0
    \   000033   09           INC     R1
-     62            }
+     64            }
    \                     ??updateLookUpTable_0:
    \   000034   E8           MOV     A,R0
    \   000035   FA           MOV     R2,A
@@ -416,9 +418,9 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000043   EA           MOV     A,R2
    \   000044   4B           ORL     A,R3
    \   000045   70C8         JNZ     ??updateLookUpTable_1
-     63            if(lutData[i].devID == 0)
-     64            {
-     65                lutData[i].devID = (uint16)pData.devID;
+     65            if(lutData[i].devID == 0)
+     66            {
+     67                lutData[i].devID = (uint16)pData.devID;
    \   000047   E8           MOV     A,R0
    \   000048   FA           MOV     R2,A
    \   000049   E9           MOV     A,R1
@@ -452,11 +454,13 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000070   A3           INC     DPTR
    \   000071   EF           MOV     A,R7
    \   000072   F0           MOVX    @DPTR,A
-     66                //idde =  lutData[i].devID;
-     67                //idde =  lutData[i].data;
-     68                //id = (char*)&idde;
-     69                //id[2] = '\0';
-     70                lutData[i].devAddress = devAddress;
+     68                /*
+     69                idde =  lutData[i].devID;
+     70                idde =  lutData[i].data;
+     71                id = (char*)&idde;
+     72                id[2] = '\0';
+     73                */
+     74                lutData[i].devAddress = devAddress;
    \   000073   8A82         MOV     DPL,R2
    \   000075   8B83         MOV     DPH,R3
    \   000077   A3           INC     DPTR
@@ -466,14 +470,14 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   00007B   A3           INC     DPTR
    \   00007C   ED           MOV     A,R5
    \   00007D   F0           MOVX    @DPTR,A
-     71            }
-     72            if(i < 20)
+     75            }
+     76            if(i < 20)
    \                     ??updateLookUpTable_3:
    \   00007E   12....       LCALL   ?Subroutine3 & 0xFFFF
    \                     ??CrossCallReturnLabel_17:
    \   000081   5024         JNC     ??updateLookUpTable_4
-     73            {
-     74                lutData[i].data = pData.data;
+     77            {
+     78                lutData[i].data = pData.data;
    \   000083   740C         MOV     A,#0xc
    \   000085   12....       LCALL   ?XSTACK_DISP0_8
    \   000088   12....       LCALL   ?XLOAD_R4567
@@ -494,16 +498,16 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   0000A1   39           ADDC    A,R1
    \   0000A2   F583         MOV     DPH,A
    \   0000A4   12....       LCALL   ?XSTORE_R4567
-     75                //idde =  lutData[i].data;
-     76                //id = (char*)&idde;
-     77                //id[4] = '\0';
-     78                //dataRdy = 1;
-     79            }
-     80              
-     81                 // HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
-     82                 // HalLcdWriteString(id,0);
-     83                 // HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
-     84          }
+     79                //idde =  lutData[i].data;
+     80                //id = (char*)&idde;
+     81                //id[4] = '\0';
+     82                //dataRdy = 1;
+     83            }
+     84              
+     85                 //HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
+     86                 // HalLcdWriteString(id,0);
+     87                 // HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
+     88          }
    \                     ??updateLookUpTable_4:
    \   0000A7                REQUIRE ?Subroutine2
    \   0000A7                ; // Fall through to label ?Subroutine2
@@ -541,33 +545,33 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000004   E9           MOV     A,R1
    \   000005                REQUIRE ??Subroutine11_0
    \   000005                ; // Fall through to label ??Subroutine11_0
-     85          
+     89          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-     86          uint16 lookForAddr(uint16 devID)
+     90          uint16 lookForAddr(uint16 devID)
    \                     lookForAddr:
-     87          {
+     91          {
    \   000000                REQUIRE ?V0
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-     88            int i = 0;
+     92            int i = 0;
    \   000005   7800         MOV     R0,#0x0
    \   000007   7900         MOV     R1,#0x0
-     89            uint16 devAddress = 0;
+     93            uint16 devAddress = 0;
    \   000009   7E00         MOV     R6,#0x0
    \   00000B   7F00         MOV     R7,#0x0
    \   00000D   8005         SJMP    ??lookForAddr_0
-     90            while(lutData[i].devID != 0 && lutData[i].devID != devID)
-     91            {
-     92              i++;
+     94            while(lutData[i].devID != 0 && lutData[i].devID != devID)
+     95            {
+     96              i++;
    \                     ??lookForAddr_1:
    \   00000F   08           INC     R0
    \   000010   E8           MOV     A,R0
    \   000011   7001         JNZ     ??lookForAddr_0
    \   000013   09           INC     R1
-     93            }
+     97            }
    \                     ??lookForAddr_0:
    \   000014   E8           MOV     A,R0
    \   000015   FC           MOV     R4,A
@@ -595,7 +599,7 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000033   6B           XRL     A,R3
    \                     ??lookForAddr_3:
    \   000034   70D9         JNZ     ??lookForAddr_1
-     94            if(lutData[i].devID == devID)
+     98            if(lutData[i].devID == devID)
    \                     ??lookForAddr_2:
    \   000036   12....       LCALL   ?Subroutine6 & 0xFFFF
    \                     ??CrossCallReturnLabel_5:
@@ -605,8 +609,8 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   00003D   6B           XRL     A,R3
    \                     ??lookForAddr_4:
    \   00003E   701D         JNZ     ??lookForAddr_5
-     95            {
-     96              devAddress = lutData[i].devAddress;
+     99            {
+    100              devAddress = lutData[i].devAddress;
    \   000040   E8           MOV     A,R0
    \   000041   75F00A       MOV     B,#0xa
    \   000044   A4           MUL     AB
@@ -627,15 +631,15 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   00005A   A3           INC     DPTR
    \   00005B   E0           MOVX    A,@DPTR
    \   00005C   FF           MOV     R7,A
-     97            }
-     98            return devAddress;
+    101            }
+    102            return devAddress;
    \                     ??lookForAddr_5:
    \   00005D   EE           MOV     A,R6
    \   00005E   FA           MOV     R2,A
    \   00005F   EF           MOV     A,R7
    \   000060   FB           MOV     R3,A
    \   000061   02....       LJMP    ?Subroutine2 & 0xFFFF
-     99          }
+    103          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine6:
@@ -673,40 +677,40 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000009   F583         MOV     DPH,A
    \   00000B   E0           MOVX    A,@DPTR
    \   00000C   22           RET
-    100          
+    104          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    101          int16 getIDFromPkt(afMSGCommandFormat_t *cmd)
+    105          int16 getIDFromPkt(afMSGCommandFormat_t *cmd)
    \                     getIDFromPkt:
-    102          {
+    106          {
    \   000000   C082         PUSH    DPL
    \   000002   C083         PUSH    DPH
    \   000004                ; Saved register size: 2
    \   000004                ; Auto size: 0
-    103          	/*uint8 i = 0;
-    104          	uint16 devID = 0;
-    105          	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
-    106          	{
-    107          		i++;
-    108          	}
-    109          	if (*(cmd->Data + i) == START_DELIMITER)
+    107          	/*uint8 i = 0;
+    108          	uint16 devID = 0;
+    109          	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
     110          	{
-    111          		devID = (*(cmd->Data + i))<<8;
-    112          		devID +=*(cmd->Data + i + 1);
-    113          	}
-    114          	return devID;*/
-    115                  uint16 devID = 0;
-    116                  //char * id;
-    117                  
-    118                  //devID = (uint16)(*(cmd->Data+1))<<8;
-    119          	//devID +=(uint16)*(cmd->Data );
-    120                  devID = (uint16)(*(cmd->Data + 1))<<8;
-    121          	devID +=(uint16)*(cmd->Data);
-    122                  //id = (char*)&devID;
-    123                  //HalLcdWriteString("-----------------------------Borislav----------------------",0);
-    124                  //HalLcdWriteString(id,0);
-    125                  //HalLcdWriteString("-----------------------------Borislav----------------------",0);
-    126                  return devID;
+    111          		i++;
+    112          	}
+    113          	if (*(cmd->Data + i) == START_DELIMITER)
+    114          	{
+    115          		devID = (*(cmd->Data + i))<<8;
+    116          		devID +=*(cmd->Data + i + 1);
+    117          	}
+    118          	return devID;*/
+    119                  uint16 devID = 0;
+    120                  //char * id;
+    121                  
+    122                  //devID = (uint16)(*(cmd->Data+1))<<8;
+    123          	//devID +=(uint16)*(cmd->Data );
+    124                  devID = (uint16)(*(cmd->Data + 1))<<8;
+    125          	devID +=(uint16)*(cmd->Data);
+    126                  //id = (char*)&devID;
+    127                  //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+    128                  //HalLcdWriteString(id,0);
+    129                  //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+    130                  return devID;
    \   000004   8A82         MOV     DPL,R2
    \   000006   8B83         MOV     DPH,R3
    \   000008   A3           INC     DPTR
@@ -727,13 +731,13 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   00001B   E0           MOVX    A,@DPTR
    \   00001C   FA           MOV     R2,A
    \   00001D   02....       LJMP    ?Subroutine0 & 0xFFFF
-    127          }
-    128          
+    131          }
+    132          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    129          int32 getDataFromPkt(afMSGCommandFormat_t *cmd)
+    133          int32 getDataFromPkt(afMSGCommandFormat_t *cmd)
    \                     getDataFromPkt:
-    130          {
+    134          {
    \   000000                REQUIRE ?V0
    \   000000                REQUIRE ?V1
    \   000000                REQUIRE ?V2
@@ -746,36 +750,36 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 16
    \   000005                ; Auto size: 0
-    131          	/*uint8 i = 0;
-    132                  uint8 j = 0;
-    133          	uint32 data = 0;
-    134          	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
-    135          	{
-    136          		i++;
-    137          	}
-    138          	if (*(cmd->Data + i) == START_DELIMITER)
+    135          	/*uint8 i = 0;
+    136                  uint8 j = 0;
+    137          	uint32 data = 0;
+    138          	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
     139          	{
-    140          		for(j = 0; j < 3; j++)
-    141                          {
-    142                            data +=(*(cmd->Data + i + j + 2))<<8;
-    143                          }
-    144                          j++;
-    145                          data +=(*(cmd->Data + i + j + 2));
-    146          	}
-    147          	return data;*/
-    148                  //char * id;
-    149                  uint8 i = 0;
+    140          		i++;
+    141          	}
+    142          	if (*(cmd->Data + i) == START_DELIMITER)
+    143          	{
+    144          		for(j = 0; j < 3; j++)
+    145                          {
+    146                            data +=(*(cmd->Data + i + j + 2))<<8;
+    147                          }
+    148                          j++;
+    149                          data +=(*(cmd->Data + i + j + 2));
+    150          	}
+    151          	return data;*/
+    152                  //char * id;
+    153                  uint8 i = 0;
    \   000005   7E00         MOV     R6,#0x0
-    150                  uint32 data = 0x00000000;
+    154                  uint32 data = 0x00000000;
    \   000007   8E..         MOV     ?V0,R6
    \   000009   8E..         MOV     ?V1,R6
    \   00000B   8E..         MOV     ?V2,R6
    \   00000D   8E..         MOV     ?V3,R6
-    151                  
-    152                  for(i = 0; i < cmd->DataLength - 2; i++)
+    155                  
+    156                  for(i = 0; i < cmd->DataLength - 2; i++)
    \   00000F   8054         SJMP    ??getDataFromPkt_0
-    153                  {
-    154                    data +=(uint32)(*(cmd->Data + cmd->DataLength - 1 - i))<<(8*(cmd->DataLength - 3 - i));
+    157                  {
+    158                    data +=(uint32)(*(cmd->Data + cmd->DataLength - 1 - i))<<(8*(cmd->DataLength - 3 - i));
    \                     ??getDataFromPkt_1:
    \   000011   8A82         MOV     DPL,R2
    \   000013   8B83         MOV     DPH,R3
@@ -834,8 +838,8 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   00005D   78..         MOV     R0,#?V0
    \   00005F   79..         MOV     R1,#?V4
    \   000061   12....       LCALL   ?L_ADD
-    155                    
-    156                  }
+    159                    
+    160                  }
    \   000064   0E           INC     R6
    \                     ??getDataFromPkt_0:
    \   000065   EE           MOV     A,R6
@@ -856,30 +860,30 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000078   E4           CLR     A
    \   000079   9D           SUBB    A,R5
    \   00007A   4095         JC      ??getDataFromPkt_1
-    157                  /*
-    158                  data =(uint32)(*(cmd->Data + 5))<<24;
-    159                  data +=(uint32)(*(cmd->Data + 4))<<16;
-    160                  data +=(uint32)(*(cmd->Data + 3))<<8;        
-    161                  data +=(uint32)(*(cmd->Data + 2));
-    162                  */
-    163                  //id = (char*)&data;
-    164                  //HalLcdWriteString("-----------------------------GetData----------------------",0);
-    165                  //HalLcdWriteString(id,0);
-    166                  //HalLcdWriteString("-----------------------------GetData----------------------",0);
-    167                  return data;
+    161                  /*
+    162                  data =(uint32)(*(cmd->Data + 5))<<24;
+    163                  data +=(uint32)(*(cmd->Data + 4))<<16;
+    164                  data +=(uint32)(*(cmd->Data + 3))<<8;        
+    165                  data +=(uint32)(*(cmd->Data + 2));
+    166                  */
+    167                  //id = (char*)&data;
+    168                  //HalLcdWriteString("-----------------------------GetData----------------------",0);
+    169                  //HalLcdWriteString(id,0);
+    170                  //HalLcdWriteString("-----------------------------GetData----------------------",0);
+    171                  return data;
    \   00007C   AA..         MOV     R2,?V0
    \   00007E   AB..         MOV     R3,?V1
    \   000080   AC..         MOV     R4,?V2
    \   000082   AD..         MOV     R5,?V3
    \   000084   7F08         MOV     R7,#0x8
    \   000086   02....       LJMP    ?BANKED_LEAVE_XDATA
-    168          }
-    169          
+    172          }
+    173          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    170          int32 getCmd(uint16 devID)
+    174          int32 getCmd(uint16 devID)
    \                     getCmd:
-    171          {
+    175          {
    \   000000                REQUIRE ?V0
    \   000000                REQUIRE ?V1
    \   000000                REQUIRE ?V2
@@ -888,25 +892,25 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 12
    \   000005                ; Auto size: 0
-    172            int i = 0;
+    176            int i = 0;
    \   000005   7800         MOV     R0,#0x0
    \   000007   7900         MOV     R1,#0x0
-    173            uint32 data = 1500;
+    177            uint32 data = 1500;
    \   000009   75..DC       MOV     ?V0,#-0x24
    \   00000C   75..05       MOV     ?V1,#0x5
    \   00000F   88..         MOV     ?V2,R0
    \   000011   88..         MOV     ?V3,R0
    \   000013   8005         SJMP    ??getCmd_0
-    174            while(lutData[i].devID != devID && i < 20) //
-    175          	//while(DataID[i].devID != 0 && DataID[i].devID != devID && i < 20)
-    176            {
-    177              i++;
+    178            while(lutData[i].devID != devID && i < 20) //
+    179          	//while(DataID[i].devID != 0 && DataID[i].devID != devID && i < 20)
+    180            {
+    181              i++;
    \                     ??getCmd_1:
    \   000015   08           INC     R0
    \   000016   E8           MOV     A,R0
    \   000017   7001         JNZ     ??getCmd_0
    \   000019   09           INC     R1
-    178            }
+    182            }
    \                     ??getCmd_0:
    \   00001A   E8           MOV     A,R0
    \   00001B   FC           MOV     R4,A
@@ -928,7 +932,7 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000030   12....       LCALL   ?Subroutine3 & 0xFFFF
    \                     ??CrossCallReturnLabel_18:
    \   000033   40E0         JC      ??getCmd_1
-    179            if(lutData[i].devID == devID)
+    183            if(lutData[i].devID == devID)
    \                     ??getCmd_3:
    \   000035   E8           MOV     A,R0
    \   000036   FC           MOV     R4,A
@@ -946,8 +950,8 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000046   6B           XRL     A,R3
    \                     ??getCmd_4:
    \   000047   7018         JNZ     ??getCmd_5
-    180            {
-    181              data = lutData[i].cmd;
+    184            {
+    185              data = lutData[i].cmd;
    \   000049   75F00A       MOV     B,#0xa
    \   00004C   E9           MOV     A,R1
    \   00004D   A4           MUL     AB
@@ -964,15 +968,15 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   00005D   A3           INC     DPTR
    \   00005E   E0           MOVX    A,@DPTR
    \   00005F   F5..         MOV     ?V1,A
-    182            }
-    183            return data;
+    186            }
+    187            return data;
    \                     ??getCmd_5:
    \   000061   AA..         MOV     R2,?V0
    \   000063   AB..         MOV     R3,?V1
    \   000065   AC..         MOV     R4,?V2
    \   000067   AD..         MOV     R5,?V3
    \   000069   02....       LJMP    ?Subroutine1 & 0xFFFF
-    184          }
+    188          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine7:
@@ -984,25 +988,25 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \                     ??CrossCallReturnLabel_12:
    \   000009   6A           XRL     A,R2
    \   00000A   22           RET
-    185          
-    186          
+    189          
+    190          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    187          void sendDataToPC(LookUpTable_t *lutData)//uint32_t data, uint16_t devID, uint8_t port);
+    191          void sendDataToPC(LookUpTable_t *lutData)//uint32_t data, uint16_t devID, uint8_t port);
    \                     sendDataToPC:
-    188          {
+    192          {
    \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-    189            
-    190           
-    191            //char * id;
-    192            //uint16 idde;
-    193           // uint32 da;
-    194            //uint8 num;
-    195            
-    196            app_packet.data = lutData->data;
+    193            
+    194           
+    195            //char * id;
+    196            //uint16 idde;
+    197           // uint32 da;
+    198            //uint8 num;
+    199            
+    200            app_packet.data = lutData->data;
    \   000005   8A82         MOV     DPL,R2
    \   000007   8B83         MOV     DPH,R3
    \   000009   A3           INC     DPTR
@@ -1012,7 +1016,7 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   00000D   12....       LCALL   ?XLOAD_R4567
    \   000010   90....       MOV     DPTR,#app_packet + 3
    \   000013   12....       LCALL   ?XSTORE_R4567
-    197            app_packet.devID = lutData->devID;
+    201            app_packet.devID = lutData->devID;
    \   000016   8A82         MOV     DPL,R2
    \   000018   8B83         MOV     DPH,R3
    \   00001A   E0           MOVX    A,@DPTR
@@ -1026,36 +1030,36 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\look_up_t
    \   000024   A3           INC     DPTR
    \   000025   E9           MOV     A,R1
    \   000026   F0           MOVX    @DPTR,A
-    198            app_packet.packNum = 0;
+    202            app_packet.packNum = 0;
    \   000027   A3           INC     DPTR
    \   000028   E4           CLR     A
    \   000029   F0           MOVX    @DPTR,A
-    199            
-    200            //app_packet->data = lutData->data;
-    201            //app_packet->devID = lutData->devID;
-    202            ///app_packet->packNum = 0;
     203            
-    204            //idde = app_packet.devID;
-    205           // da = app_packet.data;
-    206            //num = app_packet.packNum + 0x30;
-    207            //id = (char*)&idde;
-    208           // id = (char*)&da;
-    209           // id = (char*)&num;
-    210            //id[2] = '\0';
-    211            //id[4] = '\0';
-    212            //id[1] = '\0';
-    213          
-    214            // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
-    215            // HalLcdWriteString(id,0);
-    216            // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
-    217            
-    218            dllDataRequest(&app_packet);
+    204            //app_packet->data = lutData->data;
+    205            //app_packet->devID = lutData->devID;
+    206            ///app_packet->packNum = 0;
+    207            
+    208            //idde = app_packet.devID;
+    209           // da = app_packet.data;
+    210            //num = app_packet.packNum + 0x30;
+    211            //id = (char*)&idde;
+    212           // id = (char*)&da;
+    213           // id = (char*)&num;
+    214            //id[2] = '\0';
+    215            //id[4] = '\0';
+    216            //id[1] = '\0';
+    217          
+    218            // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
+    219            // HalLcdWriteString(id,0);
+    220            // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
+    221            
+    222            dllDataRequest(&app_packet);
    \   00002A                ; Setup parameters for call to function dllDataRequest
    \   00002A   7A..         MOV     R2,#app_packet & 0xff
    \   00002C   7B..         MOV     R3,#(app_packet >> 8) & 0xff
    \   00002E   12....       LCALL   `??dllDataRequest::?relay`; Banked call to: dllDataRequest
-    219            //HalLcdWriteString("Milos----------------------",0); 
-    220          }
+    223            //HalLcdWriteString("Milos----------------------",0); 
+    224          }
    \   000031   02....       LJMP    ?Subroutine2 & 0xFFFF
 
    \                                 In  segment BANK_RELAYS, align 1
