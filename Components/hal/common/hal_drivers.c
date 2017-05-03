@@ -73,6 +73,11 @@
 #include "hal_spi.h"
 #endif
 
+
+////////////////////////////////////////////////////////////////////////////////////// 
+//#include "includes/dll.h"
+//#include "includes/look_up_table.h"
+////////////////////////////////////////////////////////////////////////////////////// 
 /**************************************************************************************************
  *                                      GLOBAL VARIABLES
  **************************************************************************************************/
@@ -254,6 +259,18 @@ uint16 Hal_ProcessEvent( uint8 task_id, uint16 events )
     (void)osal_pwrmgr_task_state(Hal_TaskID, PWRMGR_CONSERVE);
     return events ^ HAL_PWRMGR_CONSERVE_EVENT;
   }
+ ////////////////////////////////////////////////////////////////////////////////////// 
+  /*if (events & HAL_UART_EVENT)
+  {
+    //HalBuzzerStop();
+    HalUARTRead(HAL_UART_PORT_0, uartConfig.rx.pBuffer, 128);
+    
+    
+    //osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
+    osal_start_timerEx (Hal_TaskID, HAL_UART_EVENT, 1000);
+    return events ^ HAL_UART_EVENT;
+  }*/
+  //////////////////////////////////////////////////////////////////////////////////////
 #endif
 
   return 0;

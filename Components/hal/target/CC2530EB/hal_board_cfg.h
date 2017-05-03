@@ -524,14 +524,15 @@ st( \
 
 /* Set to TRUE enable UART usage, FALSE disable it */
 #ifndef HAL_UART
-#if (defined ZAPP_P1) || (defined ZAPP_P2) || (defined ZTOOL_P1) || (defined ZTOOL_P2)
+//#if (defined ZAPP_P1) || (defined ZAPP_P2) || (defined ZTOOL_P1) || (defined ZTOOL_P2)
 #define HAL_UART TRUE
-#else
-#define HAL_UART FALSE
-#endif
+//#else
+//#define HAL_UART FALSE
+//#endif
 #endif
 
 #if HAL_UART
+/*                                                                              // 535-547 nije bio zakomentarisan
 #ifndef HAL_UART_DMA
 #if HAL_DMA
 #if (defined ZAPP_P2) || (defined ZTOOL_P2)
@@ -543,23 +544,21 @@ st( \
 #define HAL_UART_DMA  0
 #endif
 #endif
-
+*/
 #ifndef HAL_UART_ISR
-#if HAL_UART_DMA           // Default preference for DMA over ISR.
-#define HAL_UART_ISR  0
+//#if HAL_UART_DMA           // Default preference for DMA over ISR.            // Nije bilo yakomentarisano
+#define HAL_UART_ISR  2                                                       // Bilo je nula podrazumijevana vrijednost
+/*                                                                              //551-557 nije bilo zakomentarisano
 #elif (defined ZAPP_P2) || (defined ZTOOL_P2)
 #define HAL_UART_ISR  2
 #else
 #define HAL_UART_ISR  1
 #endif
-#endif
-
-#if (HAL_UART_DMA && (HAL_UART_DMA == HAL_UART_ISR))
-#error HAL_UART_DMA & HAL_UART_ISR must be different.
+*/
 #endif
 
 // Used to set P2 priority - USART0 over USART1 if both are defined.
-#if ((HAL_UART_DMA == 1) || (HAL_UART_ISR == 1))
+#if ((HAL_UART_DMA == 1) || (HAL_UART_ISR == 2))
 #define HAL_UART_PRIPO             0x00
 #else
 #define HAL_UART_PRIPO             0x40

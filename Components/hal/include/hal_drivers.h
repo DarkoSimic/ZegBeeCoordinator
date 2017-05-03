@@ -58,7 +58,10 @@ extern "C"
 #define PERIOD_RSSI_RESET_EVT               0x0040
 #define HAL_LED_BLINK_EVENT                 0x0020
 #define HAL_KEY_EVENT                       0x0010
-
+////////////////////////////////////////////////////////////////////////////////////// 
+//#define HAL_UART_EVENT                      0x0100
+//#define GENERICAPP_SEND_MSG_EVT             0x0200
+//////////////////////////////////////////////////////////////////////////////////////
 #if defined POWER_SAVING
 #define HAL_SLEEP_TIMER_EVENT               0x0004
 #define HAL_PWRMGR_HOLD_EVENT               0x0002

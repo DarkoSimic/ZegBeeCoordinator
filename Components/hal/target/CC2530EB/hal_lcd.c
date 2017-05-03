@@ -199,7 +199,7 @@
  *                                       LOCAL VARIABLES
  **************************************************************************************************/
 
-static uint8 *Lcd_Line1;
+//static uint8 *Lcd_Line1;
 
 /**************************************************************************************************
  *                                       FUNCTIONS - API
@@ -230,7 +230,7 @@ uint8 uartGet(void);
 void HalLcdInit(void)
 { HalLcd_HW_Init();
 #if (HAL_LCD == TRUE)
-  Lcd_Line1 = NULL;
+  //Lcd_Line1 = NULL;
  
 #endif
 }
@@ -276,11 +276,11 @@ void HalLcdWriteString ( char *str, uint8 option)
 {
 #if (HAL_LCD == TRUE)
 
-  uint8 strLen = 0;
+ /* uint8 strLen = 0;
   uint8 totalLen = 0;
   uint8 *buf;
   uint8 tmpLen;
-
+*/
 #endif 
   
   uint8 i = 0;
@@ -302,31 +302,31 @@ void HalLcdWriteString ( char *str, uint8 option)
 
   strLen = (uint8)osal_strlen( (char*)str );
 
-  /* Check boundries 
+  *//* Check boundries 
   if ( strLen > HAL_LCD_MAX_CHARS )
     strLen = HAL_LCD_MAX_CHARS;
 
   if ( option == HAL_LCD_LINE_1 )
   {
-    /* Line 1 gets saved for later 
+    *//* Line 1 gets saved for later 
     osal_memcpy( Lcd_Line1, str, strLen );
     Lcd_Line1[strLen] = '\0';
   }
   else
   {
-    /* Line 2 triggers action 
+    *//* Line 2 triggers action 
     tmpLen = (uint8)osal_strlen( (char*)Lcd_Line1 );
     totalLen =  tmpLen + 1 + strLen + 1;
     buf = osal_mem_alloc( totalLen );
     if ( buf != NULL )
     {
-      /* Concatenate strings 
+      *//* Concatenate strings 
       osal_memcpy( buf, Lcd_Line1, tmpLen );
       buf[tmpLen++] = ' ';
       osal_memcpy( &buf[tmpLen], str, strLen );
       buf[tmpLen+strLen] = '\0';
 
-      /* Send it out 
+      *//* Send it out 
 #if defined (ZTOOL_P1) || defined (ZTOOL_P2)
 
 #if defined(SERIAL_DEBUG_SUPPORTED)
@@ -335,12 +335,12 @@ void HalLcdWriteString ( char *str, uint8 option)
 
 #endif //ZTOOL_P1
 
-      /* Free mem 
+     */ /* Free mem 
       osal_mem_free( buf );
     }
   }
 
-  /* Display the string 
+  *//* Display the string 
   HalLcd_HW_WriteLine (option, str);
 
 #endif //HAL_LCD
@@ -537,14 +537,15 @@ void HalLcdDisplayPercentBar( char *title, uint8 value )
  *
  * @return  None
  **************************************************************************************************/
+/*
 static void halLcd_ConfigIO(void)
 {
-  /* GPIO configuration */
+  // GPIO configuration 
   HAL_CONFIG_IO_OUTPUT(HAL_LCD_MODE_PORT,  HAL_LCD_MODE_PIN,  1);
   HAL_CONFIG_IO_OUTPUT(HAL_LCD_RESET_PORT, HAL_LCD_RESET_PIN, 1);
   HAL_CONFIG_IO_OUTPUT(HAL_LCD_CS_PORT,    HAL_LCD_CS_PIN,    1);
 }
-
+*/
 /**************************************************************************************************
  * @fn      halLcd_ConfigSPI
  *
@@ -554,35 +555,36 @@ static void halLcd_ConfigIO(void)
  *
  * @return  None
  **************************************************************************************************/
+/*
 static void halLcd_ConfigSPI(void)
 {
-  /* UART/SPI Peripheral configuration */
+   //UART/SPI Peripheral configuration 
 
    uint8 baud_exponent;
    uint8 baud_mantissa;
 
-  /* Set SPI on UART 1 alternative 2 */
+  // Set SPI on UART 1 alternative 2 
   PERCFG |= 0x02;
 
-  /* Configure clk, master out and master in lines */
+  // Configure clk, master out and master in lines 
   HAL_CONFIG_IO_PERIPHERAL(HAL_LCD_CLK_PORT,  HAL_LCD_CLK_PIN);
   HAL_CONFIG_IO_PERIPHERAL(HAL_LCD_MOSI_PORT, HAL_LCD_MOSI_PIN);
   HAL_CONFIG_IO_PERIPHERAL(HAL_LCD_MISO_PORT, HAL_LCD_MISO_PIN);
 
 
-  /* Set SPI speed to 1 MHz (the values assume system clk of 32MHz)
-   * Confirm on board that this results in 1MHz spi clk.
-   */
+  // Set SPI speed to 1 MHz (the values assume system clk of 32MHz)
+   // Confirm on board that this results in 1MHz spi clk.
+   
   baud_exponent = 15;
   baud_mantissa =  0;
 
-  /* Configure SPI */
-  U1UCR  = 0x80;      /* Flush and goto IDLE state. 8-N-1. */
-  U1CSR  = 0x00;      /* SPI mode, master. */
+  //Configure SPI 
+  U1UCR  = 0x80;      // Flush and goto IDLE state. 8-N-1. 
+  U1CSR  = 0x00;      // SPI mode, master. 
   U1GCR  = HAL_SPI_TRANSFER_MSB_FIRST | HAL_SPI_CLOCK_PHA_0 | HAL_SPI_CLOCK_POL_LO | baud_exponent;
   U1BAUD = baud_mantissa;
 }
-
+*/
 /**************************************************************************************************
  * @fn      HalLcd_HW_Init
  *
@@ -613,28 +615,28 @@ void HalLcd_HW_Init(void)
   /* Initialize LCD IO lines 
   halLcd_ConfigIO();
 
-  /* Initialize SPI 
+  *//* Initialize SPI 
   halLcd_ConfigSPI();
 
-  /* Perform reset 
+  *//* Perform reset 
   LCD_ACTIVATE_RESET();
   HalLcd_HW_WaitUs(15000); // 15 ms
   LCD_RELEASE_RESET();
   HalLcd_HW_WaitUs(15); // 15 us
 
-  /* Perform the initialization sequence 
+  *//* Perform the initialization sequence 
   FUNCTION_SET(CGRAM | COM_FORWARD | THREE_LINE);
 
-  /* Set contrast 
+  *//* Set contrast 
   HalLcd_HW_SetContrast(15);
 
-  /* Set power 
+  *//* Set power 
   SET_POWER_SAVE_MODE(OSC_OFF | POWER_SAVE_ON);
   SET_POWER_CTRL(VOLTAGE_DIVIDER_ON | CONVERTER_AND_REG_ON);
   SET_BIAS_CTRL(BIAS_1_5);
   HalLcd_HW_WaitUs(21000);// 21 ms
 
-  /* Clear the display 
+ */ /* Clear the display 
   HalLcd_HW_Clear();
   HalLcd_HW_ClearAllSpecChars();
   SET_DISPLAY_CTRL(DISPLAY_CTRL_ON | DISPLAY_CTRL_BLINK_OFF | DISPLAY_CTRL_CURSOR_OFF);

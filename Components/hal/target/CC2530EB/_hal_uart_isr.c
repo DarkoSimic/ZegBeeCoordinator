@@ -249,6 +249,8 @@ static void HalUARTInitISR(void)
   ADCCFG &= ~HAL_UART_Px_RX_TX;      // Make sure ADC doesnt use this.
   UxCSR = CSR_MODE;                  // Mode is UART Mode.
   UxUCR = UCR_FLUSH;                 // Flush it.
+  
+  
 }
 
 /******************************************************************************
@@ -549,6 +551,12 @@ HAL_ISR_FUNCTION( halUart1RxIsr, URX1_VECTOR )
   }
 
   isrCfg.rxTick = HAL_UART_ISR_IDLE;
+  ////////////////////////////////////////////////////////////////////////////////////// 
+  halProcessUartInterrupt();
+  ////////////////////////////////////////////////////////////////////////////////////// 
+  ///osal_set_event(Hal_TaskID, HAL_UART_EVENT);
+ //osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
+
 }
 
 /***************************************************************************************************
@@ -575,12 +583,13 @@ HAL_ISR_FUNCTION( halUart1TxIsr, UTX1_VECTOR )
   {
     UTXxIF = 0;
     UxDBUF = isrCfg.txBuf[isrCfg.txHead++];
-
+   
     if (isrCfg.txHead >= HAL_UART_ISR_TX_MAX)
     {
       isrCfg.txHead = 0;
     }
   }
+  
 }
 
 /******************************************************************************

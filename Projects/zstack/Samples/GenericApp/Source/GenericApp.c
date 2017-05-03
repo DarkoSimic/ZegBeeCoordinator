@@ -83,6 +83,23 @@
 #include "RTOS_App.h"
 #endif
 
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//#include "includes/hal_driver.h"
+#include "hal_drivers.h"
+
+#include "includes/dll.h"
+#include "includes/look_up_table.h"
+
+#include "includes/circular_buffer.h"
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
 /*********************************************************************
  * MACROS
  */
@@ -136,6 +153,12 @@
 /*********************************************************************
  * GLOBAL VARIABLES
  */
+////////////////////////////////////////////////////////////////////////////////////////////
+CircularBuffer_t cMain;
+uint8 dataRdy;
+LookUpTable_t lutData[20];
+uint8 *rxBuffer;
+////////////////////////////////////////////////////////////////////////////////////////////
 
 uint8 coin = 1;
 char prevData = 0;
@@ -156,10 +179,6 @@ uint16 SAddr[MAX_NUMBER_OF_ENDDEVICES] = {0,0};
 uint8 index = 0;
 
 uint8 brojac = 0;
-
-uint8 txBuff = 97;
-uint8 rxBuff[HAL_UART_ISR_RX_MAX];
-halUARTCfg_t uartConfig;
 
 
 // This list should be filled with Application specific Cluster IDs.
@@ -211,8 +230,10 @@ devStates_t GenericApp_NwkState;
 byte GenericApp_TransID;  // This is the unique message ID (counter)
 
 afAddrType_t GenericApp_DstAddr;
+afAddrType_t GenericApp_DstAddress;//GenericApp_DstAddress
+//////////////////////////////////////////////////////////////////////////////  Mozda izbrisati ovo
 
-afAddrType_t GenericApp_DstAddress[MAX_NUMBER_OF_ENDDEVICES] = {0,0};
+//afAddrType_t GenericApp_DstAddress[MAX_NUMBER_OF_ENDDEVICES] = {0,0};
 
 // Number of recieved messages
 static uint16 rxMsgCount;
@@ -224,11 +245,11 @@ static uint32 txMsgDelay = GENERICAPP_SEND_MSG_TIMEOUT;
  * LOCAL FUNCTIONS
  */
 static void GenericApp_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg );
-static void GenericApp_HandleKeys( byte shift, byte keys );
+//static void GenericApp_HandleKeys( byte shift, byte keys );
 static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pckt );
 static void GenericApp_SendTheMessage( void );
 
-static void GenericApp_EndPointList(uint16);
+//static void GenericApp_EndPointList(uint16);
 
 #if defined( IAR_ARMCM3_LM )
 static void GenericApp_ProcessRtosMessage( void );
@@ -255,57 +276,9 @@ static void GenericApp_ProcessRtosMessage( void );
  *                    used to send messages and set timers.
  *
  * @return  none
- *//*
-void LazoInit()
-{
-	  uint16 count;
-   
-  // Podesavanje da P0.1 ima GPIO funkciju  
-  P0SEL &= 0xFD;
-        
-  // Podesavanje P0.1 izlazni 
-  P0DIR |= 0x02;
-  
-  // Podesavanje da svi pinovi porta P0 imaju pulldown konfiguraciju
-  P2INP = 0x20;
-  
-  // led for indication
-  //LED = 0;
-  
-  // config struct
-  
-	
-  // initialize structure for uart config
-  uartConfig.configured = TRUE;
-  uartConfig.baudRate = HAL_UART_BR_9600;
-  uartConfig.flowControl = FALSE;
-  
-  uartConfig.idleTimeout = HAL_UART_ISR_IDLE;
-  uartConfig.intEnable = TRUE;
-  uartConfig.callBackFunc = NULL;
-	
-  //config tx options
-  uartConfig.tx.maxBufSize = HAL_UART_ISR_TX_MAX;
-  uartConfig.tx.pBuffer = &txBuff;
-  
-  //config rx options
-  uartConfig.rx.maxBufSize = HAL_UART_ISR_RX_MAX;
-  uartConfig.rx.pBuffer = rxBuff;
-  //uartConfig.rx.Tail = 0;
-  //uartConfig.rx.Head = 0;
-  // enable global interrupt
-	EA = 1;
-  
-  // provjeriti je li UART "definisan"
-  
-  HalUARTInit();
-  uartInit();
-  
-  
-  
-  //HalUARTOpen(HAL_UART_PORT_0, &uartConfig);
-}
-*/
+ */
+
+
 void GenericApp_Init( uint8 task_id )
 {
   GenericApp_TaskID = task_id;
@@ -345,6 +318,24 @@ void GenericApp_Init( uint8 task_id )
   // Register this task with RTOS task initiator
   RTOS_RegisterApp( task_id, GENERICAPP_RTOS_MSG_EVT );
 #endif
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+  //halInitDriver();
+    dllInit();
+    lookUpInit();
+    circularInit(&cMain);
+    
+     //halGPIOOutput(HW_PORT_D, 0x03, 0);
+
+    circularPut(&cMain, 'T');
+    circularPut(&cMain, 'E');
+    circularPut(&cMain, 'S');
+    circularPut(&cMain, 'T');
+    
+   // halUARTWrite(PC, &cMain, 0);
+  
+////////////////////////////////////////////////////////////////////////////////////////////  
+    
+  
 }
 /*********************************************************************
  * @fn      GenericApp_EndPointList
@@ -356,6 +347,7 @@ void GenericApp_Init( uint8 task_id )
  * 
  * @return  none
  */
+/*
 static void GenericApp_EndPointList(uint16 shAddr)
 {
  
@@ -371,6 +363,7 @@ static void GenericApp_EndPointList(uint16 shAddr)
   
   
 }
+*/
 /*********************************************************************
  * @fn      GenericApp_ProcessEvent
  *
@@ -390,8 +383,8 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
   afDataConfirm_t *afDataConfirm;
   zAddrType_t dstAddr;
 
-    uint8 flag = 0;
-    uint8 i;
+    //uint8 flag = 0;
+    //uint8 i;
 
 
   // Data Confirmation message fields
@@ -440,8 +433,8 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
           break;
 
         case AF_INCOMING_MSG_CMD:
-          
-          if(0==brojac)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////          
+         /* if(0==brojac)
           {
            shortAddressOfEndDevice[brojac] = MSGpkt->macSrcAddr;
            brojac++;
@@ -472,10 +465,10 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
             GenericApp_DstAddress[i].addrMode = (afAddrMode_t)Addr16Bit;
             GenericApp_DstAddress[i].endPoint = GENERICAPP_ENDPOINT;
             GenericApp_DstAddress[i].addr.shortAddr = shortAddressOfEndDevice[i];
-          }
+          }*/
           
          GenericApp_MessageMSGCB( MSGpkt );
-         
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
           break;
 
         case ZDO_STATE_CHANGE:
@@ -516,6 +509,71 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
 
   // Send a message out - This event is generated by a timer
   //  (setup in GenericApp_Init()).
+  
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+  if ( events & RX_PROCCESS_EVENT )
+  {
+    /*
+    uint8 i;
+    uint16 *pdevID;
+    uint32 *pData;
+    uint16 devID;
+    
+    uint8 *p;
+    */
+    uint16 ID;
+    uint32 Data;
+    char theMessage[MAX_NUMBER_OF_ENDDEVICES][25];
+
+
+    
+    ID = processFrameRx(rxBuffer);
+    
+    
+    GenericApp_DstAddress.addrMode = (afAddrMode_t)Addr16Bit;
+    GenericApp_DstAddress.endPoint = GENERICAPP_ENDPOINT;
+    GenericApp_DstAddress.addr.shortAddr = lookForAddr(ID);
+    
+   /* 
+    pdevID = &devID;
+    pData = &Data;
+    *pdevID = ID;
+    *pData = getCmd(ID);
+    */
+    Data = getCmd(ID);
+    
+    //p = &
+
+    theMessage[GenericApp_DstAddress.addr.shortAddr][0] = (char)((ID >> 8) & 0x00FF);
+    theMessage[GenericApp_DstAddress.addr.shortAddr][1] = (char)(ID & 0x00FF); 
+   /* for(i = 0; i < 2; i++)
+    {
+      theMessage[GenericApp_DstAddress.addr.shortAddr][i] = (char)pdevID[i-1];
+    }*/
+    theMessage[GenericApp_DstAddress.addr.shortAddr][2] = (char)((Data >> 24) & 0x000000FF);
+    theMessage[GenericApp_DstAddress.addr.shortAddr][3] = (char)((Data >> 16) & 0x000000FF); 
+    theMessage[GenericApp_DstAddress.addr.shortAddr][4] = (char)((Data >> 8) & 0x000000FF);
+    theMessage[GenericApp_DstAddress.addr.shortAddr][5] = (char)(Data & 0x000000FF); 
+   /* for(i = 2; i < 6; i++)
+    {
+      theMessage[GenericApp_DstAddress.addr.shortAddr][i] = (char)pData[i-4];
+    }
+*/
+
+    if ( AF_DataRequest( &GenericApp_DstAddress, &GenericApp_epDesc,
+                           GENERICAPP_CLUSTERID,
+                           (byte)osal_strlen( theMessage[GenericApp_DstAddress.addr.shortAddr] ) + 1,
+                           (byte *)&theMessage[GenericApp_DstAddress.addr.shortAddr],
+                           &GenericApp_TransID,
+                           AF_DISCV_ROUTE, AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+      {
+        HalLedSet ( HAL_LED_4, HAL_LED_MODE_BLINK );  // Blink an LED
+      }
+
+  }
+    
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+    
   if ( events & GENERICAPP_SEND_MSG_EVT )
   {
     if(keyPressSW4)
@@ -542,21 +600,23 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
        //HalUARTOpen(HAL_UART_PORT_0, &uartConfig);
      //HalUARTRead(HAL_UART_PORT_0, buff, 2);
      //if(HalUARTRead(HAL_UART_PORT_0, buff, 2))
+      //buff[i] = U0DBUF;   
+       // buff[l] = uartGet();
       /*while(buff[l]!='\0')
       {
-        //buff[i] = U0DBUF;   
-        buff[l] = uartGet();
-        //*buff = uartGet(); 
-        //buff++;
+        
+        *buff = uartGet(); 
+        buff++;
         l++;
       }*/
       //if(l==0)
       //HalLcdRead(buff, 1);
       //buff++;
       
-       
+ //////////////////////////////////////////////////////////////////////////////
+      //HalLcdRead(buff, 1);    //zakomentarisao
       
-      HalLcdRead(buff, 1);
+///////////////////////////////////////////////////////////////////////////////
       //HalLcdWriteString("Sinisa",0); 
       //if(buff[0]='\0')
     /*  for(i = 0;i <3;i++)
@@ -567,13 +627,14 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
           HalLcdWriteString("",0);
           HalLcdWriteString("--------------------------------",0);
         */
-     if((char)*buff!='\0')
+//////////////////////////////////////////////////////////////////////////////
+    // if((char)*buff!='\0') //zakomentarisao
      {
        GenericApp_SendTheMessage();
        //HalLcdWriteString("Sile before send",0);
      }
     
-
+//////////////////////////////////////////////////////////////////////////////
      
      
      
@@ -680,7 +741,7 @@ static void GenericApp_ProcessZDOMsgs( zdoIncomingMsg_t *inMsg )
  *                 HAL_KEY_SW_1
  *
  * @return  none
- */
+ *//*
 static void GenericApp_HandleKeys( uint8 shift, uint8 keys )
 {
   zAddrType_t dstAddr;
@@ -759,7 +820,7 @@ static void GenericApp_HandleKeys( uint8 shift, uint8 keys )
     }
   }
 }
-
+*/
 /*********************************************************************
  * LOCAL FUNCTIONS
  */
@@ -777,8 +838,12 @@ static void GenericApp_HandleKeys( uint8 shift, uint8 keys )
  */
 static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 {
-  uint8 i;
-  
+  //uint8 i;
+  //////////////////////////////////////////////////////////////////////////////
+  Data_t Data;
+  uint16 addr;
+  //char * id;
+  //////////////////////////////////////////////////////////////////////////////
   switch ( pkt->clusterId )
   {
     case GENERICAPP_CLUSTERID:
@@ -787,8 +852,8 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       rxMsgCount += 1;  // Count this message
       HalLedSet ( HAL_LED_4, HAL_LED_MODE_BLINK );  // Blink an LED
 
-      HalLcdWriteString("--------------------------------",0);
-      HalLcdWriteString("Received data:",0);
+     // HalLcdWriteString("--------------------------------",0);
+     // HalLcdWriteString("Received data:",0);
 /*      
       for(i=0;i<pkt->cmd.DataLength;i++)
       {
@@ -796,6 +861,25 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
         
       }
 */     
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //Data.devID = *(pkt->cmd.Data);
+      Data.devID =getIDFromPkt(&pkt->cmd);
+      
+      //id = (char*)&Data.devID;
+      //pkt->cmd.Data++;
+      //pkt->cmd.Data++;
+      //Data.data = *(pkt->cmd.Data);
+      Data.data =getDataFromPkt(&pkt->cmd); 
+      //id = (char*)&Data.data;
+      addr = pkt->macSrcAddr;
+      
+      updateLookUpTable(Data, addr);
+      //HalLcdWriteString(id,0); 
+      //HalLcdWriteString("Sina----------------------",0); 
+      
+ ///////////////////////////////////////////////////////////////////////////////
+ //zakomentarisao
+      /*
       switch(*(pkt->cmd.Data))
       {
         
@@ -882,9 +966,10 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
           break;
           }
       } //second switch end
-      
-      HalLcdWriteString("",0);
-      HalLcdWriteString("--------------------------------",0);
+      */
+///////////////////////////////////////////////////////////////////////////////      
+    //  HalLcdWriteString("",0);
+    //  HalLcdWriteString("--------------------------------",0);
       
      
       }
@@ -892,7 +977,7 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       
   default:
     
-    HalLcdWriteString("Podatak nije primljen.",0);
+   //HalLcdWriteString("Podatak nije primljen.",0);
         
     break;
 
@@ -913,18 +998,41 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
  */
 static void GenericApp_SendTheMessage( void )
 {
-
+  uint8 i;
+  //char * id;
+  //uint32 data;
+  
+  for(i = 0; i < 20; i++)
+  {
+    //HalLcdWriteString("Sinisa-------------petlja-----",0);
+    if(0 != lutData[i].devID)
+    {
+      sendDataToPC(&lutData[i]);
+      
+      //id = (char*)&lutData[i].devID;
+     // id[2] = '\0';
+       // HalLcdWriteString("-----------------------------Borislav  Send----------------------",0);
+       // HalLcdWriteString(id,0);
+       // HalLcdWriteString("-----------------------------Borislav  Send----------------------",0);
+      //HalLcdWriteString("Sinisa-------------petlja-----",0);
+    }
+  } 
+   //HalLcdWriteString("Sinisa----------------------",0); 
+/*
+  
   uint8 i;
   char num = '0';
 
   char theMessageData[MAX_NUMBER_OF_ENDDEVICES][25] = {"You are EndDevice1111","You are EndDevice2222"};
   //char *msg1;
   //char *msg2;
-  /*char *msg[MAX_NUMBER_OF_ENDDEVICES];
-  HalLcdRead(msg[0],2);
-  HalLcdRead(msg[1],2);
-  */
+  //char *msg[MAX_NUMBER_OF_ENDDEVICES];
+  //HalLcdRead(msg[0],2);
+  //HalLcdRead(msg[1],2);
+  
   //HalLcdWriteString("Sile in send",0);
+  */
+  /*
   char theMessage[MAX_NUMBER_OF_ENDDEVICES][25] = {"0000", "FFFF"};
   if('1' == (char)*buff)
   {
@@ -951,13 +1059,13 @@ static void GenericApp_SendTheMessage( void )
   
   for(i = 0; i<brojac; i++)
   {
-    
+   */ 
    /*  HalLcdWriteString("Ulazak u petlju",0);
      num+=i;
      uartSend(num);
      HalLcdWriteString("",0);
      */
-    if(GenericApp_DstAddress[i].addr.shortAddr != 0 )
+  /*  if(GenericApp_DstAddress[i].addr.shortAddr != 0 )
                          
     {
       if ( AF_DataRequest( &GenericApp_DstAddress[i], &GenericApp_epDesc,
@@ -974,6 +1082,7 @@ static void GenericApp_SendTheMessage( void )
       {
       // Successfully requested to be sent.
         HalLcdWriteString("Podatak je poslan.",0);
+  */
         /*HalLcdWriteString("###############################",0);
      
       
@@ -985,7 +1094,7 @@ static void GenericApp_SendTheMessage( void )
           HalLcdWriteString("",0);
           HalLcdWriteString("--------------------------------",0);
         */
-      }
+  /*    }
       else
       {
       // Error occurred in request to send.
@@ -996,7 +1105,7 @@ static void GenericApp_SendTheMessage( void )
   }
 
   buff[0] = '\0';
-  
+  */
 }
 
 #if defined( IAR_ARMCM3_LM )

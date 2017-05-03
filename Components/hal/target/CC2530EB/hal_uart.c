@@ -40,6 +40,11 @@
 /*********************************************************************
  * INCLUDES
  */
+////////////////////////////////////////////////////////////////////////////////////// 
+//#include "hal_drivers.h"
+#include "GenericApp.h"
+#include "OSAL.h"
+////////////////////////////////////////////////////////////////////////////////////// 
 
 #include "hal_board_cfg.h"
 #include "hal_defs.h"
@@ -61,6 +66,11 @@
 /*********************************************************************
  * GLOBAL VARIABLES
  */
+extern halUARTCfg_t uartConfig;
+
+uint8 TX_BUFFER[128];
+uint8 RX_BUFFER[128];
+
 
 /*********************************************************************
  * GLOBAL FUNCTIONS
@@ -99,9 +109,33 @@ void HalUARTInit(void)
 #if HAL_UART_DMA
   HalUARTInitDMA();
 #endif
-#if HAL_UART_ISR
+  */
+//#if HAL_UART_ISR
   HalUARTInitISR();
-#endif
+  
+ // halUARTCfg_t uartConfig;
+	
+  // initialize structure for uart config
+  uartConfig.configured = TRUE;
+  uartConfig.baudRate = HAL_UART_BR_9600;
+  uartConfig.flowControl = FALSE;
+  
+  uartConfig.idleTimeout = HAL_UART_ISR_IDLE;
+  uartConfig.intEnable = TRUE;
+  uartConfig.callBackFunc = NULL;
+	
+  //config tx options
+  uartConfig.tx.maxBufSize = HAL_UART_ISR_TX_MAX;
+  uartConfig.tx.pBuffer = TX_BUFFER;
+  
+  //config rx options
+  uartConfig.rx.maxBufSize = HAL_UART_ISR_RX_MAX;
+  uartConfig.rx.pBuffer = RX_BUFFER;
+  
+  
+  
+//#endif
+  /*
 #if HAL_UART_USB
   HalUARTInitUSB();
 #endif
@@ -119,7 +153,7 @@ void HalUARTInit(void)
  * @return  Status of the function call
  *****************************************************************************/
 uint8 HalUARTOpen(uint8 port, halUARTCfg_t *config)
-{/*
+{
   (void)port;
   (void)config;
 
@@ -129,16 +163,19 @@ uint8 HalUARTOpen(uint8 port, halUARTCfg_t *config)
 #if (HAL_UART_DMA == 2)
   if (port == HAL_UART_PORT_1)  HalUARTOpenDMA(config);
 #endif
+  
 #if (HAL_UART_ISR == 1)
   if (port == HAL_UART_PORT_0)  HalUARTOpenISR(config);
 #endif
+  
+  
 #if (HAL_UART_ISR == 2)
   if (port == HAL_UART_PORT_1)  HalUARTOpenISR(config);
 #endif
 #if (HAL_UART_USB)
   HalUARTOpenUSB(config);
 #endif
-  */
+  
   return HAL_UART_SUCCESS;
 }
 
@@ -158,16 +195,19 @@ uint16 HalUARTRead(uint8 port, uint8 *buf, uint16 len)
   (void)port;
   (void)buf;
   (void)len;
-/*
+
 #if (HAL_UART_DMA == 1)
   if (port == HAL_UART_PORT_0)  return HalUARTReadDMA(buf, len);
 #endif
 #if (HAL_UART_DMA == 2)
   if (port == HAL_UART_PORT_1)  return HalUARTReadDMA(buf, len);
 #endif
+  
 #if (HAL_UART_ISR == 1)
   if (port == HAL_UART_PORT_0)  return HalUARTReadISR(buf, len);
 #endif
+  
+  
 #if (HAL_UART_ISR == 2)
   if (port == HAL_UART_PORT_1)  return HalUARTReadISR(buf, len);
 #endif
@@ -175,9 +215,10 @@ uint16 HalUARTRead(uint8 port, uint8 *buf, uint16 len)
 #if HAL_UART_USB
   return HalUARTRx(buf, len);
 #else
-  return 0;
+  
 #endif
-*/
+
+  return 0;
 }
 
 /******************************************************************************
@@ -196,7 +237,7 @@ uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
   (void)port;
   (void)buf;
   (void)len;
-  uint8 i;
+/*  uint8 i;
   
   for(i=0;i<len;i++)
   {
@@ -206,16 +247,19 @@ uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
     {
     }
   }
-  /*
+ */
 #if (HAL_UART_DMA == 1)
   if (port == HAL_UART_PORT_0)  return HalUARTWriteDMA(buf, len);
 #endif
 #if (HAL_UART_DMA == 2)
   if (port == HAL_UART_PORT_1)  return HalUARTWriteDMA(buf, len);
 #endif
+
 #if (HAL_UART_ISR == 1)
   if (port == HAL_UART_PORT_0)  return HalUARTWriteISR(buf, len);
 #endif
+
+
 #if (HAL_UART_ISR == 2)
   if (port == HAL_UART_PORT_1)  return HalUARTWriteISR(buf, len);
 #endif
@@ -226,7 +270,8 @@ uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
 #else
   return 0;
 #endif
-*/
+
+  //return 0;
 }
 
 /******************************************************************************
@@ -310,7 +355,7 @@ uint16 Hal_UART_RxBufLen( uint8 port )
 {
   (void)port;
 
-  /*
+  
 #if (HAL_UART_DMA == 1)
   if (port == HAL_UART_PORT_0)  return HalUARTRxAvailDMA();
 #endif
@@ -328,10 +373,17 @@ uint16 Hal_UART_RxBufLen( uint8 port )
 #else
   return 0;
 #endif
-  */
   
-  return 0;
+  
+  //return 0;
 }
+////////////////////////////////////////////////////////////////////////////////////// 
 
+void halProcessUartInterrupt (void)
+{
+  //osal_set_event(Hal_TaskID, HAL_UART_EVENT);
+  osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
+}
+////////////////////////////////////////////////////////////////////////////////////// 
 /******************************************************************************
 ******************************************************************************/
