@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR C/C++ Compiler V9.30.3.3983 for 8051               04/May/2017  12:10:20
+// IAR C/C++ Compiler V9.30.3.3983 for 8051               04/May/2017  14:07:09
 // Copyright 2004-2016 IAR Systems AB.
 // Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 //
@@ -344,8 +344,6 @@
           CFI ?RET_LOW Frame(CFA_SP, 1)
           CFI EndCommon cfiCommon1
         
-HalUARTWrite        SYMBOL "HalUARTWrite"
-`??HalUARTWrite::?relay` SYMBOL "?relay", HalUARTWrite
 circularInit        SYMBOL "circularInit"
 `??circularInit::?relay` SYMBOL "?relay", circularInit
 sscanf              SYMBOL "sscanf"
@@ -359,19 +357,10 @@ dllInit             SYMBOL "dllInit"
 processFrameRx      SYMBOL "processFrameRx"
 `??processFrameRx::?relay` SYMBOL "?relay", processFrameRx
 
-        EXTERN `??HalUARTWrite::?relay`
-        FUNCTION `??HalUARTWrite::?relay`,00H
         EXTERN `??circularInit::?relay`
         FUNCTION `??circularInit::?relay`,00H
         EXTERN `??sscanf::?relay`
         FUNCTION `??sscanf::?relay`,00H
-        EXTERN HalUARTWrite
-        FUNCTION HalUARTWrite,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 19, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         EXTERN circularInit
         FUNCTION circularInit,0202H
         ARGFRAME ISTACK, 2, STACK
@@ -2342,17 +2331,6 @@ dllDataRequest:
         ARGFRAME XSTACK, 28, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL dllDataRequest, HalUARTWrite
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 19, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 19, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         REQUIRE ?V0
         REQUIRE ?V1
         MOV     A,#-0xa
@@ -2533,14 +2511,7 @@ dllDataRequest:
 //  704        // HalLcdWriteString(uiTxBufferCC2530, 0);
 //  705         
 //  706         
-//  707         HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 19);
-        ; Setup parameters for call to function HalUARTWrite
-        MOV     R4,#0x13
-        MOV     R5,#0x0
-        MOV     R2,#uiTxBufferCC2530 & 0xff
-        MOV     R3,#(uiTxBufferCC2530 >> 8) & 0xff
-        MOV     R1,#0x1
-        LCALL   `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
+//  707         //HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 19);
 //  708         
 //  709         //HalLcdWriteString(uiTxBufferCC2530, 0);
 //  710         
@@ -2659,14 +2630,14 @@ dllDataRequest:
 
         END
 // 
-//   915 bytes in segment BANKED_CODE
+//   902 bytes in segment BANKED_CODE
 //    30 bytes in segment BANK_RELAYS
 //   112 bytes in segment XDATA_ROM_C
 // 1 308 bytes in segment XDATA_Z
 // 
 //    30 bytes of CODE     memory
 //   112 bytes of CONST    memory
-//   915 bytes of HUGECODE memory
+//   902 bytes of HUGECODE memory
 // 1 308 bytes of XDATA    memory
 //
 //Errors: none

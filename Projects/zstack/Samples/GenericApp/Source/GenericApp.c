@@ -324,7 +324,7 @@ void GenericApp_Init( uint8 task_id )
     dllInit();
     lookUpInit();
    // circularInit(&cMain);
-    //HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
+    HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
     //HalUARTSuspend();
      //halGPIOOutput(HW_PORT_D, 0x03, 0);
 
@@ -561,12 +561,12 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
     
     //HalLcdWriteString((char *)rxBuffer, 0);
    // HalUARTWrite(HAL_UART_PORT_1, (uint8 *)rxBuffer, 19);
-    HalUARTWrite(HAL_UART_PORT_1, "EVENT", 6);
-    HalLcdWriteString("-EVENT-", 0);
-    HalLcdWriteString((char *)uartConfig.rx.pBuffer, 0);
-    HalLcdWriteString("-EVENT-", 0);
+    //HalUARTWrite(HAL_UART_PORT_1, "EVENT", 6);
+    //HalLcdWriteString("-EVENT-", 0);
+   // HalLcdWriteString((char *)uartConfig.rx.pBuffer, 0);
+    //HalLcdWriteString("-EVENT-", 0);
     //HalUARTWrite(HAL_UART_PORT_0, "EVENT", 6);
-    //HalUARTWrite(HAL_UART_PORT_0, (uint8 *)rxBuffer, 19);
+    HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uartConfig.rx.pBuffer, 29);
     /*
     theMessage[GenericApp_DstAddress.addr.shortAddr][0] = (char)((ID >> 8) & 0x00FF);
     theMessage[GenericApp_DstAddress.addr.shortAddr][1] = (char)(ID & 0x00FF); 

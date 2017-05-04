@@ -269,6 +269,7 @@ uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
     }
   }
  */
+      /*
 #if (HAL_UART_DMA == 1)
   if (port == HAL_UART_PORT_0)  return HalUARTWriteDMA(buf, len);
 #endif
@@ -280,7 +281,7 @@ uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
   if (port == HAL_UART_PORT_0)  return HalUARTWriteISR(buf, len);
 #endif
 
-
+*/
 #if (HAL_UART_ISR == 2)
   
   if (port == HAL_UART_PORT_1) 
@@ -291,14 +292,14 @@ uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
   //return HalUARTWriteISR(buf, len);
 #endif
 
-#if HAL_UART_USB
+/*#if HAL_UART_USB
   HalUARTTx(buf, len);
   return len;
 #else
   return 0;
 #endif
-
-  //return 0;
+*/
+  return 0;
 }
 
 /******************************************************************************

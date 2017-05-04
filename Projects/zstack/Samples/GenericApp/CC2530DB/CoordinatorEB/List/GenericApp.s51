@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR C/C++ Compiler V9.30.3.3983 for 8051               04/May/2017  12:10:21
+// IAR C/C++ Compiler V9.30.3.3983 for 8051               04/May/2017  14:07:09
 // Copyright 2004-2016 IAR Systems AB.
 // Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 //
@@ -340,6 +340,8 @@ HalLcdWriteString   SYMBOL "HalLcdWriteString"
 `??HalLcdWriteString::?relay` SYMBOL "?relay", HalLcdWriteString
 HalLedSet           SYMBOL "HalLedSet"
 `??HalLedSet::?relay` SYMBOL "?relay", HalLedSet
+HalUARTOpen         SYMBOL "HalUARTOpen"
+`??HalUARTOpen::?relay` SYMBOL "?relay", HalUARTOpen
 HalUARTRead         SYMBOL "HalUARTRead"
 `??HalUARTRead::?relay` SYMBOL "?relay", HalUARTRead
 HalUARTWrite        SYMBOL "HalUARTWrite"
@@ -387,6 +389,8 @@ GenericApp_ProcessEvent SYMBOL "GenericApp_ProcessEvent"
         FUNCTION `??HalLcdWriteString::?relay`,00H
         EXTERN `??HalLedSet::?relay`
         FUNCTION `??HalLedSet::?relay`,00H
+        EXTERN `??HalUARTOpen::?relay`
+        FUNCTION `??HalUARTOpen::?relay`,00H
         EXTERN `??HalUARTRead::?relay`
         FUNCTION `??HalUARTRead::?relay`,00H
         EXTERN `??HalUARTWrite::?relay`
@@ -442,6 +446,13 @@ GenericApp_ProcessEvent SYMBOL "GenericApp_ProcessEvent"
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 35, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN HalUARTOpen
+        FUNCTION HalUARTOpen,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN HalUARTRead
@@ -1096,6 +1107,17 @@ GenericApp_Init:
         ARGFRAME XSTACK, 9, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL GenericApp_Init, HalUARTOpen
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
         MOV     A,#-0x9
         LCALL   ?BANKED_ENTER_XDATA
           CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
@@ -1212,7 +1234,12 @@ GenericApp_Init:
         ; Setup parameters for call to function lookUpInit
         LCALL   `??lookUpInit::?relay`; Banked call to: lookUpInit
 //  326    // circularInit(&cMain);
-//  327     //HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
+//  327     HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
+        ; Setup parameters for call to function HalUARTOpen
+        MOV     R2,#uartConfig & 0xff
+        MOV     R3,#(uartConfig >> 8) & 0xff
+        MOV     R1,#0x1
+        LCALL   `??HalUARTOpen::?relay`; Banked call to: HalUARTOpen
 //  328     //HalUARTSuspend();
 //  329      //halGPIOOutput(HW_PORT_D, 0x03, 0);
 //  330 
@@ -1466,39 +1493,6 @@ GenericApp_ProcessEvent:
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL GenericApp_ProcessEvent, HalUARTWrite
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 35, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 35, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL GenericApp_ProcessEvent, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 35, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 35, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL GenericApp_ProcessEvent, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 35, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 35, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL GenericApp_ProcessEvent, HalLcdWriteString
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
         LOCFRAME XSTACK, 35, STACK
@@ -2142,40 +2136,23 @@ GenericApp_ProcessEvent:
 //  561     
 //  562     //HalLcdWriteString((char *)rxBuffer, 0);
 //  563    // HalUARTWrite(HAL_UART_PORT_1, (uint8 *)rxBuffer, 19);
-//  564     HalUARTWrite(HAL_UART_PORT_1, "EVENT", 6);
+//  564     //HalUARTWrite(HAL_UART_PORT_1, "EVENT", 6);
+//  565     //HalLcdWriteString("-EVENT-", 0);
+//  566    // HalLcdWriteString((char *)uartConfig.rx.pBuffer, 0);
+//  567     //HalLcdWriteString("-EVENT-", 0);
+//  568     //HalUARTWrite(HAL_UART_PORT_0, "EVENT", 6);
+//  569     HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uartConfig.rx.pBuffer, 29);
         ; Setup parameters for call to function HalUARTWrite
-        MOV     R4,#0x6
+        MOV     R4,#0x1d
         MOV     R5,#0x0
-        MOV     R2,#`?<Constant "EVENT">` & 0xff
-        MOV     R3,#(`?<Constant "EVENT">` >> 8) & 0xff
-        MOV     R1,#0x1
-        LCALL   `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
-//  565     HalLcdWriteString("-EVENT-", 0);
-        MOV     ?V0,#`?<Constant "-EVENT-">` & 0xff
-        MOV     ?V1,#(`?<Constant "-EVENT-">` >> 8) & 0xff
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
-        MOV     R2,?V0
-        MOV     R3,?V1
-        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
-//  566     HalLcdWriteString((char *)uartConfig.rx.pBuffer, 0);
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
         MOV     DPTR,#uartConfig + 12
         MOVX    A,@DPTR
         MOV     R2,A
         INC     DPTR
         MOVX    A,@DPTR
         MOV     R3,A
-        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
-//  567     HalLcdWriteString("-EVENT-", 0);
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
-        MOV     R2,?V0
-        MOV     R3,?V1
-        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
-//  568     //HalUARTWrite(HAL_UART_PORT_0, "EVENT", 6);
-//  569     //HalUARTWrite(HAL_UART_PORT_0, (uint8 *)rxBuffer, 19);
+        MOV     R1,#0x1
+        LCALL   `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
 //  570     /*
 //  571     theMessage[GenericApp_DstAddress.addr.shortAddr][0] = (char)((ID >> 8) & 0x00FF);
 //  572     theMessage[GenericApp_DstAddress.addr.shortAddr][1] = (char)(ID & 0x00FF); 
@@ -2548,16 +2525,6 @@ GenericApp_ProcessEvent:
         DB 78
         DB 68
         DB 0
-
-        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
-        DATA8
-`?<Constant "EVENT">`:
-        DB "EVENT"
-
-        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
-        DATA8
-`?<Constant "-EVENT-">`:
-        DB "-EVENT-"
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA8
@@ -3072,16 +3039,16 @@ __Constant_3e8:
 // 1198 
 // 1199 /*********************************************************************/
 // 
-// 970 bytes in segment BANKED_CODE
+// 946 bytes in segment BANKED_CODE
 //  12 bytes in segment BANK_RELAYS
 //   6 bytes in segment XDATA_I
 //   6 bytes in segment XDATA_ID
-//  70 bytes in segment XDATA_ROM_C
+//  56 bytes in segment XDATA_ROM_C
 // 324 bytes in segment XDATA_Z
 // 
 //  18 bytes of CODE     memory
-//  66 bytes of CONST    memory (+ 4 bytes shared)
-// 970 bytes of HUGECODE memory
+//  52 bytes of CONST    memory (+ 4 bytes shared)
+// 946 bytes of HUGECODE memory
 // 330 bytes of XDATA    memory
 //
 //Errors: none

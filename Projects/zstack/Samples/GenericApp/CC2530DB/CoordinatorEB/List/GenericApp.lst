@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V9.30.3.3983 for 8051                04/May/2017  12:10:21
+# IAR C/C++ Compiler V9.30.3.3983 for 8051                04/May/2017  14:07:09
 # Copyright 2004-2016 IAR Systems AB.
 # Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 #
@@ -622,7 +622,12 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
    \   000061                ; Setup parameters for call to function lookUpInit
    \   000061   12....       LCALL   `??lookUpInit::?relay`; Banked call to: lookUpInit
     326             // circularInit(&cMain);
-    327              //HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
+    327              HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
+   \   000064                ; Setup parameters for call to function HalUARTOpen
+   \   000064   7A..         MOV     R2,#uartConfig & 0xff
+   \   000066   7B..         MOV     R3,#(uartConfig >> 8) & 0xff
+   \   000068   7901         MOV     R1,#0x1
+   \   00006A   12....       LCALL   `??HalUARTOpen::?relay`; Banked call to: HalUARTOpen
     328              //HalUARTSuspend();
     329               //halGPIOOutput(HW_PORT_D, 0x03, 0);
     330          
@@ -637,8 +642,8 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
     339              
     340            
     341          }
-   \   000064   7F01         MOV     R7,#0x1
-   \   000066   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00006D   7F01         MOV     R7,#0x1
+   \   00006F   02....       LJMP    ?BANKED_LEAVE_XDATA
     342          /*********************************************************************
     343           * @fn      GenericApp_EndPointList
     344           *
@@ -1205,40 +1210,23 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
     561              
     562              //HalLcdWriteString((char *)rxBuffer, 0);
     563             // HalUARTWrite(HAL_UART_PORT_1, (uint8 *)rxBuffer, 19);
-    564              HalUARTWrite(HAL_UART_PORT_1, "EVENT", 6);
-   \   00023D                ; Setup parameters for call to function HalUARTWrite
-   \   00023D   7C06         MOV     R4,#0x6
-   \   00023F   7D00         MOV     R5,#0x0
-   \   000241   7A..         MOV     R2,#`?<Constant "EVENT">` & 0xff
-   \   000243   7B..         MOV     R3,#(`?<Constant "EVENT">` >> 8) & 0xff
-   \   000245   7901         MOV     R1,#0x1
-   \   000247   12....       LCALL   `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
-    565              HalLcdWriteString("-EVENT-", 0);
-   \   00024A   75....       MOV     ?V0,#`?<Constant "-EVENT-">` & 0xff
-   \   00024D   75....       MOV     ?V1,#(`?<Constant "-EVENT-">` >> 8) & 0xff
-   \   000250                ; Setup parameters for call to function HalLcdWriteString
-   \   000250   7900         MOV     R1,#0x0
-   \   000252   AA..         MOV     R2,?V0
-   \   000254   AB..         MOV     R3,?V1
-   \   000256   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
-    566              HalLcdWriteString((char *)uartConfig.rx.pBuffer, 0);
-   \   000259                ; Setup parameters for call to function HalLcdWriteString
-   \   000259   7900         MOV     R1,#0x0
-   \   00025B   90....       MOV     DPTR,#uartConfig + 12
-   \   00025E   E0           MOVX    A,@DPTR
-   \   00025F   FA           MOV     R2,A
-   \   000260   A3           INC     DPTR
-   \   000261   E0           MOVX    A,@DPTR
-   \   000262   FB           MOV     R3,A
-   \   000263   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
-    567              HalLcdWriteString("-EVENT-", 0);
-   \   000266                ; Setup parameters for call to function HalLcdWriteString
-   \   000266   7900         MOV     R1,#0x0
-   \   000268   AA..         MOV     R2,?V0
-   \   00026A   AB..         MOV     R3,?V1
-   \   00026C   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+    564              //HalUARTWrite(HAL_UART_PORT_1, "EVENT", 6);
+    565              //HalLcdWriteString("-EVENT-", 0);
+    566             // HalLcdWriteString((char *)uartConfig.rx.pBuffer, 0);
+    567              //HalLcdWriteString("-EVENT-", 0);
     568              //HalUARTWrite(HAL_UART_PORT_0, "EVENT", 6);
-    569              //HalUARTWrite(HAL_UART_PORT_0, (uint8 *)rxBuffer, 19);
+    569              HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uartConfig.rx.pBuffer, 29);
+   \   00023D                ; Setup parameters for call to function HalUARTWrite
+   \   00023D   7C1D         MOV     R4,#0x1d
+   \   00023F   7D00         MOV     R5,#0x0
+   \   000241   90....       MOV     DPTR,#uartConfig + 12
+   \   000244   E0           MOVX    A,@DPTR
+   \   000245   FA           MOV     R2,A
+   \   000246   A3           INC     DPTR
+   \   000247   E0           MOVX    A,@DPTR
+   \   000248   FB           MOV     R3,A
+   \   000249   7901         MOV     R1,#0x1
+   \   00024B   12....       LCALL   `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
     570              /*
     571              theMessage[GenericApp_DstAddress.addr.shortAddr][0] = (char)((ID >> 8) & 0x00FF);
     572              theMessage[GenericApp_DstAddress.addr.shortAddr][1] = (char)(ID & 0x00FF); 
@@ -1274,80 +1262,80 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
     602              
     603            if ( events & GENERICAPP_SEND_MSG_EVT )
    \                     ??GenericApp_ProcessEvent_16:
-   \   00026F   EE           MOV     A,R6
-   \   000270   A2E0         MOV     C,0xE0 /* A   */.0
-   \   000272   4003         JC      $+5
-   \   000274   02....       LJMP    ??GenericApp_ProcessEvent_17 & 0xFFFF
+   \   00024E   EE           MOV     A,R6
+   \   00024F   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000251   4003         JC      $+5
+   \   000253   02....       LJMP    ??GenericApp_ProcessEvent_17 & 0xFFFF
     604            {
     605              if(keyPressSW4)
-   \   000277   90....       MOV     DPTR,#keyPressSW4
-   \   00027A   E0           MOVX    A,@DPTR
-   \   00027B   606B         JZ      ??GenericApp_ProcessEvent_18
+   \   000256   90....       MOV     DPTR,#keyPressSW4
+   \   000259   E0           MOVX    A,@DPTR
+   \   00025A   606B         JZ      ??GenericApp_ProcessEvent_18
     606              {
     607                
     608                dstAddr.addrMode = Addr16Bit;
-   \   00027D   7414         MOV     A,#0x14
-   \   00027F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000282   7402         MOV     A,#0x2
-   \   000284   F0           MOVX    @DPTR,A
+   \   00025C   7414         MOV     A,#0x14
+   \   00025E   12....       LCALL   ?XSTACK_DISP0_8
+   \   000261   7402         MOV     A,#0x2
+   \   000263   F0           MOVX    @DPTR,A
     609                dstAddr.addr.shortAddr = 0x0000;//NLME_GetShortAddr();//0x0000; // Coordinator
-   \   000285   740C         MOV     A,#0xc
-   \   000287   12....       LCALL   ?XSTACK_DISP0_8
-   \   00028A   E4           CLR     A
-   \   00028B   F0           MOVX    @DPTR,A
-   \   00028C   A3           INC     DPTR
-   \   00028D   F0           MOVX    @DPTR,A
+   \   000264   740C         MOV     A,#0xc
+   \   000266   12....       LCALL   ?XSTACK_DISP0_8
+   \   000269   E4           CLR     A
+   \   00026A   F0           MOVX    @DPTR,A
+   \   00026B   A3           INC     DPTR
+   \   00026C   F0           MOVX    @DPTR,A
     610                ZDP_EndDeviceBindReq( &dstAddr, 0x0000, //NLME_GetShortAddr(),
     611                                      GenericApp_epDesc.endPoint,
     612                                      GENERICAPP_PROFID,
     613                                      GENERICAPP_MAX_CLUSTERS, (cId_t *)GenericApp_ClusterList,
     614                                      GENERICAPP_MAX_CLUSTERS, (cId_t *)GenericApp_ClusterList,
     615                                      FALSE );
-   \   00028E   75....       MOV     ?V0,#GenericApp_ClusterList & 0xff
-   \   000291   75....       MOV     ?V1,#(GenericApp_ClusterList >> 8) & 0xff
-   \   000294                ; Setup parameters for call to function ZDP_EndDeviceBindReq
-   \   000294   F5..         MOV     ?V2,A
-   \   000296   78..         MOV     R0,#?V2
-   \   000298   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00029B   78..         MOV     R0,#?V0
-   \   00029D   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0002A0   75..01       MOV     ?V2,#0x1
-   \   0002A3   78..         MOV     R0,#?V2
-   \   0002A5   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0002A8   78..         MOV     R0,#?V0
-   \   0002AA   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0002AD   75..01       MOV     ?V0,#0x1
-   \   0002B0   78..         MOV     R0,#?V0
-   \   0002B2   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0002B5   75..04       MOV     ?V0,#0x4
-   \   0002B8   75..0F       MOV     ?V1,#0xf
-   \   0002BB   78..         MOV     R0,#?V0
-   \   0002BD   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   0002C0   90....       MOV     DPTR,#GenericApp_epDesc
-   \   0002C3   E0           MOVX    A,@DPTR
-   \   0002C4   F9           MOV     R1,A
-   \   0002C5   7C00         MOV     R4,#0x0
-   \   0002C7   7D00         MOV     R5,#0x0
-   \   0002C9   7415         MOV     A,#0x15
-   \   0002CB   12....       LCALL   ?XSTACK_DISP101_8
-   \   0002CE   12....       LCALL   `??ZDP_EndDeviceBindReq::?relay`; Banked call to: ZDP_EndDeviceBindReq
-   \   0002D1   7409         MOV     A,#0x9
-   \   0002D3   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00026D   75....       MOV     ?V0,#GenericApp_ClusterList & 0xff
+   \   000270   75....       MOV     ?V1,#(GenericApp_ClusterList >> 8) & 0xff
+   \   000273                ; Setup parameters for call to function ZDP_EndDeviceBindReq
+   \   000273   F5..         MOV     ?V2,A
+   \   000275   78..         MOV     R0,#?V2
+   \   000277   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   00027A   78..         MOV     R0,#?V0
+   \   00027C   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00027F   75..01       MOV     ?V2,#0x1
+   \   000282   78..         MOV     R0,#?V2
+   \   000284   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000287   78..         MOV     R0,#?V0
+   \   000289   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00028C   75..01       MOV     ?V0,#0x1
+   \   00028F   78..         MOV     R0,#?V0
+   \   000291   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000294   75..04       MOV     ?V0,#0x4
+   \   000297   75..0F       MOV     ?V1,#0xf
+   \   00029A   78..         MOV     R0,#?V0
+   \   00029C   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00029F   90....       MOV     DPTR,#GenericApp_epDesc
+   \   0002A2   E0           MOVX    A,@DPTR
+   \   0002A3   F9           MOV     R1,A
+   \   0002A4   7C00         MOV     R4,#0x0
+   \   0002A6   7D00         MOV     R5,#0x0
+   \   0002A8   7415         MOV     A,#0x15
+   \   0002AA   12....       LCALL   ?XSTACK_DISP101_8
+   \   0002AD   12....       LCALL   `??ZDP_EndDeviceBindReq::?relay`; Banked call to: ZDP_EndDeviceBindReq
+   \   0002B0   7409         MOV     A,#0x9
+   \   0002B2   12....       LCALL   ?DEALLOC_XSTACK8
     616                
     617                keyPressSW4 = 0;
-   \   0002D6   90....       MOV     DPTR,#keyPressSW4
-   \   0002D9   E4           CLR     A
-   \   0002DA   F0           MOVX    @DPTR,A
+   \   0002B5   90....       MOV     DPTR,#keyPressSW4
+   \   0002B8   E4           CLR     A
+   \   0002B9   F0           MOVX    @DPTR,A
     618                
     619                osal_set_event(GenericApp_TaskID,GENERICAPP_SEND_MSG_EVT);
-   \   0002DB                ; Setup parameters for call to function osal_set_event
-   \   0002DB   7A01         MOV     R2,#0x1
-   \   0002DD   FB           MOV     R3,A
-   \   0002DE   90....       MOV     DPTR,#GenericApp_TaskID
-   \   0002E1   E0           MOVX    A,@DPTR
-   \   0002E2   F9           MOV     R1,A
-   \   0002E3   12....       LCALL   `??osal_set_event::?relay`; Banked call to: osal_set_event
-   \   0002E6   8055         SJMP    ??GenericApp_ProcessEvent_19
+   \   0002BA                ; Setup parameters for call to function osal_set_event
+   \   0002BA   7A01         MOV     R2,#0x1
+   \   0002BC   FB           MOV     R3,A
+   \   0002BD   90....       MOV     DPTR,#GenericApp_TaskID
+   \   0002C0   E0           MOVX    A,@DPTR
+   \   0002C1   F9           MOV     R1,A
+   \   0002C2   12....       LCALL   `??osal_set_event::?relay`; Banked call to: osal_set_event
+   \   0002C5   8055         SJMP    ??GenericApp_ProcessEvent_19
     620                
     621              }
     622              else
@@ -1390,49 +1378,49 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
     659                 
     660                 GenericApp_SendTheMessage();
    \                     ??GenericApp_ProcessEvent_18:
-   \   0002E8   75..00       MOV     ?V0,#0x0
+   \   0002C7   75..00       MOV     ?V0,#0x0
    \                     ??GenericApp_ProcessEvent_20:
-   \   0002EB   E5..         MOV     A,?V0
-   \   0002ED   75F00A       MOV     B,#0xa
-   \   0002F0   A4           MUL     AB
-   \   0002F1   F8           MOV     R0,A
-   \   0002F2   AAF0         MOV     R2,B
-   \   0002F4   EA           MOV     A,R2
-   \   0002F5   F9           MOV     R1,A
-   \   0002F6   74..         MOV     A,#lutData & 0xff
-   \   0002F8   28           ADD     A,R0
-   \   0002F9   F582         MOV     DPL,A
-   \   0002FB   74..         MOV     A,#(lutData >> 8) & 0xff
-   \   0002FD   39           ADDC    A,R1
-   \   0002FE   F583         MOV     DPH,A
-   \   000300   E0           MOVX    A,@DPTR
-   \   000301   F8           MOV     R0,A
-   \   000302   A3           INC     DPTR
-   \   000303   E0           MOVX    A,@DPTR
-   \   000304   F9           MOV     R1,A
-   \   000305   E8           MOV     A,R0
-   \   000306   49           ORL     A,R1
-   \   000307   6014         JZ      ??GenericApp_ProcessEvent_21
-   \   000309                ; Setup parameters for call to function sendDataToPC
-   \   000309   E5..         MOV     A,?V0
-   \   00030B   75F00A       MOV     B,#0xa
-   \   00030E   A4           MUL     AB
-   \   00030F   F8           MOV     R0,A
-   \   000310   EA           MOV     A,R2
-   \   000311   F9           MOV     R1,A
-   \   000312   74..         MOV     A,#lutData & 0xff
-   \   000314   28           ADD     A,R0
-   \   000315   FA           MOV     R2,A
-   \   000316   74..         MOV     A,#(lutData >> 8) & 0xff
-   \   000318   39           ADDC    A,R1
-   \   000319   FB           MOV     R3,A
-   \   00031A   12....       LCALL   `??sendDataToPC::?relay`; Banked call to: sendDataToPC
+   \   0002CA   E5..         MOV     A,?V0
+   \   0002CC   75F00A       MOV     B,#0xa
+   \   0002CF   A4           MUL     AB
+   \   0002D0   F8           MOV     R0,A
+   \   0002D1   AAF0         MOV     R2,B
+   \   0002D3   EA           MOV     A,R2
+   \   0002D4   F9           MOV     R1,A
+   \   0002D5   74..         MOV     A,#lutData & 0xff
+   \   0002D7   28           ADD     A,R0
+   \   0002D8   F582         MOV     DPL,A
+   \   0002DA   74..         MOV     A,#(lutData >> 8) & 0xff
+   \   0002DC   39           ADDC    A,R1
+   \   0002DD   F583         MOV     DPH,A
+   \   0002DF   E0           MOVX    A,@DPTR
+   \   0002E0   F8           MOV     R0,A
+   \   0002E1   A3           INC     DPTR
+   \   0002E2   E0           MOVX    A,@DPTR
+   \   0002E3   F9           MOV     R1,A
+   \   0002E4   E8           MOV     A,R0
+   \   0002E5   49           ORL     A,R1
+   \   0002E6   6014         JZ      ??GenericApp_ProcessEvent_21
+   \   0002E8                ; Setup parameters for call to function sendDataToPC
+   \   0002E8   E5..         MOV     A,?V0
+   \   0002EA   75F00A       MOV     B,#0xa
+   \   0002ED   A4           MUL     AB
+   \   0002EE   F8           MOV     R0,A
+   \   0002EF   EA           MOV     A,R2
+   \   0002F0   F9           MOV     R1,A
+   \   0002F1   74..         MOV     A,#lutData & 0xff
+   \   0002F3   28           ADD     A,R0
+   \   0002F4   FA           MOV     R2,A
+   \   0002F5   74..         MOV     A,#(lutData >> 8) & 0xff
+   \   0002F7   39           ADDC    A,R1
+   \   0002F8   FB           MOV     R3,A
+   \   0002F9   12....       LCALL   `??sendDataToPC::?relay`; Banked call to: sendDataToPC
    \                     ??GenericApp_ProcessEvent_21:
-   \   00031D   05..         INC     ?V0
-   \   00031F   E5..         MOV     A,?V0
-   \   000321   C3           CLR     C
-   \   000322   9414         SUBB    A,#0x14
-   \   000324   40C5         JC      ??GenericApp_ProcessEvent_20
+   \   0002FC   05..         INC     ?V0
+   \   0002FE   E5..         MOV     A,?V0
+   \   000300   C3           CLR     C
+   \   000301   9414         SUBB    A,#0x14
+   \   000303   40C5         JC      ??GenericApp_ProcessEvent_20
     661                  //HalLcdWriteString("Sile before send",0);
     662               }
     663              
@@ -1448,17 +1436,17 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
     673               osal_start_timerEx( GenericApp_TaskID,
     674                                   GENERICAPP_SEND_MSG_EVT,
     675                                   1000); //txMsgDelay );
-   \   000326                ; Setup parameters for call to function osal_start_timerEx
-   \   000326   90....       MOV     DPTR,#__Constant_3e8
-   \   000329   12....       LCALL   ?PUSH_XSTACK8_X_FOUR
-   \   00032C   7A01         MOV     R2,#0x1
-   \   00032E   7B00         MOV     R3,#0x0
-   \   000330   90....       MOV     DPTR,#GenericApp_TaskID
-   \   000333   E0           MOVX    A,@DPTR
-   \   000334   F9           MOV     R1,A
-   \   000335   12....       LCALL   `??osal_start_timerEx::?relay`; Banked call to: osal_start_timerEx
-   \   000338   7404         MOV     A,#0x4
-   \   00033A   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000305                ; Setup parameters for call to function osal_start_timerEx
+   \   000305   90....       MOV     DPTR,#__Constant_3e8
+   \   000308   12....       LCALL   ?PUSH_XSTACK8_X_FOUR
+   \   00030B   7A01         MOV     R2,#0x1
+   \   00030D   7B00         MOV     R3,#0x0
+   \   00030F   90....       MOV     DPTR,#GenericApp_TaskID
+   \   000312   E0           MOVX    A,@DPTR
+   \   000313   F9           MOV     R1,A
+   \   000314   12....       LCALL   `??osal_start_timerEx::?relay`; Banked call to: osal_start_timerEx
+   \   000317   7404         MOV     A,#0x4
+   \   000319   12....       LCALL   ?DEALLOC_XSTACK8
     676              
     677              // osal_set_event(GenericApp_TaskID,GENERICAPP_SEND_MSG_EVT);
     678              
@@ -1466,13 +1454,13 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
     680              // return unprocessed events
     681              return (events ^ GENERICAPP_SEND_MSG_EVT);
    \                     ??GenericApp_ProcessEvent_19:
-   \   00033D   EE           MOV     A,R6
-   \   00033E   6401         XRL     A,#0x1
-   \   000340   FA           MOV     R2,A
-   \   000341   EF           MOV     A,R7
+   \   00031C   EE           MOV     A,R6
+   \   00031D   6401         XRL     A,#0x1
+   \   00031F   FA           MOV     R2,A
+   \   000320   EF           MOV     A,R7
    \                     ??GenericApp_ProcessEvent_15:
-   \   000342   FB           MOV     R3,A
-   \   000343   8004         SJMP    ??GenericApp_ProcessEvent_22
+   \   000321   FB           MOV     R3,A
+   \   000322   8004         SJMP    ??GenericApp_ProcessEvent_22
     682            }
     683          
     684          #if defined( IAR_ARMCM3_LM )
@@ -1490,13 +1478,13 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
     696            // Discard unknown events
     697            return 0;
    \                     ??GenericApp_ProcessEvent_17:
-   \   000345   7A00         MOV     R2,#0x0
-   \   000347   7B00         MOV     R3,#0x0
+   \   000324   7A00         MOV     R2,#0x0
+   \   000326   7B00         MOV     R3,#0x0
    \                     ??GenericApp_ProcessEvent_22:
-   \   000349   7415         MOV     A,#0x15
-   \   00034B   12....       LCALL   ?DEALLOC_XSTACK8
-   \   00034E   7F06         MOV     R7,#0x6
-   \   000350   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000328   7415         MOV     A,#0x15
+   \   00032A   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00032D   7F06         MOV     R7,#0x6
+   \   00032F   02....       LJMP    ?BANKED_LEAVE_XDATA
     698          }
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
@@ -1549,16 +1537,6 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
    \   000002   4E           DB 78
    \   000003   44           DB 68
    \   000004   00           DB 0
-
-   \                                 In  segment XDATA_ROM_C, align 1
-   \                     `?<Constant "EVENT">`:
-   \   000000   4556454E     DB "EVENT"
-   \            5400    
-
-   \                                 In  segment XDATA_ROM_C, align 1
-   \                     `?<Constant "-EVENT-">`:
-   \   000000   2D455645     DB "-EVENT-"
-   \            4E542D00
 
    \                                 In  segment XDATA_ROM_C, align 1
    \                     `?<Constant "End Device Match Desc">`:
@@ -2080,6 +2058,7 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
    ------ --------
       9   GenericApp_Init
         9   -> HalLcdWriteString
+        9   -> HalUARTOpen
         9   -> RegisterForKeys
         9   -> ZDO_RegisterForZDOMsg
         9   -> afRegister
@@ -2108,8 +2087,6 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
 
    Bytes  Function/Label
    -----  --------------
-       8  ?<Constant "-EVENT-">
-       6  ?<Constant "EVENT">
       22  ?<Constant "End Device Match Desc">
       11  ?<Constant "GenericApp">
        5  ?<Constant {83, 69, 78, 68, 0}>
@@ -2120,10 +2097,10 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
        2  GenericApp_ClusterList
       12  GenericApp_DstAddr
       12  GenericApp_DstAddress
-     105  GenericApp_Init
+     114  GenericApp_Init
        6  GenericApp_Init::?relay
        1  GenericApp_NwkState
-     851  GenericApp_ProcessEvent
+     818  GenericApp_ProcessEvent
        6  GenericApp_ProcessEvent::?relay
       12  GenericApp_SimpleDesc
        1  GenericApp_TaskID
@@ -2148,16 +2125,16 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Projects\zstack\Samples\Gene
       29  uartConfig
 
  
- 970 bytes in segment BANKED_CODE
+ 946 bytes in segment BANKED_CODE
   12 bytes in segment BANK_RELAYS
    6 bytes in segment XDATA_I
    6 bytes in segment XDATA_ID
-  70 bytes in segment XDATA_ROM_C
+  56 bytes in segment XDATA_ROM_C
  324 bytes in segment XDATA_Z
  
   18 bytes of CODE     memory
-  66 bytes of CONST    memory (+ 4 bytes shared)
- 970 bytes of HUGECODE memory
+  52 bytes of CONST    memory (+ 4 bytes shared)
+ 946 bytes of HUGECODE memory
  330 bytes of XDATA    memory
 
 Errors: none

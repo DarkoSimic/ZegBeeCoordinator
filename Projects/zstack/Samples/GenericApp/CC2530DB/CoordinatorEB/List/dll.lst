@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V9.30.3.3983 for 8051                04/May/2017  12:10:20
+# IAR C/C++ Compiler V9.30.3.3983 for 8051                04/May/2017  14:07:09
 # Copyright 2004-2016 IAR Systems AB.
 # Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 #
@@ -1493,21 +1493,14 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\dll.c
     704                 // HalLcdWriteString(uiTxBufferCC2530, 0);
     705                  
     706                  
-    707                  HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 19);
-   \   000083                ; Setup parameters for call to function HalUARTWrite
-   \   000083   7C13         MOV     R4,#0x13
-   \   000085   7D00         MOV     R5,#0x0
-   \   000087   7A..         MOV     R2,#uiTxBufferCC2530 & 0xff
-   \   000089   7B..         MOV     R3,#(uiTxBufferCC2530 >> 8) & 0xff
-   \   00008B   7901         MOV     R1,#0x1
-   \   00008D   12....       LCALL   `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
+    707                  //HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 19);
     708                  
     709                  //HalLcdWriteString(uiTxBufferCC2530, 0);
     710                  
     711          	emFlagCC2530 = EMISSION_START;
-   \   000090   90....       MOV     DPTR,#emFlagCC2530
-   \   000093   7401         MOV     A,#0x1
-   \   000095   F0           MOVX    @DPTR,A
+   \   000083   90....       MOV     DPTR,#emFlagCC2530
+   \   000086   7401         MOV     A,#0x1
+   \   000088   F0           MOVX    @DPTR,A
     712          	
     713          	//idde = emPacket.appData.devID;//
     714                  
@@ -1545,8 +1538,8 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\dll.c
     746                  //HalLcdWriteString("-----------------------------Borislav----------------------",0);
     747          
     748          }
-   \   000096   7409         MOV     A,#0x9
-   \   000098   02....       LJMP    ?Subroutine1 & 0xFFFF
+   \   000089   7409         MOV     A,#0x9
+   \   00008B   02....       LJMP    ?Subroutine1 & 0xFFFF
 
    \                                 In  segment BANK_RELAYS, align 1
    \                     `??dllInit::?relay`:
@@ -1618,7 +1611,6 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\dll.c
    ------ ------ --------
       2      0   CallBackRegister
       1     28   dllDataRequest
-        0     19   -> HalUARTWrite
         0     28   -> packFrameToStell
       2      0   dllInit
         2      0   -> circularInit
@@ -1648,7 +1640,7 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\dll.c
        6  CallBackRegister::?relay
      260  cTxBufferCC2530
        2  callBack
-     155  dllDataRequest
+     142  dllDataRequest
        6  dllDataRequest::?relay
       24  dllInit
        6  dllInit::?relay
@@ -1669,14 +1661,14 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\dll.c
      256  uiTxBufferCC2530
 
  
-   915 bytes in segment BANKED_CODE
+   902 bytes in segment BANKED_CODE
     30 bytes in segment BANK_RELAYS
    112 bytes in segment XDATA_ROM_C
  1 308 bytes in segment XDATA_Z
  
     30 bytes of CODE     memory
    112 bytes of CONST    memory
-   915 bytes of HUGECODE memory
+   902 bytes of HUGECODE memory
  1 308 bytes of XDATA    memory
 
 Errors: none
