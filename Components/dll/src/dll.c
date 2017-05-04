@@ -701,10 +701,10 @@ void dllDataRequest(Data_t *aData)
         
        // halUARTWrite(port, cTxBuffer, 0);
         
-         //HalLcdWriteString(uiTxBufferCC2530, 0);
+       // HalLcdWriteString(uiTxBufferCC2530, 0);
         
         
-        HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 1);
+        HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 19);
         
         //HalLcdWriteString(uiTxBufferCC2530, 0);
         

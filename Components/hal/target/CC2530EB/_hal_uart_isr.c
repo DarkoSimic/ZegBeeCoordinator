@@ -290,6 +290,7 @@ static void HalUARTInitISR(void)
  
     
     U1BAUD = 0x3A; 
+    IEN0 |= 0x08;
     /*
   PxSEL  |= HAL_UART_Px_RX_TX;       // Enable Tx and Rx on P1.
   ADCCFG &= ~HAL_UART_Px_RX_TX;      // Make sure ADC doesnt use this.
@@ -449,10 +450,18 @@ uint16 HalUARTWriteISR(uint8 *buf, uint16 len)
   // Enforce all or none.
   if (HalUARTTxAvailISR() < len)
   {
-    HalLcdWriteString("Miso----------------------",0);
+    //HalLcdWriteString("Miso----------------------",0);
     return 0;
   }
-
+for(i=0;i<len;i++)
+  {
+   //U1DBUF = '1';//
+   U1DBUF = *(buf + i);
+   // HalLcdWriteString("Micin----------------------",0);
+    while((U1CSR & 0x01) == 0x01)
+    {
+    }
+  }
   for (cnt = 0; cnt < len; cnt++)
   {
     isrCfg.txBuf[isrCfg.txTail] = *buf++;
@@ -461,25 +470,18 @@ uint16 HalUARTWriteISR(uint8 *buf, uint16 len)
     if (isrCfg.txTail >= HAL_UART_ISR_TX_MAX-1)
     {
       isrCfg.txTail = 0;
-        HalLcdWriteString("Simic----------------------",0);
+        //HalLcdWriteString("Simic----------------------",0);
     }
     else
     {
       isrCfg.txTail++;
-      HalLcdWriteString("Savan----------------------",0);
+      //HalLcdWriteString("Savan----------------------",0);
     }
 
     // Keep re-enabling ISR as it might be keeping up with this loop due to other ints.
-   // IEN2 |= UTXxIE;  
+    IEN2 |= UTXxIE;  
   }
-  for(i=0;i<len;i++)
-  {
-   U1DBUF = '1';//*(buf + i);
-    //HalLcdWriteString("Micin----------------------",0);
-    while((U1CSR & 0x01) == 0x01)
-    {
-    }
-  }
+  
 
   return cnt;
 }
@@ -619,9 +621,20 @@ HAL_ISR_FUNCTION( halUart1RxIsr, URX1_VECTOR )
 #endif
 
 {
+  
+  //uint8 tmp = UxDBUF;
+ // char str[2];
+  
   uint8 tmp = UxDBUF;
+  char str[2];
   isrCfg.rxBuf[isrCfg.rxTail] = tmp;
-
+  
+  /*
+  if((U1CSR & 0x04) == 0x04)
+    {
+      tmp = UxDBUF;;
+      isrCfg.rxBuf[isrCfg.rxTail] = tmp;
+    */
   // Re-sync the shadow on any 1st byte received.
   if (isrCfg.rxHead == isrCfg.rxTail)
   {
@@ -635,7 +648,16 @@ HAL_ISR_FUNCTION( halUart1RxIsr, URX1_VECTOR )
 
   isrCfg.rxTick = HAL_UART_ISR_IDLE;
   ////////////////////////////////////////////////////////////////////////////////////// 
+  //HalLcdWriteString("--------- SET LAZO -------------",0); 
   halProcessUartInterrupt();
+  *str = (char)(isrCfg.rxTail) + '0';
+  str[1] = '\0';
+  HalLcdWriteString("--------- SET LAZO -------------",0); 
+  HalLcdWriteString((char *)isrCfg.rxBuf, 0);
+  HalLcdWriteString(str, 0);
+  HalLcdWriteString("--------- SET LAZO -------------",0); 
+  
+  
   ////////////////////////////////////////////////////////////////////////////////////// 
   ///osal_set_event(Hal_TaskID, HAL_UART_EVENT);
  //osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);

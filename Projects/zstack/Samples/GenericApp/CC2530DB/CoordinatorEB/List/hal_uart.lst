@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V9.30.3.3983 for 8051                03/May/2017  16:53:08
+# IAR C/C++ Compiler V9.30.3.3983 for 8051                04/May/2017  12:10:21
 # Copyright 2004-2016 IAR Systems AB.
 # Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 #
@@ -309,7 +309,7 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
    \   000005                ; Auto size: 0
    \   000005   7800         MOV     R0,#0x0
    \   000007   7900         MOV     R1,#0x0
-   \   000009   802E         SJMP    ??HalUARTReadISR_0
+   \   000009   8027         SJMP    ??HalUARTReadISR_0
    \                     ??HalUARTReadISR_1:
    \   00000B   74..         MOV     A,#isrCfg & 0xff
    \   00000D   2E           ADD     A,R6
@@ -324,44 +324,49 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
    \   00001B   90....       MOV     DPTR,#isrCfg + 128
    \   00001E   E0           MOVX    A,@DPTR
    \   00001F   04           INC     A
-   \   000020   F0           MOVX    @DPTR,A
-   \   000021   8A82         MOV     DPL,R2
-   \   000023   8B83         MOV     DPH,R3
-   \   000025   A3           INC     DPTR
-   \   000026   AA82         MOV     R2,DPL
-   \   000028   AB83         MOV     R3,DPH
-   \   00002A   C3           CLR     C
-   \   00002B   9480         SUBB    A,#-0x80
-   \   00002D   4005         JC      ??HalUARTReadISR_2
-   \   00002F   90....       MOV     DPTR,#isrCfg + 128
-   \   000032   E4           CLR     A
-   \   000033   F0           MOVX    @DPTR,A
+   \   000020   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_0:
+   \   000023   C3           CLR     C
+   \   000024   9480         SUBB    A,#-0x80
+   \   000026   4005         JC      ??HalUARTReadISR_2
+   \   000028   90....       MOV     DPTR,#isrCfg + 128
+   \   00002B   E4           CLR     A
+   \   00002C   F0           MOVX    @DPTR,A
    \                     ??HalUARTReadISR_2:
-   \   000034   08           INC     R0
-   \   000035   E8           MOV     A,R0
-   \   000036   7001         JNZ     ??HalUARTReadISR_0
-   \   000038   09           INC     R1
+   \   00002D   08           INC     R0
+   \   00002E   E8           MOV     A,R0
+   \   00002F   7001         JNZ     ??HalUARTReadISR_0
+   \   000031   09           INC     R1
    \                     ??HalUARTReadISR_0:
-   \   000039   90....       MOV     DPTR,#isrCfg + 128
-   \   00003C   E0           MOVX    A,@DPTR
-   \   00003D   FE           MOV     R6,A
-   \   00003E   A3           INC     DPTR
-   \   00003F   E0           MOVX    A,@DPTR
-   \   000040   6E           XRL     A,R6
-   \   000041   6007         JZ      ??HalUARTReadISR_3
-   \   000043   C3           CLR     C
-   \   000044   E8           MOV     A,R0
-   \   000045   9C           SUBB    A,R4
-   \   000046   E9           MOV     A,R1
-   \   000047   9D           SUBB    A,R5
-   \   000048   40C1         JC      ??HalUARTReadISR_1
+   \   000032   90....       MOV     DPTR,#isrCfg + 128
+   \   000035   E0           MOVX    A,@DPTR
+   \   000036   FE           MOV     R6,A
+   \   000037   A3           INC     DPTR
+   \   000038   E0           MOVX    A,@DPTR
+   \   000039   6E           XRL     A,R6
+   \   00003A   6007         JZ      ??HalUARTReadISR_3
+   \   00003C   C3           CLR     C
+   \   00003D   E8           MOV     A,R0
+   \   00003E   9C           SUBB    A,R4
+   \   00003F   E9           MOV     A,R1
+   \   000040   9D           SUBB    A,R5
+   \   000041   40C8         JC      ??HalUARTReadISR_1
    \                     ??HalUARTReadISR_3:
-   \   00004A   E8           MOV     A,R0
-   \   00004B   FA           MOV     R2,A
-   \   00004C   E9           MOV     A,R1
-   \   00004D   FB           MOV     R3,A
-   \   00004E                REQUIRE ?Subroutine0
-   \   00004E                ; // Fall through to label ?Subroutine0
+   \   000043   E8           MOV     A,R0
+   \   000044   FA           MOV     R2,A
+   \   000045   E9           MOV     A,R1
+   \   000046   FB           MOV     R3,A
+   \   000047   02....       LJMP    ?Subroutine0 & 0xFFFF
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   F0           MOVX    @DPTR,A
+   \   000001   8A82         MOV     DPL,R2
+   \   000003   8B83         MOV     DPH,R3
+   \   000005   A3           INC     DPTR
+   \   000006   AA82         MOV     R2,DPL
+   \   000008   AB83         MOV     R3,DPH
+   \   00000A   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
@@ -372,154 +377,136 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
    \   __banked_func __xdata_reentrant uint16 HalUARTWriteISR(uint8 *, uint16)
    \                     HalUARTWriteISR:
    \   000000                REQUIRE ?V0
-   \   000000                REQUIRE ?V1
-   \   000000                REQUIRE ?V2
-   \   000000                REQUIRE ?V3
-   \   000000                REQUIRE ?V4
-   \   000000   74F3         MOV     A,#-0xd
+   \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 13
+   \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-   \   000005   EA           MOV     A,R2
-   \   000006   FE           MOV     R6,A
-   \   000007   EB           MOV     A,R3
-   \   000008   FF           MOV     R7,A
-   \   000009   8C..         MOV     ?V0,R4
-   \   00000B   8D..         MOV     ?V1,R5
-   \   00000D   75..00       MOV     ?V4,#0x0
-   \   000010   90....       MOV     DPTR,#isrCfg + 260
-   \   000013   E0           MOVX    A,@DPTR
-   \   000014   F8           MOV     R0,A
-   \   000015   A3           INC     DPTR
-   \   000016   E0           MOVX    A,@DPTR
-   \   000017   C3           CLR     C
-   \   000018   98           SUBB    A,R0
-   \   000019   90....       MOV     DPTR,#isrCfg + 260
-   \   00001C   E0           MOVX    A,@DPTR
-   \   00001D   FA           MOV     R2,A
-   \   00001E   A3           INC     DPTR
-   \   00001F   E0           MOVX    A,@DPTR
-   \   000020   F8           MOV     R0,A
-   \   000021   EA           MOV     A,R2
-   \   000022   5010         JNC     ??HalUARTWriteISR_0
-   \   000024   C3           CLR     C
-   \   000025   98           SUBB    A,R0
-   \   000026   F8           MOV     R0,A
-   \   000027   95E0         SUBB    A,0xE0 /* A   */
+   \   000005   75..00       MOV     ?V0,#0x0
+   \   000008   90....       MOV     DPTR,#isrCfg + 260
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   F8           MOV     R0,A
+   \   00000D   A3           INC     DPTR
+   \   00000E   E0           MOVX    A,@DPTR
+   \   00000F   C3           CLR     C
+   \   000010   98           SUBB    A,R0
+   \   000011   90....       MOV     DPTR,#isrCfg + 260
+   \   000014   E0           MOVX    A,@DPTR
+   \   000015   FE           MOV     R6,A
+   \   000016   A3           INC     DPTR
+   \   000017   E0           MOVX    A,@DPTR
+   \   000018   F8           MOV     R0,A
+   \   000019   EE           MOV     A,R6
+   \   00001A   5010         JNC     ??HalUARTWriteISR_0
+   \   00001C   C3           CLR     C
+   \   00001D   98           SUBB    A,R0
+   \   00001E   F8           MOV     R0,A
+   \   00001F   95E0         SUBB    A,0xE0 /* A   */
+   \   000021   F9           MOV     R1,A
+   \   000022   E8           MOV     A,R0
+   \   000023   24FF         ADD     A,#-0x1
+   \   000025   18           DEC     R0
+   \   000026   E9           MOV     A,R1
+   \   000027   34FF         ADDC    A,#-0x1
    \   000029   F9           MOV     R1,A
-   \   00002A   E8           MOV     A,R0
-   \   00002B   24FF         ADD     A,#-0x1
-   \   00002D   18           DEC     R0
-   \   00002E   E9           MOV     A,R1
-   \   00002F   34FF         ADDC    A,#-0x1
-   \   000031   F9           MOV     R1,A
-   \   000032   800D         SJMP    ??HalUARTWriteISR_1
+   \   00002A   800D         SJMP    ??HalUARTWriteISR_1
    \                     ??HalUARTWriteISR_0:
-   \   000034   C3           CLR     C
-   \   000035   98           SUBB    A,R0
-   \   000036   F8           MOV     R0,A
-   \   000037   95E0         SUBB    A,0xE0 /* A   */
-   \   000039   F9           MOV     R1,A
-   \   00003A   E8           MOV     A,R0
-   \   00003B   247F         ADD     A,#0x7f
-   \   00003D   F8           MOV     R0,A
-   \   00003E   5001         JNC     ??HalUARTWriteISR_1
-   \   000040   09           INC     R1
+   \   00002C   C3           CLR     C
+   \   00002D   98           SUBB    A,R0
+   \   00002E   F8           MOV     R0,A
+   \   00002F   95E0         SUBB    A,0xE0 /* A   */
+   \   000031   F9           MOV     R1,A
+   \   000032   E8           MOV     A,R0
+   \   000033   247F         ADD     A,#0x7f
+   \   000035   F8           MOV     R0,A
+   \   000036   5001         JNC     ??HalUARTWriteISR_1
+   \   000038   09           INC     R1
    \                     ??HalUARTWriteISR_1:
-   \   000041   C3           CLR     C
-   \   000042   E8           MOV     A,R0
-   \   000043   95..         SUBB    A,?V0
-   \   000045   E9           MOV     A,R1
-   \   000046   95..         SUBB    A,?V1
-   \   000048   500F         JNC     ??HalUARTWriteISR_2
-   \   00004A                ; Setup parameters for call to function HalLcdWriteString
-   \   00004A   7900         MOV     R1,#0x0
-   \   00004C   7A..         MOV     R2,#`?<Constant "Miso-----------------...">` & 0xff
-   \   00004E   7B..         MOV     R3,#(`?<Constant "Miso-----------------...">` >> 8) & 0xff
-   \   000050   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
-   \   000053   7A00         MOV     R2,#0x0
-   \   000055   7B00         MOV     R3,#0x0
-   \   000057   8077         SJMP    ??HalUARTWriteISR_3
-   \                     ??HalUARTWriteISR_2:
-   \   000059   75..00       MOV     ?V2,#0x0
-   \   00005C   75..00       MOV     ?V3,#0x0
-   \   00005F   8014         SJMP    ??HalUARTWriteISR_4
-   \                     ??HalUARTWriteISR_5:
-   \   000061   E0           MOVX    A,@DPTR
-   \   000062   04           INC     A
-   \   000063   F0           MOVX    @DPTR,A
-   \   000064                ; Setup parameters for call to function HalLcdWriteString
-   \   000064   7900         MOV     R1,#0x0
-   \   000066   7A..         MOV     R2,#`?<Constant "Savan----------------...">` & 0xff
-   \   000068   7B..         MOV     R3,#(`?<Constant "Savan----------------...">` >> 8) & 0xff
-   \                     ??HalUARTWriteISR_6:
-   \   00006A   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
-   \   00006D   05..         INC     ?V2
-   \   00006F   E5..         MOV     A,?V2
-   \   000071   7002         JNZ     ??HalUARTWriteISR_4
-   \   000073   05..         INC     ?V3
+   \   000039   C3           CLR     C
+   \   00003A   E8           MOV     A,R0
+   \   00003B   9C           SUBB    A,R4
+   \   00003C   E9           MOV     A,R1
+   \   00003D   9D           SUBB    A,R5
+   \   00003E   5019         JNC     ??HalUARTWriteISR_2
+   \   000040   7A00         MOV     R2,#0x0
+   \   000042   7B00         MOV     R3,#0x0
+   \   000044   8063         SJMP    ??HalUARTWriteISR_3
    \                     ??HalUARTWriteISR_4:
-   \   000075   C3           CLR     C
-   \   000076   E5..         MOV     A,?V2
-   \   000078   95..         SUBB    A,?V0
-   \   00007A   E5..         MOV     A,?V3
-   \   00007C   95..         SUBB    A,?V1
-   \   00007E   5042         JNC     ??HalUARTWriteISR_7
-   \   000080   8E82         MOV     DPL,R6
-   \   000082   8F83         MOV     DPH,R7
-   \   000084   E0           MOVX    A,@DPTR
-   \   000085   C0E0         PUSH    A
-   \   000087   90....       MOV     DPTR,#isrCfg + 261
-   \   00008A   E0           MOVX    A,@DPTR
-   \   00008B   F8           MOV     R0,A
-   \   00008C   74..         MOV     A,#(isrCfg + 132) & 0xff
-   \   00008E   28           ADD     A,R0
-   \   00008F   F582         MOV     DPL,A
-   \   000091   E4           CLR     A
-   \   000092   34..         ADDC    A,#((isrCfg + 132) >> 8) & 0xff
-   \   000094   F583         MOV     DPH,A
-   \   000096   D0E0         POP     A
-   \   000098   F0           MOVX    @DPTR,A
-   \   000099   8E82         MOV     DPL,R6
-   \   00009B   8F83         MOV     DPH,R7
-   \   00009D   A3           INC     DPTR
-   \   00009E   AE82         MOV     R6,DPL
-   \   0000A0   AF83         MOV     R7,DPH
-   \   0000A2   90....       MOV     DPTR,#isrCfg + 262
-   \   0000A5   E4           CLR     A
-   \   0000A6   F0           MOVX    @DPTR,A
-   \   0000A7   90....       MOV     DPTR,#isrCfg + 261
-   \   0000AA   E0           MOVX    A,@DPTR
-   \   0000AB   C3           CLR     C
-   \   0000AC   947F         SUBB    A,#0x7f
-   \   0000AE   40B1         JC      ??HalUARTWriteISR_5
-   \   0000B0   E4           CLR     A
-   \   0000B1   F0           MOVX    @DPTR,A
-   \   0000B2                ; Setup parameters for call to function HalLcdWriteString
-   \   0000B2   F9           MOV     R1,A
-   \   0000B3   7A..         MOV     R2,#`?<Constant "Simic----------------...">` & 0xff
-   \   0000B5   7B..         MOV     R3,#(`?<Constant "Simic----------------...">` >> 8) & 0xff
-   \   0000B7   80B1         SJMP    ??HalUARTWriteISR_6
-   \                     ??HalUARTWriteISR_8:
-   \   0000B9   75F931       MOV     0xf9,#0x31
-   \                     ??HalUARTWriteISR_9:
-   \   0000BC   A2F8         MOV     C,0xf8.0
-   \   0000BE   40FC         JC      ??HalUARTWriteISR_9
-   \   0000C0   05..         INC     ?V4
+   \   000046   A8..         MOV     R0,?V0
+   \   000048   EA           MOV     A,R2
+   \   000049   28           ADD     A,R0
+   \   00004A   F582         MOV     DPL,A
+   \   00004C   E4           CLR     A
+   \   00004D   3B           ADDC    A,R3
+   \   00004E   F583         MOV     DPH,A
+   \   000050   E0           MOVX    A,@DPTR
+   \   000051   F5F9         MOV     0xf9,A
+   \                     ??HalUARTWriteISR_5:
+   \   000053   A2F8         MOV     C,0xf8.0
+   \   000055   40FC         JC      ??HalUARTWriteISR_5
+   \   000057   05..         INC     ?V0
+   \                     ??HalUARTWriteISR_2:
+   \   000059   C3           CLR     C
+   \   00005A   E5..         MOV     A,?V0
+   \   00005C   9C           SUBB    A,R4
+   \   00005D   E4           CLR     A
+   \   00005E   9D           SUBB    A,R5
+   \   00005F   40E5         JC      ??HalUARTWriteISR_4
+   \   000061   7800         MOV     R0,#0x0
+   \   000063   7900         MOV     R1,#0x0
+   \   000065   800B         SJMP    ??HalUARTWriteISR_6
    \                     ??HalUARTWriteISR_7:
-   \   0000C2   C3           CLR     C
-   \   0000C3   E5..         MOV     A,?V4
-   \   0000C5   95..         SUBB    A,?V0
-   \   0000C7   E4           CLR     A
-   \   0000C8   95..         SUBB    A,?V1
-   \   0000CA   40ED         JC      ??HalUARTWriteISR_8
-   \   0000CC   AA..         MOV     R2,?V2
-   \   0000CE   AB..         MOV     R3,?V3
+   \   000067   E0           MOVX    A,@DPTR
+   \   000068   04           INC     A
+   \                     ??HalUARTWriteISR_8:
+   \   000069   F0           MOVX    @DPTR,A
+   \   00006A   439A08       ORL     0x9a,#0x8
+   \   00006D   08           INC     R0
+   \   00006E   E8           MOV     A,R0
+   \   00006F   7001         JNZ     ??HalUARTWriteISR_6
+   \   000071   09           INC     R1
+   \                     ??HalUARTWriteISR_6:
+   \   000072   C3           CLR     C
+   \   000073   E8           MOV     A,R0
+   \   000074   9C           SUBB    A,R4
+   \   000075   E9           MOV     A,R1
+   \   000076   9D           SUBB    A,R5
+   \   000077   502C         JNC     ??HalUARTWriteISR_9
+   \   000079   8A82         MOV     DPL,R2
+   \   00007B   8B83         MOV     DPH,R3
+   \   00007D   E0           MOVX    A,@DPTR
+   \   00007E   C0E0         PUSH    A
+   \   000080   90....       MOV     DPTR,#isrCfg + 261
+   \   000083   E0           MOVX    A,@DPTR
+   \   000084   FE           MOV     R6,A
+   \   000085   74..         MOV     A,#(isrCfg + 132) & 0xff
+   \   000087   2E           ADD     A,R6
+   \   000088   F582         MOV     DPL,A
+   \   00008A   E4           CLR     A
+   \   00008B   34..         ADDC    A,#((isrCfg + 132) >> 8) & 0xff
+   \   00008D   F583         MOV     DPH,A
+   \   00008F   D0E0         POP     A
+   \   000091   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_1:
+   \   000094   90....       MOV     DPTR,#isrCfg + 262
+   \   000097   E4           CLR     A
+   \   000098   F0           MOVX    @DPTR,A
+   \   000099   90....       MOV     DPTR,#isrCfg + 261
+   \   00009C   E0           MOVX    A,@DPTR
+   \   00009D   C3           CLR     C
+   \   00009E   947F         SUBB    A,#0x7f
+   \   0000A0   40C5         JC      ??HalUARTWriteISR_7
+   \   0000A2   E4           CLR     A
+   \   0000A3   80C4         SJMP    ??HalUARTWriteISR_8
+   \                     ??HalUARTWriteISR_9:
+   \   0000A5   E8           MOV     A,R0
+   \   0000A6   FA           MOV     R2,A
+   \   0000A7   E9           MOV     A,R1
+   \   0000A8   FB           MOV     R3,A
    \                     ??HalUARTWriteISR_3:
-   \   0000D0   7F05         MOV     R7,#0x5
-   \   0000D2   02....       LJMP    ?BANKED_LEAVE_XDATA
-   \   0000D5                REQUIRE U1DBUF
-   \   0000D5                REQUIRE _A_U1CSR
+   \   0000A9   02....       LJMP    ?Subroutine0 & 0xFFFF
+   \   0000AC                REQUIRE U1DBUF
+   \   0000AC                REQUIRE _A_U1CSR
+   \   0000AC                REQUIRE IEN2
 
    \                                 In  segment NEAR_CODE, align 1, keep-with-next
    \   __near_func __xdata_reentrant __interrupt void halUart1RxIsr(void)
@@ -528,51 +515,85 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
    \   000002   74F2         MOV     A,#-0xe
    \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
    \   000007                ; Saved register size: 14
-   \   000007                ; Auto size: 0
-   \   000007   A8F9         MOV     R0,0xf9+0x0
-   \   000009   E8           MOV     A,R0
-   \   00000A   C0E0         PUSH    A
-   \   00000C   90....       MOV     DPTR,#isrCfg + 129
-   \   00000F   E0           MOVX    A,@DPTR
-   \   000010   F8           MOV     R0,A
-   \   000011   74..         MOV     A,#isrCfg & 0xff
-   \   000013   28           ADD     A,R0
-   \   000014   F582         MOV     DPL,A
-   \   000016   E4           CLR     A
-   \   000017   34..         ADDC    A,#(isrCfg >> 8) & 0xff
-   \   000019   F583         MOV     DPH,A
-   \   00001B   D0E0         POP     A
-   \   00001D   F0           MOVX    @DPTR,A
-   \   00001E   90....       MOV     DPTR,#isrCfg + 128
-   \   000021   E0           MOVX    A,@DPTR
-   \   000022   F8           MOV     R0,A
-   \   000023   A3           INC     DPTR
-   \   000024   E0           MOVX    A,@DPTR
-   \   000025   68           XRL     A,R0
-   \   000026   7006         JNZ     ??halUart1RxIsr_0
-   \   000028   E595         MOV     A,0x95
-   \   00002A   90....       MOV     DPTR,#isrCfg + 131
-   \   00002D   F0           MOVX    @DPTR,A
+   \   000007                ; Auto size: 2
+   \   000007   74FE         MOV     A,#-0x2
+   \   000009   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000C   A8F9         MOV     R0,0xf9+0x0
+   \   00000E   E8           MOV     A,R0
+   \   00000F   C0E0         PUSH    A
+   \   000011   90....       MOV     DPTR,#isrCfg + 129
+   \   000014   E0           MOVX    A,@DPTR
+   \   000015   F8           MOV     R0,A
+   \   000016   74..         MOV     A,#isrCfg & 0xff
+   \   000018   28           ADD     A,R0
+   \   000019   F582         MOV     DPL,A
+   \   00001B   E4           CLR     A
+   \   00001C   34..         ADDC    A,#(isrCfg >> 8) & 0xff
+   \   00001E   F583         MOV     DPH,A
+   \   000020   D0E0         POP     A
+   \   000022   F0           MOVX    @DPTR,A
+   \   000023   90....       MOV     DPTR,#isrCfg + 128
+   \   000026   E0           MOVX    A,@DPTR
+   \   000027   F8           MOV     R0,A
+   \   000028   A3           INC     DPTR
+   \   000029   E0           MOVX    A,@DPTR
+   \   00002A   68           XRL     A,R0
+   \   00002B   7006         JNZ     ??halUart1RxIsr_0
+   \   00002D   E595         MOV     A,0x95
+   \   00002F   90....       MOV     DPTR,#isrCfg + 131
+   \   000032   F0           MOVX    @DPTR,A
    \                     ??halUart1RxIsr_0:
-   \   00002E   90....       MOV     DPTR,#isrCfg + 129
-   \   000031   E0           MOVX    A,@DPTR
-   \   000032   04           INC     A
-   \   000033   F0           MOVX    @DPTR,A
-   \   000034   C3           CLR     C
-   \   000035   9480         SUBB    A,#-0x80
-   \   000037   4002         JC      ??halUart1RxIsr_1
-   \   000039   E4           CLR     A
-   \   00003A   F0           MOVX    @DPTR,A
+   \   000033   90....       MOV     DPTR,#isrCfg + 129
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   04           INC     A
+   \   000038   F0           MOVX    @DPTR,A
+   \   000039   C3           CLR     C
+   \   00003A   9480         SUBB    A,#-0x80
+   \   00003C   4002         JC      ??halUart1RxIsr_1
+   \   00003E   E4           CLR     A
+   \   00003F   F0           MOVX    @DPTR,A
    \                     ??halUart1RxIsr_1:
-   \   00003B   A3           INC     DPTR
-   \   00003C   74C6         MOV     A,#-0x3a
-   \   00003E   F0           MOVX    @DPTR,A
-   \   00003F                ; Setup parameters for call to function halProcessUartInterrupt
-   \   00003F   12....       LCALL   `??halProcessUartInterrupt::?relay`; Banked call to: halProcessUartInterrupt
-   \   000042   7F01         MOV     R7,#0x1
-   \   000044   02....       LJMP    ?INTERRUPT_LEAVE_XSP
-   \   000047                REQUIRE U1DBUF
-   \   000047                REQUIRE ST0
+   \   000040   A3           INC     DPTR
+   \   000041   74C6         MOV     A,#-0x3a
+   \   000043   F0           MOVX    @DPTR,A
+   \   000044                ; Setup parameters for call to function halProcessUartInterrupt
+   \   000044   12....       LCALL   `??halProcessUartInterrupt::?relay`; Banked call to: halProcessUartInterrupt
+   \   000047   90....       MOV     DPTR,#isrCfg + 129
+   \   00004A   E0           MOVX    A,@DPTR
+   \   00004B   2430         ADD     A,#0x30
+   \   00004D   85..82       MOV     DPL,?XSP + 0
+   \   000050   85..83       MOV     DPH,?XSP + 1
+   \   000053   F0           MOVX    @DPTR,A
+   \   000054   7401         MOV     A,#0x1
+   \   000056   12....       LCALL   ?XSTACK_DISP0_8
+   \   000059   E4           CLR     A
+   \   00005A   F0           MOVX    @DPTR,A
+   \   00005B                ; Setup parameters for call to function HalLcdWriteString
+   \   00005B   F9           MOV     R1,A
+   \   00005C   7A..         MOV     R2,#`?<Constant "--------- SET LAZO --...">` & 0xff
+   \   00005E   7B..         MOV     R3,#(`?<Constant "--------- SET LAZO --...">` >> 8) & 0xff
+   \   000060   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+   \   000063                ; Setup parameters for call to function HalLcdWriteString
+   \   000063   7900         MOV     R1,#0x0
+   \   000065   7A..         MOV     R2,#isrCfg & 0xff
+   \   000067   7B..         MOV     R3,#(isrCfg >> 8) & 0xff
+   \   000069   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+   \   00006C                ; Setup parameters for call to function HalLcdWriteString
+   \   00006C   7900         MOV     R1,#0x0
+   \   00006E   AA..         MOV     R2,?XSP + 0
+   \   000070   AB..         MOV     R3,?XSP + 1
+   \   000072   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+   \   000075                ; Setup parameters for call to function HalLcdWriteString
+   \   000075   7900         MOV     R1,#0x0
+   \   000077   7A..         MOV     R2,#`?<Constant "--------- SET LAZO --...">` & 0xff
+   \   000079   7B..         MOV     R3,#(`?<Constant "--------- SET LAZO --...">` >> 8) & 0xff
+   \   00007B   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+   \   00007E   7402         MOV     A,#0x2
+   \   000080   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000083   7F01         MOV     R7,#0x1
+   \   000085   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+   \   000088                REQUIRE U1DBUF
+   \   000088                REQUIRE ST0
 
    \                                 In  segment NEAR_CODE, align 1, keep-with-next
    \   __near_func __xdata_reentrant __interrupt void halUart1TxIsr(void)
@@ -761,6 +782,7 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
    \   000062   75F8C0       MOV     0xf8,#-0x40
    \   000065   75FC08       MOV     0xfc,#0x8
    \   000068   75FA3A       MOV     0xfa,#0x3a
+   \   00006B   D2AB         SETB    0xa8.3
     155          
     156            
     157          //#endif
@@ -770,20 +792,20 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
     161          #endif
     162            */
     163          }
-   \   00006B                REQUIRE ?Subroutine1
-   \   00006B                REQUIRE CLKCONCMD
-   \   00006B                REQUIRE P2INP
-   \   00006B                REQUIRE P2DIR
-   \   00006B                REQUIRE PERCFG
-   \   00006B                REQUIRE P0SEL
-   \   00006B                REQUIRE U0CSR
-   \   00006B                REQUIRE U0GCR
-   \   00006B                REQUIRE U0BAUD
-   \   00006B                REQUIRE P1SEL
-   \   00006B                REQUIRE _A_U1CSR
-   \   00006B                REQUIRE U1GCR
-   \   00006B                REQUIRE U1BAUD
-   \   00006B                ; // Fall through to label ?Subroutine1
+   \   00006D   02....       LJMP    ?Subroutine1 & 0xFFFF
+   \   000070                REQUIRE CLKCONCMD
+   \   000070                REQUIRE P2INP
+   \   000070                REQUIRE P2DIR
+   \   000070                REQUIRE PERCFG
+   \   000070                REQUIRE P0SEL
+   \   000070                REQUIRE U0CSR
+   \   000070                REQUIRE U0GCR
+   \   000070                REQUIRE U0BAUD
+   \   000070                REQUIRE P1SEL
+   \   000070                REQUIRE _A_U1CSR
+   \   000070                REQUIRE U1GCR
+   \   000070                REQUIRE U1BAUD
+   \   000070                REQUIRE _A_IEN0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine1:
@@ -913,14 +935,14 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
     200            return HAL_UART_SUCCESS;
    \                     ??HalUARTOpen_0:
    \   00007A   7900         MOV     R1,#0x0
-   \   00007C   02....       LJMP    ?Subroutine1 & 0xFFFF
-   \   00007F                REQUIRE U1BAUD
-   \   00007F                REQUIRE U1GCR
-   \   00007F                REQUIRE U1UCR
-   \   00007F                REQUIRE P1SEL
-   \   00007F                REQUIRE _A_U1CSR
-   \   00007F                REQUIRE _A_IEN0
-   \   00007F                REQUIRE _A_IRCON2
+   \   00007C   80..         SJMP    ?Subroutine1
+   \   00007E                REQUIRE U1BAUD
+   \   00007E                REQUIRE U1GCR
+   \   00007E                REQUIRE U1UCR
+   \   00007E                REQUIRE P1SEL
+   \   00007E                REQUIRE _A_U1CSR
+   \   00007E                REQUIRE _A_IEN0
+   \   00007E                REQUIRE _A_IRCON2
     201          }
     202          
     203          /*****************************************************************************
@@ -982,7 +1004,8 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
    \   000011   7A00         MOV     R2,#0x0
    \   000013   7B00         MOV     R3,#0x0
    \                     ??HalUARTRead_1:
-   \   000015   02....       LJMP    ?Subroutine0 & 0xFFFF
+   \   000015                REQUIRE ?Subroutine0
+   \   000015                ; // Fall through to label ?Subroutine0
     243          }
     244          
     245          /******************************************************************************
@@ -1001,20 +1024,12 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
     256          uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
    \                     HalUARTWrite:
     257          {
-   \   000000                REQUIRE ?V0
-   \   000000                REQUIRE ?V1
-   \   000000                REQUIRE ?V2
-   \   000000   74F5         MOV     A,#-0xb
+   \   000000   74F7         MOV     A,#-0x9
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 11
+   \   000005                ; Saved register size: 9
    \   000005                ; Auto size: 0
-   \   000005   89..         MOV     ?V2,R1
-   \   000007   EA           MOV     A,R2
-   \   000008   FE           MOV     R6,A
-   \   000009   EB           MOV     A,R3
-   \   00000A   FF           MOV     R7,A
-   \   00000B   8C..         MOV     ?V0,R4
-   \   00000D   8D..         MOV     ?V1,R5
+   \   000005   E9           MOV     A,R1
+   \   000006   FE           MOV     R6,A
     258            (void)port;
     259            (void)buf;
     260            (void)len;
@@ -1044,26 +1059,15 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
     284          #if (HAL_UART_ISR == 2)
     285            
     286            if (port == HAL_UART_PORT_1) 
-   \   00000F   7401         MOV     A,#0x1
-   \   000011   65..         XRL     A,?V2
-   \   000013   7016         JNZ     ??HalUARTWrite_0
+   \   000007   7401         MOV     A,#0x1
+   \   000009   6E           XRL     A,R6
+   \   00000A   7005         JNZ     ??HalUARTWrite_0
     287            {
-    288              HalLcdWriteString("Sico----------------------",0);
-   \   000015                ; Setup parameters for call to function HalLcdWriteString
-   \   000015   7900         MOV     R1,#0x0
-   \   000017   7A..         MOV     R2,#`?<Constant "Sico-----------------...">` & 0xff
-   \   000019   7B..         MOV     R3,#(`?<Constant "Sico-----------------...">` >> 8) & 0xff
-   \   00001B   12....       LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+    288             // HalLcdWriteString("Sico----------------------",0);
     289              return HalUARTWriteISR(buf, len);
-   \   00001E                ; Setup parameters for call to function HalUARTWriteISR
-   \   00001E   AC..         MOV     R4,?V0
-   \   000020   AD..         MOV     R5,?V1
-   \   000022   EE           MOV     A,R6
-   \   000023   FA           MOV     R2,A
-   \   000024   EF           MOV     A,R7
-   \   000025   FB           MOV     R3,A
-   \   000026   12....       LCALL   `??HalUARTWriteISR::?relay`; Banked call to: HalUARTWriteISR
-   \   000029   8004         SJMP    ??HalUARTWrite_1
+   \   00000C                ; Setup parameters for call to function HalUARTWriteISR
+   \   00000C   12....       LCALL   `??HalUARTWriteISR::?relay`; Banked call to: HalUARTWriteISR
+   \   00000F   8004         SJMP    ??HalUARTWrite_1
     290            }
     291            //return HalUARTWriteISR(buf, len);
     292          #endif
@@ -1074,11 +1078,10 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
     297          #else
     298            return 0;
    \                     ??HalUARTWrite_0:
-   \   00002B   7A00         MOV     R2,#0x0
-   \   00002D   7B00         MOV     R3,#0x0
+   \   000011   7A00         MOV     R2,#0x0
+   \   000013   7B00         MOV     R3,#0x0
    \                     ??HalUARTWrite_1:
-   \   00002F   7F03         MOV     R7,#0x3
-   \   000031   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000015   80..         SJMP    ?Subroutine0
     299          #endif
     300          
     301            //return 0;
@@ -1247,7 +1250,8 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
    \   000032   7A00         MOV     R2,#0x0
    \   000034   7B00         MOV     R3,#0x0
    \                     ??Hal_UART_RxBufLen_3:
-   \   000036   02....       LJMP    ?Subroutine1 & 0xFFFF
+   \   000036                REQUIRE ?Subroutine1
+   \   000036                ; // Fall through to label ?Subroutine1
     402          #endif
     403            
     404            
@@ -1260,39 +1264,35 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
     409          void halProcessUartInterrupt (void)
    \                     halProcessUartInterrupt:
     410          {
-   \   000000                REQUIRE ?V0
-   \   000000                REQUIRE ?V1
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 10
-   \   000005                ; Auto size: 0
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
     411            //osal_set_event(Hal_TaskID, HAL_UART_EVENT);
     412            //if(MIN_FRAME_SIZE <= HalUARTReadISR(RX_BUFFER, 128))
-    413            if(HalUARTReadISR(RX_BUFFER, 128))    ////////////////////////////////////////////////////////////////// ovdje treba uporediti sa minimalnom velicinom bafera, definisati MIN_FRAME_SIZE
-   \   000005                ; Setup parameters for call to function HalUARTReadISR
-   \   000005   7C80         MOV     R4,#-0x80
-   \   000007   7D00         MOV     R5,#0x0
-   \   000009   7A..         MOV     R2,#RX_BUFFER & 0xff
-   \   00000B   7B..         MOV     R3,#(RX_BUFFER >> 8) & 0xff
-   \   00000D   12....       LCALL   `??HalUARTReadISR::?relay`; Banked call to: HalUARTReadISR
-   \   000010   8B..         MOV     ?V1,R3
-   \   000012   EA           MOV     A,R2
-   \   000013   45..         ORL     A,?V1
-   \   000015   600C         JZ      ??halProcessUartInterrupt_0
-    414            {
-    415              osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
-   \   000017                ; Setup parameters for call to function osal_set_event
-   \   000017   7A00         MOV     R2,#0x0
-   \   000019   7B01         MOV     R3,#0x1
-   \   00001B   90....       MOV     DPTR,#GenericApp_TaskID
-   \   00001E   E0           MOVX    A,@DPTR
-   \   00001F   F9           MOV     R1,A
-   \   000020   12....       LCALL   `??osal_set_event::?relay`; Banked call to: osal_set_event
-    416            }
-    417          }
-   \                     ??halProcessUartInterrupt_0:
-   \   000023   7F02         MOV     R7,#0x2
-   \   000025   02....       LJMP    ?BANKED_LEAVE_XDATA
+    413            /*HalUARTReadISR(RX_BUFFER, 128);
+    414            HalLcdWriteString("--------- SET EVENT -------------",0); 
+    415            osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);*/
+    416          
+    417           // if(HalUARTReadISR(RX_BUFFER, 128))    ////////////////////////////////////////////////////////////////// ovdje treba uporediti sa minimalnom velicinom bafera, definisati MIN_FRAME_SIZE
+    418           // {
+    419              //HalLcdWriteString("--------- SET EVENT -------------",0); 
+    420              /*
+    421              HalLcdWriteString("--------- SET LAZO -------------",0); 
+    422            HalLcdWriteString((char *)RX_BUFFER, 0);
+    423            HalLcdWriteString("--------- SET LAZO -------------",0);
+    424            */
+    425              osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
+   \   000004                ; Setup parameters for call to function osal_set_event
+   \   000004   7A00         MOV     R2,#0x0
+   \   000006   7B01         MOV     R3,#0x1
+   \   000008   90....       MOV     DPTR,#GenericApp_TaskID
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   F9           MOV     R1,A
+   \   00000D   12....       LCALL   `??osal_set_event::?relay`; Banked call to: osal_set_event
+    426           // }
+    427          }
+   \   000010   80..         SJMP    ?Subroutine1
 
    \                                 In  segment INTVEC, offset 0x1b, root
    \                     `??halUart1RxIsr::??INTVEC 27`:
@@ -1358,47 +1358,19 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
    \   000003   ......       DC24    halProcessUartInterrupt
 
    \                                 In  segment XDATA_ROM_C, align 1
-   \                     `?<Constant "Miso-----------------...">`:
-   \   000000   4D69736F     DB "Miso----------------------"
+   \                     `?<Constant "--------- SET LAZO --...">`:
+   \   000000   2D2D2D2D     DB "--------- SET LAZO -------------"
+   \            2D2D2D2D
+   \            2D205345
+   \            54204C41
+   \            5A4F202D
    \            2D2D2D2D
    \            2D2D2D2D
    \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D00  
-
-   \                                 In  segment XDATA_ROM_C, align 1
-   \                     `?<Constant "Simic----------------...">`:
-   \   000000   53696D69     DB "Simic----------------------"
-   \            632D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D00
-
-   \                                 In  segment XDATA_ROM_C, align 1
-   \                     `?<Constant "Savan----------------...">`:
-   \   000000   53617661     DB "Savan----------------------"
-   \            6E2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D00
-
-   \                                 In  segment XDATA_ROM_C, align 1
-   \                     `?<Constant "Sico-----------------...">`:
-   \   000000   5369636F     DB "Sico----------------------"
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D2D2D
-   \            2D2D00  
-    418          ////////////////////////////////////////////////////////////////////////////////////// 
-    419          /******************************************************************************
-    420          ******************************************************************************/
+   \            00      
+    428          ////////////////////////////////////////////////////////////////////////////////////// 
+    429          /******************************************************************************
+    430          ******************************************************************************/
 
    Maximum stack usage in bytes:
 
@@ -1409,20 +1381,18 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
       0      0   HalUARTPoll
       0      9   HalUARTRead
         0      9   -> HalUARTReadISR
-      1     19   HalUARTReadISR
+      1     18   HalUARTReadISR
       0      0   HalUARTResume
       0      0   HalUARTSuspend
-      0     11   HalUARTWrite
-        0     11   -> HalLcdWriteString
-        0     11   -> HalUARTWriteISR
-      1     24   HalUARTWriteISR
-        0     13   -> HalLcdWriteString
+      0      9   HalUARTWrite
+        0      9   -> HalUARTWriteISR
+      1     18   HalUARTWriteISR
       2      0   Hal_UART_RxBufLen
-      0     24   halProcessUartInterrupt
-        0     10   -> HalUARTReadISR
-        0     10   -> osal_set_event
-      1     14   halUart1RxIsr
-        0     14   -> halProcessUartInterrupt
+      2     16   halProcessUartInterrupt
+        2      0   -> osal_set_event
+      1     16   halUart1RxIsr
+        0     16   -> HalLcdWriteString
+        0     16   -> halProcessUartInterrupt
       6      0   halUart1TxIsr
 
 
@@ -1430,32 +1400,30 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
 
    Bytes  Function/Label
    -----  --------------
-      27  ?<Constant "Miso-----------------...">
-      28  ?<Constant "Savan----------------...">
-      27  ?<Constant "Sico-----------------...">
-      28  ?<Constant "Simic----------------...">
+      33  ?<Constant "--------- SET LAZO --...">
        5  ?Subroutine0
        7  ?Subroutine1
+      11  ?Subroutine2
        1  CLKCONCMD
-     107  HalUARTInit
+     112  HalUARTInit
        6  HalUARTInit::?relay
-     127  HalUARTOpen
+     126  HalUARTOpen
        6  HalUARTOpen::?relay
        3  HalUARTPoll
        6  HalUARTPoll::?relay
-      24  HalUARTRead
+      21  HalUARTRead
        6  HalUARTRead::?relay
-      78  HalUARTReadISR
+      74  HalUARTReadISR
        6  HalUARTReadISR::?relay
        3  HalUARTResume
        6  HalUARTResume::?relay
        3  HalUARTSuspend
        6  HalUARTSuspend::?relay
-      52  HalUARTWrite
+      23  HalUARTWrite
        6  HalUARTWrite::?relay
-     213  HalUARTWriteISR
+     172  HalUARTWriteISR
        6  HalUARTWriteISR::?relay
-      57  Hal_UART_RxBufLen
+      54  Hal_UART_RxBufLen
        6  Hal_UART_RxBufLen::?relay
        1  IEN2
        1  P0SEL
@@ -1476,27 +1444,27 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\hal\target\CC2530
        1  _A_IEN0
        1  _A_IRCON2
        1  _A_U1CSR
-      40  halProcessUartInterrupt
+      18  halProcessUartInterrupt
        6  halProcessUartInterrupt::?relay
-      71  halUart1RxIsr
+     136  halUart1RxIsr
        3  halUart1RxIsr::??INTVEC 27
       82  halUart1TxIsr
        3  halUart1TxIsr::??INTVEC 115
      265  isrCfg
 
  
- 719 bytes in segment BANKED_CODE
+ 632 bytes in segment BANKED_CODE
   66 bytes in segment BANK_RELAYS
    6 bytes in segment INTVEC
- 153 bytes in segment NEAR_CODE
+ 218 bytes in segment NEAR_CODE
   18 bytes in segment SFR_AN
- 110 bytes in segment XDATA_ROM_C
+  33 bytes in segment XDATA_ROM_C
  521 bytes in segment XDATA_Z
  
- 219 bytes of CODE     memory (+  6 bytes shared)
- 110 bytes of CONST    memory
+ 284 bytes of CODE     memory (+  6 bytes shared)
+  33 bytes of CONST    memory
    0 bytes of DATA     memory (+ 18 bytes shared)
- 719 bytes of HUGECODE memory
+ 632 bytes of HUGECODE memory
  521 bytes of XDATA    memory
 
 Errors: none

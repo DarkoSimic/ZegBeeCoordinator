@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V9.30.3.3983 for 8051                03/May/2017  16:53:08
+# IAR C/C++ Compiler V9.30.3.3983 for 8051                04/May/2017  12:10:20
 # Copyright 2004-2016 IAR Systems AB.
 # Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 #
@@ -1490,12 +1490,12 @@ C:\Users\ljuic\Desktop\New folder\ZigBeeCoordinator\Components\dll\src\dll.c
     701                  
     702                 // halUARTWrite(port, cTxBuffer, 0);
     703                  
-    704                   //HalLcdWriteString(uiTxBufferCC2530, 0);
+    704                 // HalLcdWriteString(uiTxBufferCC2530, 0);
     705                  
     706                  
-    707                  HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 1);
+    707                  HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 19);
    \   000083                ; Setup parameters for call to function HalUARTWrite
-   \   000083   7C01         MOV     R4,#0x1
+   \   000083   7C13         MOV     R4,#0x13
    \   000085   7D00         MOV     R5,#0x0
    \   000087   7A..         MOV     R2,#uiTxBufferCC2530 & 0xff
    \   000089   7B..         MOV     R3,#(uiTxBufferCC2530 >> 8) & 0xff

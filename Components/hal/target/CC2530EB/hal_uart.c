@@ -285,7 +285,7 @@ uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
   
   if (port == HAL_UART_PORT_1) 
   {
-    HalLcdWriteString("Sico----------------------",0);
+   // HalLcdWriteString("Sico----------------------",0);
     return HalUARTWriteISR(buf, len);
   }
   //return HalUARTWriteISR(buf, len);
@@ -410,10 +410,20 @@ void halProcessUartInterrupt (void)
 {
   //osal_set_event(Hal_TaskID, HAL_UART_EVENT);
   //if(MIN_FRAME_SIZE <= HalUARTReadISR(RX_BUFFER, 128))
-  if(HalUARTReadISR(RX_BUFFER, 128))    ////////////////////////////////////////////////////////////////// ovdje treba uporediti sa minimalnom velicinom bafera, definisati MIN_FRAME_SIZE
-  {
+  /*HalUARTReadISR(RX_BUFFER, 128);
+  HalLcdWriteString("--------- SET EVENT -------------",0); 
+  osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);*/
+
+ // if(HalUARTReadISR(RX_BUFFER, 128))    ////////////////////////////////////////////////////////////////// ovdje treba uporediti sa minimalnom velicinom bafera, definisati MIN_FRAME_SIZE
+ // {
+    //HalLcdWriteString("--------- SET EVENT -------------",0); 
+    /*
+    HalLcdWriteString("--------- SET LAZO -------------",0); 
+  HalLcdWriteString((char *)RX_BUFFER, 0);
+  HalLcdWriteString("--------- SET LAZO -------------",0);
+  */
     osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
-  }
+ // }
 }
 ////////////////////////////////////////////////////////////////////////////////////// 
 /******************************************************************************

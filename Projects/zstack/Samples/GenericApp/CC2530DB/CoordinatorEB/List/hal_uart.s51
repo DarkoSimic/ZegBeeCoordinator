@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR C/C++ Compiler V9.30.3.3983 for 8051               03/May/2017  16:53:08
+// IAR C/C++ Compiler V9.30.3.3983 for 8051               04/May/2017  12:10:21
 // Copyright 2004-2016 IAR Systems AB.
 // Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 //
@@ -118,16 +118,16 @@
         RSEG XSTACK:XDATA:NOROOT(0)
 
         EXTERN ?V0
-        EXTERN ?V1
-        EXTERN ?V2
-        EXTERN ?V3
-        EXTERN ?V4
+        EXTERN ?ALLOC_XSTACK8
         EXTERN ?BANKED_ENTER_XDATA
         EXTERN ?BANKED_LEAVE_XDATA
         EXTERN ?BDISPATCH
         EXTERN ?BRET
+        EXTERN ?DEALLOC_XSTACK8
         EXTERN ?INTERRUPT_ENTER_XSP
         EXTERN ?INTERRUPT_LEAVE_XSP
+        EXTERN ?XSP
+        EXTERN ?XSTACK_DISP0_8
         EXTERN __INIT_XDATA_Z
 
         PUBLIC `??HalUARTInit::?relay`
@@ -172,7 +172,7 @@
         LOCFRAME XSTACK, 9, STACK
         PUBLIC HalUARTReadISR
         FUNCTION HalUARTReadISR,0203H
-        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME XSTACK, 9, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         LOCFRAME ISTACK, 1, STACK
@@ -184,16 +184,16 @@
         FUNCTION HalUARTSuspend,0203H
         ARGFRAME XSTACK, 0, STACK
         PUBLIC HalUARTWrite
-        FUNCTION HalUARTWrite,0a1203H
+        FUNCTION HalUARTWrite,021203H
         ARGFRAME XSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
+        LOCFRAME XSTACK, 9, STACK
         PUBLIC HalUARTWriteISR
-        FUNCTION HalUARTWriteISR,0a1203H
-        ARGFRAME XSTACK, 11, STACK
+        FUNCTION HalUARTWriteISR,080203H
+        ARGFRAME XSTACK, 9, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         LOCFRAME ISTACK, 1, STACK
-        LOCFRAME XSTACK, 13, STACK
+        LOCFRAME XSTACK, 9, STACK
         PUBLIC Hal_UART_RxBufLen
         FUNCTION Hal_UART_RxBufLen,0203H
         ARGFRAME XSTACK, 0, STACK
@@ -218,16 +218,16 @@
         PUBWEAK _A_IRCON2
         PUBWEAK _A_U1CSR
         PUBLIC halProcessUartInterrupt
-        FUNCTION halProcessUartInterrupt,0a1203H
-        ARGFRAME XSTACK, 14, STACK
+        FUNCTION halProcessUartInterrupt,021203H
+        ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        LOCFRAME XSTACK, 10, STACK
+        LOCFRAME ISTACK, 2, STACK
         PUBLIC halUart1RxIsr
         FUNCTION halUart1RxIsr,021233H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 1, STACK
-        LOCFRAME XSTACK, 14, STACK
+        LOCFRAME XSTACK, 16, STACK
         PUBLIC halUart1TxIsr
         FUNCTION halUart1TxIsr,0233H
         ARGFRAME XSTACK, 0, STACK
@@ -428,14 +428,14 @@ halUart1TxIsr       SYMBOL "halUart1TxIsr"
         FUNCTION HalLcdWriteString,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
+        ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN osal_set_event
         FUNCTION osal_set_event,0202H
-        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME ISTACK, 2, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME XSTACK, 0, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN uartConfig
@@ -698,12 +698,8 @@ HalUARTReadISR:
         MOV     DPTR,#isrCfg + 128
         MOVX    A,@DPTR
         INC     A
-        MOVX    @DPTR,A
-        MOV     DPL,R2
-        MOV     DPH,R3
-        INC     DPTR
-        MOV     R2,DPL
-        MOV     R3,DPH
+        LCALL   ?Subroutine2 & 0xFFFF
+??CrossCallReturnLabel_0:
         CLR     C
         SUBB    A,#-0x80
         JC      ??HalUARTReadISR_2
@@ -734,74 +730,17 @@ HalUARTReadISR:
         MOV     R2,A
         MOV     A,R1
         MOV     R3,A
+        LJMP    ?Subroutine0 & 0xFFFF
           CFI EndBlock cfiBlock0
-        REQUIRE ?Subroutine0
-        ; // Fall through to label ?Subroutine0
-
-        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-?Subroutine0:
-          CFI Block cfiBlock1 Using cfiCommon0
-          CFI NoFunction
-          CFI CFA_SP SP+0
-          CFI CFA_XSP16 add(XSP16, 9)
-          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
-          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        MOV     R7,#0x1
-        LJMP    ?BANKED_LEAVE_XDATA
-          CFI EndBlock cfiBlock1
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 // __banked_func __xdata_reentrant uint16 HalUARTWriteISR(uint8 *, uint16)
 HalUARTWriteISR:
-          CFI Block cfiBlock2 Using cfiCommon0
+          CFI Block cfiBlock1 Using cfiCommon0
           CFI Function HalUARTWriteISR
         CODE
-        FUNCALL HalUARTWriteISR, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalUARTWriteISR, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        FUNCALL HalUARTWriteISR, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         REQUIRE ?V0
-        REQUIRE ?V1
-        REQUIRE ?V2
-        REQUIRE ?V3
-        REQUIRE ?V4
-        MOV     A,#-0xd
+        MOV     A,#-0x9
         LCALL   ?BANKED_ENTER_XDATA
           CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
           CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
@@ -809,24 +748,14 @@ HalUARTWriteISR:
           CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
           CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
           CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-          CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-          CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-          CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-          CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-12)))
-          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
           CFI CFA_SP SP+0
-          CFI CFA_XSP16 add(XSP16, 13)
-        ; Saved register size: 13
+          CFI CFA_XSP16 add(XSP16, 9)
+        ; Saved register size: 9
         ; Auto size: 0
-        MOV     A,R2
-        MOV     R6,A
-        MOV     A,R3
-        MOV     R7,A
-        MOV     ?V0,R4
-        MOV     ?V1,R5
-        MOV     ?V4,#0x0
+        MOV     ?V0,#0x0
         MOV     DPTR,#isrCfg + 260
         MOVX    A,@DPTR
         MOV     R0,A
@@ -836,11 +765,11 @@ HalUARTWriteISR:
         SUBB    A,R0
         MOV     DPTR,#isrCfg + 260
         MOVX    A,@DPTR
-        MOV     R2,A
+        MOV     R6,A
         INC     DPTR
         MOVX    A,@DPTR
         MOV     R0,A
-        MOV     A,R2
+        MOV     A,R6
         JNC     ??HalUARTWriteISR_0
         CLR     C
         SUBB    A,R0
@@ -868,65 +797,72 @@ HalUARTWriteISR:
 ??HalUARTWriteISR_1:
         CLR     C
         MOV     A,R0
-        SUBB    A,?V0
+        SUBB    A,R4
         MOV     A,R1
-        SUBB    A,?V1
+        SUBB    A,R5
         JNC     ??HalUARTWriteISR_2
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
-        MOV     R2,#`?<Constant "Miso-----------------...">` & 0xff
-        MOV     R3,#(`?<Constant "Miso-----------------...">` >> 8) & 0xff
-        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
         MOV     R2,#0x0
         MOV     R3,#0x0
         SJMP    ??HalUARTWriteISR_3
-??HalUARTWriteISR_2:
-        MOV     ?V2,#0x0
-        MOV     ?V3,#0x0
-        SJMP    ??HalUARTWriteISR_4
+??HalUARTWriteISR_4:
+        MOV     R0,?V0
+        MOV     A,R2
+        ADD     A,R0
+        MOV     DPL,A
+        CLR     A
+        ADDC    A,R3
+        MOV     DPH,A
+        MOVX    A,@DPTR
+        MOV     0xf9,A
 ??HalUARTWriteISR_5:
+        MOV     C,0xf8.0
+        JC      ??HalUARTWriteISR_5
+        INC     ?V0
+??HalUARTWriteISR_2:
+        CLR     C
+        MOV     A,?V0
+        SUBB    A,R4
+        CLR     A
+        SUBB    A,R5
+        JC      ??HalUARTWriteISR_4
+        MOV     R0,#0x0
+        MOV     R1,#0x0
+        SJMP    ??HalUARTWriteISR_6
+??HalUARTWriteISR_7:
         MOVX    A,@DPTR
         INC     A
+??HalUARTWriteISR_8:
         MOVX    @DPTR,A
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
-        MOV     R2,#`?<Constant "Savan----------------...">` & 0xff
-        MOV     R3,#(`?<Constant "Savan----------------...">` >> 8) & 0xff
+        ORL     0x9a,#0x8
+        INC     R0
+        MOV     A,R0
+        JNZ     ??HalUARTWriteISR_6
+        INC     R1
 ??HalUARTWriteISR_6:
-        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
-        INC     ?V2
-        MOV     A,?V2
-        JNZ     ??HalUARTWriteISR_4
-        INC     ?V3
-??HalUARTWriteISR_4:
         CLR     C
-        MOV     A,?V2
-        SUBB    A,?V0
-        MOV     A,?V3
-        SUBB    A,?V1
-        JNC     ??HalUARTWriteISR_7
-        MOV     DPL,R6
-        MOV     DPH,R7
+        MOV     A,R0
+        SUBB    A,R4
+        MOV     A,R1
+        SUBB    A,R5
+        JNC     ??HalUARTWriteISR_9
+        MOV     DPL,R2
+        MOV     DPH,R3
         MOVX    A,@DPTR
         PUSH    A
           CFI CFA_SP SP+-1
         MOV     DPTR,#isrCfg + 261
         MOVX    A,@DPTR
-        MOV     R0,A
+        MOV     R6,A
         MOV     A,#(isrCfg + 132) & 0xff
-        ADD     A,R0
+        ADD     A,R6
         MOV     DPL,A
         CLR     A
         ADDC    A,#((isrCfg + 132) >> 8) & 0xff
         MOV     DPH,A
         POP     A
           CFI CFA_SP SP+0
-        MOVX    @DPTR,A
-        MOV     DPL,R6
-        MOV     DPH,R7
-        INC     DPTR
-        MOV     R6,DPL
-        MOV     R7,DPH
+        LCALL   ?Subroutine2 & 0xFFFF
+??CrossCallReturnLabel_1:
         MOV     DPTR,#isrCfg + 262
         CLR     A
         MOVX    @DPTR,A
@@ -934,51 +870,124 @@ HalUARTWriteISR:
         MOVX    A,@DPTR
         CLR     C
         SUBB    A,#0x7f
-        JC      ??HalUARTWriteISR_5
+        JC      ??HalUARTWriteISR_7
         CLR     A
-        MOVX    @DPTR,A
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,A
-        MOV     R2,#`?<Constant "Simic----------------...">` & 0xff
-        MOV     R3,#(`?<Constant "Simic----------------...">` >> 8) & 0xff
-        SJMP    ??HalUARTWriteISR_6
-??HalUARTWriteISR_8:
-        MOV     0xf9,#0x31
+        SJMP    ??HalUARTWriteISR_8
 ??HalUARTWriteISR_9:
-        MOV     C,0xf8.0
-        JC      ??HalUARTWriteISR_9
-        INC     ?V4
-??HalUARTWriteISR_7:
-        CLR     C
-        MOV     A,?V4
-        SUBB    A,?V0
-        CLR     A
-        SUBB    A,?V1
-        JC      ??HalUARTWriteISR_8
-        MOV     R2,?V2
-        MOV     R3,?V3
+        MOV     A,R0
+        MOV     R2,A
+        MOV     A,R1
+        MOV     R3,A
 ??HalUARTWriteISR_3:
-        MOV     R7,#0x5
-        LJMP    ?BANKED_LEAVE_XDATA
-          CFI EndBlock cfiBlock2
+        LJMP    ?Subroutine0 & 0xFFFF
+          CFI EndBlock cfiBlock1
         REQUIRE U1DBUF
         REQUIRE _A_U1CSR
+        REQUIRE IEN2
+
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
+?Subroutine2:
+          CFI Block cfiCond2 Using cfiCommon0
+          CFI Function HalUARTReadISR
+          CFI Conditional ??CrossCallReturnLabel_0
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI CFA_SP SP+-2
+          CFI CFA_XSP16 add(XSP16, 9)
+          CFI Block cfiCond3 Using cfiCommon0
+          CFI (cfiCond3) Function HalUARTWriteISR
+          CFI (cfiCond3) Conditional ??CrossCallReturnLabel_1
+          CFI (cfiCond3) R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI (cfiCond3) VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI (cfiCond3) V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI (cfiCond3) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI (cfiCond3) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+          CFI (cfiCond3) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI (cfiCond3) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI (cfiCond3) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI (cfiCond3) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI (cfiCond3) CFA_SP SP+-2
+          CFI (cfiCond3) CFA_XSP16 add(XSP16, 9)
+          CFI Block cfiPicker4 Using cfiCommon1
+          CFI (cfiPicker4) NoFunction
+          CFI (cfiPicker4) Picker
+        MOVX    @DPTR,A
+        MOV     DPL,R2
+        MOV     DPH,R3
+        INC     DPTR
+        MOV     R2,DPL
+        MOV     R3,DPH
+        RET
+          CFI EndBlock cfiCond2
+          CFI EndBlock cfiCond3
+          CFI EndBlock cfiPicker4
 
         RSEG NEAR_CODE:CODE:NOROOT(0)
 // __near_func __xdata_reentrant __interrupt void halUart1RxIsr(void)
 halUart1RxIsr:
-          CFI Block cfiBlock3 Using cfiCommon1
+          CFI Block cfiBlock5 Using cfiCommon1
           CFI Function halUart1RxIsr
         CODE
         FUNCALL halUart1RxIsr, halProcessUartInterrupt
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 14, STACK
+        LOCFRAME XSTACK, 16, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 14, STACK
+        ARGFRAME XSTACK, 16, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL halUart1RxIsr, HalLcdWriteString
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 16, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 16, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL halUart1RxIsr, HalLcdWriteString
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 16, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 16, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL halUart1RxIsr, HalLcdWriteString
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 16, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 16, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL halUart1RxIsr, HalLcdWriteString
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 16, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         PUSH    A
@@ -1002,7 +1011,10 @@ halUart1RxIsr:
           CFI R0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
           CFI CFA_XSP16 add(XSP16, 14)
         ; Saved register size: 14
-        ; Auto size: 0
+        ; Auto size: 2
+        MOV     A,#-0x2
+        LCALL   ?ALLOC_XSTACK8
+          CFI CFA_XSP16 add(XSP16, 16)
         MOV     R0,0xf9+0x0
         MOV     A,R0
         PUSH    A
@@ -1045,16 +1057,49 @@ halUart1RxIsr:
         MOVX    @DPTR,A
         ; Setup parameters for call to function halProcessUartInterrupt
         LCALL   `??halProcessUartInterrupt::?relay`; Banked call to: halProcessUartInterrupt
+        MOV     DPTR,#isrCfg + 129
+        MOVX    A,@DPTR
+        ADD     A,#0x30
+        MOV     DPL,?XSP + 0
+        MOV     DPH,?XSP + 1
+        MOVX    @DPTR,A
+        MOV     A,#0x1
+        LCALL   ?XSTACK_DISP0_8
+        CLR     A
+        MOVX    @DPTR,A
+        ; Setup parameters for call to function HalLcdWriteString
+        MOV     R1,A
+        MOV     R2,#`?<Constant "--------- SET LAZO --...">` & 0xff
+        MOV     R3,#(`?<Constant "--------- SET LAZO --...">` >> 8) & 0xff
+        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+        ; Setup parameters for call to function HalLcdWriteString
+        MOV     R1,#0x0
+        MOV     R2,#isrCfg & 0xff
+        MOV     R3,#(isrCfg >> 8) & 0xff
+        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+        ; Setup parameters for call to function HalLcdWriteString
+        MOV     R1,#0x0
+        MOV     R2,?XSP + 0
+        MOV     R3,?XSP + 1
+        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+        ; Setup parameters for call to function HalLcdWriteString
+        MOV     R1,#0x0
+        MOV     R2,#`?<Constant "--------- SET LAZO --...">` & 0xff
+        MOV     R3,#(`?<Constant "--------- SET LAZO --...">` >> 8) & 0xff
+        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+        MOV     A,#0x2
+        LCALL   ?DEALLOC_XSTACK8
+          CFI CFA_XSP16 add(XSP16, 14)
         MOV     R7,#0x1
         LJMP    ?INTERRUPT_LEAVE_XSP
-          CFI EndBlock cfiBlock3
+          CFI EndBlock cfiBlock5
         REQUIRE U1DBUF
         REQUIRE ST0
 
         RSEG NEAR_CODE:CODE:NOROOT(0)
 // __near_func __xdata_reentrant __interrupt void halUart1TxIsr(void)
 halUart1TxIsr:
-          CFI Block cfiBlock4 Using cfiCommon1
+          CFI Block cfiBlock6 Using cfiCommon1
           CFI Function halUart1TxIsr
         CODE
         PUSH    A
@@ -1140,7 +1185,7 @@ halUart1TxIsr:
           CFI A SameValue
           CFI CFA_SP SP+-2
         RETI
-          CFI EndBlock cfiBlock4
+          CFI EndBlock cfiBlock6
         REQUIRE IEN2
         REQUIRE _A_IRCON2
         REQUIRE U1DBUF
@@ -1162,7 +1207,7 @@ halUart1TxIsr:
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  106 void HalUARTInit(void)
 HalUARTInit:
-          CFI Block cfiBlock5 Using cfiCommon0
+          CFI Block cfiBlock7 Using cfiCommon0
           CFI Function HalUARTInit
         CODE
 //  107 {
@@ -1277,6 +1322,7 @@ HalUARTInit:
         MOV     0xf8,#-0x40
         MOV     0xfc,#0x8
         MOV     0xfa,#0x3a
+        SETB    0xa8.3
 //  155 
 //  156   
 //  157 //#endif
@@ -1286,8 +1332,8 @@ HalUARTInit:
 //  161 #endif
 //  162   */
 //  163 }
-          CFI EndBlock cfiBlock5
-        REQUIRE ?Subroutine1
+        LJMP    ?Subroutine1 & 0xFFFF
+          CFI EndBlock cfiBlock7
         REQUIRE CLKCONCMD
         REQUIRE P2INP
         REQUIRE P2DIR
@@ -1300,23 +1346,7 @@ HalUARTInit:
         REQUIRE _A_U1CSR
         REQUIRE U1GCR
         REQUIRE U1BAUD
-        ; // Fall through to label ?Subroutine1
-
-        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-?Subroutine1:
-          CFI Block cfiBlock6 Using cfiCommon0
-          CFI NoFunction
-          CFI CFA_SP SP+-5
-          CFI DPL0 Frame(CFA_SP, 4)
-          CFI DPH0 Frame(CFA_SP, 5)
-        POP     DPH
-          CFI CFA_SP SP+-4
-          CFI DPH0 SameValue
-        POP     DPL
-          CFI CFA_SP SP+-3
-          CFI DPL0 SameValue
-        LJMP    ?BRET
-          CFI EndBlock cfiBlock6
+        REQUIRE _A_IEN0
 //  164 
 //  165 /******************************************************************************
 //  166  * @fn      HalUARTOpen
@@ -1332,7 +1362,7 @@ HalUARTInit:
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  175 uint8 HalUARTOpen(uint8 port, halUARTCfg_t *config)
 HalUARTOpen:
-          CFI Block cfiBlock7 Using cfiCommon0
+          CFI Block cfiBlock8 Using cfiCommon0
           CFI Function HalUARTOpen
         CODE
 //  176 {
@@ -1447,8 +1477,8 @@ HalUARTOpen:
 //  200   return HAL_UART_SUCCESS;
 ??HalUARTOpen_0:
         MOV     R1,#0x0
-        LJMP    ?Subroutine1 & 0xFFFF
-          CFI EndBlock cfiBlock7
+        SJMP    ?Subroutine1
+          CFI EndBlock cfiBlock8
         REQUIRE U1BAUD
         REQUIRE U1GCR
         REQUIRE U1UCR
@@ -1473,7 +1503,7 @@ HalUARTOpen:
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  214 uint16 HalUARTRead(uint8 port, uint8 *buf, uint16 len)
 HalUARTRead:
-          CFI Block cfiBlock8 Using cfiCommon0
+          CFI Block cfiBlock9 Using cfiCommon0
           CFI Function HalUARTRead
         CODE
 //  215 {
@@ -1542,9 +1572,29 @@ HalUARTRead:
         MOV     R2,#0x0
         MOV     R3,#0x0
 ??HalUARTRead_1:
-        LJMP    ?Subroutine0 & 0xFFFF
+          CFI EndBlock cfiBlock9
+        REQUIRE ?Subroutine0
+        ; // Fall through to label ?Subroutine0
 //  243 }
-          CFI EndBlock cfiBlock8
+
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
+?Subroutine0:
+          CFI Block cfiBlock10 Using cfiCommon0
+          CFI NoFunction
+          CFI CFA_SP SP+0
+          CFI CFA_XSP16 add(XSP16, 9)
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        MOV     R7,#0x1
+        LJMP    ?BANKED_LEAVE_XDATA
+          CFI EndBlock cfiBlock10
 //  244 
 //  245 /******************************************************************************
 //  246  * @fn      HalUARTWrite
@@ -1561,36 +1611,22 @@ HalUARTRead:
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  256 uint16 HalUARTWrite(uint8 port, uint8 *buf, uint16 len)
 HalUARTWrite:
-          CFI Block cfiBlock9 Using cfiCommon0
+          CFI Block cfiBlock11 Using cfiCommon0
           CFI Function HalUARTWrite
         CODE
 //  257 {
-        FUNCALL HalUARTWrite, HalLcdWriteString
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL HalUARTWrite, HalUARTWriteISR
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 11, STACK
+        LOCFRAME XSTACK, 9, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 11, STACK
+        ARGFRAME XSTACK, 9, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        REQUIRE ?V0
-        REQUIRE ?V1
-        REQUIRE ?V2
-        MOV     A,#-0xb
+        MOV     A,#-0x9
         LCALL   ?BANKED_ENTER_XDATA
           CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
           CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
@@ -1598,22 +1634,15 @@ HalUARTWrite:
           CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
           CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
           CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-          CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-          CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-10)))
-          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
           CFI CFA_SP SP+0
-          CFI CFA_XSP16 add(XSP16, 11)
-        ; Saved register size: 11
+          CFI CFA_XSP16 add(XSP16, 9)
+        ; Saved register size: 9
         ; Auto size: 0
-        MOV     ?V2,R1
-        MOV     A,R2
+        MOV     A,R1
         MOV     R6,A
-        MOV     A,R3
-        MOV     R7,A
-        MOV     ?V0,R4
-        MOV     ?V1,R5
 //  258   (void)port;
 //  259   (void)buf;
 //  260   (void)len;
@@ -1644,23 +1673,12 @@ HalUARTWrite:
 //  285   
 //  286   if (port == HAL_UART_PORT_1) 
         MOV     A,#0x1
-        XRL     A,?V2
+        XRL     A,R6
         JNZ     ??HalUARTWrite_0
 //  287   {
-//  288     HalLcdWriteString("Sico----------------------",0);
-        ; Setup parameters for call to function HalLcdWriteString
-        MOV     R1,#0x0
-        MOV     R2,#`?<Constant "Sico-----------------...">` & 0xff
-        MOV     R3,#(`?<Constant "Sico-----------------...">` >> 8) & 0xff
-        LCALL   `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
+//  288    // HalLcdWriteString("Sico----------------------",0);
 //  289     return HalUARTWriteISR(buf, len);
         ; Setup parameters for call to function HalUARTWriteISR
-        MOV     R4,?V0
-        MOV     R5,?V1
-        MOV     A,R6
-        MOV     R2,A
-        MOV     A,R7
-        MOV     R3,A
         LCALL   `??HalUARTWriteISR::?relay`; Banked call to: HalUARTWriteISR
         SJMP    ??HalUARTWrite_1
 //  290   }
@@ -1676,13 +1694,12 @@ HalUARTWrite:
         MOV     R2,#0x0
         MOV     R3,#0x0
 ??HalUARTWrite_1:
-        MOV     R7,#0x3
-        LJMP    ?BANKED_LEAVE_XDATA
+        SJMP    ?Subroutine0
 //  299 #endif
 //  300 
 //  301   //return 0;
 //  302 }
-          CFI EndBlock cfiBlock9
+          CFI EndBlock cfiBlock11
 //  303 
 //  304 /******************************************************************************
 //  305  * @fn      HalUARTSuspend
@@ -1697,7 +1714,7 @@ HalUARTWrite:
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  313 void HalUARTSuspend( void )
 HalUARTSuspend:
-          CFI Block cfiBlock10 Using cfiCommon0
+          CFI Block cfiBlock12 Using cfiCommon0
           CFI Function HalUARTSuspend
         CODE
 //  314 {
@@ -1714,7 +1731,7 @@ HalUARTSuspend:
 //  323 */
 //  324 }
         LJMP    ?BRET
-          CFI EndBlock cfiBlock10
+          CFI EndBlock cfiBlock12
 //  325 
 //  326 /******************************************************************************
 //  327  * @fn      HalUARTResume
@@ -1729,7 +1746,7 @@ HalUARTSuspend:
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  335 void HalUARTResume( void )
 HalUARTResume:
-          CFI Block cfiBlock11 Using cfiCommon0
+          CFI Block cfiBlock13 Using cfiCommon0
           CFI Function HalUARTResume
         CODE
 //  336 {
@@ -1746,7 +1763,7 @@ HalUARTResume:
 //  345   */
 //  346 }
         LJMP    ?BRET
-          CFI EndBlock cfiBlock11
+          CFI EndBlock cfiBlock13
 //  347 
 //  348 /***************************************************************************************************
 //  349  * @fn      HalUARTPoll
@@ -1761,7 +1778,7 @@ HalUARTResume:
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  357 void HalUARTPoll(void)
 HalUARTPoll:
-          CFI Block cfiBlock12 Using cfiCommon0
+          CFI Block cfiBlock14 Using cfiCommon0
           CFI Function HalUARTPoll
         CODE
 //  358 {
@@ -1780,7 +1797,7 @@ HalUARTPoll:
 //  369   */
 //  370 }
         LJMP    ?BRET
-          CFI EndBlock cfiBlock12
+          CFI EndBlock cfiBlock14
 //  371 
 //  372 /**************************************************************************************************
 //  373  * @fn      Hal_UART_RxBufLen()
@@ -1795,7 +1812,7 @@ HalUARTPoll:
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  381 uint16 Hal_UART_RxBufLen( uint8 port )
 Hal_UART_RxBufLen:
-          CFI Block cfiBlock13 Using cfiCommon0
+          CFI Block cfiBlock15 Using cfiCommon0
           CFI Function Hal_UART_RxBufLen
         CODE
 //  382 {
@@ -1866,78 +1883,74 @@ Hal_UART_RxBufLen:
         MOV     R2,#0x0
         MOV     R3,#0x0
 ??Hal_UART_RxBufLen_3:
-        LJMP    ?Subroutine1 & 0xFFFF
+          CFI EndBlock cfiBlock15
+        REQUIRE ?Subroutine1
+        ; // Fall through to label ?Subroutine1
 //  402 #endif
 //  403   
 //  404   
 //  405   //return 0;
 //  406 }
-          CFI EndBlock cfiBlock13
+
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
+?Subroutine1:
+          CFI Block cfiBlock16 Using cfiCommon0
+          CFI NoFunction
+          CFI CFA_SP SP+-5
+          CFI DPL0 Frame(CFA_SP, 4)
+          CFI DPH0 Frame(CFA_SP, 5)
+        POP     DPH
+          CFI CFA_SP SP+-4
+          CFI DPH0 SameValue
+        POP     DPL
+          CFI CFA_SP SP+-3
+          CFI DPL0 SameValue
+        LJMP    ?BRET
+          CFI EndBlock cfiBlock16
 //  407 ////////////////////////////////////////////////////////////////////////////////////// 
 //  408 
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  409 void halProcessUartInterrupt (void)
 halProcessUartInterrupt:
-          CFI Block cfiBlock14 Using cfiCommon0
+          CFI Block cfiBlock17 Using cfiCommon0
           CFI Function halProcessUartInterrupt
         CODE
 //  410 {
-        FUNCALL halProcessUartInterrupt, HalUARTReadISR
-        LOCFRAME ISTACK, 0, STACK
-        LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
-        LOCFRAME IOVERLAY, 0, STATIC
-        LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL halProcessUartInterrupt, osal_set_event
-        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 10, STACK
+        LOCFRAME XSTACK, 0, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
-        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME ISTACK, 2, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 10, STACK
+        ARGFRAME XSTACK, 0, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        REQUIRE ?V0
-        REQUIRE ?V1
-        MOV     A,#-0xa
-        LCALL   ?BANKED_ENTER_XDATA
-          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-          CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-9)))
-          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-          CFI CFA_SP SP+0
-          CFI CFA_XSP16 add(XSP16, 10)
-        ; Saved register size: 10
+        PUSH    DPL
+          CFI DPL0 Frame(CFA_SP, 4)
+          CFI CFA_SP SP+-4
+        PUSH    DPH
+          CFI DPH0 Frame(CFA_SP, 5)
+          CFI CFA_SP SP+-5
+        ; Saved register size: 2
         ; Auto size: 0
 //  411   //osal_set_event(Hal_TaskID, HAL_UART_EVENT);
 //  412   //if(MIN_FRAME_SIZE <= HalUARTReadISR(RX_BUFFER, 128))
-//  413   if(HalUARTReadISR(RX_BUFFER, 128))    ////////////////////////////////////////////////////////////////// ovdje treba uporediti sa minimalnom velicinom bafera, definisati MIN_FRAME_SIZE
-        ; Setup parameters for call to function HalUARTReadISR
-        MOV     R4,#-0x80
-        MOV     R5,#0x0
-        MOV     R2,#RX_BUFFER & 0xff
-        MOV     R3,#(RX_BUFFER >> 8) & 0xff
-        LCALL   `??HalUARTReadISR::?relay`; Banked call to: HalUARTReadISR
-        MOV     ?V1,R3
-        MOV     A,R2
-        ORL     A,?V1
-        JZ      ??halProcessUartInterrupt_0
-//  414   {
-//  415     osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
+//  413   /*HalUARTReadISR(RX_BUFFER, 128);
+//  414   HalLcdWriteString("--------- SET EVENT -------------",0); 
+//  415   osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);*/
+//  416 
+//  417  // if(HalUARTReadISR(RX_BUFFER, 128))    ////////////////////////////////////////////////////////////////// ovdje treba uporediti sa minimalnom velicinom bafera, definisati MIN_FRAME_SIZE
+//  418  // {
+//  419     //HalLcdWriteString("--------- SET EVENT -------------",0); 
+//  420     /*
+//  421     HalLcdWriteString("--------- SET LAZO -------------",0); 
+//  422   HalLcdWriteString((char *)RX_BUFFER, 0);
+//  423   HalLcdWriteString("--------- SET LAZO -------------",0);
+//  424   */
+//  425     osal_set_event(GenericApp_TaskID, RX_PROCCESS_EVENT);
         ; Setup parameters for call to function osal_set_event
         MOV     R2,#0x0
         MOV     R3,#0x1
@@ -1945,12 +1958,10 @@ halProcessUartInterrupt:
         MOVX    A,@DPTR
         MOV     R1,A
         LCALL   `??osal_set_event::?relay`; Banked call to: osal_set_event
-//  416   }
-//  417 }
-??halProcessUartInterrupt_0:
-        MOV     R7,#0x2
-        LJMP    ?BANKED_LEAVE_XDATA
-          CFI EndBlock cfiBlock14
+//  426  // }
+//  427 }
+        SJMP    ?Subroutine1
+          CFI EndBlock cfiBlock17
 
         COMMON INTVEC:CODE:ROOT(0)
         ORG 27
@@ -2041,41 +2052,26 @@ halProcessUartInterrupt:
 
         RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
         DATA8
-`?<Constant "Miso-----------------...">`:
-        DB "Miso----------------------"
-
-        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
-        DATA8
-`?<Constant "Simic----------------...">`:
-        DB "Simic----------------------"
-
-        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
-        DATA8
-`?<Constant "Savan----------------...">`:
-        DB "Savan----------------------"
-
-        RSEG XDATA_ROM_C:CONST:REORDER:NOROOT(0)
-        DATA8
-`?<Constant "Sico-----------------...">`:
-        DB "Sico----------------------"
+`?<Constant "--------- SET LAZO --...">`:
+        DB "--------- SET LAZO -------------"
 
         END
-//  418 ////////////////////////////////////////////////////////////////////////////////////// 
-//  419 /******************************************************************************
-//  420 ******************************************************************************/
+//  428 ////////////////////////////////////////////////////////////////////////////////////// 
+//  429 /******************************************************************************
+//  430 ******************************************************************************/
 // 
-// 719 bytes in segment BANKED_CODE
+// 632 bytes in segment BANKED_CODE
 //  66 bytes in segment BANK_RELAYS
 //   6 bytes in segment INTVEC
-// 153 bytes in segment NEAR_CODE
+// 218 bytes in segment NEAR_CODE
 //  18 bytes in segment SFR_AN
-// 110 bytes in segment XDATA_ROM_C
+//  33 bytes in segment XDATA_ROM_C
 // 521 bytes in segment XDATA_Z
 // 
-// 219 bytes of CODE     memory (+  6 bytes shared)
-// 110 bytes of CONST    memory
+// 284 bytes of CODE     memory (+  6 bytes shared)
+//  33 bytes of CONST    memory
 //   0 bytes of DATA     memory (+ 18 bytes shared)
-// 719 bytes of HUGECODE memory
+// 632 bytes of HUGECODE memory
 // 521 bytes of XDATA    memory
 //
 //Errors: none

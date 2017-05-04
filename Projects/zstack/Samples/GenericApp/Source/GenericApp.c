@@ -290,9 +290,9 @@ void GenericApp_Init( uint8 task_id )
   // If the hardware is application specific - add it here.
   // If the hardware is other parts of the device add it in main().
 
-  /*GenericApp_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
-  GenericApp_DstAddr.endPoint = GENERICAPP_ENDPOINT;
-  GenericApp_DstAddr.addr.shortAddr = 0xFFFF; //0;// NLME_GetShortAddr();//1;*/
+  //GenericApp_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
+  //GenericApp_DstAddr.endPoint = GENERICAPP_ENDPOINT;
+  //GenericApp_DstAddr.addr.shortAddr = 0xFFFF; //0;// NLME_GetShortAddr();//1;*/
 
   // Fill out the endpoint description.
   GenericApp_epDesc.endPoint = GENERICAPP_ENDPOINT;
@@ -523,18 +523,19 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
     
     uint8 *p;
     */
-    uint16 ID;
-    uint32 Data;
-    char theMessage[MAX_NUMBER_OF_ENDDEVICES][25];
+   // uint16 ID;
+   // uint32 Data;
+    //char theMessage[MAX_NUMBER_OF_ENDDEVICES][25];
+    char doorOpened[] = {'S','E','N','D','\0'};
 
-
-    //rxBuffer = uartConfig.rx.pBuffer;
-    ID = processFrameRx(rxBuffer);
+    HalUARTRead(HAL_UART_PORT_1, uartConfig.rx.pBuffer, 128);
+    rxBuffer = uartConfig.rx.pBuffer;
+    //ID = processFrameRx(rxBuffer);
     
     
     GenericApp_DstAddress.addrMode = (afAddrMode_t)Addr16Bit;
     GenericApp_DstAddress.endPoint = GENERICAPP_ENDPOINT;
-    GenericApp_DstAddress.addr.shortAddr = lookForAddr(ID);
+    //GenericApp_DstAddress.addr.shortAddr = lookForAddr(ID);
     
    /* 
     pdevID = &devID;
@@ -542,26 +543,49 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
     *pdevID = ID;
     *pData = getCmd(ID);
     */
-    Data = getCmd(ID);
+    //Data = getCmd(ID);
     
-    //p = &
+    
+  
+   // Successfully requested to be sent.
+    //HalLcdWriteString("Podatak je poslan.",0);
+    GenericApp_DstAddr.addr.shortAddr = lutData[0].devAddress;
+    
+    AF_DataRequest( &GenericApp_DstAddr, &GenericApp_epDesc,
+                       GENERICAPP_CLUSTERID,
+                       5,                                                       
+                       (byte *)&doorOpened,
+                       &GenericApp_TransID,
+                       AF_DISCV_ROUTE, AF_DEFAULT_RADIUS );
 
+    
+    //HalLcdWriteString((char *)rxBuffer, 0);
+   // HalUARTWrite(HAL_UART_PORT_1, (uint8 *)rxBuffer, 19);
+    HalUARTWrite(HAL_UART_PORT_1, "EVENT", 6);
+    HalLcdWriteString("-EVENT-", 0);
+    HalLcdWriteString((char *)uartConfig.rx.pBuffer, 0);
+    HalLcdWriteString("-EVENT-", 0);
+    //HalUARTWrite(HAL_UART_PORT_0, "EVENT", 6);
+    //HalUARTWrite(HAL_UART_PORT_0, (uint8 *)rxBuffer, 19);
+    /*
     theMessage[GenericApp_DstAddress.addr.shortAddr][0] = (char)((ID >> 8) & 0x00FF);
     theMessage[GenericApp_DstAddress.addr.shortAddr][1] = (char)(ID & 0x00FF); 
+    */
    /* for(i = 0; i < 2; i++)
     {
       theMessage[GenericApp_DstAddress.addr.shortAddr][i] = (char)pdevID[i-1];
-    }*/
+    }
     theMessage[GenericApp_DstAddress.addr.shortAddr][2] = (char)((Data >> 24) & 0x000000FF);
     theMessage[GenericApp_DstAddress.addr.shortAddr][3] = (char)((Data >> 16) & 0x000000FF); 
     theMessage[GenericApp_DstAddress.addr.shortAddr][4] = (char)((Data >> 8) & 0x000000FF);
     theMessage[GenericApp_DstAddress.addr.shortAddr][5] = (char)(Data & 0x000000FF); 
+    */
    /* for(i = 2; i < 6; i++)
     {
       theMessage[GenericApp_DstAddress.addr.shortAddr][i] = (char)pData[i-4];
     }
 */
-
+/*
     if ( AF_DataRequest( &GenericApp_DstAddress, &GenericApp_epDesc,
                            GENERICAPP_CLUSTERID,
                            (byte)osal_strlen( theMessage[GenericApp_DstAddress.addr.shortAddr] ) + 1,
@@ -571,7 +595,7 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
       {
         HalLedSet ( HAL_LED_4, HAL_LED_MODE_BLINK );  // Blink an LED
       }
-
+*/
   }
     
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
@@ -632,11 +656,13 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
 //////////////////////////////////////////////////////////////////////////////
     // if((char)*buff!='\0') //zakomentarisao
      {
+       
        GenericApp_SendTheMessage();
-       //HalLcdWriteString("Sile before send",0);
+        //HalLcdWriteString("Sile before send",0);
      }
     
 //////////////////////////////////////////////////////////////////////////////
+     
      
      
      
@@ -1003,8 +1029,24 @@ static void GenericApp_SendTheMessage( void )
   uint8 i;
  // char * id;
   //uint32 data;
+  /*BS
+  char doorOpened[] = {'S','E','N','D','\0'};
   
-  for(i = 0; i < 20; i++)
+   // Successfully requested to be sent.
+    //HalLcdWriteString("Podatak je poslan.",0);
+    GenericApp_DstAddr.addr.shortAddr = lutData[0].devAddress;
+    
+    AF_DataRequest( &GenericApp_DstAddr, &GenericApp_epDesc,
+                       GENERICAPP_CLUSTERID,
+                       5,                                                       
+                       (byte *)&doorOpened,
+                       &GenericApp_TransID,
+                       AF_DISCV_ROUTE, AF_DEFAULT_RADIUS );
+    
+    HalLcdWriteString("Provjera slanja",0);
+  */
+    
+   for(i = 0; i < 20; i++)
   {
     //HalLcdWriteString("Sinisa-------------petlja-----",0);
     if(0 != lutData[i].devID)
