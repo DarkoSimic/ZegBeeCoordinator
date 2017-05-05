@@ -496,7 +496,7 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
     uint32 broj;
     char id[3];
     char dat[5];
-    //char di[3];
+    char di[3];
     char tad[5];
     char theMessage[25];
     //char doorOpened[] = {'S','E','N','D','\0'};
@@ -561,12 +561,13 @@ uint16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
      i = 0;
      while(broj)
      {
-      id[i] = (broj % 16) + '0';
+      id[i] = (broj % 256);// + '0';
       broj/=256;
       i++;
      }
      id[i] = '0';
        
+     //_itoa(getSignalAddress(ID))
     //theMessage[0] = 'T';
     //theMessage[1] = '2';
     theMessage[0] = id[0];
