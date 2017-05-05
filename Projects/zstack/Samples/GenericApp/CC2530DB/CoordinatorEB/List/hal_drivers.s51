@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR C/C++ Compiler V9.30.3.3983 for 8051               04/May/2017  14:07:09
+// IAR C/C++ Compiler V9.30.3.3983 for 8051               05/May/2017  15:57:09
 // Copyright 2004-2016 IAR Systems AB.
 // Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 //
@@ -252,6 +252,8 @@ HalKeyInit          SYMBOL "HalKeyInit"
 `??HalKeyInit::?relay` SYMBOL "?relay", HalKeyInit
 HalKeyPoll          SYMBOL "HalKeyPoll"
 `??HalKeyPoll::?relay` SYMBOL "?relay", HalKeyPoll
+HalLcdInit          SYMBOL "HalLcdInit"
+`??HalLcdInit::?relay` SYMBOL "?relay", HalLcdInit
 HalLedInit          SYMBOL "HalLedInit"
 `??HalLedInit::?relay` SYMBOL "?relay", HalLedInit
 HalLedUpdate        SYMBOL "HalLedUpdate"
@@ -285,6 +287,8 @@ Hal_ProcessPoll     SYMBOL "Hal_ProcessPoll"
         FUNCTION `??HalKeyInit::?relay`,00H
         EXTERN `??HalKeyPoll::?relay`
         FUNCTION `??HalKeyPoll::?relay`,00H
+        EXTERN `??HalLcdInit::?relay`
+        FUNCTION `??HalLcdInit::?relay`,00H
         EXTERN `??HalLedInit::?relay`
         FUNCTION `??HalLedInit::?relay`,00H
         EXTERN `??HalLedUpdate::?relay`
@@ -332,6 +336,13 @@ Hal_ProcessPoll     SYMBOL "Hal_ProcessPoll"
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 10, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN HalLcdInit
+        FUNCTION HalLcdInit,0202H
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN HalLedInit
@@ -584,6 +595,17 @@ HalDriverInit:
         ARGFRAME XSTACK, 0, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
+        FUNCALL HalDriverInit, HalLcdInit
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL HalDriverInit, HalLedInit
         LOCFRAME ISTACK, 2, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -653,7 +675,9 @@ HalDriverInit:
 //  137 
 //  138   /* LCD */
 //  139 #if (defined HAL_LCD) && (HAL_LCD == TRUE)
-//  140   //HalLcdInit();
+//  140   HalLcdInit();
+        ; Setup parameters for call to function HalLcdInit
+        LCALL   `??HalLcdInit::?relay`; Banked call to: HalLcdInit
 //  141 #endif
 //  142 
 //  143   /* LED */
@@ -1063,14 +1087,14 @@ __Constant_64:
 //  313 **************************************************************************************************/
 //  314 
 // 
-// 154 bytes in segment BANKED_CODE
+// 157 bytes in segment BANKED_CODE
 //  24 bytes in segment BANK_RELAYS
 //   4 bytes in segment XDATA_ROM_C
 //   1 byte  in segment XDATA_Z
 // 
 //  24 bytes of CODE     memory
 //   0 bytes of CONST    memory (+ 4 bytes shared)
-// 154 bytes of HUGECODE memory
+// 157 bytes of HUGECODE memory
 //   1 byte  of XDATA    memory
 //
 //Errors: none

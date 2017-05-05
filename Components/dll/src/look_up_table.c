@@ -2,6 +2,9 @@
 #include "includes/dll.h"
 
 #include "hal_lcd.h"
+
+#include <stdlib.h>  
+#include "OnBoard.h"
 //*****************************************************************************
 //
 // Extern variables

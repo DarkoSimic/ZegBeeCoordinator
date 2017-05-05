@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// IAR C/C++ Compiler V9.30.3.3983 for 8051               04/May/2017  14:07:10
+// IAR C/C++ Compiler V9.30.3.3983 for 8051               05/May/2017  15:57:10
 // Copyright 2004-2016 IAR Systems AB.
 // Evaluation license - IAR Embedded Workbench for 8051, Evaluation version 9.30
 //
@@ -388,46 +388,49 @@ updateLookUpTable   SYMBOL "updateLookUpTable"
 //    2 #include "includes/dll.h"
 //    3 
 //    4 #include "hal_lcd.h"
-//    5 //*****************************************************************************
-//    6 //
-//    7 // Extern variables
-//    8 //
-//    9 // treba promijeniti naziv ova dva bafera u circularBuffer.h
-//   10 //
-//   11 //*****************************************************************************
+//    5 
+//    6 #include <stdlib.h>  
+//    7 #include "OnBoard.h"
+//    8 //*****************************************************************************
+//    9 //
+//   10 // Extern variables
+//   11 //
+//   12 // treba promijeniti naziv ova dva bafera u circularBuffer.h
+//   13 //
+//   14 //*****************************************************************************
 
         RSEG XDATA_Z:XDATA:NOROOT(0)
         DATA8
-//   12 Data_t app_packet;
+//   15 Data_t app_packet;
 app_packet:
         DS 7
         REQUIRE __INIT_XDATA_Z
-//   13 
-//   14 //static LookUpTable_t lutData[20];
-//   15 extern LookUpTable_t lutData[20];
-//   16 //extern uint8 dataRdy;
-//   17 //*****************************************************************************
-//   18 //
-//   19 // Local variables
-//   20 //
-//   21 //*****************************************************************************
-//   22 
-//   23 
-//   24 
-//   25 //*****************************************************************************
-//   26 //
-//   27 // Function definition
-//   28 //
-//   29 //*****************************************************************************
-//   30 
+//   16 
+//   17 //static LookUpTable_t lutData[20];
+//   18 extern LookUpTable_t lutData[20];
+//   19 //extern uint8 dataRdy;
+//   20 //*****************************************************************************
+//   21 //
+//   22 // Local variables
+//   23 //
+//   24 //*****************************************************************************
+//   25 
+//   26 
+//   27 
+//   28 //*****************************************************************************
+//   29 //
+//   30 // Function definition
+//   31 //
+//   32 //*****************************************************************************
+//   33 
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//   31 void lookUpInit(void)
+//   34 void lookUpInit(void)
 lookUpInit:
           CFI Block cfiBlock0 Using cfiCommon0
           CFI Function lookUpInit
         CODE
-//   32 {
+//   35 {
         FUNCALL lookUpInit, CallBackRegister
         LOCFRAME ISTACK, 2, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -447,12 +450,12 @@ lookUpInit:
           CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//   33 	CallBackRegister(updateCmd);
+//   36 	CallBackRegister(updateCmd);
         ; Setup parameters for call to function CallBackRegister
         MOV     R2,#`??updateCmd::?relay` & 0xff
         MOV     R3,#(`??updateCmd::?relay` >> 8) & 0xff
         LCALL   `??CallBackRegister::?relay`; Banked call to: CallBackRegister
-//   34 }
+//   37 }
           CFI EndBlock cfiBlock0
         REQUIRE ?Subroutine0
         ; // Fall through to label ?Subroutine0
@@ -472,15 +475,15 @@ lookUpInit:
           CFI DPL0 SameValue
         LJMP    ?BRET
           CFI EndBlock cfiBlock1
-//   35 
+//   38 
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//   36 void updateCmd(Data_t *pData)
+//   39 void updateCmd(Data_t *pData)
 updateCmd:
           CFI Block cfiBlock2 Using cfiCommon0
           CFI Function updateCmd
         CODE
-//   37 {
+//   40 {
         REQUIRE ?V0
         REQUIRE ?V1
         REQUIRE ?V2
@@ -507,11 +510,11 @@ updateCmd:
         MOV     R4,A
         MOV     A,R3
         MOV     R5,A
-//   38   int i = 0;
+//   41   int i = 0;
         MOV     R2,#0x0
         MOV     R3,#0x0
         SJMP    ??updateCmd_0
-//   39   while(lutData[i].devID != 0 && lutData[i].devID != pData->devID && i<20)
+//   42   while(lutData[i].devID != 0 && lutData[i].devID != pData->devID && i<20)
 ??updateCmd_1:
         MOV     A,R2
         MOV     R0,A
@@ -540,13 +543,13 @@ updateCmd:
         LCALL   ??Subroutine11_0 & 0xFFFF
 ??CrossCallReturnLabel_14:
         JNC     ??updateCmd_3
-//   40   {
-//   41     i++;
+//   43   {
+//   44     i++;
         INC     R2
         MOV     A,R2
         JNZ     ??updateCmd_0
         INC     R3
-//   42   }
+//   45   }
 ??updateCmd_0:
         MOV     A,R2
         MOV     R0,A
@@ -562,9 +565,9 @@ updateCmd:
         MOV     A,R0
         ORL     A,R1
         JNZ     ??updateCmd_1
-//   43   if(lutData[i].devID == 0)
-//   44   {
-//   45       lutData[i].devID = pData->devID;
+//   46   if(lutData[i].devID == 0)
+//   47   {
+//   48       lutData[i].devID = pData->devID;
         MOV     DPL,R4
         MOV     DPH,R5
         MOVX    A,@DPTR
@@ -586,15 +589,15 @@ updateCmd:
         MUL     AB
         ADD     A,?V0
         LCALL   ?Subroutine9 & 0xFFFF
-//   46       //lutData[i].devAddress = devAddress;
-//   47   }
+//   49       //lutData[i].devAddress = devAddress;
+//   50   }
 ??CrossCallReturnLabel_10:
         MOV     A,R6
         MOVX    @DPTR,A
         INC     DPTR
         MOV     A,R7
         MOVX    @DPTR,A
-//   48   if(i < 20)
+//   51   if(i < 20)
 ??updateCmd_3:
         CLR     C
         MOV     A,R2
@@ -603,8 +606,8 @@ updateCmd:
         LCALL   ??Subroutine11_0 & 0xFFFF
 ??CrossCallReturnLabel_15:
         JNC     ??updateCmd_4
-//   49   {
-//   50       lutData[i].cmd = pData->data;
+//   52   {
+//   53       lutData[i].cmd = pData->data;
         MOV     DPL,R4
         MOV     DPH,R5
         INC     DPTR
@@ -633,9 +636,9 @@ updateCmd:
         INC     DPTR
         MOV     A,?V1
         MOVX    @DPTR,A
-//   51       //dataRdy = 1;
-//   52   }
-//   53 }
+//   54       //dataRdy = 1;
+//   55   }
+//   56 }
 ??updateCmd_4:
           CFI EndBlock cfiBlock2
         REQUIRE ?Subroutine1
@@ -788,12 +791,12 @@ updateCmd:
           CFI EndBlock cfiPicker10
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//   54 void updateLookUpTable(Data_t pData, uint16 devAddress)
+//   57 void updateLookUpTable(Data_t pData, uint16 devAddress)
 updateLookUpTable:
           CFI Block cfiBlock11 Using cfiCommon0
           CFI Function updateLookUpTable
         CODE
-//   55 {
+//   58 {
         REQUIRE ?V0
         MOV     A,#-0x9
         LCALL   ?BANKED_ENTER_XDATA
@@ -814,15 +817,15 @@ updateLookUpTable:
         MOV     R4,A
         MOV     A,R3
         MOV     R5,A
-//   56   int i = 0;
+//   59   int i = 0;
         MOV     R0,#0x0
         MOV     R1,#0x0
         SJMP    ??updateLookUpTable_0
-//   57 /*
-//   58   char *id;
-//   59   uint32 idde;
-//   60   */
-//   61   while(lutData[i].devID != 0 && lutData[i].devID != pData.devID && i<20)
+//   60 /*
+//   61   char *id;
+//   62   uint32 idde;
+//   63   */
+//   64   while(lutData[i].devID != 0 && lutData[i].devID != pData.devID && i<20)
 ??updateLookUpTable_1:
         MOV     A,R0
         MOV     R2,A
@@ -847,13 +850,13 @@ updateLookUpTable:
         LCALL   ?Subroutine3 & 0xFFFF
 ??CrossCallReturnLabel_16:
         JNC     ??updateLookUpTable_3
-//   62   {
-//   63     i++;
+//   65   {
+//   66     i++;
         INC     R0
         MOV     A,R0
         JNZ     ??updateLookUpTable_0
         INC     R1
-//   64   }
+//   67   }
 ??updateLookUpTable_0:
         MOV     A,R0
         MOV     R2,A
@@ -869,9 +872,9 @@ updateLookUpTable:
         MOV     A,R2
         ORL     A,R3
         JNZ     ??updateLookUpTable_1
-//   65   if(lutData[i].devID == 0)
-//   66   {
-//   67       lutData[i].devID = (uint16)pData.devID;
+//   68   if(lutData[i].devID == 0)
+//   69   {
+//   70       lutData[i].devID = (uint16)pData.devID;
         MOV     A,R0
         MOV     R2,A
         MOV     A,R1
@@ -905,13 +908,13 @@ updateLookUpTable:
         INC     DPTR
         MOV     A,R7
         MOVX    @DPTR,A
-//   68       /*
-//   69       idde =  lutData[i].devID;
-//   70       idde =  lutData[i].data;
-//   71       id = (char*)&idde;
-//   72       id[2] = '\0';
-//   73       */
-//   74       lutData[i].devAddress = devAddress;
+//   71       /*
+//   72       idde =  lutData[i].devID;
+//   73       idde =  lutData[i].data;
+//   74       id = (char*)&idde;
+//   75       id[2] = '\0';
+//   76       */
+//   77       lutData[i].devAddress = devAddress;
         MOV     DPL,R2
         MOV     DPH,R3
         INC     DPTR
@@ -921,14 +924,14 @@ updateLookUpTable:
         INC     DPTR
         MOV     A,R5
         MOVX    @DPTR,A
-//   75   }
-//   76   if(i < 20)
+//   78   }
+//   79   if(i < 20)
 ??updateLookUpTable_3:
         LCALL   ?Subroutine3 & 0xFFFF
 ??CrossCallReturnLabel_17:
         JNC     ??updateLookUpTable_4
-//   77   {
-//   78       lutData[i].data = pData.data;
+//   80   {
+//   81       lutData[i].data = pData.data;
         MOV     A,#0xc
         LCALL   ?XSTACK_DISP0_8
         LCALL   ?XLOAD_R4567
@@ -949,16 +952,16 @@ updateLookUpTable:
         ADDC    A,R1
         MOV     DPH,A
         LCALL   ?XSTORE_R4567
-//   79       //idde =  lutData[i].data;
-//   80       //id = (char*)&idde;
-//   81       //id[4] = '\0';
-//   82       //dataRdy = 1;
-//   83   }
-//   84     
-//   85        //HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
-//   86        // HalLcdWriteString(id,0);
-//   87        // HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
-//   88 }
+//   82       //idde =  lutData[i].data;
+//   83       //id = (char*)&idde;
+//   84       //id[4] = '\0';
+//   85       //dataRdy = 1;
+//   86   }
+//   87     
+//   88        //HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
+//   89        // HalLcdWriteString(id,0);
+//   90        // HalLcdWriteString("-----------------------------Borislav----LUT------------------",0);
+//   91 }
 ??updateLookUpTable_4:
           CFI EndBlock cfiBlock11
         REQUIRE ?Subroutine2
@@ -1193,15 +1196,15 @@ updateLookUpTable:
           CFI EndBlock cfiCond23
           CFI EndBlock cfiCond24
           CFI EndBlock cfiPicker25
-//   89 
+//   92 
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//   90 uint16 lookForAddr(uint16 devID)
+//   93 uint16 lookForAddr(uint16 devID)
 lookForAddr:
           CFI Block cfiBlock26 Using cfiCommon0
           CFI Function lookForAddr
         CODE
-//   91 {
+//   94 {
         REQUIRE ?V0
         MOV     A,#-0x9
         LCALL   ?BANKED_ENTER_XDATA
@@ -1218,22 +1221,22 @@ lookForAddr:
           CFI CFA_XSP16 add(XSP16, 9)
         ; Saved register size: 9
         ; Auto size: 0
-//   92   int i = 0;
+//   95   int i = 0;
         MOV     R0,#0x0
         MOV     R1,#0x0
-//   93   uint16 devAddress = 0;
+//   96   uint16 devAddress = 0;
         MOV     R6,#0x0
         MOV     R7,#0x0
         SJMP    ??lookForAddr_0
-//   94   while(lutData[i].devID != 0 && lutData[i].devID != devID)
-//   95   {
-//   96     i++;
+//   97   while(lutData[i].devID != 0 && lutData[i].devID != devID)
+//   98   {
+//   99     i++;
 ??lookForAddr_1:
         INC     R0
         MOV     A,R0
         JNZ     ??lookForAddr_0
         INC     R1
-//   97   }
+//  100   }
 ??lookForAddr_0:
         MOV     A,R0
         MOV     R4,A
@@ -1261,7 +1264,7 @@ lookForAddr:
         XRL     A,R3
 ??lookForAddr_3:
         JNZ     ??lookForAddr_1
-//   98   if(lutData[i].devID == devID)
+//  101   if(lutData[i].devID == devID)
 ??lookForAddr_2:
         LCALL   ?Subroutine6 & 0xFFFF
 ??CrossCallReturnLabel_5:
@@ -1271,8 +1274,8 @@ lookForAddr:
         XRL     A,R3
 ??lookForAddr_4:
         JNZ     ??lookForAddr_5
-//   99   {
-//  100     devAddress = lutData[i].devAddress;
+//  102   {
+//  103     devAddress = lutData[i].devAddress;
         MOV     A,R0
         MOV     B,#0xa
         MUL     AB
@@ -1293,15 +1296,15 @@ lookForAddr:
         INC     DPTR
         MOVX    A,@DPTR
         MOV     R7,A
-//  101   }
-//  102   return devAddress;
+//  104   }
+//  105   return devAddress;
 ??lookForAddr_5:
         MOV     A,R6
         MOV     R2,A
         MOV     A,R7
         MOV     R3,A
         LJMP    ?Subroutine2 & 0xFFFF
-//  103 }
+//  106 }
           CFI EndBlock cfiBlock26
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
@@ -1508,15 +1511,15 @@ lookForAddr:
           CFI EndBlock cfiCond37
           CFI EndBlock cfiCond38
           CFI EndBlock cfiPicker39
-//  104 
+//  107 
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  105 int16 getIDFromPkt(afMSGCommandFormat_t *cmd)
+//  108 int16 getIDFromPkt(afMSGCommandFormat_t *cmd)
 getIDFromPkt:
           CFI Block cfiBlock40 Using cfiCommon0
           CFI Function getIDFromPkt
         CODE
-//  106 {
+//  109 {
         PUSH    DPL
           CFI DPL0 Frame(CFA_SP, 4)
           CFI CFA_SP SP+-4
@@ -1525,30 +1528,30 @@ getIDFromPkt:
           CFI CFA_SP SP+-5
         ; Saved register size: 2
         ; Auto size: 0
-//  107 	/*uint8 i = 0;
-//  108 	uint16 devID = 0;
-//  109 	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
-//  110 	{
-//  111 		i++;
-//  112 	}
-//  113 	if (*(cmd->Data + i) == START_DELIMITER)
-//  114 	{
-//  115 		devID = (*(cmd->Data + i))<<8;
-//  116 		devID +=*(cmd->Data + i + 1);
-//  117 	}
-//  118 	return devID;*/
-//  119         uint16 devID = 0;
-//  120         //char * id;
-//  121         
-//  122         //devID = (uint16)(*(cmd->Data+1))<<8;
-//  123 	//devID +=(uint16)*(cmd->Data );
-//  124         devID = (uint16)(*(cmd->Data + 1))<<8;
-//  125 	devID +=(uint16)*(cmd->Data);
-//  126         //id = (char*)&devID;
-//  127         //HalLcdWriteString("-----------------------------Borislav----------------------",0);
-//  128         //HalLcdWriteString(id,0);
-//  129         //HalLcdWriteString("-----------------------------Borislav----------------------",0);
-//  130         return devID;
+//  110 	/*uint8 i = 0;
+//  111 	uint16 devID = 0;
+//  112 	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
+//  113 	{
+//  114 		i++;
+//  115 	}
+//  116 	if (*(cmd->Data + i) == START_DELIMITER)
+//  117 	{
+//  118 		devID = (*(cmd->Data + i))<<8;
+//  119 		devID +=*(cmd->Data + i + 1);
+//  120 	}
+//  121 	return devID;*/
+//  122         uint16 devID = 0;
+//  123         //char * id;
+//  124         
+//  125         //devID = (uint16)(*(cmd->Data+1))<<8;
+//  126 	//devID +=(uint16)*(cmd->Data );
+//  127         devID = (uint16)(*(cmd->Data + 1))<<8;
+//  128 	devID +=(uint16)*(cmd->Data);
+//  129         //id = (char*)&devID;
+//  130         //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+//  131         //HalLcdWriteString(id,0);
+//  132         //HalLcdWriteString("-----------------------------Borislav----------------------",0);
+//  133         return devID;
         MOV     DPL,R2
         MOV     DPH,R3
         INC     DPTR
@@ -1569,17 +1572,17 @@ getIDFromPkt:
         MOVX    A,@DPTR
         MOV     R2,A
         LJMP    ?Subroutine0 & 0xFFFF
-//  131 }
+//  134 }
           CFI EndBlock cfiBlock40
-//  132 
+//  135 
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  133 int32 getDataFromPkt(afMSGCommandFormat_t *cmd)
+//  136 int32 getDataFromPkt(afMSGCommandFormat_t *cmd)
 getDataFromPkt:
           CFI Block cfiBlock41 Using cfiCommon0
           CFI Function getDataFromPkt
         CODE
-//  134 {
+//  137 {
         REQUIRE ?V0
         REQUIRE ?V1
         REQUIRE ?V2
@@ -1610,36 +1613,36 @@ getDataFromPkt:
           CFI CFA_XSP16 add(XSP16, 16)
         ; Saved register size: 16
         ; Auto size: 0
-//  135 	/*uint8 i = 0;
-//  136         uint8 j = 0;
-//  137 	uint32 data = 0;
-//  138 	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
-//  139 	{
-//  140 		i++;
-//  141 	}
-//  142 	if (*(cmd->Data + i) == START_DELIMITER)
-//  143 	{
-//  144 		for(j = 0; j < 3; j++)
-//  145                 {
-//  146                   data +=(*(cmd->Data + i + j + 2))<<8;
-//  147                 }
-//  148                 j++;
-//  149                 data +=(*(cmd->Data + i + j + 2));
-//  150 	}
-//  151 	return data;*/
-//  152         //char * id;
-//  153         uint8 i = 0;
+//  138 	/*uint8 i = 0;
+//  139         uint8 j = 0;
+//  140 	uint32 data = 0;
+//  141 	while(*(cmd->Data + i) != START_DELIMITER && (*(cmd->Data + i) != '\0'))
+//  142 	{
+//  143 		i++;
+//  144 	}
+//  145 	if (*(cmd->Data + i) == START_DELIMITER)
+//  146 	{
+//  147 		for(j = 0; j < 3; j++)
+//  148                 {
+//  149                   data +=(*(cmd->Data + i + j + 2))<<8;
+//  150                 }
+//  151                 j++;
+//  152                 data +=(*(cmd->Data + i + j + 2));
+//  153 	}
+//  154 	return data;*/
+//  155         //char * id;
+//  156         uint8 i = 0;
         MOV     R6,#0x0
-//  154         uint32 data = 0x00000000;
+//  157         uint32 data = 0x00000000;
         MOV     ?V0,R6
         MOV     ?V1,R6
         MOV     ?V2,R6
         MOV     ?V3,R6
-//  155         
-//  156         for(i = 0; i < cmd->DataLength - 2; i++)
+//  158         
+//  159         for(i = 0; i < cmd->DataLength - 2; i++)
         SJMP    ??getDataFromPkt_0
-//  157         {
-//  158           data +=(uint32)(*(cmd->Data + cmd->DataLength - 1 - i))<<(8*(cmd->DataLength - 3 - i));
+//  160         {
+//  161           data +=(uint32)(*(cmd->Data + cmd->DataLength - 1 - i))<<(8*(cmd->DataLength - 3 - i));
 ??getDataFromPkt_1:
         MOV     DPL,R2
         MOV     DPH,R3
@@ -1698,8 +1701,8 @@ getDataFromPkt:
         MOV     R0,#?V0
         MOV     R1,#?V4
         LCALL   ?L_ADD
-//  159           
-//  160         }
+//  162           
+//  163         }
         INC     R6
 ??getDataFromPkt_0:
         MOV     A,R6
@@ -1720,34 +1723,34 @@ getDataFromPkt:
         CLR     A
         SUBB    A,R5
         JC      ??getDataFromPkt_1
-//  161         /*
-//  162         data =(uint32)(*(cmd->Data + 5))<<24;
-//  163         data +=(uint32)(*(cmd->Data + 4))<<16;
-//  164         data +=(uint32)(*(cmd->Data + 3))<<8;        
-//  165         data +=(uint32)(*(cmd->Data + 2));
-//  166         */
-//  167         //id = (char*)&data;
-//  168         //HalLcdWriteString("-----------------------------GetData----------------------",0);
-//  169         //HalLcdWriteString(id,0);
-//  170         //HalLcdWriteString("-----------------------------GetData----------------------",0);
-//  171         return data;
+//  164         /*
+//  165         data =(uint32)(*(cmd->Data + 5))<<24;
+//  166         data +=(uint32)(*(cmd->Data + 4))<<16;
+//  167         data +=(uint32)(*(cmd->Data + 3))<<8;        
+//  168         data +=(uint32)(*(cmd->Data + 2));
+//  169         */
+//  170         //id = (char*)&data;
+//  171         //HalLcdWriteString("-----------------------------GetData----------------------",0);
+//  172         //HalLcdWriteString(id,0);
+//  173         //HalLcdWriteString("-----------------------------GetData----------------------",0);
+//  174         return data;
         MOV     R2,?V0
         MOV     R3,?V1
         MOV     R4,?V2
         MOV     R5,?V3
         MOV     R7,#0x8
         LJMP    ?BANKED_LEAVE_XDATA
-//  172 }
+//  175 }
           CFI EndBlock cfiBlock41
-//  173 
+//  176 
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  174 int32 getCmd(uint16 devID)
+//  177 int32 getCmd(uint16 devID)
 getCmd:
           CFI Block cfiBlock42 Using cfiCommon0
           CFI Function getCmd
         CODE
-//  175 {
+//  178 {
         REQUIRE ?V0
         REQUIRE ?V1
         REQUIRE ?V2
@@ -1770,25 +1773,25 @@ getCmd:
           CFI CFA_XSP16 add(XSP16, 12)
         ; Saved register size: 12
         ; Auto size: 0
-//  176   int i = 0;
+//  179   int i = 0;
         MOV     R0,#0x0
         MOV     R1,#0x0
-//  177   uint32 data = 1500;
+//  180   uint32 data = 1500;
         MOV     ?V0,#-0x24
         MOV     ?V1,#0x5
         MOV     ?V2,R0
         MOV     ?V3,R0
         SJMP    ??getCmd_0
-//  178   while(lutData[i].devID != devID && i < 20) //
-//  179 	//while(DataID[i].devID != 0 && DataID[i].devID != devID && i < 20)
-//  180   {
-//  181     i++;
+//  181   while(lutData[i].devID != devID && i < 20) //
+//  182 	//while(DataID[i].devID != 0 && DataID[i].devID != devID && i < 20)
+//  183   {
+//  184     i++;
 ??getCmd_1:
         INC     R0
         MOV     A,R0
         JNZ     ??getCmd_0
         INC     R1
-//  182   }
+//  185   }
 ??getCmd_0:
         MOV     A,R0
         MOV     R4,A
@@ -1810,7 +1813,7 @@ getCmd:
         LCALL   ?Subroutine3 & 0xFFFF
 ??CrossCallReturnLabel_18:
         JC      ??getCmd_1
-//  183   if(lutData[i].devID == devID)
+//  186   if(lutData[i].devID == devID)
 ??getCmd_3:
         MOV     A,R0
         MOV     R4,A
@@ -1828,8 +1831,8 @@ getCmd:
         XRL     A,R3
 ??getCmd_4:
         JNZ     ??getCmd_5
-//  184   {
-//  185     data = lutData[i].cmd;
+//  187   {
+//  188     data = lutData[i].cmd;
         MOV     B,#0xa
         MOV     A,R1
         MUL     AB
@@ -1846,15 +1849,15 @@ getCmd:
         INC     DPTR
         MOVX    A,@DPTR
         MOV     ?V1,A
-//  186   }
-//  187   return data;
+//  189   }
+//  190   return data;
 ??getCmd_5:
         MOV     R2,?V0
         MOV     R3,?V1
         MOV     R4,?V2
         MOV     R5,?V3
         LJMP    ?Subroutine1 & 0xFFFF
-//  188 }
+//  191 }
           CFI EndBlock cfiBlock42
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
@@ -1907,16 +1910,16 @@ getCmd:
           CFI EndBlock cfiCond43
           CFI EndBlock cfiCond44
           CFI EndBlock cfiPicker45
-//  189 
-//  190 
+//  192 
+//  193 
 
         RSEG BANKED_CODE:HUGECODE:NOROOT(0)
-//  191 void sendDataToPC(LookUpTable_t *lutData)//uint32_t data, uint16_t devID, uint8_t port);
+//  194 void sendDataToPC(LookUpTable_t *lutData)//uint32_t data, uint16_t devID, uint8_t port);
 sendDataToPC:
           CFI Block cfiBlock46 Using cfiCommon0
           CFI Function sendDataToPC
         CODE
-//  192 {
+//  195 {
         FUNCALL sendDataToPC, dllDataRequest
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -1943,14 +1946,14 @@ sendDataToPC:
           CFI CFA_XSP16 add(XSP16, 9)
         ; Saved register size: 9
         ; Auto size: 0
-//  193   
-//  194  
-//  195   //char * id;
-//  196   //uint16 idde;
-//  197  // uint32 da;
-//  198   //uint8 num;
-//  199   
-//  200   app_packet.data = lutData->data;
+//  196   
+//  197  
+//  198   //char * id;
+//  199   //uint16 idde;
+//  200  // uint32 da;
+//  201   //uint8 num;
+//  202   
+//  203   app_packet.data = lutData->data;
         MOV     DPL,R2
         MOV     DPH,R3
         INC     DPTR
@@ -1960,7 +1963,7 @@ sendDataToPC:
         LCALL   ?XLOAD_R4567
         MOV     DPTR,#app_packet + 3
         LCALL   ?XSTORE_R4567
-//  201   app_packet.devID = lutData->devID;
+//  204   app_packet.devID = lutData->devID;
         MOV     DPL,R2
         MOV     DPH,R3
         MOVX    A,@DPTR
@@ -1974,36 +1977,36 @@ sendDataToPC:
         INC     DPTR
         MOV     A,R1
         MOVX    @DPTR,A
-//  202   app_packet.packNum = 0;
+//  205   app_packet.packNum = 0;
         INC     DPTR
         CLR     A
         MOVX    @DPTR,A
-//  203   
-//  204   //app_packet->data = lutData->data;
-//  205   //app_packet->devID = lutData->devID;
-//  206   ///app_packet->packNum = 0;
-//  207   
-//  208   //idde = app_packet.devID;
-//  209  // da = app_packet.data;
-//  210   //num = app_packet.packNum + 0x30;
-//  211   //id = (char*)&idde;
-//  212  // id = (char*)&da;
-//  213  // id = (char*)&num;
-//  214   //id[2] = '\0';
-//  215   //id[4] = '\0';
-//  216   //id[1] = '\0';
-//  217 
-//  218   // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
-//  219   // HalLcdWriteString(id,0);
-//  220   // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
-//  221   
-//  222   dllDataRequest(&app_packet);
+//  206   
+//  207   //app_packet->data = lutData->data;
+//  208   //app_packet->devID = lutData->devID;
+//  209   ///app_packet->packNum = 0;
+//  210   
+//  211   //idde = app_packet.devID;
+//  212  // da = app_packet.data;
+//  213   //num = app_packet.packNum + 0x30;
+//  214   //id = (char*)&idde;
+//  215  // id = (char*)&da;
+//  216  // id = (char*)&num;
+//  217   //id[2] = '\0';
+//  218   //id[4] = '\0';
+//  219   //id[1] = '\0';
+//  220 
+//  221   // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
+//  222   // HalLcdWriteString(id,0);
+//  223   // HalLcdWriteString("-----------------------------SENDDATA----------------------",0);
+//  224   
+//  225   dllDataRequest(&app_packet);
         ; Setup parameters for call to function dllDataRequest
         MOV     R2,#app_packet & 0xff
         MOV     R3,#(app_packet >> 8) & 0xff
         LCALL   `??dllDataRequest::?relay`; Banked call to: dllDataRequest
-//  223   //HalLcdWriteString("Milos----------------------",0); 
-//  224 }
+//  226   //HalLcdWriteString("Milos----------------------",0); 
+//  227 }
         LJMP    ?Subroutine2 & 0xFFFF
           CFI EndBlock cfiBlock46
 

@@ -6,7 +6,7 @@
 
 #include "hal_lcd.h"
 #include "OnBoard.h"
-//#include <stdlib.h>
+#include <stdlib.h>
 //#include "stdlib.h"
 //#include "cmsis_os.h"
 
@@ -19,6 +19,7 @@
 // A mapping of devices IDs to signal_id number.
 //
 //*****************************************************************************
+
 static const uint16 signalID[] = {
                                   TEMP_SENSOR_INSIDE,
                                   TEMP_SENSOR_OUTSIDE,
@@ -123,62 +124,16 @@ static CallBack_t callBack;
 //*****************************************************************************
 void dllInit(void)
 {
-	//osThreadDef(communicationThread, osPriorityHigh, 2, 0);
 
-	//uint8 portPC = PC;
-	//uint8 portCC2530 = CC2530;
-
-	//statePC = IDLE;
 	stateCC2530 = IDLE;
-	//rxBufferPCIndex = 0;
-	//txBufferPCIndex = 0;
+
 	rxBufferCC2530Index = 0;
 	txBufferCC2530Index = 0;
 
 	//circularInit(&cTxBufferPC);
 	circularInit(&cTxBufferCC2530);
         
-       // HalUARTClose(HAL_UART_PORT_1);
-        //HalUARTOpen(HAL_UART_PORT_1, &uartConfig);
-        
-        /*CircularBuffer_t *cRxBuffer;
-	CircularBuffer_t *cTxBuffer;
-        cRxBuffer = &rxBufferCC2530;
-        cTxBuffer = &cTxBufferCC2530;
-        */
-     /*   
-        
-        uint8 port  = *(uint8 *)(arg);
-	uint8 *tmp;
-	uint8 *rxBuffer;
-        uint8 *txBuffer;
-	uint8 *txIndex;
-	uint8 *rxIndex;
-	uint8 *emFlag;
-	DLLState_t *state;
-	CircularBuffer_t *cRxBuffer;
-	CircularBuffer_t *cTxBuffer;
-        
-        tmp = &tmpCC2530;
-        state = &stateCC2530;
-        txBuffer = (uint8 *)uiTxBufferCC2530;
-        rxBuffer = uiRxBufferCC2530;
-        txIndex = &txBufferCC2530Index;
-        rxIndex = &rxBufferCC2530Index;
-        emFlag = &emFlagCC2530;
-        cRxBuffer = &rxBufferCC2530;
-        cTxBuffer = &cTxBufferCC2530;
-*/
-	//halUARTOpenPort(PC, BAUDRATE_PC , 1, 0);
-	//halUARTOpenPort(CC2530, BAUDRATE_CC2530, 1, 0);
-        
-        
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Ovdje treba initUart
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	//tID_PC_Communication = osThreadCreate( osThread(communicationThread), (void *)(&portPC));
-	//tID_CC2530_Communication = osThreadCreate( osThread(communicationThread), (void *)(&portCC2530));
+      
 }
 
 //*****************************************************************************
@@ -195,118 +150,7 @@ void CallBackRegister(CallBack_t cb)
 	callBack = cb;
 }
 
-//*****************************************************************************
-//
-//! Function handles comminucation. Handles RX or TX on active ports.
-//!
-//! \param arg is pointer on port.
-//!
-//! This function sends data from app layer forward and delivers data to app
-//! layer.
-//!
-//! \return None.
-//
-//*****************************************************************************
-/*
-void communicationThread(void const *arg)
-{
-	uint8 port  = *(uint8 *)(arg);
-	uint8 *tmp;
-	uint8 *rxBuffer;
-        uint8 *txBuffer;
-	uint8 *txIndex;
-	uint8 *rxIndex;
-	uint8 *emFlag;
-	DLLState_t *state;
-	CircularBuffer_t *cRxBuffer;
-	CircularBuffer_t *cTxBuffer;
 
-	if (PC == port)
-	{
-		tmp = &tmpPC;
-		state = &statePC;
-		txBuffer = (uint8 *)uiTxBufferPC;
-		rxBuffer = uiRxBufferPC;
-		txIndex = &txBufferPCIndex;
-		rxIndex = &rxBufferPCIndex;
-		emFlag = &emFlagPC;
-		cRxBuffer = &rxBufferPC;
-		cTxBuffer = &cTxBufferPC;
-	}
-	else if (CC2530 == port)
-	{
-  	tmp = &tmpCC2530;
-		state = &stateCC2530;
-		txBuffer = (uint8 *)uiTxBufferCC2530;
-		rxBuffer = uiRxBufferCC2530;
-		txIndex = &txBufferCC2530Index;
-		rxIndex = &rxBufferCC2530Index;
-		emFlag = &emFlagCC2530;
-		cRxBuffer = &rxBufferCC2530;
-		cTxBuffer = &cTxBufferCC2530;
-	}
-
-	while (1)
-	{
-		osDelay(10);
-		switch ((*state))
-		{
-			case IDLE:
-				if (circularGet(cRxBuffer, tmp))	//zastita!!!
-				{
-					if (START_DELIMITER == (*tmp))
-					{
-						*rxIndex = 0;
-						*state = RECEPTION;
-					}
-					else
-					{
-						*state = IDLE;
-
-					}
-				}
-				else if (EMISSION_START == (*emFlag))
-				{
-					*state = EMISSION;
-				}
-
-				else
-				{
-					*state = IDLE;
-
-				}
-				break;
-			case RECEPTION:
-				do
-				{
-					if (circularGet(cRxBuffer, tmp)) // zastita!!!
-					{
-						if (START_DELIMITER == (*tmp))
-						{
-							*rxIndex = 0;
-						}
-						else
-						{
-							rxBuffer[(*rxIndex)++] = *tmp;
-						}
-					}
-				} while(STOP_DELIMITER != *tmp);
-				*state = IDLE;				//
-				processFrameRx(rxBuffer, *rxIndex, port);
-			break;
-			case EMISSION:
-				array2circular(cTxBuffer, txBuffer, *txIndex);
-				halUARTWrite(port, cTxBuffer, 0);
-				*txIndex = 0;
-				*state = IDLE;
-			break;
-			default:
-				// error state!!!
-			break;
-		}
-	}
-}
-*/
 //*****************************************************************************
 //
 //! Get the signal ID.
@@ -319,13 +163,9 @@ void communicationThread(void const *arg)
 //! \return Returns signal ID, or -1 if \e deviceAddress is not supported.
 //
 //*****************************************************************************
-static uint8 getSignalID(const uint16 deviceAddress)
+uint8 getSignalID(const uint16 deviceAddress)
 {
 	uint8 i;
-        //uint8 j;
-        char *id;
-        //char idde;
-        uint16 idde;
         
 	uint8 retVal = 255;
 	for (i = 0; i < sizeof(signalID); i+=2)
@@ -337,34 +177,28 @@ static uint8 getSignalID(const uint16 deviceAddress)
                         
                         
 		}
-                //idde = deviceAddress;//i + 0x30;//signalID[i];
-                idde = signalID[i];//i + 0x30;//signalID[i];
-                id = (char*)&idde;
-                //id[0] = idde;
-               // id[1] = '\0';
-                id[2] = '\0';
-                //HalLcdWriteString("-----------------------------SignalID----------------------",0);
-               // HalLcdWriteString(id,0);
-                /*for(j=0;j<3;j++)
-                {
-                  uartSend(*(id + j));
-                  
-                }*/
-                //HalLcdWriteString("-----------------------------SignalID----------------------",0);
-                idde = deviceAddress;//i + 0x30;
-                //signalID[i];id = (char*)&idde;
-                //HalLcdWriteString("-----------------------------deviceAddress----------------------",0);
-                //HalLcdWriteString(id,0);
-                /*for(j=0;j<3;j++)
-                {
-                  uartSend(*(id + j));
-                  
-                }*/
-                //HalLcdWriteString("-----------------------------deviceAddress----------------------",0);
+               
 	}
 	return retVal;
 }
-
+uint16 getSignalAddress(const uint16 ID)
+{
+  uint8 i;
+        
+	uint16 retVal = 0;
+	for (i = 0; i < sizeof(signalID); i+=2)
+	{
+            
+		if (ID == i)
+		{
+			retVal = signalID[i];
+                        
+                        
+		}
+               
+	}
+	return retVal;
+}
 //*****************************************************************************
 //
 //! Process received data.
@@ -379,51 +213,191 @@ static uint8 getSignalID(const uint16 deviceAddress)
 //! \return Returns signal ID, or -1 if \e deviceAddress is not supported.
 //
 //*****************************************************************************
-uint16 processFrameRx(uint8 *frame)
+uint16 processFrame(uint8 *buff)
 {
-	Data_t *cbData;
-	int iSignalID;
-	int iData;
-	int iPackNum;
-	int iTimeStamp;
-	int iCheckSum;
-	sscanf((char *)frame, 
-               "%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d",
-                       &iSignalID,
-                       &iPackNum,
-                       &iData,
-                       &iTimeStamp,
-                       &iCheckSum
-                       );
-	recPack.appData.devID = signalID[iSignalID];
-	recPack.appData.packNum = (uint32)iPackNum & 0xff;
-	recPack.appData.data = (uint32)iData & 0xffffffff;
-	recPack.timeStamp = (uint32)iTimeStamp & 0xff;
-	recPack.checkSum = (uint32)iCheckSum & 0xff;
+	uint8 i = 0;
+	uint8 j = 0;
+        uint8 k = 0;
+	
+        Data_t *cbData;
+        
+        // pomocne promjenljive
+        char cID[10];
+        char cPackNum[10];
+        char cCmd[10];
+        char cTimeStamp[10];
+        char cCheckSum[10];
+        
+        char dID[10];
+        char dCmd[10];
+          
+        //uint8 newLine = 0x0A;
 
-	cbData = (struct sData *)(&recPack);
-
-
-//if (checksum(recPack) == recPack->checkSum)
-//{
-//	if (devAddressSupport(recPack->appData.devID))
-//	{
-			callBack(cbData);
-
-//	}
-		//return 1;
-                return recPack.appData.devID;
-//}
-//else
-//{
-//	error_checkSum();
-//	recPack = NULL;
-//	return 0;
-//}
-
+        //uint16 broj = 0;
+        
+	while(*(buff +  i) != 0x3E)//'>')
+	{
+		i++;
+	}
+	if(*(buff + i) ==  0x3E)//'>')
+	{
+		i++;
+		if(*(buff + i) ==  0x23)//'#')
+		{
+			i++;
+     			while(*(buff + i) !=  0x2C)//',')
+			{
+				cID[j]=  *(buff + i);
+                                j++;
+				i++;
+			}
+                        cID[j]= '\0';
+		}
+                else
+                {
+                  return 0;
+                }
+		if(*(buff + i) == 0x2C)//',')
+		{
+			i++;
+                        if(*(buff + i) == 0x23)//'#')
+                        {
+                          i++;
+                          j = 0;
+                          while(*(buff + i) != 0x2C)//',')
+                          {
+                                cPackNum[j]=  *(buff + i);
+				i++;
+				j++;
+                          }
+                          cPackNum[j]= '\0';
+                        }
+                        
+		}
+                else
+                {
+                  return 0;
+                }
+		if(*(buff + i) == 0x2C)//',')
+		{
+			i++;
+                        if(*(buff + i) == 0x23)//'#')
+                        {
+                          i++;
+                          j = 0;
+                          while(*(buff + i) != 0x2C)//',')
+                          {
+				cCmd[j]=  *(buff + i);
+				i++;
+				j++;
+                          }
+                          cCmd[j]= '\0';
+                        }
+		}
+                else
+                {
+                  return 0;
+                }
+                if(*(buff + i) == 0x2C)//',')
+		{
+			i++;
+                        if(*(buff + i) == 0x23)//'#')
+                        {
+                          i++;
+                          j = 0;
+                          while(*(buff + i) != 0x2C)//',')
+                          {
+				cTimeStamp[j]=  *(buff + i);
+				i++;
+				j++;
+                          }
+                          cTimeStamp[j]= '\0';
+                        }
+		}
+                else
+                {
+                  return 0;
+                }
+                if(*(buff + i) == 0x2C)//',')
+		{
+			i++;
+                        if(*(buff + i) == 0x23)//'#')
+                        {
+                          i++;
+                          j = 0;
+                          while(*(buff + i) != 0x3C)//'<')
+                          {
+				cCheckSum[j]=  *(buff + i);
+				i++;
+				j++;
+                          }
+                          cCheckSum[j]= '\0';
+                        }
+		}
+                else
+                {
+                  return 0;
+                }
+		
+	}
+        else
+        {
+          return 0;
+        }
+	
+        
+        
+        for(k = 0; k < 2; k++)
+        {
+          dID[k] = cID[1-k];
+          
+        }
+        dID[2] = '\0';
+        
+        for(k = 0; k < 4; k++)
+        {
+          dCmd[k] = cCmd[3-k];
+          
+        }
+        dCmd[4] = '\0';
+        
+        
+        recPack.appData.devID = (uint16)atoi(dID);
+	recPack.appData.packNum = (uint8)atoi(cPackNum);
+        recPack.appData.data = (uint32)atol(dCmd);
+        //recPack.appData.devID = (uint16)atoi(cID);
+	//recPack.appData.packNum = (uint8)atoi(cPackNum);
+       // recPack.appData.data = (uint32)atol(cCmd);
+	recPack.timeStamp = (uint8)atoi(cTimeStamp);
+	recPack.checkSum = (uint8)atoi(cCheckSum);
+        
+       
+        
+        
+        
+        cbData = (struct sData *)(&recPack);
+        callBack(cbData);
+/*
+        _itoa(recPack.appData.data, (uint8 *)dCmd, 10);
+        for(k = 0; k < 4; k++)
+        {
+          cCmd[k] = dCmd[3-k];
+          
+        }
+        cCmd[4] = '\0';
+       
+       HalUARTWrite(HAL_UART_PORT_1, "ID", 2);
+       HalUARTWrite(HAL_UART_PORT_1, &newLine, 1);
+       //HalUARTWrite(HAL_UART_PORT_1, (uint8 *)cCmd, k+1);
+       HalUARTWrite(HAL_UART_PORT_1, (uint8 *)cCmd, 5);
+       HalUARTWrite(HAL_UART_PORT_1, &newLine, 1);
+       HalUARTWrite(HAL_UART_PORT_1, "ID", 2);
+       HalUARTWrite(HAL_UART_PORT_1, &newLine, 1);
+*/
+        return recPack.appData.devID;
+        
+        
 }
-
-
 //*****************************************************************************
 //
 //! Calculating checksum.
@@ -490,44 +464,8 @@ static uint8 devAddressSupport(uint16 devAddress)
 //! \return None.
 //
 //*****************************************************************************
-/*
-static uint8 halUARTWrite(CircularBuffer_t *txBuffer, uint8 len)
-{
-	uint8 cnt = 0;
-	uint8 i;
-	uint8 data;
 
-	if (0 == len)
-	{
-		while(!circularIsEmpty(txBuffer))
-		{
-			circularGet(txBuffer, &data);
-                        uartSend(data);
-			cnt++;
 
-		}// end while
-	}// end if
-
-	else if (len < circularSize(txBuffer))
-	{
-		for (i = 0; i < len; i++)
-		{
-			circularGet(txBuffer, &data);
-			uartSend(data);
-		}// end for
-		cnt = i;
-
-	}// end else if
-
-	else
-	{
-		// error_uart();
-
-	}// end else
-
-	return cnt;
-}
-*/
 static void packFrameToStell(uint8 *buff, DLLPacket_t emPacket)
 {
   
@@ -620,24 +558,10 @@ static void packFrameToStell(uint8 *buff, DLLPacket_t emPacket)
 
 void dllDataRequest(Data_t *aData)
 {
-        //char *id;
-        //uint16 idde;
-        //uint8 num;
-        //uint32 da;
-        /*
-        int iSignalID;
-	int iData;
-	int iPackNum;
-	int iTimeStamp;
-	int iCheckSum;
-        */
-        //uint8 *txBuffer;
-        //uint8 *txIndex;
-        //CircularBuffer_t *cTxBuffer;
+     
         
 	DLLPacket_t emPacket;
-	//emPacket.appData = *aData;
-        //emPacket.appData = aData;
+
         
         emPacket.appData.devID = aData->devID;
         emPacket.appData.data = aData->data;
@@ -645,49 +569,7 @@ void dllDataRequest(Data_t *aData)
         emPacket.timeStamp = 0;
 	emPacket.checkSum = checksum(&emPacket);
         
-        //txBuffer = (uint8 *)uiTxBufferCC2530;
-        //cTxBuffer = &cTxBufferCC2530;
-        //txBuffer = (uint8 *)uiTxBufferCC2530;
-        //txIndex = &txBufferCC2530Index;
-	// ako bude bilo potrebe za slanjem vremenskog trenutka
-	// radi iscrtavanja grafa obezbjedicemo mehanizam, inace
-	// timeStamp = 0
-	/*
-        iSignalID = (int)getSignalID(emPacket.appData.devID);
-	iData = (int)emPacket.appData.data;
-	iPackNum = (int)emPacket.appData.packNum;
-	iTimeStamp = (int)emPacket.timeStamp;
-	iCheckSum = (int)emPacket.checkSum;
-        */
-        /*
-        iSignalID = (unsigned)getSignalID(emPacket.appData.devID);
-	iData = (unsigned)emPacket.appData.data;
-	iPackNum = (unsigned)emPacket.appData.packNum;
-	iTimeStamp = (unsigned)emPacket.timeStamp;
-	iCheckSum = (unsigned)emPacket.checkSum;
-        */
-        
-	 //HalLcdWriteString("Miso----------------------",0);
-        /*
-        txBufferCC2530Index = sprintf(uiTxBufferCC2530,
-                                      ">#%d,#%c,#%l,#%c,#%c",
-                                      getSignalID(emPacket.appData.devID),
-                                      emPacket.appData.packNum,
-                                      emPacket.appData.data,
-                                      emPacket.timeStamp,
-                                      emPacket.checkSum
-                                      );
-        */
-        /*
-        txBufferCC2530Index = sprintf(uiTxBufferCC2530,
-                                      ">#%d,#%d,#%d,#%d,#%d",
-                                      iSignalID,
-                                      iPackNum,
-                                      iData,
-                                      iTimeStamp,
-                                      iCheckSum
-                                      );
-        */
+       
         packFrameToStell((uint8 *)uiTxBufferCC2530, emPacket);
         //array2circular(cTxBuffer, txBuffer, *txIndex);
         
@@ -701,10 +583,12 @@ void dllDataRequest(Data_t *aData)
         
        // halUARTWrite(port, cTxBuffer, 0);
         
-       // HalLcdWriteString(uiTxBufferCC2530, 0);
+        //HalLcdWriteString(uiTxBufferCC2530, 0);
         
-        
-        //HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 19);
+     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+       //HalUARTWrite(HAL_UART_PORT_1, (uint8 *)uiTxBufferCC2530, 19);
+     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+
         
         //HalLcdWriteString(uiTxBufferCC2530, 0);
         

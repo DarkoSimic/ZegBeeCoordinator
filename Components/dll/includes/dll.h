@@ -96,7 +96,9 @@ typedef void (*CallBack_t)(Data_t *);
 //*****************************************************************************
 void dllInit(void);
 void CallBackRegister(CallBack_t cb);
-uint16 processFrameRx(uint8 *frame);
+uint16 getSignalAddress(const uint16 ID);
+//uint16 processFrameRx(uint8 *frame);
+uint16 processFrame(uint8 *buff);
 void dllDataRequest(Data_t *aData);
 
 #endif //__DLL_H__
